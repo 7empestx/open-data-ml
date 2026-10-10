@@ -152,3 +152,18 @@ The full write-up is in [reports/trip_shortterm.md](reports/trip_shortterm.md). 
   * Sensors are at chance.
   * Trip history alone reaches PR-AUC 0.12 at 24 h (prevalence 0.005). With sensors added it's 0.18 (p = 0.046, not significant), mostly Kelmarsh repeat trips.
 * **Conclusion: no reliable short-term warning.** Repeat tripping is the main predictable structure. Next steps: weather and season condition rules for oil trips, higher-frequency data, and maintenance labels.
+
+## 9. Sample wind farm condition report (Kelmarsh, Penmanshiel)
+
+[reports/condition_report/condition_report.md](reports/condition_report/condition_report.md) (PDF: `condition_report.pdf`) is a sample health-assessment report built only from the public data and the results above. It is not a failure prediction.
+
+Contents:
+- per-turbine scorecard with a RAG flag;
+- downtime and lost production by cause;
+- seasonal and weather patterns;
+- chronic abnormal states, including Penmanshiel gear-oil pump pressure build-ups that ended at logged oil or filter services;
+- Kelmarsh model drift;
+- sensor health;
+- recommended actions.
+
+Code: `scripts/condition_metrics.py`, `condition_scorecard.py`, `condition_tables.py`, `condition_figures.py` and `build_condition_report.py`. Computed tables are in `reports/condition_report/tables/`.

@@ -1,0 +1,1286 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Wind Farm Condition Report (sample)</title><style>
+@page { size: A4; margin: 16mm 14mm 18mm 14mm;
+  @bottom-center { content: counter(page); } }
+body { font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif; font-size: 9.6pt; line-height: 1.38; color: #1d2733; }
+h1 { font-size: 20pt; color: #12324d; border-bottom: 3px solid #12324d; padding-bottom: 4px; margin-top: 0; }
+h2 { font-size: 14pt; color: #12324d; border-bottom: 1px solid #b8c4d0; padding-bottom: 2px; margin-top: 20px; break-after: avoid; }
+h3 { font-size: 11.5pt; color: #1f4e79; margin-top: 14px; break-after: avoid; }
+p, li { orphans: 3; widows: 3; }
+blockquote { border-left: 4px solid #c0504d; background: #fbf1f0; margin: 10px 0; padding: 6px 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 7.6pt; margin: 8px 0 12px 0; break-inside: auto; }
+th { background: #12324d; color: white; text-align: left; padding: 3px 4px; font-weight: 600; }
+td { border-bottom: 1px solid #d5dde5; padding: 2.5px 4px; vertical-align: top; }
+tr { break-inside: avoid; }
+tr:nth-child(even) td { background: #f5f8fb; }
+img { max-width: 100%; display: block; margin: 8px auto 2px auto; break-inside: avoid; }
+code { font-size: 8pt; background: #eef2f6; padding: 0 2px; }
+strong { color: #10263a; }
+.flag-RED { color: #fff; background: #c0392b; padding: 0 4px; border-radius: 2px; font-weight: bold; }
+.flag-AMBER { color: #1d2733; background: #f5b041; padding: 0 4px; border-radius: 2px; font-weight: bold; }
+.flag-GREEN { color: #fff; background: #27ae60; padding: 0 4px; border-radius: 2px; font-weight: bold; }
+</style></head><body><h1>Wind Farm Condition Report (sample)</h1>
+<p><strong>Sites:</strong> Kelmarsh (6 x Senvion MM92, 2,050 kW, KEL01 to KEL06) and Penmanshiel (14 x Senvion MM82, 2,050 kW, PEN01, PEN02, PEN04 to PEN15)</p>
+<p><strong>Data period:</strong></p>
+<ul>
+<li>Kelmarsh: 2016 to 2024.</li>
+<li>Penmanshiel: mid-2016 to 2023 for PEN01 to PEN10, and to 2024 for PEN11 to PEN15. Penmanshiel 2016 is the partial first operating year and is left out of the farm totals.</li>
+</ul>
+<p><strong>Data:</strong> public 10-minute SCADA and turbine status logs published by Cubico Sustainable Investments on Zenodo (CC BY 4.0). No site visits, no vibration or oil-lab data.</p>
+<p><strong>Status:</strong> this is a sample of a health-assessment product, built on public data. It is a retrospective condition review, <strong>not a failure prediction</strong>.</p>
+<blockquote>
+<p>This report is not engineering advice. Every number in it is computed from the public data described in Section 5. Any finding should be checked by a qualified engineer, with site records and inspections, before anyone acts on it.</p>
+</blockquote>
+<h2>1. Executive summary</h2>
+<h3>Kelmarsh</h3>
+<ul>
+<li><strong>Overall performance:</strong><ul>
+<li>Time-based technical availability over 2016 to 2024 is 97.9% (time not in a fault or maintenance stop). Energy-based availability is 96.2%.</li>
+<li>Availability was 99.2% to 99.6% in 2017 to 2020 and fell to 96.5% to 97.6% in 2021 to 2024.</li>
+</ul>
+</li>
+<li><strong>Concentration of downtime:</strong> three turbines, KEL04, KEL05 and KEL06, account for 83% of all fault and maintenance downtime since 2021. The operator's log comments for these three record:<ul>
+<li>a generator bearing failure, a gearbox exchange and a busbar failure on KEL04;</li>
+<li>a gear-oil cooler fan stop of 370 h, repeated pitch errors and converter (IGBT) work on KEL05;</li>
+<li>two pitch motor replacements and a generator bearing exchange on KEL06.</li>
+</ul>
+</li>
+<li><strong>Causes of lost production:</strong> about 10,906 MWh (2016 to 2024). The largest causes are:<ul>
+<li>manual (maintenance) stops: 31.2%;</li>
+<li>grid stops: 18.6%;</li>
+<li>converter faults: 13.2%.</li>
+</ul>
+</li>
+<li><strong>Gearbox oil-system trips are rare:</strong> 14 trips in 10 episodes over nine years. Pitch trips are more common (131 trips in 69 episodes) and cluster in January to March.</li>
+<li><strong>Model drift:</strong> the normal-behaviour temperature models fit worse at every Kelmarsh turbine in 2023 and 2024 than in 2018 to 2022.<ul>
+<li>KEL04 has the largest change, after its July 2023 gearbox exchange.</li>
+<li>The rise at the other five turbines has no logged explanation and should be checked before temperature alarms are trusted.</li>
+</ul>
+</li>
+<li><strong>Flags:</strong> RED for KEL04 and KEL05, AMBER for KEL01 and KEL06, GREEN for KEL02 and KEL03.</li>
+</ul>
+<h3>Penmanshiel</h3>
+<ul>
+<li><strong>Overall performance:</strong> technical availability over 2017 to 2024 is 98.0%, and energy-based availability is 96.2%. Lost production is about 22,519 MWh. The largest causes are:<ul>
+<li>manual stops: 24.5%;</li>
+<li>curtailment: 20.6%;</li>
+<li>weather: 19.6%, mostly high-wind cut-out;</li>
+<li>pitch faults: 8.2%.</li>
+</ul>
+</li>
+<li><strong>Signature issue, gearbox lubrication:</strong> there were 440 oil-system trips in 235 episodes (2016 to 2024), 354 of them "Missing gear oil (high rpm)". Kelmarsh had 14.</li>
+<li><strong>Gear-oil pump pressure build-ups:</strong> full-load pump pressure built up by 1.8 to 3.7 bar over several months on PEN01, PEN02, PEN04, PEN05, PEN06, PEN07 and PEN15 in 2022 and 2023.<ul>
+<li>Six of these build-ups ended at a logged oil change, a filter-choked inspection or the fleet-wide gear-oil exchange of November and December 2023. PEN07's dropped without a logged service.</li>
+<li>Oil trips on PEN02 and PEN04 clustered during their build-ups.</li>
+</ul>
+</li>
+<li><strong>Open item at the end of the record:</strong> PEN14's pump pressure was rising through the last five months of the data. It read 9.9 bar in December 2024, against 7.4 to 8.1 bar in the same month of each year from 2019 to 2023. This is the clearest open item in the report.</li>
+<li><strong>Long single outages:</strong><ul>
+<li>PEN10 busbar replacement: 61 days in 2023;</li>
+<li>PEN11 sun-pinion retrofit: 29 days in late 2022;</li>
+<li>PEN04 generator bearing replacement: 17 days in 2023.</li>
+</ul>
+</li>
+<li><strong>Flags:</strong> RED for 8 of 14 turbines (PEN01, PEN02, PEN04, PEN06, PEN10, PEN11, PEN14, PEN15), AMBER for 4 (PEN05, PEN07, PEN08, PEN09), GREEN for 2 (PEN12, PEN13).<ul>
+<li>Several RED flags come from conditions the log shows were addressed near the end of the record. The context column in Section 2 says which.</li>
+</ul>
+</li>
+</ul>
+<h2>2. Per-turbine scorecard</h2>
+<p><strong>Assessment window:</strong> each turbine's last two full calendar years of data. That is 2023 to 2024 for Kelmarsh and PEN11 to PEN15, and 2022 to 2023 for PEN01 to PEN10.</p>
+<p><strong>Column definitions:</strong></p>
+<ul>
+<li><strong>Tech. avail.:</strong> share of time not in a fault or maintenance stop. Grid, weather, curtailment and routine stops are not counted against the turbine.</li>
+<li><strong>Energy avail.:</strong> export / (export + SCADA lost production during downtime).</li>
+<li><strong>Fault h/yr:</strong> fault-stop downtime per year in the window. Overlaps are removed by first-cause attribution (Section 5).</li>
+<li><strong>Oil and pitch episodes:</strong> trip episodes in the window. Trips of the same type less than 24 h apart are merged into one episode.</li>
+<li><strong>Repeat share:</strong> the share of all episodes (2016 to 2024) that started within 30 days of the previous episode of the same type.</li>
+<li><strong>Abnormal oil days:</strong> share of operating days in the window's final year on which any gear-oil signal deviated by more than 3 robust standard deviations from a normal-behaviour model. The signals are oil sump temperature, inlet temperature, inlet pressure and pump pressure. The model is trained only on prior years.</li>
+<li><strong>Pump pressure:</strong> monthly median gear-oil pump pressure above 1,000 kW (unit-corrected). It compares the 2017 to 2021 median (baseline) with the last month of record.</li>
+<li><strong>Oil-temp model error:</strong> healthy-period mean absolute error of the gear-oil temperature model in the final year, divided by its 2018 to 2022 mean.</li>
+</ul>
+<h3>Kelmarsh</h3>
+<table>
+<thead>
+<tr>
+<th>Turbine</th>
+<th>Flag</th>
+<th>Tech. avail.</th>
+<th>Energy avail.</th>
+<th>Fault h/yr</th>
+<th>Largest fault cause</th>
+<th>Oil episodes</th>
+<th>Pitch episodes</th>
+<th>Repeat share oil / pitch (30 d, all years)</th>
+<th>Abnormal oil days, final yr</th>
+<th>Pump pressure: baseline to last month (bar)</th>
+<th>Oil-temp model error vs 2018-22</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KEL01</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>99.5%</td>
+<td>99.2%</td>
+<td>4</td>
+<td>hydraulics (4 h)</td>
+<td>0</td>
+<td>1</td>
+<td>- / 25%</td>
+<td>8%</td>
+<td>7.2 to 7.0</td>
+<td>1.7x</td>
+</tr>
+<tr>
+<td>KEL02</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>99.4%</td>
+<td>98.9%</td>
+<td>9</td>
+<td>pitch (10 h)</td>
+<td>0</td>
+<td>3</td>
+<td>- / 38%</td>
+<td>2%</td>
+<td>6.6 to 7.1</td>
+<td>1.3x</td>
+</tr>
+<tr>
+<td>KEL03</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>98.6%</td>
+<td>98.5%</td>
+<td>71</td>
+<td>control_comm (96 h)</td>
+<td>0</td>
+<td>1</td>
+<td>- / 22%</td>
+<td>2%</td>
+<td>7.0 to 7.2</td>
+<td>1.4x</td>
+</tr>
+<tr>
+<td>KEL04</td>
+<td><span class="flag-RED">RED</span></td>
+<td>93.8%</td>
+<td>92.1%</td>
+<td>330</td>
+<td>converter (407 h)</td>
+<td>2</td>
+<td>4</td>
+<td>0% / 22%</td>
+<td>15%</td>
+<td>7.0 to 7.4</td>
+<td>3.1x</td>
+</tr>
+<tr>
+<td>KEL05</td>
+<td><span class="flag-RED">RED</span></td>
+<td>95.2%</td>
+<td>96.2%</td>
+<td>354</td>
+<td>gearbox (370 h)</td>
+<td>1</td>
+<td>11</td>
+<td>40% / 39%</td>
+<td>5%</td>
+<td>6.9 to 7.4</td>
+<td>1.7x</td>
+</tr>
+<tr>
+<td>KEL06</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>95.8%</td>
+<td>95.7%</td>
+<td>234</td>
+<td>generator (234 h)</td>
+<td>0</td>
+<td>2</td>
+<td>- / 33%</td>
+<td>6%</td>
+<td>7.0 to 6.9</td>
+<td>1.8x</td>
+</tr>
+</tbody>
+</table>
+<h3>Penmanshiel</h3>
+<table>
+<thead>
+<tr>
+<th>Turbine</th>
+<th>Flag</th>
+<th>Tech. avail.</th>
+<th>Energy avail.</th>
+<th>Fault h/yr</th>
+<th>Largest fault cause</th>
+<th>Oil episodes</th>
+<th>Pitch episodes</th>
+<th>Repeat share oil / pitch (30 d, all years)</th>
+<th>Abnormal oil days, final yr</th>
+<th>Pump pressure: baseline to last month (bar)</th>
+<th>Oil-temp model error vs 2018-22</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PEN01</td>
+<td><span class="flag-RED">RED</span></td>
+<td>99.1%</td>
+<td>97.6%</td>
+<td>39</td>
+<td>pitch (76 h)</td>
+<td>2</td>
+<td>3</td>
+<td>10% / 35%</td>
+<td>38%</td>
+<td>7.2 to 7.5</td>
+<td>1.0x</td>
+</tr>
+<tr>
+<td>PEN02</td>
+<td><span class="flag-RED">RED</span></td>
+<td>98.4%</td>
+<td>97.5%</td>
+<td>92</td>
+<td>gearbox (108 h)</td>
+<td>13</td>
+<td>0</td>
+<td>41% / 48%</td>
+<td>57%</td>
+<td>7.7 to 8.1</td>
+<td>1.1x</td>
+</tr>
+<tr>
+<td>PEN04</td>
+<td><span class="flag-RED">RED</span></td>
+<td>93.7%</td>
+<td>94.6%</td>
+<td>262</td>
+<td>unspecified (375 h)</td>
+<td>11</td>
+<td>1</td>
+<td>61% / 38%</td>
+<td>56%</td>
+<td>7.7 to 8.0</td>
+<td>0.9x</td>
+</tr>
+<tr>
+<td>PEN05</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>96.6%</td>
+<td>94.6%</td>
+<td>166</td>
+<td>pitch (251 h)</td>
+<td>1</td>
+<td>1</td>
+<td>29% / 25%</td>
+<td>12%</td>
+<td>7.8 to 8.0</td>
+<td>1.0x</td>
+</tr>
+<tr>
+<td>PEN06</td>
+<td><span class="flag-RED">RED</span></td>
+<td>94.3%</td>
+<td>91.9%</td>
+<td>143</td>
+<td>pitch (257 h)</td>
+<td>4</td>
+<td>5</td>
+<td>12% / 45%</td>
+<td>3%</td>
+<td>7.5 to 7.7</td>
+<td>1.0x</td>
+</tr>
+<tr>
+<td>PEN07</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>97.2%</td>
+<td>95.4%</td>
+<td>183</td>
+<td>hydraulics (164 h)</td>
+<td>5</td>
+<td>4</td>
+<td>26% / 35%</td>
+<td>14%</td>
+<td>7.1 to 7.8</td>
+<td>1.2x</td>
+</tr>
+<tr>
+<td>PEN08</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>97.9%</td>
+<td>96.5%</td>
+<td>114</td>
+<td>converter (154 h)</td>
+<td>6</td>
+<td>2</td>
+<td>36% / 31%</td>
+<td>0%</td>
+<td>6.8 to 6.9</td>
+<td>0.9x</td>
+</tr>
+<tr>
+<td>PEN09</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>98.5%</td>
+<td>97.3%</td>
+<td>87</td>
+<td>gearbox (119 h)</td>
+<td>7</td>
+<td>0</td>
+<td>31% / 50%</td>
+<td>1%</td>
+<td>6.8 to 6.9</td>
+<td>0.9x</td>
+</tr>
+<tr>
+<td>PEN10</td>
+<td><span class="flag-RED">RED</span></td>
+<td>90.3%</td>
+<td>92.4%</td>
+<td>739</td>
+<td>unspecified (1471 h)</td>
+<td>0</td>
+<td>3</td>
+<td>50% / 60%</td>
+<td>0%</td>
+<td>6.7 to 7.0</td>
+<td>0.9x</td>
+</tr>
+<tr>
+<td>PEN11</td>
+<td><span class="flag-RED">RED</span></td>
+<td>98.5%</td>
+<td>95.7%</td>
+<td>66</td>
+<td>unspecified (37 h)</td>
+<td>1</td>
+<td>1</td>
+<td>50% / 60%</td>
+<td>42%</td>
+<td>6.8 to 6.6</td>
+<td>1.1x</td>
+</tr>
+<tr>
+<td>PEN12</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>98.0%</td>
+<td>95.4%</td>
+<td>116</td>
+<td>pitch (77 h)</td>
+<td>3</td>
+<td>3</td>
+<td>25% / 27%</td>
+<td>1%</td>
+<td>7.1 to 7.6</td>
+<td>1.1x</td>
+</tr>
+<tr>
+<td>PEN13</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>99.5%</td>
+<td>97.5%</td>
+<td>6</td>
+<td>tower (11 h)</td>
+<td>0</td>
+<td>0</td>
+<td>29% / 38%</td>
+<td>1%</td>
+<td>7.2 to 7.6</td>
+<td>1.2x</td>
+</tr>
+<tr>
+<td>PEN14</td>
+<td><span class="flag-RED">RED</span></td>
+<td>98.9%</td>
+<td>97.3%</td>
+<td>38</td>
+<td>electrical (70 h)</td>
+<td>0</td>
+<td>0</td>
+<td>0% / 33%</td>
+<td>8%</td>
+<td>7.8 to 9.9</td>
+<td>1.4x</td>
+</tr>
+<tr>
+<td>PEN15</td>
+<td><span class="flag-RED">RED</span></td>
+<td>97.0%</td>
+<td>95.4%</td>
+<td>89</td>
+<td>pitch (71 h)</td>
+<td>16</td>
+<td>5</td>
+<td>66% / 40%</td>
+<td>22%</td>
+<td>7.3 to 6.9</td>
+<td>3.1x</td>
+</tr>
+</tbody>
+</table>
+<h3>Flags and reasons</h3>
+<p>The flag rules were fixed before the per-turbine results were reviewed. They are simple heuristics, not a calibrated risk score.</p>
+<p><span class="flag-RED">RED</span> if any of:</p>
+<ul>
+<li>availability below 95%;</li>
+<li>8 or more oil-system or 8 or more pitch trip episodes in the window;</li>
+<li>pump pressure 2.0 bar or more above baseline in the last month;</li>
+<li>abnormal oil state on 30% or more of days in the final year.</li>
+</ul>
+<p><span class="flag-AMBER">AMBER</span> if any of:</p>
+<ul>
+<li>availability below 97%;</li>
+<li>4 or more oil or pitch episodes;</li>
+<li>pump pressure 1.0 bar or more above baseline;</li>
+<li>abnormal oil state on 10% or more of days;</li>
+<li>oil-temperature model error 1.5 times its baseline or more;</li>
+<li>more than 2% of data missing.</li>
+</ul>
+<p><span class="flag-GREEN">GREEN</span> otherwise.</p>
+<p>The context column summarises the operator's free-text log comments. Those comments exist only from 2022 onward.</p>
+<table>
+<thead>
+<tr>
+<th>Turbine</th>
+<th>Flag</th>
+<th>Triggered rules</th>
+<th>Context from the status-log comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KEL01</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>oil-temperature model error 1.7x</td>
+<td>Proactive generator NDE bearing replacement in June 2022 (noise detected). Model error rose at all six Kelmarsh turbines (Section 3.4).</td>
+</tr>
+<tr>
+<td>KEL02</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>none</td>
+<td>NDE bearing stop in November 2022 (48 h).</td>
+</tr>
+<tr>
+<td>KEL03</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>none</td>
+<td>NDE bearing replacement in May 2023 (26 h).</td>
+</tr>
+<tr>
+<td>KEL04</td>
+<td><span class="flag-RED">RED</span></td>
+<td>availability 93.8%; 4 pitch episodes; abnormal oil state on 15% of days in 2024; oil-temperature model error 3.1x</td>
+<td>2022: NDE bearing failure (673 h manual stop). Feb 2023: recurrent oil particle alarms, then endoscope inspection. Jul 2023: gearbox exchange (337 h). Jan 2024: busbar failure (390 h). Jul 2024: gear-oil coupling replaced. Abnormal oil days were mostly in the months right after the exchange. They rose again to 17% in Nov 2024 and 42% in Dec 2024 (Section 3.4).</td>
+</tr>
+<tr>
+<td>KEL05</td>
+<td><span class="flag-RED">RED</span></td>
+<td>11 pitch episodes; availability 95.2%; oil-temperature model error 1.7x</td>
+<td>Gear-oil cooler fan overload stop of 370 h in 2023. "Repeating error BP52" pitch trips: 17 in Sep 2023, 7 in Mar 2024, 17 in Apr 2024. Converter IGBT and fitboard work in May and June 2024.</td>
+</tr>
+<tr>
+<td>KEL06</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>availability 95.8%; oil-temperature model error 1.8x</td>
+<td>Pitch motor replaced in March 2022 and again in April 2024. Generator speed-sensor connector fault and generator NDE bearing exchange in September 2024.</td>
+</tr>
+<tr>
+<td>PEN01</td>
+<td><span class="flag-RED">RED</span></td>
+<td>abnormal oil state on 38% of days in 2023</td>
+<td>Pump pressure rose from 7.6 bar (May 2023) to 10.6 bar (Sep 2023) and was back at 7.5 bar after the gear-oil exchange of 27 Nov 2023. Only one month of data follows the exchange.</td>
+</tr>
+<tr>
+<td>PEN02</td>
+<td><span class="flag-RED">RED</span></td>
+<td>13 oil episodes; abnormal oil state on 57% of days in 2023</td>
+<td>Pump pressure reached 11.4 bar in Sep 2023, with oil trips through Nov 2023. Back to 8.1 bar after the 27 Nov 2023 oil exchange. One month of post-service data.</td>
+</tr>
+<tr>
+<td>PEN04</td>
+<td><span class="flag-RED">RED</span></td>
+<td>availability 93.7%; 11 oil episodes; abnormal oil state on 56% of days in 2023</td>
+<td>Pump pressure reached 11.4 bar, with 10 "Low gearbox oil pressure" trips from Aug to Nov 2023. Back to 8.0 bar after the 29 Nov 2023 oil exchange. Generator DE and NDE bearing replacement in May 2023 (410 h).</td>
+</tr>
+<tr>
+<td>PEN05</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>availability 96.6%; abnormal oil state on 12% of days in 2023</td>
+<td>Pump pressure reached 10.9 bar in late 2022 and fell to 7.7 bar after the filter-choked gearbox inspection of 17 Mar 2023. Pitch motor replacement in Oct 2022 (251 h).</td>
+</tr>
+<tr>
+<td>PEN06</td>
+<td><span class="flag-RED">RED</span></td>
+<td>availability 94.3%; 4 oil and 5 pitch episodes</td>
+<td>Pitch fault stop of 455 h in June 2022. Pitch motor faults in 2023.</td>
+</tr>
+<tr>
+<td>PEN07</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>5 oil and 4 pitch episodes; abnormal oil state on 14% of days in 2023</td>
+<td>Pump pressure reached 9.5 bar in Sep 2023 and was 7.9 bar in Oct 2023; no service is logged at that drop. Gearbox endoscope inspection in Apr 2023. Pitch motor replacements in Dec 2022 and Jun 2023.</td>
+</tr>
+<tr>
+<td>PEN08</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>6 oil episodes</td>
+<td>Recurrent anemometer fault in 2022. Pitch motor exchange in May 2023.</td>
+</tr>
+<tr>
+<td>PEN09</td>
+<td><span class="flag-AMBER">AMBER</span></td>
+<td>7 oil episodes</td>
+<td>Gear-oil leak in Jul 2023; hose replaced in Nov 2023. Pressures read about half of normal from Feb 2018 to Nov 2019 (Section 2.2).</td>
+</tr>
+<tr>
+<td>PEN10</td>
+<td><span class="flag-RED">RED</span></td>
+<td>availability 90.3%</td>
+<td>Busbar replacement: one 61-day outage from Mar to May 2023, then software update. Pressures read about half of normal from Feb 2018 to Nov 2019.</td>
+</tr>
+<tr>
+<td>PEN11</td>
+<td><span class="flag-RED">RED</span></td>
+<td>abnormal oil state on 42% of days in 2024</td>
+<td>25 oil episodes in 2021 to 2022, then a sun-pinion retrofit (29 days, Nov 2022). Zero oil trips in 2023. Pump pressure rose to 8.1 bar from Mar to Aug 2024 and dropped to 6.7 bar after the gear-oil hose damage repair on 30 Aug 2024.</td>
+</tr>
+<tr>
+<td>PEN12</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>none</td>
+<td>NDE bearing replacement in Mar 2024. Foundation repairs in Oct 2022.</td>
+</tr>
+<tr>
+<td>PEN13</td>
+<td><span class="flag-GREEN">GREEN</span></td>
+<td>none</td>
+<td>Pump pressure rose to 9.2 bar in mid-2024 and was back at 7.5 bar from Aug 2024. No service is logged at that drop.</td>
+</tr>
+<tr>
+<td>PEN14</td>
+<td><span class="flag-RED">RED</span></td>
+<td>pump pressure +2.0 bar in last month</td>
+<td>High-speed bearing replacement in Mar 2022, after which inlet pressure stepped down from about 2.6 to 2.0 bar. Pump pressure rose from 7.7 bar (Aug 2024) to 9.9 bar (Dec 2024), and the model z-score reached 3.7 in Dec 2024. Open at the end of the record.</td>
+</tr>
+<tr>
+<td>PEN15</td>
+<td><span class="flag-RED">RED</span></td>
+<td>16 oil and 5 pitch episodes; abnormal oil state on 22% of days in 2024; oil-temperature model error 3.1x</td>
+<td>Pump pressure reached 10.8 bar in Oct 2022. Oil changed on 26 Jan 2023 ("particles high from sun pinion circlip"). Particle alarms from Jan to Apr 2024. Gearbox exchange in Apr 2024. Then 7 "Missing gear oil (high rpm)" trips in Dec 2024.</td>
+</tr>
+</tbody>
+</table>
+<h3>2.1 Availability, stops and trips by year</h3>
+<p><img alt="Technical availability by turbine and year" src="../figures/fig1_availability.png" /></p>
+<p><img alt="Oil-system and pitch trip episodes by turbine and year" src="../figures/fig4_trips_turbine_year.png" /></p>
+<p>Full per-turbine, per-year counts are in the CSV tables:</p>
+<ul>
+<li>stops by class and fault stops by component: <code>tables/stop_counts_&lt;farm&gt;.csv</code>;</li>
+<li>downtime hours by cause: <code>tables/downtime_by_cause.csv</code>;</li>
+<li>trip episodes: <code>tables/trip_episodes.csv</code>.</li>
+</ul>
+<h3>2.2 Sensor health</h3>
+<table>
+<thead>
+<tr>
+<th>Turbine</th>
+<th>Data missing (window)</th>
+<th>Longest gap (window)</th>
+<th>Invalid or frozen 10-min values, all years</th>
+<th>Oil-pressure unit switches (bar/kPa)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KEL01</td>
+<td>0.20%</td>
+<td>6 h</td>
+<td>81</td>
+<td>4</td>
+</tr>
+<tr>
+<td>KEL02</td>
+<td>0.17%</td>
+<td>6 h</td>
+<td>478</td>
+<td>2</td>
+</tr>
+<tr>
+<td>KEL03</td>
+<td>0.36%</td>
+<td>25 h</td>
+<td>51</td>
+<td>2</td>
+</tr>
+<tr>
+<td>KEL04</td>
+<td>0.61%</td>
+<td>27 h</td>
+<td>5,243</td>
+<td>2</td>
+</tr>
+<tr>
+<td>KEL05</td>
+<td>0.30%</td>
+<td>6 h</td>
+<td>940</td>
+<td>2</td>
+</tr>
+<tr>
+<td>KEL06</td>
+<td>1.08%</td>
+<td>28 h</td>
+<td>1,293</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Turbine</th>
+<th>Data missing (window)</th>
+<th>Longest gap (window)</th>
+<th>Invalid or frozen 10-min values, all years</th>
+<th>Oil-pressure unit switches (bar/kPa)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PEN01</td>
+<td>0.17%</td>
+<td>8 h</td>
+<td>918</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN02</td>
+<td>0.16%</td>
+<td>7 h</td>
+<td>530</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN04</td>
+<td>0.66%</td>
+<td>27 h</td>
+<td>499</td>
+<td>7</td>
+</tr>
+<tr>
+<td>PEN05</td>
+<td>0.32%</td>
+<td>23 h</td>
+<td>485</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN06</td>
+<td>0.22%</td>
+<td>8 h</td>
+<td>952</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN07</td>
+<td>1.20%</td>
+<td>115 h</td>
+<td>293</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN08</td>
+<td>0.21%</td>
+<td>7 h</td>
+<td>82</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN09</td>
+<td>0.17%</td>
+<td>8 h</td>
+<td>92</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN10</td>
+<td>0.67%</td>
+<td>51 h</td>
+<td>726</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PEN11</td>
+<td>0.55%</td>
+<td>16 h</td>
+<td>95</td>
+<td>7</td>
+</tr>
+<tr>
+<td>PEN12</td>
+<td>1.00%</td>
+<td>50 h</td>
+<td>97</td>
+<td>7</td>
+</tr>
+<tr>
+<td>PEN13</td>
+<td>0.29%</td>
+<td>10 h</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>PEN14</td>
+<td>0.65%</td>
+<td>22 h</td>
+<td>38</td>
+<td>7</td>
+</tr>
+<tr>
+<td>PEN15</td>
+<td>0.28%</td>
+<td>9 h</td>
+<td>1,509</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Oil-pressure units:</strong></p>
+<ul>
+<li>The gear-oil inlet and pump pressures are labelled "bar" but are logged in kPa for most of the record. The unit switches on the same dates across each fleet:<ul>
+<li>Kelmarsh: not logged before mid-2017, then kPa, with a bar period in June and July 2021, plus a short bar period on KEL01 in May 2019.</li>
+<li>Penmanshiel: bar until April or May 2018, then kPa, with a bar period from June to August 2022.</li>
+</ul>
+</li>
+<li>This report converts every reading row by row (values above 20 are divided by 100). Any operator alarm or dashboard that uses the raw values will be wrong during part of the record.</li>
+</ul>
+<p><strong>Other sensor issues:</strong></p>
+<ul>
+<li><strong>PEN09 and PEN10:</strong> from February 2018 to November 2019, both turbines' pressure readings were about half of normal. Full-load inlet pressure was about 1.2 bar against about 2.5 bar, and pump pressure about 4.6 bar against about 6.9 bar. The ratio differs between the two signals, so this is not a simple unit change. No cause is logged (the comments start in 2022). Treat these two years of pressure data as unreliable.</li>
+<li><strong>Penmanshiel gear-oil temperature:</strong> missing for all turbines in 2016 and 2017.</li>
+<li><strong>Invalid or frozen values:</strong> these are physically impossible readings, or readings identical for 6 h or more, on wind, temperature and bearing channels.<ul>
+<li>The largest counts are KEL04 in 2023 (4,794 values) and PEN15 in 2024 (1,462 values). Both fall in the years of their gearbox exchanges.</li>
+</ul>
+</li>
+</ul>
+<h2>3. Farm-level patterns</h2>
+<h3>3.1 What drives lost production</h3>
+<p><img alt="Downtime by cause" src="../figures/fig2_downtime_by_cause.png" /></p>
+<p>Downtime is estimated from the status logs. Each turbine-minute is assigned to the earliest-starting active stop, so overlapping stops are not double counted. Lost production uses the SCADA lost-production-to-downtime counter.</p>
+<p><strong>Kelmarsh, 2016 to 2024 (54 turbine-years):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cause</th>
+<th>Stops</th>
+<th>Downtime (turbine-h)</th>
+<th>h per turbine-year</th>
+<th>Lost production (MWh)</th>
+<th>Share of lost production</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maintenance</td>
+<td>1,159</td>
+<td>4,720</td>
+<td>87.4</td>
+<td>3,407</td>
+<td>31.2%</td>
+</tr>
+<tr>
+<td>grid</td>
+<td>509</td>
+<td>2,709</td>
+<td>50.1</td>
+<td>2,032</td>
+<td>18.6%</td>
+</tr>
+<tr>
+<td>fault: converter</td>
+<td>263</td>
+<td>1,653</td>
+<td>30.6</td>
+<td>1,437</td>
+<td>13.2%</td>
+</tr>
+<tr>
+<td>weather</td>
+<td>115</td>
+<td>1,812</td>
+<td>33.5</td>
+<td>692</td>
+<td>6.3%</td>
+</tr>
+<tr>
+<td>curtailment</td>
+<td>106</td>
+<td>1,431</td>
+<td>26.5</td>
+<td>607</td>
+<td>5.6%</td>
+</tr>
+<tr>
+<td>fault: pitch</td>
+<td>131</td>
+<td>1,030</td>
+<td>19.1</td>
+<td>566</td>
+<td>5.2%</td>
+</tr>
+<tr>
+<td>fault: gearbox</td>
+<td>49</td>
+<td>677</td>
+<td>12.5</td>
+<td>463</td>
+<td>4.2%</td>
+</tr>
+<tr>
+<td>routine</td>
+<td>3,953</td>
+<td>659</td>
+<td>12.2</td>
+<td>318</td>
+<td>2.9%</td>
+</tr>
+<tr>
+<td>no logged stop</td>
+<td>0</td>
+<td>0</td>
+<td>0.0</td>
+<td>275</td>
+<td>2.5%</td>
+</tr>
+<tr>
+<td>fault: tower</td>
+<td>316</td>
+<td>144</td>
+<td>2.7</td>
+<td>256</td>
+<td>2.3%</td>
+</tr>
+<tr>
+<td>fault: unspecified</td>
+<td>34</td>
+<td>409</td>
+<td>7.6</td>
+<td>253</td>
+<td>2.3%</td>
+</tr>
+<tr>
+<td>fault: sensor_met</td>
+<td>298</td>
+<td>196</td>
+<td>3.6</td>
+<td>124</td>
+<td>1.1%</td>
+</tr>
+<tr>
+<td>fault: hydraulics</td>
+<td>12</td>
+<td>157</td>
+<td>2.9</td>
+<td>98</td>
+<td>0.9%</td>
+</tr>
+<tr>
+<td>fault: generator</td>
+<td>9</td>
+<td>263</td>
+<td>4.9</td>
+<td>89</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>fault: electrical</td>
+<td>24</td>
+<td>139</td>
+<td>2.6</td>
+<td>88</td>
+<td>0.8%</td>
+</tr>
+<tr>
+<td>fault: yaw</td>
+<td>27</td>
+<td>46</td>
+<td>0.9</td>
+<td>72</td>
+<td>0.7%</td>
+</tr>
+<tr>
+<td>fault: control_comm</td>
+<td>2</td>
+<td>96</td>
+<td>1.8</td>
+<td>69</td>
+<td>0.6%</td>
+</tr>
+<tr>
+<td>fault: brake</td>
+<td>4</td>
+<td>57</td>
+<td>1.1</td>
+<td>35</td>
+<td>0.3%</td>
+</tr>
+<tr>
+<td>fault: rotor</td>
+<td>22</td>
+<td>48</td>
+<td>0.9</td>
+<td>26</td>
+<td>0.2%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Penmanshiel, 2017 to 2024 (102 turbine-years):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cause</th>
+<th>Stops</th>
+<th>Downtime (turbine-h)</th>
+<th>h per turbine-year</th>
+<th>Lost production (MWh)</th>
+<th>Share of lost production</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maintenance</td>
+<td>2,306</td>
+<td>8,525</td>
+<td>83.3</td>
+<td>5,523</td>
+<td>24.5%</td>
+</tr>
+<tr>
+<td>curtailment</td>
+<td>1,096</td>
+<td>6,894</td>
+<td>67.4</td>
+<td>4,630</td>
+<td>20.6%</td>
+</tr>
+<tr>
+<td>weather</td>
+<td>4,694</td>
+<td>3,062</td>
+<td>29.9</td>
+<td>4,408</td>
+<td>19.6%</td>
+</tr>
+<tr>
+<td>fault: pitch</td>
+<td>299</td>
+<td>2,969</td>
+<td>29.0</td>
+<td>1,845</td>
+<td>8.2%</td>
+</tr>
+<tr>
+<td>no logged stop</td>
+<td>0</td>
+<td>0</td>
+<td>0.0</td>
+<td>1,161</td>
+<td>5.2%</td>
+</tr>
+<tr>
+<td>grid</td>
+<td>275</td>
+<td>1,417</td>
+<td>13.9</td>
+<td>989</td>
+<td>4.4%</td>
+</tr>
+<tr>
+<td>fault: unspecified</td>
+<td>57</td>
+<td>2,062</td>
+<td>20.2</td>
+<td>969</td>
+<td>4.3%</td>
+</tr>
+<tr>
+<td>fault: tower</td>
+<td>778</td>
+<td>435</td>
+<td>4.3</td>
+<td>772</td>
+<td>3.4%</td>
+</tr>
+<tr>
+<td>fault: converter</td>
+<td>602</td>
+<td>883</td>
+<td>8.6</td>
+<td>727</td>
+<td>3.2%</td>
+</tr>
+<tr>
+<td>fault: gearbox</td>
+<td>414</td>
+<td>736</td>
+<td>7.2</td>
+<td>545</td>
+<td>2.4%</td>
+</tr>
+<tr>
+<td>fault: electrical</td>
+<td>39</td>
+<td>596</td>
+<td>5.8</td>
+<td>464</td>
+<td>2.1%</td>
+</tr>
+<tr>
+<td>fault: sensor_met</td>
+<td>558</td>
+<td>406</td>
+<td>4.0</td>
+<td>192</td>
+<td>0.9%</td>
+</tr>
+<tr>
+<td>routine</td>
+<td>8,009</td>
+<td>1,071</td>
+<td>10.5</td>
+<td>159</td>
+<td>0.7%</td>
+</tr>
+<tr>
+<td>fault: hydraulics</td>
+<td>1</td>
+<td>164</td>
+<td>1.6</td>
+<td>126</td>
+<td>0.6%</td>
+</tr>
+<tr>
+<td>fault: brake</td>
+<td>17</td>
+<td>13</td>
+<td>0.1</td>
+<td>8</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>fault: yaw</td>
+<td>23</td>
+<td>3</td>
+<td>0.0</td>
+<td>2</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>fault: rotor</td>
+<td>20</td>
+<td>4</td>
+<td>0.0</td>
+<td>1</td>
+<td>0.0%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kelmarsh:</strong></p>
+<ul>
+<li><strong>Maintenance:</strong> manual stops are the largest single cause of downtime: 87 h per turbine-year and 31% of lost production. The status code does not name a component; the free-text comments sometimes do, but only from 2022.</li>
+<li><strong>Converter:</strong> converter faults are the largest fault category: 1,653 h, of which "Frequency converter error" accounts for 1,577 h. KEL04's 2024 busbar outage alone was 407 h.</li>
+<li><strong>Pitch and gearbox:</strong> pitch faults total 1,030 h. Gearbox faults total 677 h, of which a single 370 h oil-cooler fan stop on KEL05 is the largest.</li>
+</ul>
+<p><strong>Penmanshiel:</strong></p>
+<ul>
+<li><strong>Maintenance:</strong> manual stops are again the largest cause: 83 h per turbine-year.</li>
+<li><strong>Curtailment and weather:</strong> curtailment ("Park master stop") and weather together take 40% of lost production. The weather share is mostly "Max. wind speed" (high-wind cut-out, 2,047 h) and icing (1,038 h).</li>
+<li><strong>Faults:</strong><ul>
+<li>Pitch faults lead with 2,969 h (2017 to 2024), led by "Charging circuit pitch" and "Repeating error BP52".</li>
+<li>The "unspecified" fault hours are dominated by the PEN10 circuit breaker / busbar outage (1,471 h).</li>
+</ul>
+</li>
+<li><strong>Oil-system trips:</strong> these are frequent but short (736 h of gearbox fault downtime over 414 stops), so they cost less energy than their count suggests.</li>
+</ul>
+<h3>3.2 Seasonal trip patterns</h3>
+<p><img alt="Trip episodes by calendar month" src="../figures/fig3_trip_seasonality.png" /></p>
+<p>Rates are per 100 turbine-months, 2017 to 2024. The first operating year is left out because Penmanshiel's commissioning in 2016 gave 33 pitch episodes in November 2016 alone.</p>
+<p><strong>Kelmarsh pitch trips:</strong></p>
+<ul>
+<li>Concentrated in winter: 66% of the 50 episodes since 2017 started between November and March (5 of 12 months).</li>
+<li>January to March runs at 15 to 23 per 100 turbine-months, against 0 to 6 from April to August.</li>
+<li>Kelmarsh oil trips (5 since 2017) are too few to show a pattern.</li>
+</ul>
+<p><strong>Penmanshiel oil trips:</strong></p>
+<ul>
+<li>Highest in October, November and January (22 to 24 per 100 turbine-months).</li>
+<li>June is an exception at 22.</li>
+<li>Lowest in July (5) and April to May (10 to 11).</li>
+<li>The winter excess fits cold, viscous oil at high speed (the dominant code is "Missing gear oil (high rpm)"), but the June peak shows season is not the whole story.</li>
+<li>Penmanshiel pitch trips show no winter peak: 36% fell between November and March.</li>
+</ul>
+<h3>3.3 Weather-related stops</h3>
+<p><img alt="Fault-stop rate by ambient temperature" src="../figures/fig7_faults_by_temperature.png" /></p>
+<p><strong>Heat:</strong></p>
+<ul>
+<li>On 19 July 2022 (UK heatwave), Kelmarsh logged 4 converter inlet over-temperature stops on KEL03, KEL05 and KEL06, totalling 10 h. Penmanshiel logged none.</li>
+<li>At Kelmarsh, the converter fault-stop rate is 0.4 to 0.5 per 1,000 h at 0 to 20 °C, 1.4 per 1,000 h at 20 to 25 °C, and 3.6 per 1,000 h above 30 °C. The last figure is only 4 stops in 1,122 turbine-hours, all on the heatwave day at 36 to 39 °C ambient.</li>
+<li>At Penmanshiel, the converter rate peaks at 15 to 20 °C (1.6 per 1,000 h), and there is little exposure above 20 °C.</li>
+<li>Heat is a real but small cost at these sites.</li>
+</ul>
+<p><strong>Cold and ice:</strong></p>
+<ul>
+<li>Kelmarsh logged 1,802 h of weather stops, 1,585 h of them "Icing (anemometer)", mainly in 2020 to 2023.</li>
+<li>Penmanshiel's icing stops total 1,038 h.</li>
+</ul>
+<p><strong>High wind:</strong> Penmanshiel's 4,594 "Max. wind speed" stops (2,047 h) are design behaviour, not faults.</p>
+<h3>3.4 Chronic abnormal states and model drift</h3>
+<p><img alt="Penmanshiel gear-oil pump pressure" src="../figures/fig5_pen_pump_pressure.png" /></p>
+<p><strong>Penmanshiel gear-oil pressure:</strong></p>
+<ul>
+<li>The "oil-state outliers" found in earlier modelling are mostly gear-oil <strong>pump pressure</strong> at full load sitting well above its normal level for months. Inlet pressure and oil temperatures stayed normal.</li>
+<li>Six turbines built up by 1.8 to 3.7 bar over four to eight months in 2022 and 2023 (figure above). Each returned to about 7.5 to 8 bar at a logged service:<ul>
+<li>PEN15: oil change for particles, 26 January 2023;</li>
+<li>PEN05 and PEN06: filter-choked inspection, 17 March 2023;</li>
+<li>PEN01, PEN02 and PEN04: the fleet-wide gear-oil exchange, 27 to 29 November 2023.</li>
+</ul>
+</li>
+<li>PEN07 dropped in October 2023 and PEN13 in August 2024 without a logged service.</li>
+<li>A pressure rise downstream of the pump with steady inlet pressure fits a loading filter or ageing oil. That is an interpretation for an engineer to confirm, not a finding of this data.</li>
+</ul>
+<p><strong>Other Penmanshiel step changes:</strong></p>
+<ul>
+<li>PEN09 and PEN10 in 2018 to 2019: a sensor or configuration issue, see Section 2.2.</li>
+<li>PEN14: inlet pressure stepped down after its March 2022 high-speed bearing replacement.</li>
+</ul>
+<p><img alt="Kelmarsh model error drift" src="../figures/fig6_kelmarsh_drift.png" /></p>
+<p><strong>Kelmarsh drift:</strong></p>
+<ul>
+<li>The normal-behaviour models were trained each year on all earlier years. Their error on healthy data rose at all six turbines in 2023 and 2024:<ul>
+<li>gear-oil temperature error went from 0.70 to 0.95 °C in 2022 to 1.06 to 1.52 °C in 2024 at five turbines;</li>
+<li>KEL04 reached 2.37 °C;</li>
+<li>main-bearing temperatures show the same pattern.</li>
+</ul>
+</li>
+<li>KEL04's jump starts at its July 2023 gearbox exchange. Its abnormal oil days were 61% in July 2023 and 100% from August to December 2023. They fell to 0 to 4% from May to October 2024 as post-exchange data entered training, then rose again to 17% in November and 42% in December 2024. The 2023 spike reflects a model trained on the old gearbox. The late-2024 rise is not explained by the exchange and is worth a look.</li>
+<li>The farm-wide rise at the other five turbines has no logged cause in this data. Possible causes include a control or software change, sensor recalibration, or different operating conditions, but none can be confirmed here.</li>
+</ul>
+<h2>4. Recommended actions</h2>
+<p>These follow from the evidence above and are in rough priority order. They are suggestions for an operator's engineering team to assess, not instructions.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Action</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>PEN14: check gear-oil filter condition and take an oil sample.</strong></td>
+<td>Full-load pump pressure was 9.9 bar in Dec 2024, against 7.4 to 8.1 bar in December of each year from 2019 to 2023, and it rose every month from Aug to Dec 2024. The model z-score is 3.7, and the model accounts for oil temperature. Six other turbines showed the same build-up before an oil or filter service (Section 3.4).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>PEN15: investigate the post-exchange oil trips.</strong></td>
+<td>7 "Missing gear oil (high rpm)" trips in Dec 2024, eight months after the Apr 2024 gearbox exchange. Earlier: particle alarms Jan to Apr 2024, an oil change for circlip particles in Jan 2023, and the highest oil-trip count in the fleet (16 episodes in 2023 to 2024).</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Penmanshiel fleet: trend full-load gear-oil pump pressure as a routine maintenance indicator.</strong> For example, review a turbine when its monthly median is 1.0 bar above its post-service level for two months.</td>
+<td>Seven build-ups in 2022 to 2023 lasted months, and six of them ended at a logged oil or filter service. Oil trips on PEN02 and PEN04 clustered inside their build-ups. This is a monitoring rule to evaluate, not a validated predictor: earlier tests found no reliable 24 to 72 h trip warning in these signals.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>PEN01, PEN02, PEN04: confirm that the Nov 2023 oil exchange held.</strong></td>
+<td>All three returned to baseline in Dec 2023, but this record has no 2024 data for PEN01 to PEN10.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>KEL04: re-baseline condition models on post-exchange data, check the late-2024 oil-signal deviations, and review the converter.</strong></td>
+<td>Gear-oil temperature model error was 3.1 times baseline in 2024. Abnormal oil days were 17% in Nov 2024 and 42% in Dec 2024, after being 0 to 4% from May to Oct 2024. 407 h of converter (busbar) downtime in 2024 and 330 fault hours per year in the window.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>KEL05: root-cause the recurring pitch "Repeating error BP52".</strong></td>
+<td>44 such trips between Sep 2023 and Apr 2024 (17 in Sep 2023 and 17 in Apr 2024 alone), giving 11 pitch episodes in the window, the most at Kelmarsh. KEL05 also had 239 h of converter downtime in 2024.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>KEL06: review the pitch drive.</strong></td>
+<td>Pitch motors replaced in Mar 2022 and Apr 2024. Pitch faults cost 415 h in 2022 and 208 h in 2024.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Kelmarsh: explain the 2023 to 2024 model drift before relying on temperature alarms.</strong></td>
+<td>Model error rose at all six turbines, not only at KEL04 (Section 3.4).</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Kelmarsh: review icing stop logic and anemometer heating.</strong></td>
+<td>"Icing (anemometer)" stops total 1,585 h. Recurrent anemometer faults are logged on KEL04 and KEL05 in 2023.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Both farms: fix the data foundations.</strong> Log oil pressures in one unit, and record a component on manual stops.</td>
+<td>Unit switches in 2018, 2021 and 2022 (Section 2.2). Manual stops carry 31% (Kelmarsh) and 25% (Penmanshiel) of lost production with no component code.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>PEN10: review spares and logistics for busbar and switchgear faults.</strong></td>
+<td>A single 61-day outage in 2023 (1,471 h), the largest in the record.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>PEN09 and PEN10: confirm what changed in pressure measurement from Feb 2018 to Nov 2019.</strong></td>
+<td>Both turbines read about half of normal for 22 months, then returned together.</td>
+</tr>
+</tbody>
+</table>
+<h2>5. Methods and limits</h2>
+<p><strong>Data:</strong></p>
+<ul>
+<li><strong>Source:</strong> public 10-minute SCADA averages (with 10-minute min, max and standard deviation for some channels) and turbine status logs.</li>
+<li><strong>Kelmarsh:</strong> Cubico Sustainable Investments, Zenodo, DOI 10.5281/zenodo.16807551, licensed CC BY 4.0.</li>
+<li><strong>Penmanshiel:</strong> Cubico Sustainable Investments, Zenodo, DOI 10.5281/zenodo.16807304, licensed CC BY 4.0.</li>
+<li><strong>Not available:</strong> vibration, oil-lab results, inspection reports and a full work-order history. The only maintenance context is the free-text comments in the status logs, which exist from 2022 onward.</li>
+</ul>
+<p><strong>Labels:</strong></p>
+<ul>
+<li>"Stops", "faults", "trips" and their components all come from status-log codes and the operator's service categories.</li>
+<li>A trip is a fault stop. Oil-system trips are gearbox lubrication codes (missing gear oil, low oil pressure, oil-pump and cooler-fan overload, particle alarm). Pitch trips are fault stops on the pitch system.</li>
+<li>These labels record what the controller did. They do not confirm a physical failure.</li>
+</ul>
+<p><strong>Availability and downtime:</strong></p>
+<ul>
+<li>Time-based technical availability counts fault and maintenance stops against the turbine. It is not a contractual availability figure.</li>
+<li>Downtime by cause uses first-cause attribution. Ties are broken fault first, then maintenance, then external causes.</li>
+<li>Lost production uses the SCADA counter and inherits its power-curve assumptions.</li>
+</ul>
+<p><strong>Condition signals:</strong></p>
+<ul>
+<li><strong>Normal-behaviour models:</strong> gradient-boosted models, one per turbine and signal. They predict each signal from operating conditions, train only on healthy data from earlier years, and are scored on the next year.</li>
+<li><strong>Abnormal day:</strong> a day whose median robust z-score exceeds 3 in absolute value for any gear-oil signal.</li>
+<li><strong>Pump pressure figures:</strong> use producing rows above 1,000 kW only, after the unit correction.</li>
+</ul>
+<p><strong>Not a failure prediction:</strong></p>
+<ul>
+<li>Earlier work on the same data tested whether these signals give advance warning of oil-system or pitch trips. It found no reliable warning at 24 to 72 hours or at 30 days once seasonal and turbine-level chance rates were accounted for.</li>
+<li>The flags in this report describe recent condition and history. They are not probabilities of failure.</li>
+</ul>
+<p><strong>Known limits:</strong></p>
+<ul>
+<li><strong>Rule thresholds:</strong> the RAG rules are heuristics set by the analyst.</li>
+<li><strong>Repeat share:</strong> uses all years, so early-life trips count.</li>
+<li><strong>Data gaps:</strong> PEN01 to PEN10 have no 2024 data, and their January 2023 file is missing.</li>
+<li><strong>Pump pressure "last month" metric:</strong> an initial 3-month version straddled the November 2023 oil exchange. It was changed to the final month before flags were finalised, and that change removed the pump-pressure trigger for PEN01, PEN02 and PEN04, whose December 2023 values were back near baseline. Their RED flags come from other rules.</li>
+<li><strong>Weather analysis:</strong> uses nacelle-measured ambient temperature.</li>
+<li><strong>Not checked:</strong> blade, tower and foundation condition cannot be assessed from SCADA.</li>
+</ul>
+<p><strong>Credits:</strong> Kelmarsh and Penmanshiel wind farm data by Cubico Sustainable Investments, published on Zenodo under CC BY 4.0 (DOIs above). This report is an independent analysis and is not endorsed by Cubico.</p>
+<p><strong>Reproducibility:</strong> the scripts that build this report are in <code>projects/windml/scripts/</code>: <code>condition_metrics.py</code>, <code>condition_scorecard.py</code>, <code>condition_tables.py</code>, <code>condition_figures.py</code> and <code>build_condition_report.py</code>. The computed tables are in <code>reports/condition_report/tables/</code>.</p>
+<p><em>This report is not engineering advice.</em></p></body></html>

@@ -1,0 +1,1558 @@
+year,cause,hours,n_stops,farm,turbine_id
+2016,curtailment,66.21000000000001,4,kelmarsh,KEL01
+2016,fault: brake,57.322500000000005,4,kelmarsh,KEL01
+2016,fault: converter,198.72833333333335,7,kelmarsh,KEL01
+2016,fault: electrical,2.9183333333333334,1,kelmarsh,KEL01
+2016,fault: gearbox,9.86,2,kelmarsh,KEL01
+2016,fault: pitch,4.415555555555556,3,kelmarsh,KEL01
+2016,fault: rotor,11.148333333333333,8,kelmarsh,KEL01
+2016,fault: unspecified,211.1613888888889,2,kelmarsh,KEL01
+2016,grid,34.62777777777778,7,kelmarsh,KEL01
+2016,maintenance,120.3786111111111,34,kelmarsh,KEL01
+2016,routine,5.338333333333334,56,kelmarsh,KEL01
+2016,weather,0.04638888888888889,1,kelmarsh,KEL01
+2017,curtailment,14.623888888888889,2,kelmarsh,KEL01
+2017,fault: converter,0.23694444444444446,4,kelmarsh,KEL01
+2017,fault: pitch,0.34305555555555556,2,kelmarsh,KEL01
+2017,fault: rotor,35.781666666666666,10,kelmarsh,KEL01
+2017,fault: tower,5.675833333333333,5,kelmarsh,KEL01
+2017,fault: yaw,0.12694444444444444,2,kelmarsh,KEL01
+2017,grid,35.446111111111115,15,kelmarsh,KEL01
+2017,maintenance,37.496944444444445,34,kelmarsh,KEL01
+2017,routine,28.352500000000003,71,kelmarsh,KEL01
+2017,weather,0.18833333333333332,4,kelmarsh,KEL01
+2018,curtailment,12.241388888888888,3,kelmarsh,KEL01
+2018,fault: converter,0.9291666666666667,4,kelmarsh,KEL01
+2018,fault: hydraulics,0.5988888888888889,2,kelmarsh,KEL01
+2018,fault: pitch,0.6216666666666667,2,kelmarsh,KEL01
+2018,fault: tower,0.4363888888888889,2,kelmarsh,KEL01
+2018,grid,256.12111111111113,9,kelmarsh,KEL01
+2018,maintenance,32.343333333333334,26,kelmarsh,KEL01
+2018,routine,80.19916666666666,75,kelmarsh,KEL01
+2018,weather,2.1430555555555557,3,kelmarsh,KEL01
+2019,fault: converter,0.2061111111111111,4,kelmarsh,KEL01
+2019,fault: gearbox,0.019444444444444445,1,kelmarsh,KEL01
+2019,fault: hydraulics,0.26916666666666667,2,kelmarsh,KEL01
+2019,fault: tower,1.4402777777777778,5,kelmarsh,KEL01
+2019,grid,23.49138888888889,10,kelmarsh,KEL01
+2019,maintenance,32.757777777777775,15,kelmarsh,KEL01
+2019,routine,8.3075,79,kelmarsh,KEL01
+2019,weather,9.789444444444445,2,kelmarsh,KEL01
+2020,curtailment,12.31638888888889,3,kelmarsh,KEL01
+2020,fault: converter,0.24222222222222223,6,kelmarsh,KEL01
+2020,fault: hydraulics,27.68611111111111,1,kelmarsh,KEL01
+2020,fault: tower,7.444444444444445,11,kelmarsh,KEL01
+2020,fault: yaw,0.11722222222222221,2,kelmarsh,KEL01
+2020,grid,12.503611111111113,9,kelmarsh,KEL01
+2020,maintenance,30.40611111111111,18,kelmarsh,KEL01
+2020,routine,5.789444444444444,70,kelmarsh,KEL01
+2020,weather,104.40916666666666,4,kelmarsh,KEL01
+2021,curtailment,84.49277777777777,2,kelmarsh,KEL01
+2021,fault: converter,1.3325,8,kelmarsh,KEL01
+2021,fault: electrical,17.718055555555555,1,kelmarsh,KEL01
+2021,fault: hydraulics,92.65944444444445,1,kelmarsh,KEL01
+2021,fault: sensor_met,2.4652777777777777,12,kelmarsh,KEL01
+2021,fault: tower,0.33916666666666667,1,kelmarsh,KEL01
+2021,grid,0.5269444444444444,8,kelmarsh,KEL01
+2021,maintenance,28.780277777777776,17,kelmarsh,KEL01
+2021,routine,8.327222222222222,77,kelmarsh,KEL01
+2021,weather,61.408055555555556,4,kelmarsh,KEL01
+2022,fault: hydraulics,8.000833333333334,2,kelmarsh,KEL01
+2022,fault: pitch,0.33694444444444444,1,kelmarsh,KEL01
+2022,fault: sensor_met,5.993888888888889,65,kelmarsh,KEL01
+2022,fault: tower,2.5830555555555557,7,kelmarsh,KEL01
+2022,grid,58.977777777777774,4,kelmarsh,KEL01
+2022,maintenance,102.34888888888888,36,kelmarsh,KEL01
+2022,routine,7.4525,79,kelmarsh,KEL01
+2022,weather,102.98249999999999,12,kelmarsh,KEL01
+2023,curtailment,7.03,1,kelmarsh,KEL01
+2023,fault: converter,0.065,2,kelmarsh,KEL01
+2023,fault: gearbox,0.019444444444444445,1,kelmarsh,KEL01
+2023,fault: hydraulics,0.06805555555555555,1,kelmarsh,KEL01
+2023,fault: sensor_met,0.06027777777777778,1,kelmarsh,KEL01
+2023,fault: tower,0.26166666666666666,1,kelmarsh,KEL01
+2023,fault: yaw,0.09555555555555556,1,kelmarsh,KEL01
+2023,grid,0.9983333333333333,9,kelmarsh,KEL01
+2023,maintenance,26.45388888888889,20,kelmarsh,KEL01
+2023,routine,6.828888888888889,74,kelmarsh,KEL01
+2023,weather,51.68083333333333,2,kelmarsh,KEL01
+2024,curtailment,15.941944444444445,3,kelmarsh,KEL01
+2024,fault: hydraulics,3.642777777777778,2,kelmarsh,KEL01
+2024,fault: pitch,1.0719444444444444,6,kelmarsh,KEL01
+2024,fault: tower,3.3491666666666666,10,kelmarsh,KEL01
+2024,grid,0.3327777777777778,6,kelmarsh,KEL01
+2024,maintenance,35.41305555555555,16,kelmarsh,KEL01
+2024,routine,7.894722222222223,74,kelmarsh,KEL01
+2024,weather,0.0925,2,kelmarsh,KEL01
+2016,curtailment,66.42472222222223,4,kelmarsh,KEL02
+2016,fault: converter,3.135555555555556,13,kelmarsh,KEL02
+2016,fault: electrical,23.093611111111112,5,kelmarsh,KEL02
+2016,fault: pitch,75.63138888888889,6,kelmarsh,KEL02
+2016,fault: tower,0.7747222222222222,3,kelmarsh,KEL02
+2016,fault: unspecified,31.74527777777778,13,kelmarsh,KEL02
+2016,fault: yaw,0.5697222222222222,4,kelmarsh,KEL02
+2016,grid,95.28472222222221,8,kelmarsh,KEL02
+2016,maintenance,81.1925,25,kelmarsh,KEL02
+2016,routine,7.37,59,kelmarsh,KEL02
+2016,weather,0.04638888888888889,1,kelmarsh,KEL02
+2017,curtailment,14.2375,2,kelmarsh,KEL02
+2017,fault: converter,0.39999999999999997,3,kelmarsh,KEL02
+2017,fault: gearbox,0.02,1,kelmarsh,KEL02
+2017,fault: pitch,0.34444444444444444,2,kelmarsh,KEL02
+2017,fault: tower,5.7363888888888885,9,kelmarsh,KEL02
+2017,fault: yaw,0.29694444444444446,2,kelmarsh,KEL02
+2017,grid,28.956666666666667,17,kelmarsh,KEL02
+2017,maintenance,35.47972222222222,23,kelmarsh,KEL02
+2017,routine,7.579444444444444,79,kelmarsh,KEL02
+2017,weather,0.1088888888888889,2,kelmarsh,KEL02
+2018,curtailment,14.1025,2,kelmarsh,KEL02
+2018,fault: converter,8.514444444444445,6,kelmarsh,KEL02
+2018,fault: electrical,0.21694444444444444,1,kelmarsh,KEL02
+2018,fault: gearbox,0.07722222222222222,4,kelmarsh,KEL02
+2018,fault: pitch,0.3433333333333333,2,kelmarsh,KEL02
+2018,fault: tower,2.8455555555555554,6,kelmarsh,KEL02
+2018,fault: yaw,0.09722222222222222,1,kelmarsh,KEL02
+2018,grid,259.68277777777774,10,kelmarsh,KEL02
+2018,maintenance,31.833055555555557,23,kelmarsh,KEL02
+2018,routine,12.553055555555556,69,kelmarsh,KEL02
+2018,weather,28.988888888888887,2,kelmarsh,KEL02
+2019,fault: converter,0.08166666666666667,4,kelmarsh,KEL02
+2019,fault: gearbox,0.059166666666666666,3,kelmarsh,KEL02
+2019,fault: tower,1.8566666666666667,8,kelmarsh,KEL02
+2019,fault: yaw,0.09444444444444444,1,kelmarsh,KEL02
+2019,grid,0.6552777777777777,6,kelmarsh,KEL02
+2019,maintenance,33.01361111111111,11,kelmarsh,KEL02
+2019,routine,8.378055555555555,78,kelmarsh,KEL02
+2019,weather,0.04583333333333333,1,kelmarsh,KEL02
+2020,curtailment,12.6,3,kelmarsh,KEL02
+2020,fault: converter,0.41444444444444445,7,kelmarsh,KEL02
+2020,fault: gearbox,0.058055555555555555,3,kelmarsh,KEL02
+2020,fault: pitch,1.1913888888888888,1,kelmarsh,KEL02
+2020,fault: tower,11.537777777777778,15,kelmarsh,KEL02
+2020,grid,12.208055555555557,8,kelmarsh,KEL02
+2020,maintenance,62.00555555555555,8,kelmarsh,KEL02
+2020,routine,15.013333333333335,71,kelmarsh,KEL02
+2020,weather,72.31555555555556,2,kelmarsh,KEL02
+2021,curtailment,84.30722222222222,2,kelmarsh,KEL02
+2021,fault: converter,1.1397222222222223,8,kelmarsh,KEL02
+2021,fault: gearbox,0.14888888888888888,1,kelmarsh,KEL02
+2021,fault: tower,0.6175,3,kelmarsh,KEL02
+2021,grid,0.33305555555555555,4,kelmarsh,KEL02
+2021,maintenance,26.10111111111111,16,kelmarsh,KEL02
+2021,routine,7.575277777777778,76,kelmarsh,KEL02
+2021,weather,44.235277777777775,4,kelmarsh,KEL02
+2022,fault: converter,6.176944444444444,4,kelmarsh,KEL02
+2022,fault: gearbox,0.1363888888888889,8,kelmarsh,KEL02
+2022,fault: rotor,0.2972222222222222,1,kelmarsh,KEL02
+2022,fault: sensor_met,1.4380555555555556,9,kelmarsh,KEL02
+2022,fault: tower,4.097222222222222,13,kelmarsh,KEL02
+2022,grid,49.48083333333334,18,kelmarsh,KEL02
+2022,maintenance,217.90277777777777,30,kelmarsh,KEL02
+2022,routine,8.263333333333334,83,kelmarsh,KEL02
+2022,weather,92.5988888888889,3,kelmarsh,KEL02
+2023,curtailment,7.514444444444444,1,kelmarsh,KEL02
+2023,fault: converter,0.5797222222222222,2,kelmarsh,KEL02
+2023,fault: gearbox,0.058055555555555555,3,kelmarsh,KEL02
+2023,fault: tower,0.6177777777777779,3,kelmarsh,KEL02
+2023,grid,42.82361111111111,22,kelmarsh,KEL02
+2023,maintenance,46.08888888888889,24,kelmarsh,KEL02
+2023,routine,6.257777777777778,70,kelmarsh,KEL02
+2023,weather,45.60777777777778,1,kelmarsh,KEL02
+2024,curtailment,12.427777777777779,3,kelmarsh,KEL02
+2024,fault: gearbox,0.058055555555555555,3,kelmarsh,KEL02
+2024,fault: pitch,9.864722222222222,3,kelmarsh,KEL02
+2024,fault: tower,7.129166666666666,20,kelmarsh,KEL02
+2024,grid,0.3333333333333333,6,kelmarsh,KEL02
+2024,maintenance,24.65888888888889,12,kelmarsh,KEL02
+2024,routine,7.011666666666667,74,kelmarsh,KEL02
+2024,weather,0.04611111111111111,1,kelmarsh,KEL02
+2016,curtailment,66.2025,4,kelmarsh,KEL03
+2016,fault: converter,30.72388888888889,4,kelmarsh,KEL03
+2016,fault: electrical,0.5133333333333333,3,kelmarsh,KEL03
+2016,fault: pitch,23.55138888888889,5,kelmarsh,KEL03
+2016,fault: rotor,0.04666666666666667,1,kelmarsh,KEL03
+2016,fault: sensor_met,63.85722222222222,2,kelmarsh,KEL03
+2016,fault: tower,0.26305555555555554,1,kelmarsh,KEL03
+2016,fault: unspecified,44.7875,10,kelmarsh,KEL03
+2016,fault: yaw,1.4738888888888888,1,kelmarsh,KEL03
+2016,grid,53.15777777777778,8,kelmarsh,KEL03
+2016,maintenance,118.81027777777778,29,kelmarsh,KEL03
+2016,routine,6.336388888888889,57,kelmarsh,KEL03
+2016,weather,0.04416666666666667,1,kelmarsh,KEL03
+2017,curtailment,34.16444444444444,2,kelmarsh,KEL03
+2017,fault: electrical,0.9641666666666666,2,kelmarsh,KEL03
+2017,fault: pitch,0.34277777777777774,2,kelmarsh,KEL03
+2017,fault: tower,1.9183333333333334,4,kelmarsh,KEL03
+2017,grid,5.383333333333333,17,kelmarsh,KEL03
+2017,maintenance,36.015,24,kelmarsh,KEL03
+2017,routine,7.631944444444445,79,kelmarsh,KEL03
+2017,weather,0.3688888888888889,2,kelmarsh,KEL03
+2018,curtailment,9.881388888888889,2,kelmarsh,KEL03
+2018,fault: converter,7.679722222222223,10,kelmarsh,KEL03
+2018,fault: pitch,0.8266666666666667,5,kelmarsh,KEL03
+2018,fault: tower,1.3199999999999998,6,kelmarsh,KEL03
+2018,fault: yaw,0.09416666666666666,1,kelmarsh,KEL03
+2018,grid,310.27805555555557,8,kelmarsh,KEL03
+2018,maintenance,38.11805555555556,24,kelmarsh,KEL03
+2018,routine,10.123055555555556,71,kelmarsh,KEL03
+2018,weather,0.35694444444444445,1,kelmarsh,KEL03
+2019,fault: converter,0.1411111111111111,1,kelmarsh,KEL03
+2019,fault: tower,0.6233333333333333,3,kelmarsh,KEL03
+2019,fault: yaw,0.09555555555555556,1,kelmarsh,KEL03
+2019,grid,0.6505555555555556,6,kelmarsh,KEL03
+2019,maintenance,37.90888888888889,15,kelmarsh,KEL03
+2019,routine,10.037777777777778,83,kelmarsh,KEL03
+2019,weather,0.04583333333333333,1,kelmarsh,KEL03
+2020,curtailment,18.817222222222224,4,kelmarsh,KEL03
+2020,fault: converter,51.6725,8,kelmarsh,KEL03
+2020,fault: pitch,16.7975,1,kelmarsh,KEL03
+2020,fault: tower,0.9022222222222223,4,kelmarsh,KEL03
+2020,grid,12.716111111111111,9,kelmarsh,KEL03
+2020,maintenance,20.016666666666666,15,kelmarsh,KEL03
+2020,routine,153.33916666666667,75,kelmarsh,KEL03
+2020,weather,81.82055555555556,2,kelmarsh,KEL03
+2021,curtailment,84.49277777777777,2,kelmarsh,KEL03
+2021,fault: converter,0.9563888888888888,9,kelmarsh,KEL03
+2021,fault: pitch,0.7625,1,kelmarsh,KEL03
+2021,fault: sensor_met,0.050833333333333335,1,kelmarsh,KEL03
+2021,fault: tower,0.1775,1,kelmarsh,KEL03
+2021,grid,0.4433333333333333,4,kelmarsh,KEL03
+2021,maintenance,122.07416666666666,24,kelmarsh,KEL03
+2021,routine,7.743333333333333,75,kelmarsh,KEL03
+2021,weather,46.76472222222222,2,kelmarsh,KEL03
+2022,fault: converter,3.0675,3,kelmarsh,KEL03
+2022,fault: tower,0.6169444444444445,3,kelmarsh,KEL03
+2022,grid,23.988055555555555,3,kelmarsh,KEL03
+2022,maintenance,40.075833333333335,25,kelmarsh,KEL03
+2022,routine,7.938888888888889,80,kelmarsh,KEL03
+2022,weather,90.5963888888889,2,kelmarsh,KEL03
+2023,curtailment,9.820555555555556,1,kelmarsh,KEL03
+2023,fault: sensor_met,0.03638888888888889,1,kelmarsh,KEL03
+2023,fault: tower,0.2627777777777778,1,kelmarsh,KEL03
+2023,grid,0.9422222222222222,9,kelmarsh,KEL03
+2023,maintenance,56.115833333333335,30,kelmarsh,KEL03
+2023,routine,6.553055555555556,73,kelmarsh,KEL03
+2023,weather,54.81805555555555,2,kelmarsh,KEL03
+2024,curtailment,12.426944444444445,3,kelmarsh,KEL03
+2024,fault: control_comm,95.84527777777777,2,kelmarsh,KEL03
+2024,fault: pitch,45.93388888888889,1,kelmarsh,KEL03
+2024,fault: tower,0.5269444444444444,2,kelmarsh,KEL03
+2024,grid,0.27944444444444444,5,kelmarsh,KEL03
+2024,maintenance,44.72083333333333,26,kelmarsh,KEL03
+2024,routine,7.654444444444445,77,kelmarsh,KEL03
+2024,weather,0.04611111111111111,1,kelmarsh,KEL03
+2016,curtailment,66.22888888888889,4,kelmarsh,KEL04
+2016,fault: converter,0.1488888888888889,5,kelmarsh,KEL04
+2016,fault: electrical,12.143611111111111,1,kelmarsh,KEL04
+2016,fault: gearbox,0.30944444444444447,1,kelmarsh,KEL04
+2016,fault: hydraulics,23.776666666666667,1,kelmarsh,KEL04
+2016,fault: pitch,0.6794444444444444,3,kelmarsh,KEL04
+2016,fault: tower,0.26055555555555554,1,kelmarsh,KEL04
+2016,fault: unspecified,0.049444444444444444,1,kelmarsh,KEL04
+2016,grid,31.387777777777774,9,kelmarsh,KEL04
+2016,maintenance,32.19777777777778,22,kelmarsh,KEL04
+2016,routine,8.29138888888889,64,kelmarsh,KEL04
+2017,curtailment,14.616388888888888,2,kelmarsh,KEL04
+2017,fault: converter,0.25166666666666665,7,kelmarsh,KEL04
+2017,fault: pitch,0.5152777777777778,3,kelmarsh,KEL04
+2017,fault: sensor_met,0.021666666666666667,1,kelmarsh,KEL04
+2017,fault: tower,4.5280555555555555,9,kelmarsh,KEL04
+2017,grid,29.134166666666665,12,kelmarsh,KEL04
+2017,maintenance,35.073055555555555,23,kelmarsh,KEL04
+2017,routine,6.386666666666667,76,kelmarsh,KEL04
+2017,weather,35.00361111111111,3,kelmarsh,KEL04
+2018,curtailment,12.444444444444445,3,kelmarsh,KEL04
+2018,fault: converter,1.3108333333333335,3,kelmarsh,KEL04
+2018,fault: pitch,4.7252777777777775,1,kelmarsh,KEL04
+2018,fault: tower,1.801111111111111,3,kelmarsh,KEL04
+2018,fault: yaw,0.09666666666666666,1,kelmarsh,KEL04
+2018,grid,257.485,8,kelmarsh,KEL04
+2018,maintenance,64.48,23,kelmarsh,KEL04
+2018,routine,7.5247222222222225,71,kelmarsh,KEL04
+2018,weather,0.17694444444444443,1,kelmarsh,KEL04
+2019,fault: converter,0.1,3,kelmarsh,KEL04
+2019,fault: electrical,1.3227777777777776,3,kelmarsh,KEL04
+2019,fault: sensor_met,0.03972222222222222,1,kelmarsh,KEL04
+2019,fault: tower,1.5944444444444443,8,kelmarsh,KEL04
+2019,grid,1.5847222222222221,6,kelmarsh,KEL04
+2019,maintenance,31.615277777777777,15,kelmarsh,KEL04
+2019,routine,8.3725,81,kelmarsh,KEL04
+2019,weather,0.04583333333333333,1,kelmarsh,KEL04
+2020,curtailment,13.333333333333334,3,kelmarsh,KEL04
+2020,fault: converter,51.884166666666665,10,kelmarsh,KEL04
+2020,fault: tower,9.030277777777778,19,kelmarsh,KEL04
+2020,grid,12.81611111111111,8,kelmarsh,KEL04
+2020,maintenance,20.90972222222222,10,kelmarsh,KEL04
+2020,routine,7.761666666666667,79,kelmarsh,KEL04
+2020,weather,137.7975,2,kelmarsh,KEL04
+2021,curtailment,84.63472222222222,2,kelmarsh,KEL04
+2021,fault: converter,0.8672222222222222,8,kelmarsh,KEL04
+2021,fault: sensor_met,0.025277777777777777,1,kelmarsh,KEL04
+2021,fault: tower,0.26055555555555554,1,kelmarsh,KEL04
+2021,grid,0.5325,2,kelmarsh,KEL04
+2021,maintenance,36.694722222222225,18,kelmarsh,KEL04
+2021,routine,7.826944444444445,76,kelmarsh,KEL04
+2021,weather,69.3013888888889,4,kelmarsh,KEL04
+2022,fault: converter,60.48166666666667,3,kelmarsh,KEL04
+2022,fault: electrical,0.7766666666666667,2,kelmarsh,KEL04
+2022,fault: sensor_met,0.03027777777777778,1,kelmarsh,KEL04
+2022,fault: tower,0.44027777777777777,2,kelmarsh,KEL04
+2022,grid,1.2519444444444443,2,kelmarsh,KEL04
+2022,maintenance,710.2333333333333,27,kelmarsh,KEL04
+2022,routine,6.948611111111111,70,kelmarsh,KEL04
+2022,weather,142.84416666666667,3,kelmarsh,KEL04
+2023,curtailment,8.180555555555555,1,kelmarsh,KEL04
+2023,fault: gearbox,13.51638888888889,2,kelmarsh,KEL04
+2023,fault: pitch,50.52305555555555,2,kelmarsh,KEL04
+2023,fault: sensor_met,61.66972222222223,17,kelmarsh,KEL04
+2023,fault: tower,0.17722222222222223,1,kelmarsh,KEL04
+2023,fault: yaw,0.8247222222222222,1,kelmarsh,KEL04
+2023,grid,1.3388888888888888,9,kelmarsh,KEL04
+2023,maintenance,394.6547222222222,30,kelmarsh,KEL04
+2023,routine,6.435,71,kelmarsh,KEL04
+2023,weather,95.4675,2,kelmarsh,KEL04
+2024,curtailment,10.28638888888889,2,kelmarsh,KEL04
+2024,fault: converter,406.56111111111113,5,kelmarsh,KEL04
+2024,fault: gearbox,104.88861111111112,3,kelmarsh,KEL04
+2024,fault: pitch,18.751666666666665,2,kelmarsh,KEL04
+2024,fault: sensor_met,0.058611111111111114,1,kelmarsh,KEL04
+2024,fault: tower,3.511111111111111,8,kelmarsh,KEL04
+2024,fault: unspecified,0.2436111111111111,1,kelmarsh,KEL04
+2024,grid,5.273611111111111,18,kelmarsh,KEL04
+2024,maintenance,20.250555555555557,18,kelmarsh,KEL04
+2024,routine,6.07,68,kelmarsh,KEL04
+2024,weather,0.09138888888888888,2,kelmarsh,KEL04
+2016,curtailment,62.555,3,kelmarsh,KEL05
+2016,fault: converter,263.46000000000004,3,kelmarsh,KEL05
+2016,fault: electrical,0.4355555555555556,2,kelmarsh,KEL05
+2016,fault: gearbox,98.37111111111112,4,kelmarsh,KEL05
+2016,fault: pitch,0.6463888888888889,1,kelmarsh,KEL05
+2016,fault: tower,0.05666666666666667,2,kelmarsh,KEL05
+2016,fault: unspecified,3.2402777777777776,3,kelmarsh,KEL05
+2016,grid,50.91194444444445,6,kelmarsh,KEL05
+2016,maintenance,171.53972222222222,25,kelmarsh,KEL05
+2016,routine,8.627777777777778,71,kelmarsh,KEL05
+2016,weather,0.09305555555555556,2,kelmarsh,KEL05
+2017,curtailment,59.76888888888889,2,kelmarsh,KEL05
+2017,fault: pitch,1.011111111111111,4,kelmarsh,KEL05
+2017,fault: tower,4.499444444444444,9,kelmarsh,KEL05
+2017,grid,33.39694444444444,13,kelmarsh,KEL05
+2017,maintenance,37.275555555555556,22,kelmarsh,KEL05
+2017,routine,6.5969444444444445,71,kelmarsh,KEL05
+2017,weather,0.09583333333333333,2,kelmarsh,KEL05
+2018,curtailment,12.283333333333333,3,kelmarsh,KEL05
+2018,fault: gearbox,1.2430555555555556,1,kelmarsh,KEL05
+2018,fault: pitch,0.17166666666666666,1,kelmarsh,KEL05
+2018,fault: tower,2.888611111111111,5,kelmarsh,KEL05
+2018,fault: yaw,39.08138888888889,1,kelmarsh,KEL05
+2018,grid,288.6533333333333,9,kelmarsh,KEL05
+2018,maintenance,32.963611111111106,18,kelmarsh,KEL05
+2018,routine,6.993888888888889,74,kelmarsh,KEL05
+2018,weather,0.04638888888888889,1,kelmarsh,KEL05
+2019,fault: converter,0.43222222222222223,1,kelmarsh,KEL05
+2019,fault: rotor,0.355,1,kelmarsh,KEL05
+2019,fault: tower,1.2405555555555556,5,kelmarsh,KEL05
+2019,grid,22.96194444444444,10,kelmarsh,KEL05
+2019,maintenance,27.073888888888888,14,kelmarsh,KEL05
+2019,routine,8.662777777777778,81,kelmarsh,KEL05
+2019,weather,0.09166666666666666,2,kelmarsh,KEL05
+2020,curtailment,18.931944444444444,4,kelmarsh,KEL05
+2020,fault: converter,2.331388888888889,7,kelmarsh,KEL05
+2020,fault: tower,17.429166666666667,8,kelmarsh,KEL05
+2020,grid,12.872222222222222,8,kelmarsh,KEL05
+2020,maintenance,14.64472222222222,7,kelmarsh,KEL05
+2020,routine,6.68,77,kelmarsh,KEL05
+2020,weather,69.80361111111111,2,kelmarsh,KEL05
+2021,curtailment,84.49305555555556,2,kelmarsh,KEL05
+2021,fault: converter,148.97194444444443,18,kelmarsh,KEL05
+2021,fault: pitch,50.13861111111111,1,kelmarsh,KEL05
+2021,fault: sensor_met,1.7033333333333334,6,kelmarsh,KEL05
+2021,fault: tower,0.2425,1,kelmarsh,KEL05
+2021,fault: unspecified,94.23722222222223,1,kelmarsh,KEL05
+2021,grid,0.45444444444444443,4,kelmarsh,KEL05
+2021,maintenance,308.96444444444444,22,kelmarsh,KEL05
+2021,routine,6.981388888888889,73,kelmarsh,KEL05
+2021,weather,49.96222222222222,2,kelmarsh,KEL05
+2022,fault: converter,3.3213888888888885,2,kelmarsh,KEL05
+2022,fault: pitch,0.027777777777777776,1,kelmarsh,KEL05
+2022,fault: sensor_met,2.546388888888889,20,kelmarsh,KEL05
+2022,fault: tower,1.527222222222222,6,kelmarsh,KEL05
+2022,fault: yaw,0.09555555555555556,1,kelmarsh,KEL05
+2022,grid,29.802500000000002,31,kelmarsh,KEL05
+2022,maintenance,58.89972222222222,32,kelmarsh,KEL05
+2022,routine,6.781666666666666,74,kelmarsh,KEL05
+2022,weather,104.36055555555556,5,kelmarsh,KEL05
+2023,curtailment,50.82,1,kelmarsh,KEL05
+2023,fault: gearbox,370.26722222222224,1,kelmarsh,KEL05
+2023,fault: pitch,32.325833333333335,23,kelmarsh,KEL05
+2023,fault: sensor_met,50.42916666666667,158,kelmarsh,KEL05
+2023,fault: tower,0.2613888888888889,1,kelmarsh,KEL05
+2023,grid,16.32361111111111,9,kelmarsh,KEL05
+2023,maintenance,44.68,34,kelmarsh,KEL05
+2023,routine,7.1241666666666665,74,kelmarsh,KEL05
+2023,weather,46.605555555555554,1,kelmarsh,KEL05
+2024,curtailment,16.038333333333334,3,kelmarsh,KEL05
+2024,fault: converter,238.7513888888889,24,kelmarsh,KEL05
+2024,fault: pitch,6.905833333333334,24,kelmarsh,KEL05
+2024,fault: tower,9.4025,5,kelmarsh,KEL05
+2024,grid,0.2763888888888889,5,kelmarsh,KEL05
+2024,maintenance,49.641666666666666,13,kelmarsh,KEL05
+2024,routine,6.9325,70,kelmarsh,KEL05
+2024,weather,0.04666666666666667,1,kelmarsh,KEL05
+2016,curtailment,63.68194444444445,4,kelmarsh,KEL06
+2016,fault: converter,21.174722222222222,9,kelmarsh,KEL06
+2016,fault: electrical,76.6661111111111,1,kelmarsh,KEL06
+2016,fault: pitch,25.34027777777778,4,kelmarsh,KEL06
+2016,fault: tower,1.3294444444444444,6,kelmarsh,KEL06
+2016,fault: unspecified,1.493611111111111,1,kelmarsh,KEL06
+2016,fault: yaw,1.5072222222222222,2,kelmarsh,KEL06
+2016,grid,85.28861111111111,8,kelmarsh,KEL06
+2016,maintenance,60.95666666666666,17,kelmarsh,KEL06
+2016,routine,4.931388888888889,60,kelmarsh,KEL06
+2017,curtailment,14.249444444444444,2,kelmarsh,KEL06
+2017,fault: converter,111.0425,11,kelmarsh,KEL06
+2017,fault: electrical,0.2586111111111111,1,kelmarsh,KEL06
+2017,fault: pitch,1.4094444444444445,4,kelmarsh,KEL06
+2017,fault: tower,5.810833333333333,20,kelmarsh,KEL06
+2017,fault: unspecified,1.2663888888888888,1,kelmarsh,KEL06
+2017,grid,93.65444444444444,13,kelmarsh,KEL06
+2017,maintenance,39.388888888888886,26,kelmarsh,KEL06
+2017,routine,6.629444444444444,72,kelmarsh,KEL06
+2017,weather,0.12527777777777777,3,kelmarsh,KEL06
+2018,curtailment,12.32611111111111,3,kelmarsh,KEL06
+2018,fault: converter,0.9491666666666667,8,kelmarsh,KEL06
+2018,fault: electrical,2.439722222222222,1,kelmarsh,KEL06
+2018,fault: rotor,0.0913888888888889,1,kelmarsh,KEL06
+2018,fault: tower,1.3263888888888888,6,kelmarsh,KEL06
+2018,fault: yaw,0.09666666666666666,1,kelmarsh,KEL06
+2018,grid,256.93666666666667,8,kelmarsh,KEL06
+2018,maintenance,34.80277777777778,24,kelmarsh,KEL06
+2018,routine,16.841944444444444,71,kelmarsh,KEL06
+2018,weather,23.269166666666663,3,kelmarsh,KEL06
+2019,fault: converter,15.698333333333334,1,kelmarsh,KEL06
+2019,fault: tower,0.8838888888888888,4,kelmarsh,KEL06
+2019,grid,32.61,6,kelmarsh,KEL06
+2019,maintenance,25.388333333333332,12,kelmarsh,KEL06
+2019,routine,8.125,77,kelmarsh,KEL06
+2019,weather,0.04583333333333333,1,kelmarsh,KEL06
+2020,curtailment,12.656666666666666,3,kelmarsh,KEL06
+2020,fault: converter,2.6025,9,kelmarsh,KEL06
+2020,fault: generator,29.67666666666667,4,kelmarsh,KEL06
+2020,fault: tower,6.216111111111111,13,kelmarsh,KEL06
+2020,fault: yaw,0.09666666666666666,1,kelmarsh,KEL06
+2020,grid,41.01638888888889,7,kelmarsh,KEL06
+2020,maintenance,22.899166666666666,12,kelmarsh,KEL06
+2020,routine,7.207777777777777,76,kelmarsh,KEL06
+2020,weather,0.04472222222222222,1,kelmarsh,KEL06
+2021,curtailment,84.49972222222223,2,kelmarsh,KEL06
+2021,fault: converter,0.885,8,kelmarsh,KEL06
+2021,fault: gearbox,77.18694444444445,2,kelmarsh,KEL06
+2021,fault: pitch,32.236666666666665,1,kelmarsh,KEL06
+2021,fault: tower,0.44305555555555554,2,kelmarsh,KEL06
+2021,fault: yaw,0.09638888888888889,1,kelmarsh,KEL06
+2021,grid,0.5552777777777778,6,kelmarsh,KEL06
+2021,maintenance,642.4497222222222,20,kelmarsh,KEL06
+2021,routine,7.738611111111111,73,kelmarsh,KEL06
+2021,weather,0.10333333333333333,2,kelmarsh,KEL06
+2022,fault: converter,4.906944444444444,1,kelmarsh,KEL06
+2022,fault: pitch,414.60083333333336,6,kelmarsh,KEL06
+2022,fault: sensor_met,5.585277777777778,1,kelmarsh,KEL06
+2022,fault: tower,1.865,7,kelmarsh,KEL06
+2022,fault: yaw,1.118611111111111,1,kelmarsh,KEL06
+2022,grid,43.07388888888889,28,kelmarsh,KEL06
+2022,maintenance,32.9675,21,kelmarsh,KEL06
+2022,routine,7.453055555555555,78,kelmarsh,KEL06
+2022,weather,103.57972222222222,3,kelmarsh,KEL06
+2023,curtailment,9.308333333333334,1,kelmarsh,KEL06
+2023,fault: tower,2.249722222222222,11,kelmarsh,KEL06
+2023,fault: yaw,0.1725,1,kelmarsh,KEL06
+2023,grid,38.00666666666667,13,kelmarsh,KEL06
+2023,maintenance,30.086666666666666,29,kelmarsh,KEL06
+2023,routine,6.914722222222222,74,kelmarsh,KEL06
+2023,weather,41.10638888888889,1,kelmarsh,KEL06
+2024,curtailment,59.653333333333336,3,kelmarsh,KEL06
+2024,fault: gearbox,1.1105555555555555,5,kelmarsh,KEL06
+2024,fault: generator,233.7313888888889,5,kelmarsh,KEL06
+2024,fault: pitch,207.94305555555553,7,kelmarsh,KEL06
+2024,fault: tower,1.4694444444444446,6,kelmarsh,KEL06
+2024,fault: unspecified,20.766666666666666,1,kelmarsh,KEL06
+2024,grid,0.3327777777777778,6,kelmarsh,KEL06
+2024,maintenance,220.3936111111111,25,kelmarsh,KEL06
+2024,routine,6.009722222222222,67,kelmarsh,KEL06
+2016,curtailment,36.297222222222224,53,penmanshiel,PEN01
+2016,fault: brake,0.4363888888888889,1,penmanshiel,PEN01
+2016,fault: converter,23.43,11,penmanshiel,PEN01
+2016,fault: electrical,15.143333333333333,2,penmanshiel,PEN01
+2016,fault: gearbox,0.08777777777777777,3,penmanshiel,PEN01
+2016,fault: pitch,1.6830555555555557,6,penmanshiel,PEN01
+2016,fault: tower,0.17972222222222223,1,penmanshiel,PEN01
+2016,fault: unspecified,1.0966666666666667,2,penmanshiel,PEN01
+2016,grid,275.6275,9,penmanshiel,PEN01
+2016,maintenance,246.3202777777778,37,penmanshiel,PEN01
+2016,routine,3.8619444444444446,36,penmanshiel,PEN01
+2016,weather,0.8202777777777778,3,penmanshiel,PEN01
+2017,curtailment,9.793888888888889,25,penmanshiel,PEN01
+2017,fault: converter,0.13333333333333333,4,penmanshiel,PEN01
+2017,fault: gearbox,2.5305555555555554,1,penmanshiel,PEN01
+2017,fault: pitch,25.29111111111111,6,penmanshiel,PEN01
+2017,fault: tower,0.25722222222222224,1,penmanshiel,PEN01
+2017,grid,7.171666666666667,1,penmanshiel,PEN01
+2017,maintenance,69.16055555555556,39,penmanshiel,PEN01
+2017,routine,14.705,77,penmanshiel,PEN01
+2017,weather,6.194999999999999,8,penmanshiel,PEN01
+2018,curtailment,0.22194444444444444,6,penmanshiel,PEN01
+2018,fault: gearbox,0.2872222222222222,1,penmanshiel,PEN01
+2018,fault: tower,4.382777777777777,4,penmanshiel,PEN01
+2018,grid,1.4694444444444446,1,penmanshiel,PEN01
+2018,maintenance,50.94305555555555,26,penmanshiel,PEN01
+2018,routine,6.988611111111111,72,penmanshiel,PEN01
+2018,weather,146.18722222222223,43,penmanshiel,PEN01
+2019,curtailment,0.6658333333333333,7,penmanshiel,PEN01
+2019,fault: converter,145.57444444444445,14,penmanshiel,PEN01
+2019,fault: gearbox,0.029166666666666667,1,penmanshiel,PEN01
+2019,fault: pitch,41.515,1,penmanshiel,PEN01
+2019,fault: tower,1.1838888888888888,5,penmanshiel,PEN01
+2019,grid,65.56055555555555,5,penmanshiel,PEN01
+2019,maintenance,40.54833333333333,20,penmanshiel,PEN01
+2019,routine,8.473888888888888,81,penmanshiel,PEN01
+2019,weather,6.8149999999999995,24,penmanshiel,PEN01
+2020,curtailment,388.0361111111111,8,penmanshiel,PEN01
+2020,fault: converter,18.629444444444445,19,penmanshiel,PEN01
+2020,fault: electrical,18.8625,1,penmanshiel,PEN01
+2020,fault: gearbox,0.06055555555555556,2,penmanshiel,PEN01
+2020,fault: pitch,3.098055555555556,3,penmanshiel,PEN01
+2020,fault: tower,4.153333333333333,15,penmanshiel,PEN01
+2020,maintenance,148.05805555555557,33,penmanshiel,PEN01
+2020,routine,8.346666666666668,76,penmanshiel,PEN01
+2020,weather,32.55305555555555,97,penmanshiel,PEN01
+2021,curtailment,12.931666666666667,15,penmanshiel,PEN01
+2021,fault: gearbox,0.7563888888888889,3,penmanshiel,PEN01
+2021,fault: pitch,17.610555555555553,5,penmanshiel,PEN01
+2021,fault: sensor_met,0.025277777777777777,1,penmanshiel,PEN01
+2021,fault: yaw,0.09527777777777778,1,penmanshiel,PEN01
+2021,maintenance,25.371666666666666,7,penmanshiel,PEN01
+2021,routine,10.67361111111111,89,penmanshiel,PEN01
+2021,weather,46.243611111111115,40,penmanshiel,PEN01
+2022,curtailment,46.166666666666664,11,penmanshiel,PEN01
+2022,fault: converter,0.14777777777777776,2,penmanshiel,PEN01
+2022,fault: gearbox,0.029166666666666667,1,penmanshiel,PEN01
+2022,fault: pitch,75.70722222222223,12,penmanshiel,PEN01
+2022,fault: tower,0.5275,2,penmanshiel,PEN01
+2022,maintenance,19.017777777777777,16,penmanshiel,PEN01
+2022,routine,8.955277777777777,81,penmanshiel,PEN01
+2022,weather,19.184722222222224,50,penmanshiel,PEN01
+2023,curtailment,13.913055555555554,4,penmanshiel,PEN01
+2023,fault: converter,0.46138888888888885,4,penmanshiel,PEN01
+2023,fault: gearbox,0.027777777777777776,1,penmanshiel,PEN01
+2023,fault: tower,0.4336111111111111,2,penmanshiel,PEN01
+2023,grid,0.32972222222222225,1,penmanshiel,PEN01
+2023,maintenance,49.492222222222225,29,penmanshiel,PEN01
+2023,routine,8.758333333333333,77,penmanshiel,PEN01
+2023,weather,33.63638888888889,52,penmanshiel,PEN01
+2016,curtailment,41.591944444444444,51,penmanshiel,PEN02
+2016,fault: converter,0.26666666666666666,8,penmanshiel,PEN02
+2016,fault: electrical,296.845,4,penmanshiel,PEN02
+2016,fault: gearbox,0.11833333333333333,4,penmanshiel,PEN02
+2016,fault: pitch,4.4375,7,penmanshiel,PEN02
+2016,fault: sensor_met,167.28944444444446,1,penmanshiel,PEN02
+2016,fault: tower,0.7955555555555556,4,penmanshiel,PEN02
+2016,fault: unspecified,1.8741666666666668,2,penmanshiel,PEN02
+2016,grid,73.99361111111111,9,penmanshiel,PEN02
+2016,maintenance,88.33888888888889,30,penmanshiel,PEN02
+2016,routine,3.096388888888889,34,penmanshiel,PEN02
+2016,weather,0.04638888888888889,1,penmanshiel,PEN02
+2017,curtailment,5.871944444444444,25,penmanshiel,PEN02
+2017,fault: converter,0.06555555555555556,1,penmanshiel,PEN02
+2017,fault: electrical,6.218055555555555,5,penmanshiel,PEN02
+2017,fault: gearbox,1.0508333333333333,1,penmanshiel,PEN02
+2017,fault: pitch,70.33277777777778,5,penmanshiel,PEN02
+2017,fault: rotor,0.6077777777777778,2,penmanshiel,PEN02
+2017,fault: tower,7.564444444444445,11,penmanshiel,PEN02
+2017,grid,24.905833333333334,1,penmanshiel,PEN02
+2017,maintenance,50.83222222222222,35,penmanshiel,PEN02
+2017,routine,7.189722222222223,74,penmanshiel,PEN02
+2017,weather,0.485,3,penmanshiel,PEN02
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN02
+2018,fault: electrical,139.56527777777777,3,penmanshiel,PEN02
+2018,fault: gearbox,0.21888888888888888,2,penmanshiel,PEN02
+2018,fault: pitch,3.9025,12,penmanshiel,PEN02
+2018,fault: tower,6.969722222222222,16,penmanshiel,PEN02
+2018,fault: yaw,0.09666666666666666,1,penmanshiel,PEN02
+2018,grid,1.4694444444444446,1,penmanshiel,PEN02
+2018,maintenance,44.119166666666665,25,penmanshiel,PEN02
+2018,routine,7.603888888888889,72,penmanshiel,PEN02
+2018,weather,7.51,30,penmanshiel,PEN02
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN02
+2019,fault: converter,1.8388888888888888,8,penmanshiel,PEN02
+2019,fault: gearbox,16.64861111111111,5,penmanshiel,PEN02
+2019,fault: pitch,7.8775,5,penmanshiel,PEN02
+2019,fault: tower,2.4966666666666666,11,penmanshiel,PEN02
+2019,grid,37.306111111111115,5,penmanshiel,PEN02
+2019,maintenance,39.6175,21,penmanshiel,PEN02
+2019,routine,6.986111111111111,72,penmanshiel,PEN02
+2019,weather,4.928055555555556,17,penmanshiel,PEN02
+2020,curtailment,380.8786111111111,7,penmanshiel,PEN02
+2020,fault: converter,10.0025,15,penmanshiel,PEN02
+2020,fault: electrical,17.15888888888889,1,penmanshiel,PEN02
+2020,fault: gearbox,0.6013888888888889,3,penmanshiel,PEN02
+2020,fault: pitch,338.99194444444447,14,penmanshiel,PEN02
+2020,fault: tower,23.98638888888889,52,penmanshiel,PEN02
+2020,grid,9.002222222222223,1,penmanshiel,PEN02
+2020,maintenance,100.75527777777779,28,penmanshiel,PEN02
+2020,routine,8.425,77,penmanshiel,PEN02
+2020,weather,17.37472222222222,63,penmanshiel,PEN02
+2021,curtailment,12.907777777777778,14,penmanshiel,PEN02
+2021,fault: gearbox,1.0580555555555557,3,penmanshiel,PEN02
+2021,fault: pitch,8.131388888888889,1,penmanshiel,PEN02
+2021,fault: rotor,0.7786111111111111,1,penmanshiel,PEN02
+2021,fault: tower,3.3869444444444445,13,penmanshiel,PEN02
+2021,fault: yaw,0.06388888888888888,2,penmanshiel,PEN02
+2021,maintenance,40.365,19,penmanshiel,PEN02
+2021,routine,11.071666666666667,88,penmanshiel,PEN02
+2021,weather,44.64277777777778,35,penmanshiel,PEN02
+2022,curtailment,46.13305555555556,11,penmanshiel,PEN02
+2022,fault: converter,0.1,3,penmanshiel,PEN02
+2022,fault: gearbox,105.4825,7,penmanshiel,PEN02
+2022,fault: sensor_met,41.070277777777775,18,penmanshiel,PEN02
+2022,fault: tower,15.699166666666667,29,penmanshiel,PEN02
+2022,maintenance,19.101111111111113,21,penmanshiel,PEN02
+2022,routine,7.934722222222222,74,penmanshiel,PEN02
+2022,weather,14.2275,52,penmanshiel,PEN02
+2023,curtailment,13.919722222222223,4,penmanshiel,PEN02
+2023,fault: converter,0.5552777777777778,4,penmanshiel,PEN02
+2023,fault: gearbox,2.2155555555555555,12,penmanshiel,PEN02
+2023,fault: rotor,1.1805555555555556,1,penmanshiel,PEN02
+2023,fault: tower,17.731944444444444,16,penmanshiel,PEN02
+2023,grid,0.4702777777777778,1,penmanshiel,PEN02
+2023,maintenance,47.23305555555555,23,penmanshiel,PEN02
+2023,routine,9.722777777777777,81,penmanshiel,PEN02
+2023,weather,11.994444444444444,41,penmanshiel,PEN02
+2016,curtailment,35.14611111111111,30,penmanshiel,PEN04
+2016,fault: converter,1.3455555555555556,9,penmanshiel,PEN04
+2016,fault: electrical,3.4594444444444443,2,penmanshiel,PEN04
+2016,fault: gearbox,105.43555555555555,23,penmanshiel,PEN04
+2016,fault: generator,281.17305555555555,6,penmanshiel,PEN04
+2016,fault: pitch,16.580555555555556,8,penmanshiel,PEN04
+2016,fault: tower,0.6275,4,penmanshiel,PEN04
+2016,fault: unspecified,0.05305555555555556,2,penmanshiel,PEN04
+2016,grid,73.32805555555555,10,penmanshiel,PEN04
+2016,maintenance,113.56305555555556,36,penmanshiel,PEN04
+2016,routine,2.897222222222222,35,penmanshiel,PEN04
+2016,weather,1.166111111111111,4,penmanshiel,PEN04
+2017,curtailment,5.901944444444444,25,penmanshiel,PEN04
+2017,fault: converter,0.1,3,penmanshiel,PEN04
+2017,fault: gearbox,2.326111111111111,2,penmanshiel,PEN04
+2017,fault: pitch,0.4688888888888889,3,penmanshiel,PEN04
+2017,fault: rotor,0.09111111111111111,1,penmanshiel,PEN04
+2017,fault: tower,0.17833333333333334,1,penmanshiel,PEN04
+2017,fault: unspecified,15.043611111111112,1,penmanshiel,PEN04
+2017,grid,7.171944444444445,1,penmanshiel,PEN04
+2017,maintenance,56.57944444444444,25,penmanshiel,PEN04
+2017,routine,8.209722222222222,80,penmanshiel,PEN04
+2017,weather,5.066666666666666,7,penmanshiel,PEN04
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN04
+2018,fault: gearbox,4.887222222222222,3,penmanshiel,PEN04
+2018,fault: tower,2.8325,8,penmanshiel,PEN04
+2018,grid,1.4944444444444445,2,penmanshiel,PEN04
+2018,maintenance,47.99138888888889,26,penmanshiel,PEN04
+2018,routine,6.4775,71,penmanshiel,PEN04
+2018,weather,147.2461111111111,19,penmanshiel,PEN04
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN04
+2019,fault: converter,1.9677777777777778,8,penmanshiel,PEN04
+2019,fault: electrical,21.164722222222224,1,penmanshiel,PEN04
+2019,fault: tower,0.1763888888888889,1,penmanshiel,PEN04
+2019,grid,36.73638888888889,5,penmanshiel,PEN04
+2019,maintenance,35.0975,32,penmanshiel,PEN04
+2019,routine,6.285,70,penmanshiel,PEN04
+2019,weather,6.588611111111112,25,penmanshiel,PEN04
+2020,curtailment,414.66555555555556,8,penmanshiel,PEN04
+2020,fault: brake,0.2808333333333333,1,penmanshiel,PEN04
+2020,fault: converter,19.311666666666667,13,penmanshiel,PEN04
+2020,fault: gearbox,4.0825000000000005,4,penmanshiel,PEN04
+2020,fault: pitch,0.40944444444444444,1,penmanshiel,PEN04
+2020,fault: tower,2.6444444444444444,7,penmanshiel,PEN04
+2020,maintenance,138.43583333333333,22,penmanshiel,PEN04
+2020,routine,8.141388888888889,74,penmanshiel,PEN04
+2020,weather,32.532222222222224,88,penmanshiel,PEN04
+2021,curtailment,14.421666666666667,15,penmanshiel,PEN04
+2021,fault: gearbox,14.815555555555555,2,penmanshiel,PEN04
+2021,fault: pitch,83.36777777777777,17,penmanshiel,PEN04
+2021,fault: tower,1.2072222222222222,6,penmanshiel,PEN04
+2021,grid,12.225000000000001,4,penmanshiel,PEN04
+2021,maintenance,25.12972222222222,18,penmanshiel,PEN04
+2021,routine,11.417777777777777,91,penmanshiel,PEN04
+2021,weather,44.25055555555556,25,penmanshiel,PEN04
+2022,curtailment,46.13333333333333,11,penmanshiel,PEN04
+2022,fault: converter,0.03333333333333333,1,penmanshiel,PEN04
+2022,fault: electrical,39.77722222222222,2,penmanshiel,PEN04
+2022,fault: gearbox,0.4608333333333333,2,penmanshiel,PEN04
+2022,fault: pitch,78.79055555555556,2,penmanshiel,PEN04
+2022,fault: rotor,0.0913888888888889,1,penmanshiel,PEN04
+2022,fault: sensor_met,0.06972222222222223,1,penmanshiel,PEN04
+2022,fault: tower,0.9308333333333333,4,penmanshiel,PEN04
+2022,maintenance,11.859722222222222,12,penmanshiel,PEN04
+2022,routine,8.501666666666667,79,penmanshiel,PEN04
+2022,weather,22.281944444444445,38,penmanshiel,PEN04
+2023,curtailment,13.913333333333334,4,penmanshiel,PEN04
+2023,fault: converter,0.6175,5,penmanshiel,PEN04
+2023,fault: gearbox,14.168888888888889,10,penmanshiel,PEN04
+2023,fault: sensor_met,8.85,26,penmanshiel,PEN04
+2023,fault: tower,5.0616666666666665,2,penmanshiel,PEN04
+2023,fault: unspecified,374.79611111111114,32,penmanshiel,PEN04
+2023,maintenance,460.2111111111111,32,penmanshiel,PEN04
+2023,routine,7.474722222222223,64,penmanshiel,PEN04
+2023,weather,25.546666666666667,42,penmanshiel,PEN04
+2016,curtailment,18.205277777777777,21,penmanshiel,PEN05
+2016,fault: converter,0.26666666666666666,8,penmanshiel,PEN05
+2016,fault: gearbox,0.5391666666666667,12,penmanshiel,PEN05
+2016,fault: generator,1.958611111111111,2,penmanshiel,PEN05
+2016,fault: pitch,120.37416666666667,12,penmanshiel,PEN05
+2016,fault: tower,0.6144444444444445,3,penmanshiel,PEN05
+2016,fault: unspecified,0.01972222222222222,1,penmanshiel,PEN05
+2016,fault: yaw,0.0961111111111111,1,penmanshiel,PEN05
+2016,grid,56.5475,7,penmanshiel,PEN05
+2016,maintenance,137.63944444444445,30,penmanshiel,PEN05
+2016,routine,3.2505555555555556,30,penmanshiel,PEN05
+2016,weather,1.9208333333333332,7,penmanshiel,PEN05
+2017,curtailment,9.78888888888889,24,penmanshiel,PEN05
+2017,fault: converter,0.1,3,penmanshiel,PEN05
+2017,fault: pitch,91.5825,6,penmanshiel,PEN05
+2017,fault: tower,0.1763888888888889,1,penmanshiel,PEN05
+2017,grid,7.85138888888889,2,penmanshiel,PEN05
+2017,maintenance,47.01027777777778,19,penmanshiel,PEN05
+2017,routine,11.332777777777778,75,penmanshiel,PEN05
+2017,weather,6.554166666666667,12,penmanshiel,PEN05
+2018,curtailment,0.2202777777777778,6,penmanshiel,PEN05
+2018,fault: pitch,0.8111111111111111,1,penmanshiel,PEN05
+2018,fault: tower,1.2102777777777778,6,penmanshiel,PEN05
+2018,fault: yaw,0.19333333333333333,2,penmanshiel,PEN05
+2018,grid,1.4705555555555556,1,penmanshiel,PEN05
+2018,maintenance,43.29361111111111,25,penmanshiel,PEN05
+2018,routine,26.006666666666668,87,penmanshiel,PEN05
+2018,weather,11.645,25,penmanshiel,PEN05
+2019,curtailment,0.665,7,penmanshiel,PEN05
+2019,fault: converter,63.40166666666667,9,penmanshiel,PEN05
+2019,fault: gearbox,0.35777777777777775,1,penmanshiel,PEN05
+2019,fault: pitch,24.537777777777777,1,penmanshiel,PEN05
+2019,fault: tower,1.5547222222222223,7,penmanshiel,PEN05
+2019,fault: yaw,0.20194444444444445,1,penmanshiel,PEN05
+2019,grid,65.20916666666666,6,penmanshiel,PEN05
+2019,maintenance,26.086388888888887,21,penmanshiel,PEN05
+2019,routine,29.025,79,penmanshiel,PEN05
+2019,weather,6.9911111111111115,24,penmanshiel,PEN05
+2020,curtailment,388.4605555555555,8,penmanshiel,PEN05
+2020,fault: converter,4.934166666666667,6,penmanshiel,PEN05
+2020,fault: tower,2.9194444444444443,10,penmanshiel,PEN05
+2020,maintenance,104.66194444444444,17,penmanshiel,PEN05
+2020,routine,8.541666666666666,74,penmanshiel,PEN05
+2020,weather,36.3225,80,penmanshiel,PEN05
+2021,curtailment,17.86277777777778,16,penmanshiel,PEN05
+2021,fault: sensor_met,0.21000000000000002,7,penmanshiel,PEN05
+2021,fault: tower,0.35,2,penmanshiel,PEN05
+2021,grid,3.662777777777778,12,penmanshiel,PEN05
+2021,maintenance,34.815555555555555,13,penmanshiel,PEN05
+2021,routine,9.34388888888889,87,penmanshiel,PEN05
+2021,weather,60.66305555555556,45,penmanshiel,PEN05
+2022,curtailment,60.85138888888889,10,penmanshiel,PEN05
+2022,fault: converter,0.06666666666666667,2,penmanshiel,PEN05
+2022,fault: electrical,0.3502777777777778,1,penmanshiel,PEN05
+2022,fault: gearbox,0.03027777777777778,1,penmanshiel,PEN05
+2022,fault: pitch,251.19111111111113,2,penmanshiel,PEN05
+2022,fault: sensor_met,66.12055555555555,51,penmanshiel,PEN05
+2022,fault: tower,0.35138888888888886,2,penmanshiel,PEN05
+2022,maintenance,188.09083333333336,22,penmanshiel,PEN05
+2022,routine,7.679166666666667,76,penmanshiel,PEN05
+2022,weather,22.38861111111111,56,penmanshiel,PEN05
+2023,curtailment,13.92388888888889,5,penmanshiel,PEN05
+2023,fault: converter,1.0572222222222223,5,penmanshiel,PEN05
+2023,fault: sensor_met,0.04611111111111111,1,penmanshiel,PEN05
+2023,fault: tower,12.2525,13,penmanshiel,PEN05
+2023,maintenance,56.62861111111111,23,penmanshiel,PEN05
+2023,routine,10.44111111111111,76,penmanshiel,PEN05
+2023,weather,18.76888888888889,48,penmanshiel,PEN05
+2016,curtailment,24.64138888888889,35,penmanshiel,PEN06
+2016,fault: converter,98.86583333333334,8,penmanshiel,PEN06
+2016,fault: electrical,434.4425,6,penmanshiel,PEN06
+2016,fault: gearbox,0.08916666666666667,3,penmanshiel,PEN06
+2016,fault: pitch,43.51861111111111,13,penmanshiel,PEN06
+2016,fault: tower,0.6969444444444445,3,penmanshiel,PEN06
+2016,fault: unspecified,0.0425,1,penmanshiel,PEN06
+2016,fault: yaw,0.13055555555555556,3,penmanshiel,PEN06
+2016,grid,707.5344444444445,7,penmanshiel,PEN06
+2016,maintenance,379.2033333333333,20,penmanshiel,PEN06
+2016,routine,125.11972222222222,28,penmanshiel,PEN06
+2016,weather,1.7322222222222223,8,penmanshiel,PEN06
+2017,curtailment,9.824166666666667,25,penmanshiel,PEN06
+2017,fault: converter,48.700833333333335,11,penmanshiel,PEN06
+2017,fault: electrical,16.94861111111111,4,penmanshiel,PEN06
+2017,fault: gearbox,0.33916666666666667,1,penmanshiel,PEN06
+2017,fault: pitch,28.256111111111114,12,penmanshiel,PEN06
+2017,fault: tower,0.17694444444444443,1,penmanshiel,PEN06
+2017,fault: yaw,0.09666666666666666,1,penmanshiel,PEN06
+2017,grid,7.548333333333333,1,penmanshiel,PEN06
+2017,maintenance,55.94888888888889,22,penmanshiel,PEN06
+2017,routine,6.864166666666667,69,penmanshiel,PEN06
+2017,weather,5.727222222222222,10,penmanshiel,PEN06
+2018,curtailment,0.20944444444444443,5,penmanshiel,PEN06
+2018,fault: converter,2.1133333333333333,9,penmanshiel,PEN06
+2018,fault: gearbox,0.18222222222222223,1,penmanshiel,PEN06
+2018,fault: pitch,200.61944444444444,3,penmanshiel,PEN06
+2018,fault: tower,0.5266666666666666,3,penmanshiel,PEN06
+2018,fault: yaw,0.9213888888888889,1,penmanshiel,PEN06
+2018,grid,18.749166666666667,1,penmanshiel,PEN06
+2018,maintenance,76.08638888888889,24,penmanshiel,PEN06
+2018,routine,7.825833333333334,80,penmanshiel,PEN06
+2018,weather,12.940555555555555,34,penmanshiel,PEN06
+2019,curtailment,0.6658333333333333,7,penmanshiel,PEN06
+2019,fault: converter,1.4841666666666666,3,penmanshiel,PEN06
+2019,fault: gearbox,2.3252777777777776,3,penmanshiel,PEN06
+2019,fault: tower,0.44138888888888883,2,penmanshiel,PEN06
+2019,grid,78.57055555555556,5,penmanshiel,PEN06
+2019,maintenance,27.06722222222222,19,penmanshiel,PEN06
+2019,routine,43.615,80,penmanshiel,PEN06
+2019,weather,8.575,25,penmanshiel,PEN06
+2020,curtailment,389.0661111111111,8,penmanshiel,PEN06
+2020,fault: converter,8.24611111111111,14,penmanshiel,PEN06
+2020,fault: gearbox,3.716666666666667,6,penmanshiel,PEN06
+2020,fault: tower,1.2669444444444444,6,penmanshiel,PEN06
+2020,fault: yaw,0.09666666666666666,1,penmanshiel,PEN06
+2020,maintenance,108.71444444444444,18,penmanshiel,PEN06
+2020,routine,8.065555555555555,75,penmanshiel,PEN06
+2020,weather,41.1375,94,penmanshiel,PEN06
+2021,curtailment,21.502777777777776,16,penmanshiel,PEN06
+2021,fault: converter,0.29444444444444445,4,penmanshiel,PEN06
+2021,fault: gearbox,43.174166666666665,13,penmanshiel,PEN06
+2021,fault: sensor_met,0.04138888888888889,1,penmanshiel,PEN06
+2021,fault: tower,0.25805555555555554,1,penmanshiel,PEN06
+2021,grid,6.45,1,penmanshiel,PEN06
+2021,maintenance,38.49055555555556,16,penmanshiel,PEN06
+2021,routine,10.038055555555555,90,penmanshiel,PEN06
+2021,weather,47.659166666666664,37,penmanshiel,PEN06
+2022,curtailment,46.13361111111111,11,penmanshiel,PEN06
+2022,fault: converter,0.06666666666666667,2,penmanshiel,PEN06
+2022,fault: gearbox,0.05972222222222222,2,penmanshiel,PEN06
+2022,fault: pitch,0.3536111111111111,1,penmanshiel,PEN06
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN06
+2022,fault: sensor_met,19.483333333333334,18,penmanshiel,PEN06
+2022,fault: tower,0.9655555555555555,5,penmanshiel,PEN06
+2022,maintenance,613.6711111111111,22,penmanshiel,PEN06
+2022,routine,9.173333333333334,76,penmanshiel,PEN06
+2022,weather,92.41861111111112,68,penmanshiel,PEN06
+2023,curtailment,13.936944444444443,5,penmanshiel,PEN06
+2023,fault: converter,0.6041666666666666,4,penmanshiel,PEN06
+2023,fault: gearbox,0.8500000000000001,4,penmanshiel,PEN06
+2023,fault: pitch,256.56333333333333,8,penmanshiel,PEN06
+2023,fault: sensor_met,0.050277777777777775,1,penmanshiel,PEN06
+2023,fault: tower,7.0625,8,penmanshiel,PEN06
+2023,grid,0.49277777777777776,1,penmanshiel,PEN06
+2023,maintenance,58.1025,27,penmanshiel,PEN06
+2023,routine,8.924444444444445,80,penmanshiel,PEN06
+2023,weather,18.270833333333332,43,penmanshiel,PEN06
+2016,curtailment,38.39888888888889,57,penmanshiel,PEN07
+2016,fault: converter,0.3,9,penmanshiel,PEN07
+2016,fault: electrical,307.73527777777775,1,penmanshiel,PEN07
+2016,fault: gearbox,0.1036111111111111,4,penmanshiel,PEN07
+2016,fault: pitch,49.053333333333335,10,penmanshiel,PEN07
+2016,fault: tower,0.17972222222222223,1,penmanshiel,PEN07
+2016,fault: unspecified,0.18916666666666668,2,penmanshiel,PEN07
+2016,fault: yaw,0.6847222222222222,1,penmanshiel,PEN07
+2016,grid,60.603611111111114,8,penmanshiel,PEN07
+2016,maintenance,78.52416666666667,32,penmanshiel,PEN07
+2016,routine,2.9316666666666666,33,penmanshiel,PEN07
+2016,weather,1.2513888888888889,4,penmanshiel,PEN07
+2017,curtailment,20.773611111111112,26,penmanshiel,PEN07
+2017,fault: gearbox,0.17666666666666667,1,penmanshiel,PEN07
+2017,fault: pitch,64.39388888888888,7,penmanshiel,PEN07
+2017,fault: tower,4.490277777777778,6,penmanshiel,PEN07
+2017,grid,7.6866666666666665,1,penmanshiel,PEN07
+2017,maintenance,33.395833333333336,24,penmanshiel,PEN07
+2017,routine,8.666111111111112,68,penmanshiel,PEN07
+2017,weather,17.03361111111111,7,penmanshiel,PEN07
+2018,curtailment,0.22138888888888889,6,penmanshiel,PEN07
+2018,fault: gearbox,0.1338888888888889,1,penmanshiel,PEN07
+2018,fault: sensor_met,0.041666666666666664,1,penmanshiel,PEN07
+2018,fault: tower,0.7447222222222222,3,penmanshiel,PEN07
+2018,grid,1.4697222222222222,1,penmanshiel,PEN07
+2018,maintenance,53.56194444444444,27,penmanshiel,PEN07
+2018,routine,7.393055555555556,77,penmanshiel,PEN07
+2018,weather,7.355555555555556,17,penmanshiel,PEN07
+2019,curtailment,0.6658333333333333,7,penmanshiel,PEN07
+2019,fault: converter,4.715277777777778,12,penmanshiel,PEN07
+2019,fault: gearbox,22.114444444444445,2,penmanshiel,PEN07
+2019,fault: tower,0.2222222222222222,1,penmanshiel,PEN07
+2019,grid,36.944722222222225,4,penmanshiel,PEN07
+2019,maintenance,317.7397222222222,18,penmanshiel,PEN07
+2019,routine,7.163333333333333,73,penmanshiel,PEN07
+2019,weather,1.508888888888889,6,penmanshiel,PEN07
+2020,curtailment,391.9941666666667,8,penmanshiel,PEN07
+2020,fault: converter,16.53944444444444,9,penmanshiel,PEN07
+2020,fault: electrical,17.953611111111112,1,penmanshiel,PEN07
+2020,fault: gearbox,2.011388888888889,5,penmanshiel,PEN07
+2020,fault: pitch,41.36083333333333,2,penmanshiel,PEN07
+2020,fault: tower,3.0869444444444447,6,penmanshiel,PEN07
+2020,maintenance,122.91,24,penmanshiel,PEN07
+2020,routine,5.979444444444445,64,penmanshiel,PEN07
+2020,weather,21.90888888888889,73,penmanshiel,PEN07
+2021,curtailment,17.904444444444444,16,penmanshiel,PEN07
+2021,fault: gearbox,0.4161111111111111,2,penmanshiel,PEN07
+2021,fault: pitch,171.8088888888889,6,penmanshiel,PEN07
+2021,fault: tower,0.2586111111111111,1,penmanshiel,PEN07
+2021,maintenance,39.89694444444444,20,penmanshiel,PEN07
+2021,routine,11.05,97,penmanshiel,PEN07
+2021,weather,38.70527777777778,21,penmanshiel,PEN07
+2022,curtailment,46.13333333333333,11,penmanshiel,PEN07
+2022,fault: converter,0.06666666666666667,2,penmanshiel,PEN07
+2022,fault: gearbox,0.3211111111111111,2,penmanshiel,PEN07
+2022,fault: pitch,85.42416666666666,15,penmanshiel,PEN07
+2022,fault: tower,13.756944444444443,6,penmanshiel,PEN07
+2022,fault: yaw,0.09666666666666666,1,penmanshiel,PEN07
+2022,maintenance,10.692499999999999,13,penmanshiel,PEN07
+2022,routine,8.051388888888889,78,penmanshiel,PEN07
+2022,weather,9.964166666666667,39,penmanshiel,PEN07
+2023,curtailment,13.917222222222223,4,penmanshiel,PEN07
+2023,fault: converter,0.8441666666666666,5,penmanshiel,PEN07
+2023,fault: gearbox,2.806388888888889,7,penmanshiel,PEN07
+2023,fault: hydraulics,163.8763888888889,1,penmanshiel,PEN07
+2023,fault: pitch,74.91333333333333,2,penmanshiel,PEN07
+2023,fault: tower,1.2463888888888888,5,penmanshiel,PEN07
+2023,fault: unspecified,23.122777777777777,1,penmanshiel,PEN07
+2023,grid,0.835,1,penmanshiel,PEN07
+2023,maintenance,70.14527777777778,22,penmanshiel,PEN07
+2023,routine,9.618611111111111,81,penmanshiel,PEN07
+2023,weather,13.953333333333333,45,penmanshiel,PEN07
+2016,curtailment,29.14527777777778,53,penmanshiel,PEN08
+2016,fault: converter,0.26666666666666666,8,penmanshiel,PEN08
+2016,fault: electrical,2.6555555555555554,2,penmanshiel,PEN08
+2016,fault: pitch,2.4683333333333333,5,penmanshiel,PEN08
+2016,fault: unspecified,0.10305555555555557,3,penmanshiel,PEN08
+2016,fault: yaw,0.09638888888888889,1,penmanshiel,PEN08
+2016,grid,35.278333333333336,6,penmanshiel,PEN08
+2016,maintenance,574.4172222222223,28,penmanshiel,PEN08
+2016,routine,1.6991666666666667,26,penmanshiel,PEN08
+2016,weather,0.8211111111111111,3,penmanshiel,PEN08
+2017,curtailment,16.909166666666668,26,penmanshiel,PEN08
+2017,fault: converter,0.1,3,penmanshiel,PEN08
+2017,fault: pitch,1.5683333333333334,4,penmanshiel,PEN08
+2017,fault: rotor,0.0913888888888889,1,penmanshiel,PEN08
+2017,fault: tower,1.0080555555555555,4,penmanshiel,PEN08
+2017,grid,7.171666666666667,1,penmanshiel,PEN08
+2017,maintenance,33.44222222222222,15,penmanshiel,PEN08
+2017,routine,13.16611111111111,78,penmanshiel,PEN08
+2017,weather,3.745833333333333,6,penmanshiel,PEN08
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN08
+2018,fault: converter,9.556111111111111,9,penmanshiel,PEN08
+2018,fault: pitch,0.17083333333333334,1,penmanshiel,PEN08
+2018,fault: tower,1.4625000000000001,3,penmanshiel,PEN08
+2018,fault: yaw,0.0961111111111111,1,penmanshiel,PEN08
+2018,grid,1.4944444444444445,2,penmanshiel,PEN08
+2018,maintenance,58.98027777777778,26,penmanshiel,PEN08
+2018,routine,7.321666666666666,75,penmanshiel,PEN08
+2018,weather,8.544444444444444,21,penmanshiel,PEN08
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN08
+2019,fault: converter,49.99805555555555,12,penmanshiel,PEN08
+2019,fault: gearbox,25.118055555555557,16,penmanshiel,PEN08
+2019,fault: tower,6.657222222222222,9,penmanshiel,PEN08
+2019,fault: yaw,0.09583333333333334,1,penmanshiel,PEN08
+2019,grid,35.72361111111111,4,penmanshiel,PEN08
+2019,maintenance,29.1525,18,penmanshiel,PEN08
+2019,routine,8.237777777777778,76,penmanshiel,PEN08
+2019,weather,2.0591666666666666,7,penmanshiel,PEN08
+2020,curtailment,389.6452777777778,8,penmanshiel,PEN08
+2020,fault: converter,4.568333333333333,10,penmanshiel,PEN08
+2020,fault: gearbox,12.890833333333335,7,penmanshiel,PEN08
+2020,fault: pitch,5.003333333333333,1,penmanshiel,PEN08
+2020,fault: tower,3.095555555555556,11,penmanshiel,PEN08
+2020,maintenance,116.70694444444446,30,penmanshiel,PEN08
+2020,routine,7.696111111111112,73,penmanshiel,PEN08
+2020,weather,19.99388888888889,79,penmanshiel,PEN08
+2021,curtailment,14.005555555555556,15,penmanshiel,PEN08
+2021,fault: converter,1.5883333333333334,7,penmanshiel,PEN08
+2021,fault: electrical,0.3386111111111111,1,penmanshiel,PEN08
+2021,fault: pitch,9.078888888888889,3,penmanshiel,PEN08
+2021,fault: sensor_met,0.03861111111111111,1,penmanshiel,PEN08
+2021,fault: tower,0.5402777777777777,3,penmanshiel,PEN08
+2021,maintenance,43.94638888888889,23,penmanshiel,PEN08
+2021,routine,10.403333333333334,87,penmanshiel,PEN08
+2021,weather,360.23583333333335,62,penmanshiel,PEN08
+2022,curtailment,46.10055555555555,9,penmanshiel,PEN08
+2022,fault: converter,53.14111111111111,2,penmanshiel,PEN08
+2022,fault: gearbox,0.7066666666666668,4,penmanshiel,PEN08
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN08
+2022,fault: sensor_met,25.27916666666667,135,penmanshiel,PEN08
+2022,fault: tower,11.914444444444444,6,penmanshiel,PEN08
+2022,fault: yaw,0.3438888888888889,2,penmanshiel,PEN08
+2022,maintenance,17.2825,18,penmanshiel,PEN08
+2022,routine,9.11,78,penmanshiel,PEN08
+2022,weather,76.0325,64,penmanshiel,PEN08
+2023,curtailment,15.10138888888889,5,penmanshiel,PEN08
+2023,fault: converter,100.50694444444444,37,penmanshiel,PEN08
+2023,fault: electrical,24.442222222222224,1,penmanshiel,PEN08
+2023,fault: gearbox,2.2752777777777777,5,penmanshiel,PEN08
+2023,fault: pitch,3.493333333333333,3,penmanshiel,PEN08
+2023,fault: tower,5.839444444444444,9,penmanshiel,PEN08
+2023,grid,0.5052777777777778,2,penmanshiel,PEN08
+2023,maintenance,70.09388888888888,28,penmanshiel,PEN08
+2023,routine,7.875277777777778,73,penmanshiel,PEN08
+2023,weather,17.76888888888889,51,penmanshiel,PEN08
+2016,curtailment,41.11472222222222,52,penmanshiel,PEN09
+2016,fault: converter,0.5,15,penmanshiel,PEN09
+2016,fault: electrical,0.08583333333333333,1,penmanshiel,PEN09
+2016,fault: gearbox,0.11722222222222221,4,penmanshiel,PEN09
+2016,fault: pitch,13.404166666666665,12,penmanshiel,PEN09
+2016,fault: tower,0.3561111111111111,2,penmanshiel,PEN09
+2016,fault: unspecified,2.3091666666666666,4,penmanshiel,PEN09
+2016,grid,67.48722222222223,6,penmanshiel,PEN09
+2016,maintenance,47.538333333333334,19,penmanshiel,PEN09
+2016,routine,1321.4305555555557,29,penmanshiel,PEN09
+2016,weather,0.7272222222222222,3,penmanshiel,PEN09
+2017,curtailment,19.913611111111113,26,penmanshiel,PEN09
+2017,fault: converter,0.9724999999999999,12,penmanshiel,PEN09
+2017,fault: pitch,13.1375,12,penmanshiel,PEN09
+2017,fault: rotor,0.0913888888888889,1,penmanshiel,PEN09
+2017,fault: tower,0.6122222222222222,3,penmanshiel,PEN09
+2017,fault: unspecified,2.1733333333333333,1,penmanshiel,PEN09
+2017,grid,24.769166666666667,1,penmanshiel,PEN09
+2017,maintenance,38.969166666666666,12,penmanshiel,PEN09
+2017,routine,8.67361111111111,78,penmanshiel,PEN09
+2017,weather,3.374722222222222,9,penmanshiel,PEN09
+2018,curtailment,0.20916666666666667,5,penmanshiel,PEN09
+2018,fault: converter,1.2272222222222222,11,penmanshiel,PEN09
+2018,fault: gearbox,1.8102777777777779,1,penmanshiel,PEN09
+2018,fault: tower,1.1475,6,penmanshiel,PEN09
+2018,fault: yaw,0.09666666666666666,1,penmanshiel,PEN09
+2018,grid,23.555277777777775,5,penmanshiel,PEN09
+2018,maintenance,49.025,21,penmanshiel,PEN09
+2018,routine,8.658611111111112,82,penmanshiel,PEN09
+2018,weather,5.504444444444444,12,penmanshiel,PEN09
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN09
+2019,fault: converter,1.2180555555555554,8,penmanshiel,PEN09
+2019,fault: pitch,22.945,1,penmanshiel,PEN09
+2019,fault: tower,0.1775,1,penmanshiel,PEN09
+2019,grid,45.52833333333333,6,penmanshiel,PEN09
+2019,maintenance,25.441111111111113,20,penmanshiel,PEN09
+2019,routine,8.052222222222223,81,penmanshiel,PEN09
+2019,weather,2.453888888888889,9,penmanshiel,PEN09
+2020,curtailment,369.1227777777778,8,penmanshiel,PEN09
+2020,fault: converter,19.540555555555553,12,penmanshiel,PEN09
+2020,fault: gearbox,0.6216666666666667,4,penmanshiel,PEN09
+2020,fault: pitch,3.078611111111111,1,penmanshiel,PEN09
+2020,fault: tower,22.080555555555552,13,penmanshiel,PEN09
+2020,fault: unspecified,18.20777777777778,1,penmanshiel,PEN09
+2020,fault: yaw,0.09666666666666666,1,penmanshiel,PEN09
+2020,grid,3.6958333333333333,21,penmanshiel,PEN09
+2020,maintenance,124.7063888888889,24,penmanshiel,PEN09
+2020,routine,9.502222222222223,74,penmanshiel,PEN09
+2020,weather,16.114722222222223,64,penmanshiel,PEN09
+2021,curtailment,16.047777777777778,16,penmanshiel,PEN09
+2021,fault: converter,0.3438888888888889,3,penmanshiel,PEN09
+2021,fault: pitch,16.537777777777777,2,penmanshiel,PEN09
+2021,fault: sensor_met,7.304444444444444,7,penmanshiel,PEN09
+2021,grid,2.628055555555555,8,penmanshiel,PEN09
+2021,maintenance,45.72388888888889,21,penmanshiel,PEN09
+2021,routine,10.435833333333333,93,penmanshiel,PEN09
+2021,weather,30.94472222222222,26,penmanshiel,PEN09
+2022,curtailment,46.454166666666666,11,penmanshiel,PEN09
+2022,fault: converter,50.576388888888886,6,penmanshiel,PEN09
+2022,fault: gearbox,0.03,1,penmanshiel,PEN09
+2022,fault: rotor,0.0913888888888889,1,penmanshiel,PEN09
+2022,fault: tower,0.9633333333333334,5,penmanshiel,PEN09
+2022,grid,29.351666666666667,2,penmanshiel,PEN09
+2022,maintenance,16.96638888888889,14,penmanshiel,PEN09
+2022,routine,9.818611111111112,86,penmanshiel,PEN09
+2022,weather,11.954166666666666,37,penmanshiel,PEN09
+2023,curtailment,16.549444444444443,5,penmanshiel,PEN09
+2023,fault: converter,1.198611111111111,5,penmanshiel,PEN09
+2023,fault: electrical,1.0294444444444444,2,penmanshiel,PEN09
+2023,fault: gearbox,119.24027777777778,24,penmanshiel,PEN09
+2023,fault: sensor_met,0.04583333333333333,1,penmanshiel,PEN09
+2023,fault: tower,1.425,6,penmanshiel,PEN09
+2023,grid,0.32972222222222225,1,penmanshiel,PEN09
+2023,maintenance,46.03777777777778,33,penmanshiel,PEN09
+2023,routine,8.676388888888889,79,penmanshiel,PEN09
+2023,weather,15.836666666666666,55,penmanshiel,PEN09
+2016,curtailment,6.389722222222223,48,penmanshiel,PEN10
+2016,fault: converter,0.5924999999999999,11,penmanshiel,PEN10
+2016,fault: gearbox,0.5144444444444445,9,penmanshiel,PEN10
+2016,fault: pitch,139.4297222222222,13,penmanshiel,PEN10
+2016,fault: tower,1.0527777777777778,4,penmanshiel,PEN10
+2016,fault: unspecified,0.3705555555555556,1,penmanshiel,PEN10
+2016,grid,36.626666666666665,5,penmanshiel,PEN10
+2016,maintenance,1450.2547222222222,26,penmanshiel,PEN10
+2016,routine,3.6966666666666668,23,penmanshiel,PEN10
+2016,weather,1.3283333333333334,6,penmanshiel,PEN10
+2017,curtailment,16.922777777777778,26,penmanshiel,PEN10
+2017,fault: converter,0.1,3,penmanshiel,PEN10
+2017,fault: tower,1.0922222222222222,5,penmanshiel,PEN10
+2017,grid,7.187222222222222,1,penmanshiel,PEN10
+2017,maintenance,33.72527777777778,16,penmanshiel,PEN10
+2017,routine,7.598888888888889,76,penmanshiel,PEN10
+2017,weather,3.535,9,penmanshiel,PEN10
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN10
+2018,fault: converter,0.18388888888888888,5,penmanshiel,PEN10
+2018,fault: pitch,58.61055555555556,1,penmanshiel,PEN10
+2018,fault: tower,1.576111111111111,8,penmanshiel,PEN10
+2018,grid,1.4694444444444446,1,penmanshiel,PEN10
+2018,maintenance,63.36611111111111,25,penmanshiel,PEN10
+2018,other,0.3547222222222222,1,penmanshiel,PEN10
+2018,routine,7.610555555555556,77,penmanshiel,PEN10
+2018,weather,7.396944444444444,20,penmanshiel,PEN10
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN10
+2019,fault: converter,1.821388888888889,4,penmanshiel,PEN10
+2019,fault: gearbox,0.13361111111111112,1,penmanshiel,PEN10
+2019,grid,61.022222222222226,6,penmanshiel,PEN10
+2019,maintenance,30.674722222222222,25,penmanshiel,PEN10
+2019,routine,7.724722222222222,76,penmanshiel,PEN10
+2019,weather,2.1616666666666666,8,penmanshiel,PEN10
+2020,curtailment,388.58194444444445,8,penmanshiel,PEN10
+2020,fault: converter,5.961944444444445,10,penmanshiel,PEN10
+2020,fault: gearbox,8.381111111111112,7,penmanshiel,PEN10
+2020,fault: tower,1.3027777777777778,6,penmanshiel,PEN10
+2020,grid,15.842777777777778,5,penmanshiel,PEN10
+2020,maintenance,293.8,36,penmanshiel,PEN10
+2020,routine,7.724166666666667,73,penmanshiel,PEN10
+2020,weather,21.442222222222224,72,penmanshiel,PEN10
+2021,curtailment,16.825833333333332,16,penmanshiel,PEN10
+2021,fault: converter,0.1,3,penmanshiel,PEN10
+2021,fault: gearbox,0.028333333333333332,1,penmanshiel,PEN10
+2021,fault: pitch,0.6530555555555555,4,penmanshiel,PEN10
+2021,fault: sensor_met,0.3202777777777778,1,penmanshiel,PEN10
+2021,grid,3.328611111111111,9,penmanshiel,PEN10
+2021,maintenance,33.01444444444444,22,penmanshiel,PEN10
+2021,routine,9.690277777777778,87,penmanshiel,PEN10
+2021,weather,42.4925,20,penmanshiel,PEN10
+2022,curtailment,46.1325,11,penmanshiel,PEN10
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN10
+2022,fault: tower,1.7669444444444444,6,penmanshiel,PEN10
+2022,grid,0.029166666666666667,1,penmanshiel,PEN10
+2022,maintenance,54.38444444444445,15,penmanshiel,PEN10
+2022,routine,8.581111111111111,82,penmanshiel,PEN10
+2022,weather,12.837222222222222,43,penmanshiel,PEN10
+2023,curtailment,14.714722222222223,5,penmanshiel,PEN10
+2023,fault: converter,0.17166666666666666,1,penmanshiel,PEN10
+2023,fault: pitch,0.4338888888888889,3,penmanshiel,PEN10
+2023,fault: sensor_met,0.07055555555555555,3,penmanshiel,PEN10
+2023,fault: tower,3.9922222222222223,9,penmanshiel,PEN10
+2023,fault: unspecified,1471.193611111111,1,penmanshiel,PEN10
+2023,grid,26.780833333333334,25,penmanshiel,PEN10
+2023,maintenance,14.95138888888889,19,penmanshiel,PEN10
+2023,routine,6.490833333333334,60,penmanshiel,PEN10
+2023,weather,13.621944444444445,51,penmanshiel,PEN10
+2016,curtailment,29.148333333333333,50,penmanshiel,PEN11
+2016,fault: converter,0.3547222222222222,4,penmanshiel,PEN11
+2016,fault: electrical,2.0169444444444444,1,penmanshiel,PEN11
+2016,fault: gearbox,0.02861111111111111,1,penmanshiel,PEN11
+2016,fault: pitch,3.7533333333333334,9,penmanshiel,PEN11
+2016,fault: rotor,0.014444444444444444,1,penmanshiel,PEN11
+2016,fault: tower,0.17583333333333334,1,penmanshiel,PEN11
+2016,fault: unspecified,716.2058333333333,2,penmanshiel,PEN11
+2016,grid,64.78111111111112,6,penmanshiel,PEN11
+2016,maintenance,23.468611111111112,15,penmanshiel,PEN11
+2016,routine,2.2530555555555556,28,penmanshiel,PEN11
+2016,weather,1.5608333333333333,7,penmanshiel,PEN11
+2017,curtailment,17.005,26,penmanshiel,PEN11
+2017,fault: converter,0.1,3,penmanshiel,PEN11
+2017,fault: electrical,2.1063888888888886,3,penmanshiel,PEN11
+2017,fault: gearbox,0.03,1,penmanshiel,PEN11
+2017,fault: pitch,51.63249999999999,10,penmanshiel,PEN11
+2017,fault: rotor,0.0913888888888889,1,penmanshiel,PEN11
+2017,fault: tower,0.46055555555555555,2,penmanshiel,PEN11
+2017,fault: yaw,0.0016666666666666668,1,penmanshiel,PEN11
+2017,grid,7.171666666666667,1,penmanshiel,PEN11
+2017,maintenance,59.35361111111111,15,penmanshiel,PEN11
+2017,routine,8.665000000000001,78,penmanshiel,PEN11
+2017,weather,5.685555555555556,10,penmanshiel,PEN11
+2018,curtailment,0.22138888888888889,6,penmanshiel,PEN11
+2018,fault: converter,52.94472222222222,5,penmanshiel,PEN11
+2018,fault: gearbox,0.09805555555555555,5,penmanshiel,PEN11
+2018,fault: tower,5.346666666666667,7,penmanshiel,PEN11
+2018,grid,1.4694444444444446,1,penmanshiel,PEN11
+2018,maintenance,66.0875,40,penmanshiel,PEN11
+2018,routine,7.123055555555556,75,penmanshiel,PEN11
+2018,weather,13.104999999999999,25,penmanshiel,PEN11
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN11
+2019,fault: converter,30.047222222222224,23,penmanshiel,PEN11
+2019,fault: tower,1.1930555555555555,5,penmanshiel,PEN11
+2019,grid,36.474444444444444,4,penmanshiel,PEN11
+2019,maintenance,24.66888888888889,15,penmanshiel,PEN11
+2019,routine,8.203611111111112,77,penmanshiel,PEN11
+2019,weather,5.081944444444445,21,penmanshiel,PEN11
+2020,curtailment,388.67972222222227,8,penmanshiel,PEN11
+2020,fault: converter,6.5975,20,penmanshiel,PEN11
+2020,fault: gearbox,13.330555555555556,18,penmanshiel,PEN11
+2020,fault: tower,8.461944444444445,21,penmanshiel,PEN11
+2020,grid,0.7855555555555556,4,penmanshiel,PEN11
+2020,maintenance,127.86805555555556,19,penmanshiel,PEN11
+2020,routine,13.212222222222222,74,penmanshiel,PEN11
+2020,weather,33.80722222222222,95,penmanshiel,PEN11
+2021,curtailment,22.87888888888889,17,penmanshiel,PEN11
+2021,fault: converter,1.5286111111111111,6,penmanshiel,PEN11
+2021,fault: electrical,68.26527777777778,2,penmanshiel,PEN11
+2021,fault: gearbox,51.93083333333333,44,penmanshiel,PEN11
+2021,fault: pitch,13.229722222222222,1,penmanshiel,PEN11
+2021,fault: tower,0.2588888888888889,1,penmanshiel,PEN11
+2021,grid,0.43333333333333335,5,penmanshiel,PEN11
+2021,maintenance,89.56305555555555,40,penmanshiel,PEN11
+2021,routine,9.309444444444445,87,penmanshiel,PEN11
+2021,weather,98.91555555555557,20,penmanshiel,PEN11
+2022,curtailment,46.56277777777778,10,penmanshiel,PEN11
+2022,fault: brake,0.0075,1,penmanshiel,PEN11
+2022,fault: converter,0.06666666666666667,2,penmanshiel,PEN11
+2022,fault: gearbox,20.84666666666667,17,penmanshiel,PEN11
+2022,fault: sensor_met,4.040555555555556,59,penmanshiel,PEN11
+2022,fault: tower,13.735833333333332,14,penmanshiel,PEN11
+2022,fault: unspecified,6.416111111111111,7,penmanshiel,PEN11
+2022,maintenance,853.3708333333334,38,penmanshiel,PEN11
+2022,routine,8.539722222222222,74,penmanshiel,PEN11
+2022,weather,24.38861111111111,46,penmanshiel,PEN11
+2023,curtailment,13.92388888888889,4,penmanshiel,PEN11
+2023,fault: converter,1.246388888888889,8,penmanshiel,PEN11
+2023,fault: gearbox,0.18138888888888888,7,penmanshiel,PEN11
+2023,fault: tower,5.676944444444445,6,penmanshiel,PEN11
+2023,fault: unspecified,0.21472222222222223,1,penmanshiel,PEN11
+2023,grid,35.093333333333334,16,penmanshiel,PEN11
+2023,maintenance,83.97416666666666,22,penmanshiel,PEN11
+2023,routine,9.266944444444444,84,penmanshiel,PEN11
+2023,weather,19.373055555555556,53,penmanshiel,PEN11
+2024,curtailment,22.928333333333335,9,penmanshiel,PEN11
+2024,fault: converter,16.891944444444444,2,penmanshiel,PEN11
+2024,fault: electrical,5.8116666666666665,1,penmanshiel,PEN11
+2024,fault: gearbox,34.117222222222225,13,penmanshiel,PEN11
+2024,fault: pitch,29.69,2,penmanshiel,PEN11
+2024,fault: tower,0.7783333333333333,3,penmanshiel,PEN11
+2024,fault: unspecified,36.794444444444444,2,penmanshiel,PEN11
+2024,grid,54.94027777777778,20,penmanshiel,PEN11
+2024,maintenance,34.02388888888889,20,penmanshiel,PEN11
+2024,routine,6.083333333333333,65,penmanshiel,PEN11
+2024,weather,47.00555555555555,114,penmanshiel,PEN11
+2016,curtailment,38.455555555555556,47,penmanshiel,PEN12
+2016,fault: converter,0.06666666666666667,2,penmanshiel,PEN12
+2016,fault: electrical,0.6975,1,penmanshiel,PEN12
+2016,fault: gearbox,0.08777777777777777,3,penmanshiel,PEN12
+2016,fault: hydraulics,67.58277777777778,1,penmanshiel,PEN12
+2016,fault: pitch,1.5688888888888888,6,penmanshiel,PEN12
+2016,fault: tower,0.6086111111111111,3,penmanshiel,PEN12
+2016,fault: unspecified,1.5441666666666667,1,penmanshiel,PEN12
+2016,grid,45.6825,5,penmanshiel,PEN12
+2016,maintenance,1121.351111111111,30,penmanshiel,PEN12
+2016,routine,3.8230555555555554,24,penmanshiel,PEN12
+2016,weather,6.560277777777777,18,penmanshiel,PEN12
+2017,curtailment,16.950555555555557,26,penmanshiel,PEN12
+2017,fault: converter,2.288888888888889,4,penmanshiel,PEN12
+2017,fault: tower,0.26055555555555554,1,penmanshiel,PEN12
+2017,grid,7.173055555555556,1,penmanshiel,PEN12
+2017,maintenance,30.637777777777778,14,penmanshiel,PEN12
+2017,routine,8.079166666666667,79,penmanshiel,PEN12
+2017,weather,7.855277777777777,19,penmanshiel,PEN12
+2018,curtailment,0.20944444444444443,5,penmanshiel,PEN12
+2018,fault: converter,3.2230555555555553,9,penmanshiel,PEN12
+2018,fault: gearbox,8.740277777777779,7,penmanshiel,PEN12
+2018,fault: pitch,0.2013888888888889,2,penmanshiel,PEN12
+2018,fault: tower,3.5155555555555553,8,penmanshiel,PEN12
+2018,grid,211.93666666666667,1,penmanshiel,PEN12
+2018,maintenance,102.70777777777778,31,penmanshiel,PEN12
+2018,routine,7.509722222222222,76,penmanshiel,PEN12
+2018,weather,10.532777777777778,36,penmanshiel,PEN12
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN12
+2019,fault: converter,26.566388888888888,12,penmanshiel,PEN12
+2019,fault: gearbox,9.683333333333334,8,penmanshiel,PEN12
+2019,fault: pitch,22.936944444444446,9,penmanshiel,PEN12
+2019,fault: tower,0.5491666666666667,3,penmanshiel,PEN12
+2019,grid,36.09638888888889,6,penmanshiel,PEN12
+2019,maintenance,40.920833333333334,27,penmanshiel,PEN12
+2019,routine,9.856944444444444,81,penmanshiel,PEN12
+2019,weather,9.721666666666668,29,penmanshiel,PEN12
+2020,curtailment,388.2113888888889,7,penmanshiel,PEN12
+2020,fault: converter,4.9775,8,penmanshiel,PEN12
+2020,fault: electrical,0.9041666666666667,1,penmanshiel,PEN12
+2020,fault: gearbox,0.06027777777777778,2,penmanshiel,PEN12
+2020,fault: tower,6.479722222222222,13,penmanshiel,PEN12
+2020,maintenance,160.56805555555556,24,penmanshiel,PEN12
+2020,routine,7.8975,74,penmanshiel,PEN12
+2020,weather,52.382777777777775,119,penmanshiel,PEN12
+2021,curtailment,16.467222222222222,16,penmanshiel,PEN12
+2021,fault: converter,0.11861111111111111,4,penmanshiel,PEN12
+2021,fault: electrical,68.26527777777778,2,penmanshiel,PEN12
+2021,fault: gearbox,0.028055555555555556,1,penmanshiel,PEN12
+2021,fault: pitch,1.428611111111111,3,penmanshiel,PEN12
+2021,fault: sensor_met,13.116944444444444,142,penmanshiel,PEN12
+2021,maintenance,24.563333333333333,16,penmanshiel,PEN12
+2021,routine,11.133611111111112,93,penmanshiel,PEN12
+2021,weather,54.63722222222222,53,penmanshiel,PEN12
+2022,curtailment,38.05722222222222,10,penmanshiel,PEN12
+2022,fault: electrical,0.4477777777777778,1,penmanshiel,PEN12
+2022,fault: pitch,25.028333333333332,1,penmanshiel,PEN12
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN12
+2022,fault: sensor_met,27.221666666666664,20,penmanshiel,PEN12
+2022,fault: tower,6.536944444444445,33,penmanshiel,PEN12
+2022,fault: yaw,0.19194444444444445,2,penmanshiel,PEN12
+2022,grid,12.918888888888889,1,penmanshiel,PEN12
+2022,maintenance,185.05083333333332,26,penmanshiel,PEN12
+2022,routine,9.741944444444444,82,penmanshiel,PEN12
+2022,weather,36.17111111111111,99,penmanshiel,PEN12
+2023,curtailment,13.936666666666666,5,penmanshiel,PEN12
+2023,fault: converter,1.3186111111111112,13,penmanshiel,PEN12
+2023,fault: gearbox,31.392777777777777,4,penmanshiel,PEN12
+2023,fault: pitch,0.17472222222222222,1,penmanshiel,PEN12
+2023,fault: tower,14.32861111111111,32,penmanshiel,PEN12
+2023,fault: unspecified,0.21472222222222223,1,penmanshiel,PEN12
+2023,grid,42.276944444444446,1,penmanshiel,PEN12
+2023,maintenance,60.5,28,penmanshiel,PEN12
+2023,routine,9.759444444444444,84,penmanshiel,PEN12
+2023,weather,22.995833333333334,63,penmanshiel,PEN12
+2024,curtailment,23.049722222222222,9,penmanshiel,PEN12
+2024,fault: electrical,50.28277777777778,1,penmanshiel,PEN12
+2024,fault: gearbox,0.058333333333333334,2,penmanshiel,PEN12
+2024,fault: pitch,76.84361111111112,2,penmanshiel,PEN12
+2024,fault: sensor_met,0.06944444444444445,2,penmanshiel,PEN12
+2024,fault: tower,56.55972222222223,41,penmanshiel,PEN12
+2024,grid,21.55611111111111,3,penmanshiel,PEN12
+2024,maintenance,50.877500000000005,18,penmanshiel,PEN12
+2024,routine,7.107222222222222,66,penmanshiel,PEN12
+2024,weather,52.95861111111111,110,penmanshiel,PEN12
+2016,curtailment,27.085833333333333,46,penmanshiel,PEN13
+2016,fault: converter,0.5497222222222222,7,penmanshiel,PEN13
+2016,fault: gearbox,0.01361111111111111,1,penmanshiel,PEN13
+2016,fault: pitch,1.0847222222222221,5,penmanshiel,PEN13
+2016,fault: tower,0.7855555555555556,4,penmanshiel,PEN13
+2016,fault: unspecified,1.142777777777778,2,penmanshiel,PEN13
+2016,grid,39.48083333333334,4,penmanshiel,PEN13
+2016,maintenance,1225.1666666666665,13,penmanshiel,PEN13
+2016,routine,3.276111111111111,27,penmanshiel,PEN13
+2016,weather,6.557222222222222,15,penmanshiel,PEN13
+2017,curtailment,16.964444444444446,26,penmanshiel,PEN13
+2017,fault: converter,14.465277777777777,7,penmanshiel,PEN13
+2017,fault: gearbox,0.11611111111111111,5,penmanshiel,PEN13
+2017,fault: pitch,16.269444444444446,4,penmanshiel,PEN13
+2017,fault: rotor,0.09111111111111111,1,penmanshiel,PEN13
+2017,fault: sensor_met,17.48777777777778,1,penmanshiel,PEN13
+2017,fault: tower,5.464444444444444,5,penmanshiel,PEN13
+2017,grid,7.1802777777777775,1,penmanshiel,PEN13
+2017,maintenance,35.931666666666665,18,penmanshiel,PEN13
+2017,routine,6.714722222222222,72,penmanshiel,PEN13
+2017,weather,2.8183333333333334,9,penmanshiel,PEN13
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN13
+2018,fault: converter,0.1975,4,penmanshiel,PEN13
+2018,fault: pitch,0.24583333333333335,2,penmanshiel,PEN13
+2018,fault: tower,4.373333333333333,12,penmanshiel,PEN13
+2018,grid,1.6288888888888888,2,penmanshiel,PEN13
+2018,maintenance,60.881388888888885,26,penmanshiel,PEN13
+2018,routine,7.929722222222223,74,penmanshiel,PEN13
+2018,weather,16.84111111111111,40,penmanshiel,PEN13
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN13
+2019,fault: converter,2.0308333333333333,8,penmanshiel,PEN13
+2019,fault: gearbox,0.029166666666666667,1,penmanshiel,PEN13
+2019,fault: pitch,26.64611111111111,4,penmanshiel,PEN13
+2019,fault: tower,0.9661111111111111,5,penmanshiel,PEN13
+2019,grid,36.23222222222222,4,penmanshiel,PEN13
+2019,maintenance,23.458055555555553,14,penmanshiel,PEN13
+2019,routine,10.234166666666667,79,penmanshiel,PEN13
+2019,weather,11.447222222222221,39,penmanshiel,PEN13
+2020,curtailment,390.7586111111111,8,penmanshiel,PEN13
+2020,fault: converter,4.688611111111111,18,penmanshiel,PEN13
+2020,fault: electrical,25.543333333333333,2,penmanshiel,PEN13
+2020,fault: gearbox,2.9244444444444446,13,penmanshiel,PEN13
+2020,fault: pitch,0.7486111111111111,1,penmanshiel,PEN13
+2020,fault: tower,2.398888888888889,12,penmanshiel,PEN13
+2020,fault: yaw,0.24388888888888888,2,penmanshiel,PEN13
+2020,maintenance,101.55027777777778,19,penmanshiel,PEN13
+2020,routine,78.48444444444445,76,penmanshiel,PEN13
+2020,weather,52.83222222222222,114,penmanshiel,PEN13
+2021,curtailment,22.0975,17,penmanshiel,PEN13
+2021,fault: gearbox,0.029166666666666667,1,penmanshiel,PEN13
+2021,fault: sensor_met,160.88861111111112,20,penmanshiel,PEN13
+2021,fault: tower,1.1341666666666665,4,penmanshiel,PEN13
+2021,maintenance,32.70527777777778,20,penmanshiel,PEN13
+2021,routine,10.620277777777778,87,penmanshiel,PEN13
+2021,weather,38.467777777777776,44,penmanshiel,PEN13
+2022,curtailment,46.2675,10,penmanshiel,PEN13
+2022,fault: converter,0.40305555555555556,3,penmanshiel,PEN13
+2022,fault: gearbox,22.26861111111111,6,penmanshiel,PEN13
+2022,fault: pitch,118.1275,3,penmanshiel,PEN13
+2022,fault: rotor,0.0913888888888889,1,penmanshiel,PEN13
+2022,fault: tower,7.9775,11,penmanshiel,PEN13
+2022,maintenance,13.7125,15,penmanshiel,PEN13
+2022,routine,8.765555555555556,79,penmanshiel,PEN13
+2022,weather,32.61972222222222,93,penmanshiel,PEN13
+2023,curtailment,13.937222222222221,5,penmanshiel,PEN13
+2023,fault: converter,0.8583333333333333,7,penmanshiel,PEN13
+2023,fault: tower,6.296666666666667,8,penmanshiel,PEN13
+2023,grid,10.876111111111111,1,penmanshiel,PEN13
+2023,maintenance,51.00194444444445,24,penmanshiel,PEN13
+2023,routine,8.999444444444444,84,penmanshiel,PEN13
+2023,weather,28.89527777777778,71,penmanshiel,PEN13
+2024,curtailment,23.44972222222222,9,penmanshiel,PEN13
+2024,fault: tower,5.001666666666667,6,penmanshiel,PEN13
+2024,grid,1.938611111111111,14,penmanshiel,PEN13
+2024,maintenance,23.343888888888888,12,penmanshiel,PEN13
+2024,routine,8.678333333333333,76,penmanshiel,PEN13
+2024,weather,60.945,90,penmanshiel,PEN13
+2016,curtailment,34.72555555555556,44,penmanshiel,PEN14
+2016,fault: converter,0.1,3,penmanshiel,PEN14
+2016,fault: electrical,242.36166666666668,7,penmanshiel,PEN14
+2016,fault: gearbox,0.08083333333333334,3,penmanshiel,PEN14
+2016,fault: generator,18.61722222222222,1,penmanshiel,PEN14
+2016,fault: hydraulics,22.1175,1,penmanshiel,PEN14
+2016,fault: pitch,27.497777777777777,9,penmanshiel,PEN14
+2016,fault: tower,1.1266666666666667,5,penmanshiel,PEN14
+2016,fault: unspecified,96.67194444444443,3,penmanshiel,PEN14
+2016,grid,32.435,3,penmanshiel,PEN14
+2016,maintenance,903.4997222222223,23,penmanshiel,PEN14
+2016,routine,2.272777777777778,29,penmanshiel,PEN14
+2016,weather,5.397777777777778,18,penmanshiel,PEN14
+2017,curtailment,16.974999999999998,26,penmanshiel,PEN14
+2017,fault: converter,0.1,3,penmanshiel,PEN14
+2017,fault: pitch,3.44,5,penmanshiel,PEN14
+2017,fault: rotor,0.09111111111111111,1,penmanshiel,PEN14
+2017,fault: tower,0.5366666666666666,3,penmanshiel,PEN14
+2017,grid,7.171666666666667,1,penmanshiel,PEN14
+2017,maintenance,29.438333333333333,17,penmanshiel,PEN14
+2017,routine,11.135277777777778,75,penmanshiel,PEN14
+2017,weather,7.732222222222222,15,penmanshiel,PEN14
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN14
+2018,fault: converter,0.19361111111111112,4,penmanshiel,PEN14
+2018,fault: pitch,71.09305555555555,14,penmanshiel,PEN14
+2018,fault: tower,0.43666666666666665,2,penmanshiel,PEN14
+2018,grid,1.4705555555555556,1,penmanshiel,PEN14
+2018,maintenance,53.58027777777778,28,penmanshiel,PEN14
+2018,routine,39.55777777777778,79,penmanshiel,PEN14
+2018,weather,15.550555555555556,36,penmanshiel,PEN14
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN14
+2019,fault: converter,28.966666666666665,6,penmanshiel,PEN14
+2019,fault: pitch,63.373333333333335,5,penmanshiel,PEN14
+2019,fault: tower,0.5177777777777778,2,penmanshiel,PEN14
+2019,grid,40.65027777777778,4,penmanshiel,PEN14
+2019,maintenance,42.89611111111111,21,penmanshiel,PEN14
+2019,routine,9.669722222222223,80,penmanshiel,PEN14
+2019,weather,9.464444444444444,30,penmanshiel,PEN14
+2020,curtailment,391.16499999999996,8,penmanshiel,PEN14
+2020,fault: converter,2.708888888888889,10,penmanshiel,PEN14
+2020,fault: gearbox,0.029722222222222223,1,penmanshiel,PEN14
+2020,fault: pitch,62.46222222222222,2,penmanshiel,PEN14
+2020,fault: tower,1.7397222222222224,8,penmanshiel,PEN14
+2020,maintenance,100.92277777777778,22,penmanshiel,PEN14
+2020,routine,8.620833333333334,77,penmanshiel,PEN14
+2020,weather,54.17666666666667,110,penmanshiel,PEN14
+2021,curtailment,22.1325,17,penmanshiel,PEN14
+2021,fault: pitch,18.49555555555556,2,penmanshiel,PEN14
+2021,fault: tower,0.35111111111111115,2,penmanshiel,PEN14
+2021,grid,8.851666666666667,1,penmanshiel,PEN14
+2021,maintenance,37.160833333333336,21,penmanshiel,PEN14
+2021,routine,9.654444444444444,84,penmanshiel,PEN14
+2021,weather,53.358333333333334,52,penmanshiel,PEN14
+2022,curtailment,61.534166666666664,10,penmanshiel,PEN14
+2022,fault: converter,0.30138888888888893,5,penmanshiel,PEN14
+2022,fault: electrical,0.32666666666666666,1,penmanshiel,PEN14
+2022,fault: gearbox,1.1941666666666668,4,penmanshiel,PEN14
+2022,fault: pitch,2.875,3,penmanshiel,PEN14
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN14
+2022,fault: sensor_met,0.04694444444444444,1,penmanshiel,PEN14
+2022,fault: tower,0.7022222222222222,4,penmanshiel,PEN14
+2022,fault: unspecified,42.21222222222222,1,penmanshiel,PEN14
+2022,grid,1.6830555555555555,1,penmanshiel,PEN14
+2022,maintenance,98.00666666666667,20,penmanshiel,PEN14
+2022,routine,8.483611111111111,80,penmanshiel,PEN14
+2022,weather,37.19777777777778,105,penmanshiel,PEN14
+2023,curtailment,13.934722222222222,5,penmanshiel,PEN14
+2023,fault: converter,0.31805555555555554,5,penmanshiel,PEN14
+2023,fault: sensor_met,1.0891666666666666,22,penmanshiel,PEN14
+2023,fault: tower,0.2936111111111111,1,penmanshiel,PEN14
+2023,fault: unspecified,0.21388888888888888,1,penmanshiel,PEN14
+2023,grid,0.3258333333333333,1,penmanshiel,PEN14
+2023,maintenance,87.85194444444444,21,penmanshiel,PEN14
+2023,routine,9.547222222222222,83,penmanshiel,PEN14
+2023,weather,31.835555555555555,66,penmanshiel,PEN14
+2024,curtailment,23.05666666666667,9,penmanshiel,PEN14
+2024,fault: electrical,70.49472222222222,2,penmanshiel,PEN14
+2024,fault: tower,4.262222222222222,2,penmanshiel,PEN14
+2024,grid,0.3622222222222222,2,penmanshiel,PEN14
+2024,maintenance,24.719444444444445,17,penmanshiel,PEN14
+2024,routine,7.368333333333333,73,penmanshiel,PEN14
+2024,weather,70.73055555555555,130,penmanshiel,PEN14
+2016,curtailment,40.94833333333333,47,penmanshiel,PEN15
+2016,fault: converter,0.3397222222222222,11,penmanshiel,PEN15
+2016,fault: electrical,24.154444444444444,3,penmanshiel,PEN15
+2016,fault: gearbox,0.11722222222222223,4,penmanshiel,PEN15
+2016,fault: pitch,3.0183333333333335,9,penmanshiel,PEN15
+2016,fault: unspecified,0.7858333333333334,5,penmanshiel,PEN15
+2016,grid,35.305,6,penmanshiel,PEN15
+2016,maintenance,994.248611111111,25,penmanshiel,PEN15
+2016,routine,2.379166666666667,28,penmanshiel,PEN15
+2017,curtailment,16.985833333333332,26,penmanshiel,PEN15
+2017,fault: converter,0.1,3,penmanshiel,PEN15
+2017,fault: pitch,4.446666666666666,2,penmanshiel,PEN15
+2017,fault: rotor,0.0913888888888889,1,penmanshiel,PEN15
+2017,fault: tower,0.3536111111111111,2,penmanshiel,PEN15
+2017,fault: unspecified,64.7838888888889,5,penmanshiel,PEN15
+2017,grid,7.1722222222222225,1,penmanshiel,PEN15
+2017,maintenance,29.405833333333334,16,penmanshiel,PEN15
+2017,routine,7.239722222222222,74,penmanshiel,PEN15
+2017,weather,2.1069444444444443,10,penmanshiel,PEN15
+2018,curtailment,0.22166666666666665,6,penmanshiel,PEN15
+2018,fault: converter,1.9080555555555556,5,penmanshiel,PEN15
+2018,fault: pitch,1.2769444444444444,6,penmanshiel,PEN15
+2018,fault: tower,2.2619444444444445,10,penmanshiel,PEN15
+2018,fault: yaw,0.0961111111111111,1,penmanshiel,PEN15
+2018,grid,1.4694444444444446,1,penmanshiel,PEN15
+2018,maintenance,62.492777777777775,28,penmanshiel,PEN15
+2018,routine,7.78,75,penmanshiel,PEN15
+2018,weather,11.11,28,penmanshiel,PEN15
+2019,curtailment,0.5855555555555556,4,penmanshiel,PEN15
+2019,fault: brake,1.4975,1,penmanshiel,PEN15
+2019,fault: pitch,32.69583333333333,2,penmanshiel,PEN15
+2019,fault: tower,0.35,2,penmanshiel,PEN15
+2019,grid,60.12777777777777,5,penmanshiel,PEN15
+2019,maintenance,27.272222222222222,17,penmanshiel,PEN15
+2019,routine,7.470833333333333,74,penmanshiel,PEN15
+2019,weather,7.198333333333333,28,penmanshiel,PEN15
+2020,curtailment,388.37972222222226,8,penmanshiel,PEN15
+2020,fault: brake,1.7377777777777776,2,penmanshiel,PEN15
+2020,fault: converter,6.936666666666667,19,penmanshiel,PEN15
+2020,fault: gearbox,0.03,1,penmanshiel,PEN15
+2020,fault: pitch,6.3277777777777775,15,penmanshiel,PEN15
+2020,fault: tower,5.4191666666666665,12,penmanshiel,PEN15
+2020,fault: unspecified,6.603055555555556,1,penmanshiel,PEN15
+2020,maintenance,140.94555555555556,24,penmanshiel,PEN15
+2020,routine,8.629999999999999,71,penmanshiel,PEN15
+2020,weather,34.84722222222222,103,penmanshiel,PEN15
+2021,curtailment,22.227777777777778,17,penmanshiel,PEN15
+2021,fault: brake,4.939444444444444,7,penmanshiel,PEN15
+2021,fault: converter,14.094722222222222,1,penmanshiel,PEN15
+2021,fault: gearbox,3.241111111111111,11,penmanshiel,PEN15
+2021,fault: pitch,66.22277777777778,4,penmanshiel,PEN15
+2021,fault: sensor_met,12.265,14,penmanshiel,PEN15
+2021,fault: tower,0.1763888888888889,1,penmanshiel,PEN15
+2021,maintenance,40.5025,25,penmanshiel,PEN15
+2021,routine,9.434722222222222,80,penmanshiel,PEN15
+2021,weather,55.20444444444445,45,penmanshiel,PEN15
+2022,curtailment,46.13305555555556,11,penmanshiel,PEN15
+2022,fault: brake,0.7619444444444444,3,penmanshiel,PEN15
+2022,fault: gearbox,48.867222222222225,19,penmanshiel,PEN15
+2022,fault: rotor,0.09111111111111111,1,penmanshiel,PEN15
+2022,fault: tower,2.9322222222222223,11,penmanshiel,PEN15
+2022,grid,28.189166666666665,1,penmanshiel,PEN15
+2022,maintenance,193.7297222222222,30,penmanshiel,PEN15
+2022,routine,8.220833333333333,77,penmanshiel,PEN15
+2022,weather,23.971666666666668,66,penmanshiel,PEN15
+2023,curtailment,13.936944444444444,5,penmanshiel,PEN15
+2023,fault: brake,0.16833333333333333,1,penmanshiel,PEN15
+2023,fault: converter,0.8747222222222222,7,penmanshiel,PEN15
+2023,fault: gearbox,0.05694444444444444,2,penmanshiel,PEN15
+2023,fault: pitch,71.16416666666667,4,penmanshiel,PEN15
+2023,fault: sensor_met,0.09083333333333334,2,penmanshiel,PEN15
+2023,fault: tower,15.481388888888889,25,penmanshiel,PEN15
+2023,grid,0.49277777777777776,1,penmanshiel,PEN15
+2023,maintenance,147.85194444444446,29,penmanshiel,PEN15
+2023,routine,8.899722222222222,77,penmanshiel,PEN15
+2023,weather,16.796666666666667,34,penmanshiel,PEN15
+2024,curtailment,23.05527777777778,8,penmanshiel,PEN15
+2024,fault: brake,3.9275,1,penmanshiel,PEN15
+2024,fault: converter,0.1875,1,penmanshiel,PEN15
+2024,fault: gearbox,64.34611111111111,32,penmanshiel,PEN15
+2024,fault: pitch,0.2633333333333333,1,penmanshiel,PEN15
+2024,fault: sensor_met,0.7833333333333333,1,penmanshiel,PEN15
+2024,fault: tower,19.990833333333335,24,penmanshiel,PEN15
+2024,fault: unspecified,0.013333333333333334,1,penmanshiel,PEN15
+2024,grid,0.3597222222222222,2,penmanshiel,PEN15
+2024,maintenance,183.32805555555558,23,penmanshiel,PEN15
+2024,routine,7.203055555555555,68,penmanshiel,PEN15
+2024,weather,36.941944444444445,91,penmanshiel,PEN15

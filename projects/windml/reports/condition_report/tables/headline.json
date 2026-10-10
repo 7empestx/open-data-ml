@@ -1,0 +1,64 @@
+{
+ "kelmarsh": {
+  "turbine_years": 54.0,
+  "avail_time_mean": 0.9789806925001691,
+  "avail_energy_all": 0.9617231402897432,
+  "export_gwh": 274.0124199999999,
+  "lost_gwh": 10.905773730315012,
+  "fault_share_lost": 0.32781329012624316,
+  "maint_share_lost": 0.312432753480891,
+  "fault_hours_per_ty": 91.0114100786727,
+  "maint_hours_per_ty": 87.3740759760826,
+  "oil_trips": 14,
+  "pitch_trips": 131,
+  "oil_eps": 10,
+  "pitch_eps": 69,
+  "flags": {
+   "AMBER": 2,
+   "GREEN": 2,
+   "RED": 2
+  },
+  "avail_by_year": {
+   "2016": 0.9628,
+   "2017": 0.9917,
+   "2018": 0.9935,
+   "2019": 0.9955,
+   "2020": 0.9918,
+   "2021": 0.9674,
+   "2022": 0.9669,
+   "2023": 0.9764,
+   "2024": 0.9649
+  }
+ },
+ "penmanshiel": {
+  "turbine_years": 102.3,
+  "avail_time_mean": 0.9804432093805336,
+  "avail_energy_all": 0.9615216023151474,
+  "export_gwh": 562.7070583125002,
+  "lost_gwh": 22.518543439573524,
+  "fault_share_lost": 0.2508453900258642,
+  "maint_share_lost": 0.24527421919276463,
+  "fault_hours_per_ty": 80.86993400592235,
+  "maint_hours_per_ty": 83.34090628394566,
+  "oil_trips": 440,
+  "pitch_trips": 426,
+  "oil_eps": 235,
+  "pitch_eps": 248,
+  "flags": {
+   "RED": 8,
+   "AMBER": 4,
+   "GREEN": 2
+  },
+  "avail_by_year": {
+   "2016": 0.831,
+   "2017": 0.9892,
+   "2018": 0.9875,
+   "2019": 0.9876,
+   "2020": 0.977,
+   "2021": 0.9875,
+   "2022": 0.9699,
+   "2023": 0.9632,
+   "2024": 0.9812
+  }
+ }
+}
