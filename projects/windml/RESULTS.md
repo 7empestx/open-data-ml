@@ -34,7 +34,7 @@ These were profiled, typed, and saved as parquet. Each one has a `reports/schema
 | PIADE packaging | `piade_raw_events.parquet`, `piade_sequences_1h.parquet` | 429,394 state/alarm intervals across 5 machines (2020 to 2021), UTC. Hourly alarm-count sequences: 23,376 rows. |
 | Beverage bottling line | `bottling_*.parquet` (4 files) | Production, operating time, and downtime sheets. No sensor channels. Plant-local time kept naive. Downtime event log has 1,388 rows. |
 | MetroPT-3 (metro air compressor) | `metropt3.parquet` | 1,516,948 rows at 0.1 Hz. `in_failure` added from the 4 documented air-leak failures (29,954 rows). |
-| NASA C-MAPSS (simulated) | `cmapss_all.parquet` | FD001 to FD004 train and test combined: 265,256 rows. RUL column added. |
+| NASA C-MAPSS (simulated) | `cmapss_all.parquet` (local only, not committed; see DATA_SOURCES.md) | FD001 to FD004 train and test combined: 265,256 rows. RUL column added. |
 | UCI hydraulic systems | `hydraulic_cycle_features.parquet` | 2,205 cycles reduced to mean/std/min/max per sensor, with the 5 condition labels. |
 
 ## 2. Data problems found

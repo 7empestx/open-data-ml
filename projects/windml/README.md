@@ -20,7 +20,7 @@ Layout
 
 Environment: uv venv at .venv (pandas 3, pyarrow, numpy, scikit-learn, matplotlib, openpyxl, tabulate).
 
-Licenses: Kelmarsh, Penmanshiel, PVDAQ, CoMoPI, PIADE, bottling, MetroPT-3 and UCI hydraulic are CC BY 4.0; C-MAPSS is a US government work. Credit the sources in any published demo (see DATA_SOURCES.md).
+Licenses: Kelmarsh, Penmanshiel, PVDAQ, CoMoPI, PIADE, bottling, MetroPT-3 and UCI hydraulic are CC BY 4.0; C-MAPSS has no stated license, so it is not committed (fetch it with `scripts/download_cmapss.sh`). Credit the sources in any published demo (see DATA_SOURCES.md).
 
 ## Failure labeling (src/windml/labeling.py)
 

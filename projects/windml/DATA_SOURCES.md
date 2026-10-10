@@ -11,12 +11,24 @@ The source, license, and attribution for every dataset below come from the `SOUR
 | PIADE: Packaging Industry Anomaly DEtection | Yes, light cleaning | https://zenodo.org/records/7071747 | CC BY 4.0 | Credit the dataset authors and Zenodo record 7071747 |
 | Industrial Production Time-Series from a Beverage Bottling Line | Yes, light cleaning | https://zenodo.org/records/18146866 | CC BY 4.0 | Credit the dataset authors and Zenodo record 18146866 |
 | MetroPT-3 (Porto metro air compressor) | Yes, light cleaning | https://archive.ics.uci.edu/dataset/791 (DOI 10.24432/C5VW3R) | CC BY 4.0 (verified on the dataset page, 2026-10-10) | Cite the UCI DOI 10.24432/C5VW3R and the authors |
-| NASA C-MAPSS Turbofan Engine Degradation Simulation (simulated) | Yes, light cleaning | https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip (NASA Ames PCoE) | Presumed US Government work (17 USC 105). No license file; data.nasa.gov lists the license as "not specified" (checked 2026-10-10). See PUBLIC_READINESS.md. | Cite Saxena & Goebel (2008), NASA Ames Prognostics Center of Excellence |
+| NASA C-MAPSS Turbofan Engine Degradation Simulation (simulated) | Profiled locally only. **Not committed** (no raw or processed files in this repo); fetch it with `scripts/download_cmapss.sh` | https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+Simulation+Data+Set.zip (NASA Ames PCoE data repository) | Not specified: data.nasa.gov lists the license as "not specified" (checked 2026-10-10). Presumed US Government work (17 USC 105), but because it is unconfirmed we do not redistribute it. | Cite Saxena & Goebel (2008), NASA Ames Prognostics Center of Excellence |
 | UCI Condition monitoring of hydraulic systems (ZeMA) | Yes, light cleaning | https://archive.ics.uci.edu/dataset/447 (DOI 10.24432/C5CW21) | CC BY 4.0 (verified on the dataset page, 2026-10-10) | Cite the UCI DOI 10.24432/C5CW21 and the authors |
 | UCI AI4I 2020 Predictive Maintenance (synthetic) | Downloaded, not yet processed | https://archive.ics.uci.edu/dataset/601 (DOI 10.24432/C5HS5C) | CC BY 4.0 (verified on the dataset page, 2026-10-10) | Cite the UCI DOI 10.24432/C5HS5C and Matzka (2020) |
 | UCI SECOM semiconductor process data | Downloaded, not yet processed | https://archive.ics.uci.edu/dataset/179 (DOI 10.24432/C54305) | CC BY 4.0 (verified on the dataset page, 2026-10-10) | Cite the UCI DOI 10.24432/C54305 and the authors |
 
 Zenodo licenses (Kelmarsh, Penmanshiel, CoMoPI, PIADE, bottling line) were rechecked through the Zenodo records API on 2026-10-10: all CC BY 4.0. The four UCI dataset pages each state CC BY 4.0.
+
+## NASA C-MAPSS: download it yourself
+
+C-MAPSS has no stated license, so this repo does not include it, in raw or processed form. To use it:
+
+    projects/windml/scripts/download_cmapss.sh [DEST_DIR]   # default: $WINDML_RAW_DIR/nasa-cmapss
+    python projects/windml/scripts/profile_and_clean.py     # rebuilds data/processed/cmapss_all.parquet locally (gitignored)
+
+The script downloads the zip from the official NASA PCoE data repository
+(https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/),
+checks its SHA-256, unpacks the FD001 to FD004 train, test and RUL files, and writes a `SOURCE.txt` next to them.
+Review NASA's terms before redistributing anything derived from it. `reports/schema_nasa_cmapss.md` (column names, units, row counts and min/max only) stays in the repo as documentation.
 
 ## Excluded datasets
 

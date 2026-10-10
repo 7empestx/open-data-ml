@@ -23,3 +23,11 @@ projects/windml/data/processed/all_years/*_scada_labeled.parquet
 projects/windml/data/processed/all_years/*_extra_*.parquet
 # 10-min min/max/std signals for trip prediction (rebuild with projects/windml/scripts/extract_stat_signals.py)
 projects/windml/data/processed/all_years/*_stats_*.parquet
+
+# NASA C-MAPSS: license "not specified" on data.nasa.gov, so no raw or processed copies are committed.
+# Fetch with projects/windml/scripts/download_cmapss.sh and rebuild locally.
+**/cmapss_all.parquet
+**/*cmapss*.parquet
+**/*cmapss*.csv
+**/nasa-cmapss/
+**/CMAPSSData*
