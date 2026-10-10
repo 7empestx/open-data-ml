@@ -1,18 +1,18 @@
 # Public readiness check: open-data-ml
 
-Checked 2026-10-10 (MT) against `main` at commit 5ae138f. The repo is still **private**. Nothing here changes visibility, deploys, or posts anything.
+First checked 2026-10-10 (MT) against `main` at commit 5ae138f. Updated 2026-10-10 after the pre-public cleanup (commits 5ce2116 and 579fbae). The repo is still **private**. Nothing here changes visibility, deploys, or posts anything.
 
 ## Verdict
 
-**Not ready to make public yet.** The data licenses are clean. There is one hard blocker (no code license file) and a few decisions only Grant can make. None need a history rewrite.
+**Ready to make public.** All three blockers are resolved. The only remaining step is for the owner to flip the repo's visibility on GitHub. No history rewrite was done or is needed.
 
-## 1. Blockers (fix before flipping to public)
+## 1. Blockers (all resolved)
 
-| # | Item | Why it matters | Fix |
+| # | Item | Status | Resolution |
 |---|---|---|---|
-| B1 | **No `LICENSE` file** at the repo root. | Without one, the code is "all rights reserved" and nobody can legally reuse it. | Add MIT (the plan's choice) with "Copyright (c) 2026 <LLC name>". Needs Grant's OK on the LLC name. |
-| B2 | **Employer IP confirmation in writing.** | Grant acknowledged it as not blocking, but the plan says to confirm IP ownership before publishing. | Grant gets a short written confirmation (email is fine). |
-| B3 | **NASA C-MAPSS license wording.** `projects/windml/data/processed/cmapss_all.parquet` (7.3 MB) is committed. data.nasa.gov lists the license as "not specified". | US Government works are public domain under 17 USC 105, but the record doesn't say so, and contractors may have worked on it. Low risk, not verified. | Pick one: (a) keep it, with the 17 USC 105 note and citation already in DATA_SOURCES.md; or (b) **recommended:** untrack it (`git rm --cached`, add to .gitignore) and re-fetch from NASA with a script. It's a side dataset, not part of windml. It stays in history either way. If (b) matters, the only clean option is a new public repo created from a fresh snapshot, never a force-push. |
+| B1 | No `LICENSE` file at the repo root. | **Done** | MIT `LICENSE` added: "Copyright (c) 2026 Beehive AI Labs LLC" (commit 5ce2116). README.md has a License section saying the MIT License covers the code only, and that datasets keep their own licenses (Kelmarsh and Penmanshiel CC BY 4.0, attribution per `projects/windml/DATA_SOURCES.md`). |
+| B2 | Employer IP confirmation in writing. | **Done** | Written IP confirmation from Nexio received 2026-10-10. |
+| B3 | NASA C-MAPSS license is "not specified" on data.nasa.gov. | **Handled** | Option (b): `projects/windml/data/processed/cmapss_all.parquet` is no longer tracked (`git rm --cached`, commit 579fbae) and C-MAPSS patterns are in `.gitignore`. `projects/windml/scripts/download_cmapss.sh` fetches it from the official NASA PCoE source (SHA-256 checked), documented in `projects/windml/DATA_SOURCES.md`. `reports/schema_nasa_cmapss.md` stays as documentation (column names, units, row counts and min/max only, no data rows). **Note:** the parquet (7.5 MB) is still in git history (added in dee0925, removed in 579fbae), so anyone can recover it from a public clone. It is a presumed US Government work and low risk. The only way to remove it would be to publish a fresh-snapshot repo; force-pushing is not allowed. |
 
 ## 2. Dataset license check
 
@@ -31,7 +31,7 @@ Licenses checked at the source on 2026-10-10. Zenodo via the records API (`/api/
 | AI4I 2020 | UCI 601 | CC BY 4.0 (dataset page) | none | n/a |
 | SECOM | UCI 179 | CC BY 4.0 (dataset page) | none | n/a |
 | NREL PVDAQ system 10 | OEDI 4568 | CC BY 4.0 (OEDI page) | `nrel_pvdaq_system10_2008.parquet` | Yes, with attribution |
-| NASA C-MAPSS | NASA PCoE | Presumed US Gov work; catalog says "not specified" | `cmapss_all.parquet` | See B3 |
+| NASA C-MAPSS | NASA PCoE | Presumed US Gov work; catalog says "not specified" | none (untracked in 579fbae; still in history) | Not redistributed. Users fetch it with `download_cmapss.sh` (B3) |
 | NASA IMS bearings | excluded | no clear license | none, never in history | n/a |
 | SKAB | excluded | copyleft | none, never in history | n/a |
 
@@ -43,10 +43,16 @@ Every license above allows commercial use and redistribution of changed versions
 
 ## 3. Secrets and personal info
 
-- **Secrets:** scanned every commit for AWS keys, private keys, GitHub, Slack, OpenAI and Hugging Face tokens, and `password=`. **None found.**
-- **Commit identity:** all 9 commits use the GitHub noreply address `51809789+7empestx@users.noreply.github.com`. 7 show the name "Grant Starkman" and 2 show "7empestx". Your name will be public on the commits. If you'd rather they show the LLC, set `user.name` for future commits. Past commits stay as they are, since rewriting them would mean a force-push.
-- **Emails in files:** only `hello@beehivewebstudio.com`, which is the intended public contact.
-- **Machine paths:** scripts hardcode `/workspace/industrial-data` and `/workspace/logs`, for example `RAW = Path("/workspace/industrial-data")` in `src/windml/greenbyte.py` and `scripts/profile_and_clean.py`. These aren't sensitive, but nobody else can run the code. Make the raw-data path an environment variable (for example `WINDML_RAW_DIR`) with a sensible default.
+Re-scanned 2026-10-10 after the cleanup, covering the tracked files at HEAD and the full history (`git log -p --all`).
+
+- **Secrets:** no AWS access keys, private keys, or GitHub, Slack, OpenAI or Hugging Face tokens. No `password=`, `secret=` or `token=` assignments. **None found** in HEAD or in history.
+- **AWS account IDs, ARNs, CloudFront and Route 53 IDs:** none. `site/DEPLOY.md` uses only placeholders (`<account-id>`, `<distribution-id>`, `<bucket>`, `<profile>`). The real deploy script is not in the repo.
+- **Emails:** only `hello@beehivewebstudio.com` (the public contact) and the GitHub noreply address in commit metadata. This holds for history too.
+- **Local laptop paths:** no `/Users/...` or home-directory paths, and no AWS profile names, in HEAD or history.
+- **Commit identity:** every commit uses `51809789+7empestx@users.noreply.github.com`. The names "Grant Starkman" and "7empestx" will be public on the commits.
+- **Box paths:** scripts and READMEs hardcode `/workspace/industrial-data` and `/workspace/logs` (16 files). These aren't sensitive, but other people need to edit them to run the code. Planned fix: a `WINDML_RAW_DIR` environment variable (`download_cmapss.sh` already supports it).
+- **Large files:** no tracked file or blob in history is over 50 MB. The largest is `kelmarsh_scada_labeled.parquet` at 47 MB, which is under GitHub's 100 MB hard limit. GitHub may warn about files over 50 MB on push, but none are that big.
+- **PDF metadata:** the two condition-report PDFs show only a title and HeadlessChrome/Skia as producer. No author and no paths.
 
 ## 4. Not blocking, but should fix soon
 
@@ -55,12 +61,12 @@ Every license above allows commercial use and redistribution of changed versions
 3. **Name clash: "windML".** An older, unmaintained project of the same name exists: github.com/cigroup-ol/windml (about 130 stars, windml.org), and it holds the PyPI name `windML` (v0.3.8). Using windml as a repo folder or site section is fine. Don't publish a PyPI package called `windml`, and say "not affiliated" somewhere, or think about a different name (for example `windml-scada` or `open-windml`). Before using either name as a brand, also run a USPTO search (free) for "open-data-ml" and "windml". `open-data-ml` isn't taken on PyPI.
 4. **Repo size.** About 189 MB of loose objects, mostly the processed wind parquets (about 135 MB). That's under GitHub's limits, but cloning is slow. A later option is to move processed data to a Hugging Face dataset (also CC BY 4.0 with attribution) and keep git for code.
 5. **Top-level README:** add a "not engineering advice" line and a data-credit block like the one on the site.
-6. **`site/DEPLOY.md`** mentions Grant by name and describes AWS setup steps. Nothing sensitive, but you could move it to a private notes file if you don't want it public.
+6. **`site/DEPLOY.md`** mentions Grant by name and describes AWS setup steps with placeholders only (no account ID, ARN, or bucket). Nothing sensitive, but you could move it to a private notes file if you don't want it public.
 
-## 5. Before making it public (Grant's approval needed)
+## 5. Before making it public
 
-- [ ] Add LICENSE (MIT, LLC as copyright holder) (B1)
-- [ ] Get employer IP confirmation in writing (B2)
-- [ ] Decide on C-MAPSS (B3)
-- [ ] Decide on the windml name clash (section 4.3)
-- [ ] Grant flips visibility himself. This check doesn't change it.
+- [x] Add LICENSE (MIT, Beehive AI Labs LLC) (B1), commit 5ce2116
+- [x] Employer IP confirmation in writing, received from Nexio on 2026-10-10 (B2)
+- [x] C-MAPSS untracked, with a download script added (B3), commit 579fbae
+- [ ] Optional: decide on the windml name clash (section 4.3). This doesn't block going public.
+- [ ] **Remaining: the owner (Grant) flips repo visibility to public on GitHub.** This check doesn't change it.
