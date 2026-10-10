@@ -11,7 +11,7 @@
 #         NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA.
 #
 # Usage: projects/windml/scripts/download_cmapss.sh [DEST_DIR]
-#   DEST_DIR defaults to $WINDML_RAW_DIR/nasa-cmapss, or /workspace/industrial-data/nasa-cmapss
+#   DEST_DIR defaults to $WINDML_RAW_DIR/nasa-cmapss (WINDML_RAW_DIR defaults to projects/windml/data/raw)
 #   (the raw path used by scripts/profile_and_clean.py). Then run profile_and_clean.py to rebuild
 #   data/processed/cmapss_all.parquet locally (it is gitignored).
 set -euo pipefail
@@ -20,7 +20,8 @@ URL="https://phm-datasets.s3.amazonaws.com/NASA/6.+Turbofan+Engine+Degradation+S
 # SHA-256 of the outer zip as served on 2026-10-10. Set CMAPSS_SKIP_SHA=1 if NASA republishes it.
 SHA256="c9c5dec12a945a82e8bb4446589d7fb3cc057b5e5d81fa1a12e25ee9912ad3b2"
 
-DEST="${1:-${WINDML_RAW_DIR:-/workspace/industrial-data}/nasa-cmapss}"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEST="${1:-${WINDML_RAW_DIR:-$HERE/../data/raw}/nasa-cmapss}"
 mkdir -p "$DEST"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT

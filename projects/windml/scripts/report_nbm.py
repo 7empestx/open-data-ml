@@ -8,9 +8,10 @@ import matplotlib.dates as mdates
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm
 
-D, REP, FIG = ROOT / "data/nbm", ROOT / "reports", ROOT / "reports/figures"
+D, REP, FIG = cfg.NBM_DIR, cfg.REPORTS_DIR, cfg.REPORTS_DIR / "figures"
 FIG.mkdir(exist_ok=True, parents=True)
 SHORT = {"gear_oil_temp_c": "gear oil", "gear_oil_inlet_temp_c": "gear oil inlet", "main_bearing_front_temp_c": "main brg front",
          "main_bearing_rear_temp_c": "main brg rear", "rotor_bearing_temp_c": "rotor brg", "gen_bearing_front_temp_c": "gen brg front",

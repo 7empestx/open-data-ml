@@ -4,8 +4,11 @@ import json
 import numpy as np
 import pandas as pd
 
+import sys
 ROOT = Path(__file__).resolve().parents[1]
-T = ROOT / "reports/condition_report/tables"
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
+T = cfg.REPORTS_DIR / "condition_report/tables"
 NAME = {"kelmarsh": "Kelmarsh", "penmanshiel": "Penmanshiel"}
 
 

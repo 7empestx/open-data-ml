@@ -5,9 +5,11 @@ import numpy as np, pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 sys.path.insert(0, str(ROOT / "scripts"))
 import eval_trip as et
-REP = ROOT / "reports"; FIG = REP / "figures"; P = ROOT / "data/trip_preds"
+REP = cfg.REPORTS_DIR; FIG = REP / "figures"; P = cfg.TRIP_PREDS_DIR
 R = pd.read_csv(REP / "trip_metrics.csv"); T = pd.read_csv(REP / "trip_primary_tests.csv")
 SEL = json.loads((REP / "trip_selected.json").read_text())
 COL = {"season": "#999999", "history": "#1f77b4", "sensors": "#ff7f0e", "sensors_nbm": "#d62728", "sensors_hist": "#2ca02c", "sensors_nbm_hist": "#9467bd"}
@@ -101,7 +103,7 @@ from windml import nbm_years as ny, trip_features as tf
 E = pd.read_csv(REP / "trip_heldout_episodes.csv", parse_dates=["start"])
 allep = []
 for f in ["kelmarsh", "penmanshiel"]:
-    ev = pd.read_parquet(ROOT / "data/processed/all_years" / f"{f}_events.parquet")
+    ev = pd.read_parquet(cfg.ALL_YEARS_DIR / f"{f}_events.parquet")
     for k in et.FAULTS:
         allep.append(tf.trip_episodes(tf.trips(ev, k)).assign(farm=f, fault=k))
 allep = pd.concat(allep).sort_values(["fault", "turbine_id", "start"])

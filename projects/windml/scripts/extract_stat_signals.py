@@ -1,6 +1,6 @@
 """Extract 10-min Min/Max/StdDev statistics for oil-system and pitch signals from the Greenbyte CSVs already on the box.
 Writes data/processed/all_years/<farm>_stats_<TID>.parquet (one per turbine, cached; git-ignored). No downloads.
-Usage: nohup python scripts/extract_stat_signals.py [farm ...] > /workspace/logs/extract_stats.log 2>&1 &"""
+Usage: nohup python scripts/extract_stat_signals.py [farm ...] > logs/extract_stats.log 2>&1 &"""
 import re, sys
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
@@ -8,9 +8,11 @@ from pathlib import Path
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import greenbyte as gb
 gb.use_all_years()
-OUT = ROOT / "data/processed/all_years"
+OUT = cfg.ALL_YEARS_DIR
+OUT.mkdir(parents=True, exist_ok=True)
 COLS = {"Gear oil inlet pressure (bar)": "inlet_p_mean", "Gear oil inlet pressure, Min (bar)": "inlet_p_min",
         "Gear oil inlet pressure, Max (bar)": "inlet_p_max", "Gear oil inlet pressure, StdDev (bar)": "inlet_p_std",
         "Gear oil pump pressure (bar)": "pump_p_mean", "Gear oil pump pressure, Min (bar)": "pump_p_min",
@@ -54,6 +56,6 @@ if __name__ == "__main__":
         by_t = defaultdict(list)
         for f in gb.turbine_files(farm):
             by_t[_tid(f)].append(f)
-        with ProcessPoolExecutor(4) as ex:
+        with ProcessPoolExecutor(cfg.workers(4)) as ex:
             for msg in ex.map(one, [(farm, t, by_t[t]) for t in sorted(by_t)]):
                 print(farm, msg, flush=True)

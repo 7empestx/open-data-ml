@@ -6,11 +6,12 @@ import numpy as np
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import greenbyte as gb
 from windml.profile import profile
 
-RAW = Path("/workspace/industrial-data")
-REP, OUT = ROOT / "reports", ROOT / "data/processed"
+RAW = cfg.RAW_DIR
+REP, OUT = cfg.REPORTS_DIR, cfg.PROCESSED_DIR
 W = lambda name, txt: (REP / f"schema_{name}.md").write_text(txt)
 
 # ---------------- wind (raw schema, all columns) ----------------

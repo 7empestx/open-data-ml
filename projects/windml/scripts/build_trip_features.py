@@ -1,15 +1,16 @@
 """Build hourly feature/label tables for short-term trip prediction (cached per turbine, git-ignored).
-Output: data/trip/<farm>_<TID>.parquet. Usage: nohup python scripts/build_trip_features.py > /workspace/logs/trip_features.log 2>&1 &"""
+Output: data/trip/<farm>_<TID>.parquet. Usage: nohup python scripts/build_trip_features.py > logs/trip_features.log 2>&1 &"""
 import gc, sys, time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 import numpy as np, pandas as pd, pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import trip_features as tf
 
-DATA = ROOT / "data/processed/all_years"; NBM = ROOT / "data/nbm_years"
-OUT = ROOT / "data/trip"; OUT.mkdir(parents=True, exist_ok=True)
+DATA = cfg.ALL_YEARS_DIR; NBM = cfg.NBM_YEARS_DIR
+OUT = cfg.TRIP_DIR; OUT.mkdir(parents=True, exist_ok=True)
 
 
 def one(args):
@@ -47,9 +48,11 @@ def one(args):
 
 if __name__ == "__main__":
     jobs = []
-    for farm in ["kelmarsh", "penmanshiel"]:
+    for farm in (sys.argv[1:] or ["kelmarsh", "penmanshiel"]):
+        if not (DATA / f"{farm}_scada_labeled.parquet").exists():
+            print("skip", farm, "(no labeled parquet; run run_all_years.py first)", flush=True); continue
         tids = sorted(pq.read_table(DATA / f"{farm}_scada_labeled.parquet", columns=["turbine_id"]).column(0).unique().to_pylist())
         jobs += [(farm, t) for t in tids]
-    with ProcessPoolExecutor(3) as ex:
+    with ProcessPoolExecutor(cfg.workers(3)) as ex:
         for msg in ex.map(one, jobs):
             print(time.strftime("%H:%M:%S"), msg, flush=True)

@@ -23,11 +23,12 @@ import pyarrow.parquet as pq
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import trip_features as tf  # noqa: E402
 
-D = ROOT / "data/processed/all_years"
-NBM = ROOT / "data/nbm_years"
-OUT = ROOT / "reports/condition_report/tables"
+D = cfg.ALL_YEARS_DIR
+NBM = cfg.NBM_YEARS_DIR
+OUT = cfg.REPORTS_DIR / "condition_report/tables"
 OUT.mkdir(parents=True, exist_ok=True)
 FARMS = {"kelmarsh": [f"KEL0{i}" for i in range(1, 7)],
          "penmanshiel": [f"PEN{i:02d}" for i in range(1, 16) if i != 3]}

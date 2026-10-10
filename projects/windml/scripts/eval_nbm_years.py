@@ -11,9 +11,10 @@ from pathlib import Path
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm_years as ny
 
-NB = ROOT / "data/nbm_years"; DATA = ROOT / "data/processed/all_years"; REP = ROOT / "reports"
+NB = cfg.NBM_YEARS_DIR; DATA = cfg.ALL_YEARS_DIR; REP = cfg.REPORTS_DIR
 import os
 FARMS = os.environ.get("NBMY_FARMS", "kelmarsh,penmanshiel").split(",")
 DEV, HELD = [2017, 2018, 2019, 2020], [2021, 2022, 2023, 2024]

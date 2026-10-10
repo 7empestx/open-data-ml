@@ -19,10 +19,11 @@ from pathlib import Path
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import trip_features as tf
 from windml import nbm_years as ny
 
-P = ROOT / "data/trip_preds"; REP = ROOT / "reports"; DATA = ROOT / "data/processed/all_years"
+P = cfg.TRIP_PREDS_DIR; REP = cfg.REPORTS_DIR; DATA = cfg.ALL_YEARS_DIR
 FAULTS = ["oil", "pitch"]; HS = [24, 48, 72]
 FSETS = ["season", "history", "sensors", "sensors_nbm", "sensors_hist", "sensors_nbm_hist"]
 DEV, HELD = [2017, 2018, 2019, 2020], [2021, 2022, 2023, 2024]

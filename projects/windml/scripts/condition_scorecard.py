@@ -17,8 +17,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import sys
 ROOT = Path(__file__).resolve().parents[1]
-T = ROOT / "reports/condition_report/tables"
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
+T = cfg.REPORTS_DIR / "condition_report/tables"
 
 
 def window(farm, tid):
@@ -33,7 +36,7 @@ def main():
     op = pd.read_csv(T / "oil_pressure_monthly.csv")
     dt = pd.read_csv(T / "downtime_by_cause.csv")
     sh = pd.read_csv(T / "sensor_health.csv")
-    meta = pd.concat(pd.read_csv(f) for f in (ROOT / "data/nbm_years").glob("*_meta.csv"))
+    meta = pd.concat(pd.read_csv(f) for f in (cfg.NBM_YEARS_DIR).glob("*_meta.csv"))
     sw = pd.read_csv(T / "oil_pressure_unit_switches.csv")
     rows = []
     for (farm, tid), g in ty.groupby(["farm", "turbine_id"]):

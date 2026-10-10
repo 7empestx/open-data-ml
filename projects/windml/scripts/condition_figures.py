@@ -6,9 +6,12 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+import sys
 ROOT = Path(__file__).resolve().parents[1]
-T = ROOT / "reports/condition_report/tables"
-F = ROOT / "reports/condition_report/figures"
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
+T = cfg.REPORTS_DIR / "condition_report/tables"
+F = cfg.REPORTS_DIR / "condition_report/figures"
 F.mkdir(parents=True, exist_ok=True)
 plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False, "figure.dpi": 150,
                      "savefig.bbox": "tight", "axes.titleweight": "bold", "axes.titlesize": 10})
@@ -126,7 +129,7 @@ def main():
     fig.savefig(F / "fig5_pen_pump_pressure.png"); plt.close(fig)
 
     # 6 Kelmarsh model-error drift
-    meta = pd.concat(pd.read_csv(f) for f in (ROOT / "data/nbm_years").glob("kelmarsh_*_meta.csv"))
+    meta = pd.concat(pd.read_csv(f) for f in (cfg.NBM_YEARS_DIR).glob("kelmarsh_*_meta.csv"))
     fig, axs = plt.subplots(1, 2, figsize=(10, 3.4), sharey=True)
     pal = {"KEL01": "#4f81bd", "KEL02": "#9bbb59", "KEL03": "#8064a2", "KEL04": "#c0504d", "KEL05": "#f79646", "KEL06": "#4bacc6"}
     for ax, tg, lab in zip(axs, ["gear_oil_temp_c", "main_bearing_front_temp_c"], ["gear-oil temperature", "main bearing (front)"]):

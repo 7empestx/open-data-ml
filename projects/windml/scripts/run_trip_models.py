@@ -1,16 +1,21 @@
 """Walk-forward-by-year LightGBM trip classifiers. For each fault type (oil, pitch), horizon (24/48/72 h) and feature set,
 train on all years < Y (rows ending H hours before Jan 1 of Y; negatives subsampled 20%) and predict every row of year Y.
 Cached per (fault, horizon, feature set): data/trip_preds/<fault>_<H>_<fs>.parquet (git-ignored).
-Usage: nohup python scripts/run_trip_models.py > /workspace/logs/trip_models.log 2>&1 &"""
-import gc, sys, time
+Usage: nohup python scripts/run_trip_models.py > logs/trip_models.log 2>&1 &"""
+import gc, os, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd
 import lightgbm as lgb
 ROOT = Path(__file__).resolve().parents[1]
-TRIP = ROOT / "data/trip"; OUT = ROOT / "data/trip_preds"; OUT.mkdir(parents=True, exist_ok=True)
-FAULTS = ["oil", "pitch"]; HS = [24, 48, 72]; YEARS = list(range(2017, 2025))
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
+TRIP = cfg.TRIP_DIR; OUT = cfg.TRIP_PREDS_DIR; OUT.mkdir(parents=True, exist_ok=True)
+FAULTS = ["oil", "pitch"]; HS = [24, 48, 72]
+# Test years: every year after the first one in the data (2017-2024 for the full download).
+# A model is only fitted when the training years hold at least MIN_POS positive rows (WINDML_TRIP_MIN_POS, default 10).
+MIN_POS = int(os.environ.get("WINDML_TRIP_MIN_POS", "10"))
 PARAMS = dict(n_estimators=300, learning_rate=0.05, num_leaves=31, min_child_samples=50, subsample=0.8, subsample_freq=1,
-              colsample_bytree=0.7, reg_lambda=1.0, n_jobs=8, verbose=-1)
+              colsample_bytree=0.7, reg_lambda=1.0, n_jobs=cfg.workers(8), verbose=-1)
 
 
 def feature_sets(cols, fault):
@@ -31,6 +36,7 @@ def main():
             D[c] = D[c].astype("float32")
     print("rows", len(D), "cols", D.shape[1], flush=True)
     ts = D["timestamp"]; yr = D["year"].to_numpy()
+    YEARS = sorted(int(y) for y in np.unique(yr))[1:]
     for fault in FAULTS:
         FS, sensor, nbm, hist = feature_sets(D.columns, fault)
         print(fault, "n_sensor", len(sensor), "n_nbm", len(nbm), "n_hist", len(hist), flush=True)
@@ -51,7 +57,7 @@ def main():
                     neg = tr[y[tr] == 0]; pos = tr[y[tr] == 1]
                     tr = np.sort(np.concatenate([pos, rng.choice(neg, int(len(neg) * 0.2), replace=False)]))
                     te = np.where(yr == Y)[0]
-                    if len(pos) < 10 or len(te) == 0:
+                    if len(pos) < MIN_POS or len(te) == 0:
                         continue
                     m = lgb.LGBMRegressor if False else lgb.LGBMClassifier
                     mdl = m(random_state=Y, **PARAMS).fit(X[tr], y[tr])

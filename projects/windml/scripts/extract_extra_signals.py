@@ -1,7 +1,7 @@
 """Extract extra raw signals not kept by the cleaning step (pitch motor temperatures/currents, hub temperature,
 gear oil pump pressure, per-blade pitch std) from the already-downloaded Greenbyte CSVs.
 Writes data/processed/all_years/<farm>_extra_<TID>.parquet (one per turbine; cached = skipped on rerun).
-No new downloads: reads /workspace/industrial-data only. Usage: extract_extra_signals.py [farm ...]"""
+No new downloads: reads $WINDML_RAW_DIR only. Usage: extract_extra_signals.py [farm ...]"""
 import re, sys
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
@@ -9,9 +9,11 @@ from pathlib import Path
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import greenbyte as gb
 gb.use_all_years()
-OUT = ROOT / "data/processed/all_years"
+OUT = cfg.ALL_YEARS_DIR
+OUT.mkdir(parents=True, exist_ok=True)
 COLS = {
     "Temperature motor axis 1 (°C)": "pitch_motor_temp_1_c", "Temperature motor axis 2 (°C)": "pitch_motor_temp_2_c",
     "Temperature motor axis 3 (°C)": "pitch_motor_temp_3_c", "Motor current axis 1 (A)": "pitch_motor_current_1_a",
@@ -51,6 +53,6 @@ if __name__ == "__main__":
         by_t = defaultdict(list)
         for f in gb.turbine_files(farm):
             by_t[_tid(f)].append(f)
-        with ProcessPoolExecutor(4) as ex:
+        with ProcessPoolExecutor(cfg.workers(4)) as ex:
             for msg in ex.map(one, [(farm, t, by_t[t]) for t in sorted(by_t)]):
                 print(farm, msg, flush=True)

@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm
 
-D, REP = ROOT / "data/nbm", ROOT / "reports"
+D, REP = cfg.NBM_DIR, cfg.REPORTS_DIR
 THRESH = {"score_ewma": [2.0, 3.0, 4.0], "score_cusum": [25.0, 50.0, 100.0]}
 HORIZONS = (7, 30)
 

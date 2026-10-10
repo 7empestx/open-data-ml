@@ -7,11 +7,12 @@ import matplotlib.pyplot as plt
 import pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src")); sys.path.insert(0, str(ROOT / "scripts"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm_years as ny
 import eval_nbm_years as ev
 
-REP = ROOT / "reports"; FIG = REP / "figures"; FIG.mkdir(exist_ok=True)
-DATA = ROOT / "data/processed/all_years"; NB = ROOT / "data/nbm_years"
+REP = cfg.REPORTS_DIR; FIG = REP / "figures"; FIG.mkdir(exist_ok=True)
+DATA = cfg.ALL_YEARS_DIR; NB = cfg.NBM_YEARS_DIR
 chosen = json.loads((REP / "nbmy_chosen.json").read_text())
 
 # 1. pressure unit switch

@@ -7,9 +7,10 @@ import numpy as np
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm
 
-P, OUT, REP = ROOT / "data/processed", ROOT / "data/nbm", ROOT / "reports"
+P, OUT, REP = cfg.PROCESSED_DIR, cfg.NBM_DIR, cfg.REPORTS_DIR
 OUT.mkdir(exist_ok=True, parents=True)
 t00 = time.time()
 

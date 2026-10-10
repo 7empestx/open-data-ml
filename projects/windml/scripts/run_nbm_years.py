@@ -2,7 +2,7 @@
 Output (git-ignored, cached per turbine; rerun skips finished turbines):
   data/nbm_years/<farm>_<TID>.parquet   timestamp, year, z_<target> (float32, NaN = not scored)
   data/nbm_years/<farm>_<TID>_meta.csv  one row per (target, test year): rows, MAE, best_iter, skipped reason
-Usage: nohup python scripts/run_nbm_years.py [farm ...] > /workspace/logs/nbm_years.log 2>&1 &"""
+Usage: nohup python scripts/run_nbm_years.py [farm ...] > logs/nbm_years.log 2>&1 &"""
 import gc, sys, time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
@@ -10,10 +10,11 @@ import numpy as np, pandas as pd
 import pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import nbm_years as ny
 
-DATA = ROOT / "data/processed/all_years"
-OUT = ROOT / "data/nbm_years"; OUT.mkdir(parents=True, exist_ok=True)
+DATA = cfg.ALL_YEARS_DIR
+OUT = cfg.NBM_YEARS_DIR; OUT.mkdir(parents=True, exist_ok=True)
 EMBARGO = pd.Timedelta(days=3)
 
 
@@ -69,6 +70,6 @@ if __name__ == "__main__":
     for farm in (sys.argv[1:] or ["kelmarsh", "penmanshiel"]):
         tids = sorted(pq.read_table(DATA / f"{farm}_scada_labeled.parquet", columns=["turbine_id"]).column(0).unique().to_pylist())
         jobs += [(farm, t) for t in tids]
-    with ProcessPoolExecutor(2) as ex:
+    with ProcessPoolExecutor(cfg.workers(2)) as ex:
         for msg in ex.map(run_turbine, jobs):
             print(time.strftime("%H:%M:%S"), msg, flush=True)

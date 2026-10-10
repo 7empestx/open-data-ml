@@ -31,3 +31,6 @@ projects/windml/data/processed/all_years/*_stats_*.parquet
 **/*cmapss*.csv
 **/nasa-cmapss/
 **/CMAPSSData*
+
+# windml logs from nohup jobs (WINDML_LOG_DIR default)
+projects/windml/logs/

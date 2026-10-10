@@ -1,6 +1,6 @@
 """Clean + label EVERY downloaded year of Kelmarsh / Penmanshiel SCADA (all-years mode).
 
-Reads every scada_<year>* folder under /workspace/industrial-data/<farm>-wind-scada (see greenbyte.use_all_years),
+Reads every scada_<year>* folder under $WINDML_RAW_DIR/<farm>-wind-scada (see greenbyte.use_all_years),
 runs the same cleaning (clean_wind.clean_turbine) and labeling (labeling.*) rules as run_wind_clean.py /
 run_labeling.py, and writes to data/processed/all_years/ so the single-period files are untouched:
   all_years/<farm>_scada_10min.parquet, all_years/<farm>_events.parquet, all_years/<farm>_scada_labeled.parquet
@@ -17,11 +17,13 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import greenbyte as gb, clean_wind as cw, labeling as lb
 
 gb.use_all_years()
-OUT = ROOT / "data/processed/all_years"
+OUT = cfg.ALL_YEARS_DIR
 OUT.mkdir(parents=True, exist_ok=True)
+cfg.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 WINDOWS = (7, 14, 30)
 KEYS = list(cw.KEY_COLUMNS)
 
@@ -78,7 +80,7 @@ def clean(farm):
         print(farm, tid, len(df), "rows", df["timestamp"].min(), "->", df["timestamp"].max(), flush=True)
         del df, parts, t; gc.collect()
     writer.close()
-    (ROOT / f"reports/cleaning_stats_{farm}_all_years.json").write_text(json.dumps(stats, indent=1, default=str))
+    (cfg.REPORTS_DIR / f"cleaning_stats_{farm}_all_years.json").write_text(json.dumps(stats, indent=1, default=str))
     return path
 
 
@@ -137,7 +139,7 @@ def report(farm, ev, rows, n_rows):
          "## Major fault events", "", majors.to_markdown(index=False), "",
          "## Labeled 10-minute rows per turbine", "", rows.to_markdown(), "",
          f"Total rows: {n_rows:,}. Rows within the last 30 days of the record without a later major fault are right-censored (days_to_next_major_fault is NaN)."]
-    (ROOT / f"reports/labels_{farm}_all_years.md").write_text("\n".join(L))
+    (cfg.REPORTS_DIR / f"labels_{farm}_all_years.md").write_text("\n".join(L))
     update_main_report(farm, ev, s, by_year, n_rows)
     return s, by_year
 
@@ -147,7 +149,9 @@ BEGIN, END = "<!-- all-years:begin -->", "<!-- all-years:end -->"
 
 def update_main_report(farm, ev, s, by_year, n_rows):
     """Insert/refresh an all-years summary block near the top of reports/labels_<farm>.md (single-period text kept below)."""
-    p = ROOT / f"reports/labels_{farm}.md"
+    p = cfg.REPORTS_DIR / f"labels_{farm}.md"
+    if not p.exists():  # e.g. a smoke-test run with WINDML_REPORTS_DIR pointing at an empty folder
+        return
     txt = p.read_text()
     turbines = sorted(ev["turbine_id"].unique())
     block = "\n".join([BEGIN, f"## All years ({ev['start'].min():%Y-%m-%d} to {ev['start'].max():%Y-%m-%d})", "",

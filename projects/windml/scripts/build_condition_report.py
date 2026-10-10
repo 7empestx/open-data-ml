@@ -6,8 +6,11 @@ import subprocess
 from pathlib import Path
 import markdown
 
+import sys
 ROOT = Path(__file__).resolve().parents[1]
-R = ROOT / "reports/condition_report"
+sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
+R = cfg.REPORTS_DIR / "condition_report"
 T = R / "tables"
 
 CSS = """
@@ -48,7 +51,7 @@ def for_html(md: str) -> str:
 
 
 def main():
-    t = (R / "src/template.md").read_text()
+    t = (cfg.CONDITION_TEMPLATE_DIR / "template.md").read_text()
     h = json.loads((T / "headline.json").read_text())
     k, p = h["kelmarsh"], h["penmanshiel"]
     import pandas as pd
@@ -74,6 +77,7 @@ def main():
     html = re.sub(r"<td>(RED|AMBER|GREEN)</td>", r'<td><span class="flag-\1">\1</span></td>', html)
     html = html.replace('src="figures/', 'src="../figures/')
     doc = f"<!doctype html><html><head><meta charset='utf-8'><title>Wind Farm Condition Report (sample)</title><style>{CSS}</style></head><body>{html}</body></html>"
+    (R / "src").mkdir(parents=True, exist_ok=True)
     (R / "src/condition_report.html").write_text(doc)
     subprocess.run(["google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                     f"--print-to-pdf={R / 'condition_report.pdf'}", (R / "src/condition_report.html").as_uri()],

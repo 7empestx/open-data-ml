@@ -3,8 +3,9 @@ from __future__ import annotations
 import re
 from pathlib import Path
 import pandas as pd
+from . import config as cfg
 
-RAW = Path("/workspace/industrial-data")
+RAW = cfg.RAW_DIR
 FARMS = {
     "kelmarsh": {"dir": RAW / "kelmarsh-wind-scada/scada_2022", "static": RAW / "kelmarsh-wind-scada/Kelmarsh_WT_static.csv"},
     "penmanshiel": {"dir": RAW / "penmanshiel-wind-scada/scada_2021_wt11-15", "static": RAW / "penmanshiel-wind-scada/Penmanshiel_WT_static.csv"},
@@ -17,10 +18,12 @@ ALL_YEARS_EXCLUDE = {"penmanshiel": {"scada_2021_wt11-15"}}  # H1-2021 file from
 
 def use_all_years() -> None:
     """Switch turbine_files/status_files to read every year folder (call once before cleaning/labeling)."""
-    for farm, cfg in FARMS.items():
-        root = cfg["static"].parent
+    for farm, fc in FARMS.items():
+        root = fc["static"].parent
         dirs = sorted(d for d in root.glob("scada_*") if d.is_dir() and d.name not in ALL_YEARS_EXCLUDE.get(farm, set()))
-        cfg["dirs"] = dirs
+        if cfg.YEARS:  # optional subset (WINDML_YEARS), e.g. for the smoke test
+            dirs = [d for d in dirs if (m := re.match(r"scada_(\d{4})", d.name)) and int(m.group(1)) in cfg.YEARS]
+        fc["dirs"] = dirs
 
 
 def _dirs(farm: str):
@@ -58,12 +61,16 @@ def _skiprows(path: Path) -> int:
     return 0
 
 
+def _keep(path: Path) -> bool:
+    return not cfg.TURBINES or _turbine_id(path) in cfg.TURBINES
+
+
 def turbine_files(farm: str):
-    return sorted(f for d in _dirs(farm) for f in d.glob("Turbine_Data_*.csv"))
+    return sorted(f for d in _dirs(farm) for f in d.glob("Turbine_Data_*.csv") if _keep(f))
 
 
 def status_files(farm: str):
-    return sorted(f for d in _dirs(farm) for f in d.glob("Status_*.csv"))
+    return sorted(f for d in _dirs(farm) for f in d.glob("Status_*.csv") if _keep(f))
 
 
 def read_turbine(path: Path, usecols=None) -> tuple[pd.DataFrame, dict]:

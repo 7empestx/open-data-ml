@@ -6,15 +6,16 @@ from pathlib import Path
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from windml import config as cfg  # noqa: E402
 from windml import labeling as lb
 
 WINDOWS = (7, 14, 30)
 for farm in ["kelmarsh", "penmanshiel"]:
     ev = lb.classify_events(lb.parse_events(farm), major_min_duration="1h")
-    ev.to_parquet(ROOT / f"data/processed/{farm}_events.parquet", index=False)
-    scada = pd.read_parquet(ROOT / f"data/processed/{farm}_scada_10min.parquet")
+    ev.to_parquet(cfg.PROCESSED_DIR / f"{farm}_events.parquet", index=False)
+    scada = pd.read_parquet(cfg.PROCESSED_DIR / f"{farm}_scada_10min.parquet")
     lab = lb.label_grid(scada, ev, WINDOWS)
-    lab.to_parquet(ROOT / f"data/processed/{farm}_scada_labeled.parquet", index=False)
+    lab.to_parquet(cfg.PROCESSED_DIR / f"{farm}_scada_labeled.parquet", index=False)
     s = lb.summarize(ev)
     lcols = ["in_any_stop", "in_fault", "in_major_fault"] + [f"pre_fault_{w}d" for w in WINDOWS] + \
             [c for c in lab.columns if c.startswith("in_stop_")]
@@ -35,5 +36,5 @@ for farm in ["kelmarsh", "penmanshiel"]:
          "## Major fault events", "", majors.to_markdown(index=False), "",
          "## Labeled 10-minute rows per turbine", "", rows.to_markdown(), "",
          f"Total rows: {len(lab):,}. Rows within the last 30 days of the record without a later major fault are right-censored (days_to_next_major_fault is NaN)."]
-    (ROOT / f"reports/labels_{farm}.md").write_text("\n".join(L))
+    (cfg.REPORTS_DIR / f"labels_{farm}.md").write_text("\n".join(L))
     print(farm, "events", len(ev), "major", s["major_faults"], "episodes", s["major_fault_episodes"]); print(rows.loc["ALL"].to_dict())
