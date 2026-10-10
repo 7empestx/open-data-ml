@@ -24,7 +24,7 @@ These datasets are already profiled and lightly cleaned in `projects/windml/data
 - **Packaging-line alarm and failure prediction**: CoMoPI and PIADE (CC BY 4.0)
 - **Beverage bottling downtime and OEE analytics**: beverage bottling line dataset (CC BY 4.0)
 - **Air-compressor failure prediction**: MetroPT-3, Porto metro (CC BY 4.0)
-- **Remaining useful life benchmarks**: NASA C-MAPSS turbofan (US Government work, simulated)
+- **Remaining useful life benchmarks**: NASA C-MAPSS turbofan (simulated; not committed, fetch with `projects/windml/scripts/download_cmapss.sh`)
 - **Hydraulic condition classification**: UCI hydraulic systems (CC BY 4.0)
 - **Manufacturing fault and yield classification**: UCI AI4I 2020 (synthetic) and UCI SECOM (CC BY 4.0). Downloaded, not yet processed.
 
@@ -39,3 +39,9 @@ Datasets with unclear or copyleft licenses (for example NASA IMS bearings and SK
       src/ scripts/     code
       data/processed/   processed derivatives only (no raw data)
       reports/          schema, cleaning, and labeling reports
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE), Copyright (c) 2026 Beehive AI Labs LLC.
+
+The MIT License covers the code only. **Datasets and their processed derivatives keep their own licenses.** The Kelmarsh and Penmanshiel wind farm data (Cubico Sustainable Investments, via Zenodo) are CC BY 4.0, and so are the other committed datasets. Reuse requires attribution as listed in each project's `DATA_SOURCES.md` (for windml: [projects/windml/DATA_SOURCES.md](projects/windml/DATA_SOURCES.md)). NASA C-MAPSS data is not committed; fetch it from NASA with `projects/windml/scripts/download_cmapss.sh`.
