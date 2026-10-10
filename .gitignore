@@ -1,0 +1,17 @@
+# Environments and caches (any depth)
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.DS_Store
+
+# Raw downloaded data is never committed. Only each project's data/processed/ is tracked.
+projects/*/data/*
+!projects/*/data/processed/
+data/raw/
+raw/
+*.zip
+*.tar.gz
+*.csv.gz
