@@ -15,3 +15,6 @@ raw/
 *.zip
 *.tar.gz
 *.csv.gz
+
+# windml all-years outputs: single files exceed 90 MB (rebuild with projects/windml/scripts/run_all_years.py)
+projects/windml/data/processed/all_years/

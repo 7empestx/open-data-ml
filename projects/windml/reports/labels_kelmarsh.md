@@ -1,5 +1,27 @@
 # Failure labels: kelmarsh
 
+<!-- all-years:begin -->
+## All years (2016-01-14 to 2024-12-31)
+
+Re-run of the same rules on every downloaded year, 6 turbines (KEL01, KEL02, KEL03, KEL04, KEL05, KEL06), 2,840,832 labeled 10-minute rows. Full detail: [labels_kelmarsh_all_years.md](labels_kelmarsh_all_years.md); data in data/processed/all_years/ (not committed, files > 90 MB; rebuild with scripts/run_all_years.py).
+
+- Events: 503,150; fault stops: 1,196
+- Major faults: **97 events in 72 episodes**; by component {'converter': 44, 'pitch': 28, 'gearbox': 8, 'generator': 7, 'hydraulics': 6, 'yaw': 4}
+
+|   year |   major_faults |   episodes |
+|-------:|---------------:|-----------:|
+|   2016 |             22 |         16 |
+|   2017 |              1 |          1 |
+|   2018 |              8 |          8 |
+|   2019 |              1 |          1 |
+|   2020 |             12 |         10 |
+|   2021 |              8 |          6 |
+|   2022 |             12 |          9 |
+|   2023 |              5 |          4 |
+|   2024 |             28 |         17 |
+
+The section below is the original single-period report.
+<!-- all-years:end -->
 Source: Greenbyte status logs (2022-01-02 to 2022-12-31, UTC). Rules in src/windml/labeling.py.
 Major fault = Stop classified as fault, component in gearbox/generator/bearing/converter/pitch/yaw/hydraulics, duration >= 1 h; major faults on the same turbine within 24 h are merged into one episode. Pre-fault windows count back from each episode start.
 

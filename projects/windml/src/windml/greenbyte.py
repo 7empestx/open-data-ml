@@ -10,6 +10,22 @@ FARMS = {
     "penmanshiel": {"dir": RAW / "penmanshiel-wind-scada/scada_2021_wt11-15", "static": RAW / "penmanshiel-wind-scada/Penmanshiel_WT_static.csv"},
 }
 
+# All-years mode: every per-year SCADA folder under each farm's raw dir (scada_<year>[_suffix]/).
+# Folders listed in ALL_YEARS_EXCLUDE are superseded by a newer Zenodo version and skipped.
+ALL_YEARS_EXCLUDE = {"penmanshiel": {"scada_2021_wt11-15"}}  # H1-2021 file from record 5946808, replaced by full-2021 v4461
+
+
+def use_all_years() -> None:
+    """Switch turbine_files/status_files to read every year folder (call once before cleaning/labeling)."""
+    for farm, cfg in FARMS.items():
+        root = cfg["static"].parent
+        dirs = sorted(d for d in root.glob("scada_*") if d.is_dir() and d.name not in ALL_YEARS_EXCLUDE.get(farm, set()))
+        cfg["dirs"] = dirs
+
+
+def _dirs(farm: str):
+    return FARMS[farm].get("dirs") or [FARMS[farm]["dir"]]
+
 
 def read_header(path: Path) -> dict:
     """Parse the '# key: value' comment header (turbine, type, time zone, interval)."""
@@ -43,11 +59,11 @@ def _skiprows(path: Path) -> int:
 
 
 def turbine_files(farm: str):
-    return sorted(FARMS[farm]["dir"].glob("Turbine_Data_*.csv"))
+    return sorted(f for d in _dirs(farm) for f in d.glob("Turbine_Data_*.csv"))
 
 
 def status_files(farm: str):
-    return sorted(FARMS[farm]["dir"].glob("Status_*.csv"))
+    return sorted(f for d in _dirs(farm) for f in d.glob("Status_*.csv"))
 
 
 def read_turbine(path: Path, usecols=None) -> tuple[pd.DataFrame, dict]:
