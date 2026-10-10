@@ -35,3 +35,16 @@ Licenses: Kelmarsh, Penmanshiel, PVDAQ, CoMoPI, PIADE, bottling, MetroPT-3 and U
 - label_grid adds these to the 10-minute grid: in_any_stop, in_fault, in_major_fault, in_stop_<class>, days_to_next_major_fault (NaN if right-censored), and pre_fault_<N>d (inside N days before an episode start and not already in the fault).
 - Rule tables (COMPONENT_RULES, MSG_CLASS_RULES, SERVICE_CLASS, IEC_CLASS, MAJOR_COMPONENTS) sit at the top of the file. Tune them there.
 - Caveats: one year at Kelmarsh and half a year at Penmanshiel gives only 9 + 2 major-fault episodes, which is too few to train a reliable early-warning model. Use these for anomaly-detection evaluation and add more years (Kelmarsh 2016 to 2024 and Penmanshiel 2016 to 2021 are on Zenodo under CC BY 4.0).
+
+## Normal-behaviour model (src/windml/nbm.py)
+
+The NBM learns per-turbine healthy drivetrain temperatures from operating conditions and scores residual drift. It is forward-chained by month, uses no leakage, and runs on CPU only.
+
+```
+.venv/bin/python scripts/run_nbm.py          # train (~7 min on 8 cores) -> data/nbm/ (git-ignored, regenerable)
+.venv/bin/python scripts/eval_nbm.py         # detection, lead time, false alarms, chance baselines -> reports/nbm_*.csv
+.venv/bin/python scripts/report_nbm.py       # figures in reports/figures/ + reports/nbm_tables.md
+.venv/bin/python scripts/inspect_alarms.py 4 # fleet-relative alarm events with driving target
+```
+
+Results and caveats: [reports/nbm_baseline.md](reports/nbm_baseline.md).

@@ -77,3 +77,22 @@ At Penmanshiel only PEN11 and PEN14 have pre-fault rows.
 2. **Build a normal-behavior model.** Predict component temperatures (gear oil, bearings, converter) from operating conditions on healthy data, and use the residuals as an anomaly score.
 3. **Evaluate against the labels.** Check whether the residuals rise inside the 7, 14, and 30 day pre-fault windows. Report the results both with and without the 2022-07-19 heatwave converter stops.
 4. Tune the classification rules in `src/windml/labeling.py` as more years are added.
+
+## 6. Normal-behaviour model baseline (drivetrain temperatures)
+
+The full write-up is in [reports/nbm_baseline.md](reports/nbm_baseline.md). Code: `src/windml/nbm.py`, plus `scripts/run_nbm.py`, `eval_nbm.py`, `report_nbm.py`, and `inspect_alarms.py`.
+
+* **Setup.** One LightGBM model per turbine and target for 7 drivetrain temperatures, using operating-condition features only (no target lags).
+  * Training uses healthy rows only: no stops or 6-h cool-down, no faults, not in the 30 days before a major fault, no stuck sensors, QC 0.
+  * Splits are forward-chained by month with a 3-day embargo.
+  * Residual z is smoothed with a 12-h EWMA, and the turbine score is the max over targets.
+  * Evaluation covers 9 + 2 major-fault episodes (from 12 + 2 events). KEL04 is not evaluable, so 10 are scored.
+* **Fit.** Healthy-test MAE is 1.54 °C at Kelmarsh and 2.12 °C at Penmanshiel, vs Ridge at 2.18 / 2.71. LightGBM wins on 6 of 7 targets. The rotor bearing is the exception: Ridge wins at both farms, because trees can't extrapolate to warmer months.
+* **Detection (EWMA > 3, 30 days).**
+  * Kelmarsh: 6/8 onsets with a median lead of 26.9 d. But season-matched chance expects 6.05 (p = 0.72). Without the 2022-07-19 heatwave it's 3/5 vs 3.09 expected.
+  * False alarms: 0.64 per turbine-month.
+  * Penmanshiel: 2/2 at about 4.5 d lead, vs 0.63 expected (p = 0.076), with 1.26 false alarms per turbine-month.
+  * Cross-farm (Kelmarsh → Penmanshiel): 1/2, and that hit sits at the window edge (29.96 d). Cross-farm MAE is 4.08 °C raw and 3.07 °C after offset calibration.
+* **Fleet-relative scoring** (subtract the farm-median z) cuts Kelmarsh false alarms to 0.19 per turbine-month (0.13 at threshold 4). At threshold 4 it flags 4/8 vs 0.55 expected. But inspecting the alarms shows the hits come from recurring turbine-specific deviations (KEL02 gen bearing rear; KEL06 rotor bearing after its April yaw fault), not precursors.
+* **CUSUM** is uninformative: it fires in nearly every window.
+* **Conclusion.** The NBM is accurate, but with one year of data it shows **no robust early warning** of these faults. Most of them are pitch, converter, or hydraulic faults, not drivetrain faults, and the seasonal extrapolation dominates the residuals. More years are needed: a full prior year of training, many more episodes, and ideally real gearbox and bearing failures. Fleet-relative scoring should be kept.

@@ -1,0 +1,16 @@
+turbine_id,alarm_start,alarm_end,peak,driver,driver2,pre_fault_episode,lead_days
+KEL01,2022-04-22 06:50:00+00:00,2022-04-25 10:40:00+00:00,10.07,gen_bearing_rear_temp_c,gear_oil_temp_c,1.0,23.96
+KEL01,2022-05-05 01:40:00+00:00,2022-05-05 20:00:00+00:00,4.76,gen_bearing_rear_temp_c,rotor_bearing_temp_c,1.0,11.17
+KEL02,2022-05-01 07:30:00+00:00,2022-05-01 21:00:00+00:00,5.11,gen_bearing_rear_temp_c,gear_oil_inlet_temp_c,,
+KEL02,2022-05-06 01:20:00+00:00,2022-05-07 05:50:00+00:00,6.78,gen_bearing_rear_temp_c,gear_oil_temp_c,,
+KEL02,2022-10-25 08:00:00+00:00,2022-10-30 16:10:00+00:00,8.11,gen_bearing_rear_temp_c,rotor_bearing_temp_c,,
+KEL02,2022-11-01 01:20:00+00:00,2022-11-02 18:20:00+00:00,4.35,gen_bearing_rear_temp_c,rotor_bearing_temp_c,2.0,29.38
+KEL03,2022-10-21 03:40:00+00:00,2022-10-22 12:40:00+00:00,7.43,gen_bearing_rear_temp_c,gen_bearing_front_temp_c,,
+KEL03,2022-10-25 02:00:00+00:00,2022-10-25 16:10:00+00:00,5.65,gen_bearing_rear_temp_c,rotor_bearing_temp_c,,
+KEL06,2022-04-03 18:00:00+00:00,2022-04-04 00:40:00+00:00,4.57,rotor_bearing_temp_c,gen_bearing_rear_temp_c,7.0,8.95
+KEL06,2022-04-10 21:20:00+00:00,2022-04-11 05:50:00+00:00,4.7,rotor_bearing_temp_c,gen_bearing_rear_temp_c,7.0,1.81
+KEL06,2022-04-14 10:10:00+00:00,2022-04-20 13:00:00+00:00,10.91,rotor_bearing_temp_c,gen_bearing_rear_temp_c,8.0,27.69
+KEL06,2022-04-26 18:30:00+00:00,2022-05-25 16:20:00+00:00,10.15,rotor_bearing_temp_c,main_bearing_rear_temp_c,8.0,15.34
+KEL06,2022-05-28 20:30:00+00:00,2022-06-01 02:30:00+00:00,5.82,rotor_bearing_temp_c,gear_oil_temp_c,,
+KEL06,2022-06-14 19:20:00+00:00,2022-06-16 05:10:00+00:00,6.46,gen_bearing_rear_temp_c,rotor_bearing_temp_c,,
+KEL06,2022-11-30 12:20:00+00:00,2022-12-03 13:20:00+00:00,6.06,rotor_bearing_temp_c,gear_oil_temp_c,,
