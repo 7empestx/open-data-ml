@@ -61,3 +61,16 @@ nohup .venv/bin/python scripts/run_nbm_years.py > /workspace/logs/nbm_years.log 
 ```
 
 Results: [reports/nbm_all_years.md](reports/nbm_all_years.md).
+
+## Short-term trip prediction (src/windml/trip_features.py)
+
+24 / 48 / 72 h oil-system and pitch trip classifiers. All steps are cached, run under nohup and log to /workspace/logs/.
+
+```
+nohup .venv/bin/python scripts/extract_stat_signals.py > /workspace/logs/extract_stats.log 2>&1 &   # 10-min min/max/std from raw CSVs
+nohup .venv/bin/python scripts/build_trip_features.py > /workspace/logs/trip_features.log 2>&1 &    # -> data/trip/ (git-ignored)
+nohup .venv/bin/python scripts/run_trip_models.py > /workspace/logs/trip_models.log 2>&1 &          # -> data/trip_preds/ (git-ignored)
+.venv/bin/python scripts/eval_trip.py && .venv/bin/python scripts/report_trip.py
+```
+
+Results: [reports/trip_shortterm.md](reports/trip_shortterm.md).

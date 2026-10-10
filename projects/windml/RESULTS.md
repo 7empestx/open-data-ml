@@ -134,3 +134,21 @@ The full write-up is in [reports/nbm_all_years.md](reports/nbm_all_years.md). Co
   * Use the 10-min min/max/std columns, or higher-resolution data.
   * Try supervised short-horizon trip-risk models.
   * Get maintenance or work-order labels.
+
+## 8. Short-term trip prediction (24 / 48 / 72 h)
+
+The full write-up is in [reports/trip_shortterm.md](reports/trip_shortterm.md). Code: `src/windml/trip_features.py`, plus `scripts/extract_stat_signals.py`, `build_trip_features.py`, `run_trip_models.py`, `eval_trip.py`, and `report_trip.py`.
+
+* **Setup.**
+  * Hourly rows, excluding stops and faults (1.43 M rows from 20 turbines).
+  * Features: 10-min min/max/std of oil pressures (same unit fix), pitch currents, and per-blade pitch angles; spreads across blades; 1–24 h rolling dips, time below thresholds and variability trends; NBM residuals; trip history; season.
+  * LightGBM per fault type and horizon, walk-forward by year, picked on 2017–2020, scored once on 2021–2024.
+  * 12 pre-registered PR-AUC tests (Bonferroni 0.0042), plus episode detection at one alarm event per turbine-month, against season-matched and turbine-matched chance.
+* **Oil-system trips** (held-out prevalence 0.35–1.14%):
+  * Sensor models reach PR-AUC 0.011 / 0.018 / 0.027 at 24 / 48 / 72 h, vs a season-only model at 0.008 / 0.013 / 0.020. The best test is p = 0.006, so none pass the correction.
+  * At 48 h they catch 19–20 of 105 episodes vs about 10 turbine-matched expected. But a season-only model catches 19, and event precision is about 3% (about 0.97 false alarms per turbine-month).
+  * Adding sensors to trip history adds nothing.
+* **Pitch trips:**
+  * Sensors are at chance.
+  * Trip history alone reaches PR-AUC 0.12 at 24 h (prevalence 0.005). With sensors added it's 0.18 (p = 0.046, not significant), mostly Kelmarsh repeat trips.
+* **Conclusion: no reliable short-term warning.** Repeat tripping is the main predictable structure. Next steps: weather and season condition rules for oil trips, higher-frequency data, and maintenance labels.

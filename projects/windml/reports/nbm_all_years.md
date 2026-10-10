@@ -21,7 +21,7 @@ Every number below was computed by the scripts listed in §8.
 * **Signals that don't exist or can't be used:**
   * There is no gearbox bearing or high-speed-shaft temperature in these exports. As the "related" bearing temperatures I used the main-bearing front and rear (closest to the gearbox input).
   * There is no pitch-cabinet temperature. Hub temperature is the nearest proxy.
-  * The three per-blade pitch std columns are copies of each other, so I didn't use them.
+  * I didn't use the three per-blade pitch std columns, believing they were copies of each other. *Correction (trip_shortterm.md): their summary statistics match, but row by row the values differ in about 44% of rows.*
   * Pitch-motor currents have different zero offsets per axis, so I didn't use them either.
 * **Gaps in early data:**
   * Penmanshiel exports before about May 2018 lack gear-oil temperature, bearing temperatures and pitch angles. Models for those targets start scoring in **2020** (they need a training history covering all 12 months).

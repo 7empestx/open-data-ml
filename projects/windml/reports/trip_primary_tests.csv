@@ -1,0 +1,13 @@
+fault,horizon_h,model,baseline,rows,positives,pr_auc_model,pr_auc_baseline,prevalence,diff_ci95_low,diff_ci95_high,p_one_sided,significant_bonferroni_12
+oil,24,sensors,season,590366,2046,0.0114,0.008,0.00347,-0.0018,0.0087,0.094,False
+oil,24,sensors_nbm_hist,history,590366,2046,0.0156,0.0171,0.00347,-0.0153,0.0071,0.544,False
+oil,48,sensors_nbm,season,590366,4388,0.0179,0.0131,0.00743,0.0005,0.0112,0.018,False
+oil,48,sensors_hist,history,590366,4388,0.0232,0.0225,0.00743,-0.0164,0.0108,0.425,False
+oil,72,sensors,season,590366,6720,0.0274,0.0196,0.01138,0.0017,0.0176,0.006,False
+oil,72,sensors_nbm_hist,history,590366,6720,0.029,0.029,0.01138,-0.0174,0.0096,0.504,False
+pitch,24,sensors_nbm,season,590366,2843,0.0076,0.0047,0.00482,-0.0007,0.0096,0.064,False
+pitch,24,sensors_hist,history,590366,2843,0.1819,0.1203,0.00482,-0.0063,0.1248,0.046,False
+pitch,48,sensors_nbm,season,590366,4583,0.0093,0.008,0.00776,-0.003,0.0045,0.22,False
+pitch,48,sensors_nbm_hist,history,590366,4583,0.0454,0.0419,0.00776,-0.0235,0.0258,0.427,False
+pitch,72,sensors_nbm,season,590366,6387,0.0105,0.0114,0.01082,-0.0069,0.0019,0.68,False
+pitch,72,sensors_nbm_hist,history,590366,6387,0.0246,0.0295,0.01082,-0.0179,0.0085,0.829,False

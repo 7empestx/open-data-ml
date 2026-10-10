@@ -1,0 +1,26 @@
+{
+ "oil_24": {
+  "no_history": "sensors",
+  "with_history": "sensors_nbm_hist"
+ },
+ "oil_48": {
+  "no_history": "sensors_nbm",
+  "with_history": "sensors_hist"
+ },
+ "oil_72": {
+  "no_history": "sensors",
+  "with_history": "sensors_nbm_hist"
+ },
+ "pitch_24": {
+  "no_history": "sensors_nbm",
+  "with_history": "sensors_hist"
+ },
+ "pitch_48": {
+  "no_history": "sensors_nbm",
+  "with_history": "sensors_nbm_hist"
+ },
+ "pitch_72": {
+  "no_history": "sensors_nbm",
+  "with_history": "sensors_nbm_hist"
+ }
+}
