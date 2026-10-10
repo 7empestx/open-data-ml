@@ -135,7 +135,7 @@ Every number below was computed by the scripts listed in §8.
 ```
 cd projects/windml
 .venv/bin/python scripts/extract_extra_signals.py                       # extra raw signals -> data/processed/all_years/*_extra_*.parquet (cached)
-nohup .venv/bin/python scripts/run_nbm_years.py > /workspace/logs/nbm_years.log 2>&1 &   # ~23 min, cached per turbine -> data/nbm_years/
+nohup .venv/bin/python scripts/run_nbm_years.py > logs/nbm_years.log 2>&1 &   # ~23 min, cached per turbine -> data/nbm_years/
 .venv/bin/python scripts/eval_nbm_years.py                              # grid, selection, held-out results -> reports/nbmy_*.csv
 .venv/bin/python scripts/report_nbm_years.py                            # figures + reports/nbmy_tables.md
 ```

@@ -50,14 +50,14 @@ Re-scanned 2026-10-10 after the cleanup, covering the tracked files at HEAD and 
 - **Emails:** only `hello@beehivewebstudio.com` (the public contact) and the GitHub noreply address in commit metadata. This holds for history too.
 - **Local laptop paths:** no `/Users/...` or home-directory paths, and no AWS profile names, in HEAD or history.
 - **Commit identity:** every commit uses `51809789+7empestx@users.noreply.github.com`. The names "Grant Starkman" and "7empestx" will be public on the commits.
-- **Box paths:** scripts and READMEs hardcode `/workspace/industrial-data` and `/workspace/logs` (16 files). These aren't sensitive, but other people need to edit them to run the code. Planned fix: a `WINDML_RAW_DIR` environment variable (`download_cmapss.sh` already supports it).
+- **Box paths:** fixed 2026-10-10. Paths come from `projects/windml/src/windml/config.py` (`WINDML_RAW_DIR`, `WINDML_DATA_DIR`, `WINDML_REPORTS_DIR`, `WINDML_LOG_DIR`) with repo-relative defaults. No `/workspace` paths remain in code or docs.
 - **Large files:** no tracked file or blob in history is over 50 MB. The largest is `kelmarsh_scada_labeled.parquet` at 47 MB, which is under GitHub's 100 MB hard limit. GitHub may warn about files over 50 MB on push, but none are that big.
 - **PDF metadata:** the two condition-report PDFs show only a title and HeadlessChrome/Skia as producer. No author and no paths.
 
 ## 4. Not blocking, but should fix soon
 
-1. **No dependency file.** Add `pyproject.toml` with a `uv.lock` (or `requirements.txt`) so the results can be reproduced.
-2. **No data-download scripts.** DATA_POLICY says raw data "can be re-fetched", but there's no script that does it. Add `scripts/download_data.py` that pulls each Zenodo/UCI record by DOI and checks file hashes.
+1. **Dependency file:** done 2026-10-10. `projects/windml/requirements.txt` is pinned, and `make setup` installs it.
+2. **Data-download scripts:** wind data done 2026-10-10 (`projects/windml/scripts/download_wind_data.py`, MD5-checked against Zenodo, plus `make smoke` and CI). The side datasets (UCI, PVDAQ and so on) still have no download script.
 3. **Name clash: "windML".** An older, unmaintained project of the same name exists: github.com/cigroup-ol/windml (about 130 stars, windml.org), and it holds the PyPI name `windML` (v0.3.8). Using windml as a repo folder or site section is fine. Don't publish a PyPI package called `windml`, and say "not affiliated" somewhere, or think about a different name (for example `windml-scada` or `open-windml`). Before using either name as a brand, also run a USPTO search (free) for "open-data-ml" and "windml". `open-data-ml` isn't taken on PyPI.
 4. **Repo size.** About 189 MB of loose objects, mostly the processed wind parquets (about 135 MB). That's under GitHub's limits, but cloning is slow. A later option is to move processed data to a Hugging Face dataset (also CC BY 4.0 with attribution) and keep git for code.
 5. **Top-level README:** add a "not engineering advice" line and a data-credit block like the one on the site.

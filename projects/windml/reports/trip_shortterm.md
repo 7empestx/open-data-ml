@@ -143,9 +143,9 @@ How to read this:
 
 ```
 cd projects/windml
-nohup .venv/bin/python scripts/extract_stat_signals.py > /workspace/logs/extract_stats.log 2>&1 &     # 10-min min/max/std from raw CSVs (cached)
-nohup .venv/bin/python scripts/build_trip_features.py > /workspace/logs/trip_features.log 2>&1 &      # hourly features + labels -> data/trip/
-nohup .venv/bin/python scripts/run_trip_models.py > /workspace/logs/trip_models.log 2>&1 &            # 288 walk-forward fits -> data/trip_preds/
+nohup .venv/bin/python scripts/extract_stat_signals.py > logs/extract_stats.log 2>&1 &     # 10-min min/max/std from raw CSVs (cached)
+nohup .venv/bin/python scripts/build_trip_features.py > logs/trip_features.log 2>&1 &      # hourly features + labels -> data/trip/
+nohup .venv/bin/python scripts/run_trip_models.py > logs/trip_models.log 2>&1 &            # 288 walk-forward fits -> data/trip_preds/
 .venv/bin/python scripts/eval_trip.py      # metrics, selection, primary tests -> reports/trip_*.csv
 .venv/bin/python scripts/report_trip.py    # figures + reports/trip_tables.md
 ```

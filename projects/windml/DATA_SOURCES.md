@@ -18,6 +18,13 @@ The source, license, and attribution for every dataset below come from the `SOUR
 
 Zenodo licenses (Kelmarsh, Penmanshiel, CoMoPI, PIADE, bottling line) were rechecked through the Zenodo records API on 2026-10-10: all CC BY 4.0. The four UCI dataset pages each state CC BY 4.0.
 
+## Downloading the wind data
+
+`make download` (or `python scripts/download_wind_data.py`) fetches the Kelmarsh (Zenodo 16807551) and Penmanshiel (Zenodo 16807304)
+SCADA zips through the Zenodo records API, checks each file's published MD5, and extracts them into `$WINDML_RAW_DIR`
+(default `data/raw/`, git-ignored). It also writes a `SOURCE.txt` with the record, license and retrieval date. Use
+`--farms` and `--years` to download a subset. See README.md, section "Reproduce".
+
 ## NASA C-MAPSS: download it yourself
 
 C-MAPSS has no stated license, so this repo does not include it, in raw or processed form. To use it:
