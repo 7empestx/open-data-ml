@@ -1,0 +1,62 @@
+---
+title: open-data-ml
+description: Machine learning on openly licensed public data. First project, windml, looks for early signs of wind turbine faults.
+template: splash
+hero:
+  title: Machine learning on open data, done in the open
+  tagline: open-data-ml trains machine learning models only on public data that is openly licensed. Every dataset, cleaning step, and result is documented so the work can be checked.
+  actions:
+    - text: Read about windml
+      link: /windml/
+      icon: right-arrow
+    - text: Data policy
+      link: /about/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## How it works
+
+<CardGrid>
+	<Card title="Open data">
+		We use public datasets released under open licenses, such as CC BY 4.0. We download them from the original source and follow each license's terms.
+	</Card>
+	<Card title="Models">
+		We clean the data, label known events, and train models we can test against those labels. We document the methods and the limits of each model, and plan to publish the code.
+	</Card>
+	<Card title="Attribution">
+		Each project lists its data sources, licenses, and required credits. The people who released the data get credit everywhere it's used.
+	</Card>
+</CardGrid>
+
+## First project: windml
+
+windml looks for early signs of wind turbine faults in 10-minute SCADA data.
+
+It starts with two UK wind farms released by Cubico Sustainable Investments under CC BY 4.0:
+
+- **Kelmarsh:** 6 turbines, all of 2022, 315,360 rows of 10-minute data.
+- **Penmanshiel:** 5 turbines, 130,320 rows of 10-minute data.
+
+So far the data has been cleaned and checked, and major faults have been labeled from the farms' own event logs: 12 at Kelmarsh and 2 at Penmanshiel.
+
+There are no model results yet. We'll post them once they've been tested.
+
+## What's next
+
+- Add more years of Kelmarsh and Penmanshiel data.
+- Build models that learn each turbine's normal behavior and flag when it drifts.
+- Test whether those flags show up in the days and weeks before the labeled faults.
+- Publish the results, including what doesn't work.
+- Add more open datasets as new projects.
+
+## For wind operators
+
+If you run wind turbines and want a free health check on your own SCADA data, get in touch. You keep ownership of your data.
+
+Contact: [hello@beehivewebstudio.com](mailto:hello@beehivewebstudio.com)
+
+---
+
+<small>Data credit: Kelmarsh and Penmanshiel wind farm data, Cubico Sustainable Investments Ltd, published on Zenodo under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Kelmarsh: DOI [10.5281/zenodo.16807551](https://doi.org/10.5281/zenodo.16807551). Penmanshiel: DOI [10.5281/zenodo.5946808](https://doi.org/10.5281/zenodo.5946808). This is research on public data. It's not engineering advice.</small>
