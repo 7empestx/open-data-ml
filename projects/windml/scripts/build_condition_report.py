@@ -1,7 +1,9 @@
 """Assemble reports/condition_report/condition_report.md from src/template.md + computed tables, then render the PDF
 (python-markdown -> HTML with print CSS -> headless Chrome --print-to-pdf)."""
 import json
+import os
 import re
+import shutil
 import subprocess
 from pathlib import Path
 import markdown
@@ -79,7 +81,12 @@ def main():
     doc = f"<!doctype html><html><head><meta charset='utf-8'><title>Wind Farm Condition Report (sample)</title><style>{CSS}</style></head><body>{html}</body></html>"
     (R / "src").mkdir(parents=True, exist_ok=True)
     (R / "src/condition_report.html").write_text(doc)
-    subprocess.run(["google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
+    chrome = os.environ.get("WINDML_CHROME") or next(
+        (c for c in ("google-chrome", "chromium", "chromium-browser", "chrome") if shutil.which(c)), None)
+    if not chrome:
+        print("no Chrome/Chromium found (set WINDML_CHROME); wrote", R / "condition_report.md", "but skipped the PDF")
+        return
+    subprocess.run([chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer",
                     f"--print-to-pdf={R / 'condition_report.pdf'}", (R / "src/condition_report.html").as_uri()],
                    check=True, capture_output=True, timeout=120)
     print("wrote", R / "condition_report.pdf")
