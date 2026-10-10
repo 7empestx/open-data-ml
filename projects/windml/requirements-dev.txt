@@ -1,0 +1,4 @@
+# Tests and lint (CI and `make test lint`)
+-r requirements.txt
+pytest==9.1.1
+ruff==0.17.0

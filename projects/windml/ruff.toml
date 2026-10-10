@@ -1,0 +1,6 @@
+# CI lint is errors-only: syntax errors and undefined names (the research scripts keep their compact style).
+target-version = "py311"
+line-length = 160
+
+[lint]
+select = ["E9", "F63", "F7", "F82"]
