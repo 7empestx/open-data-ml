@@ -25,6 +25,7 @@ export default defineConfig({
 						{ label: 'Cleaning notes and data problems', slug: 'windml/cleaning' },
 						{ label: 'Failure labels', slug: 'windml/labels' },
 						{ label: 'Results', slug: 'windml/results' },
+						{ label: 'Sample condition report', slug: 'windml/condition-report' },
 					],
 				},
 				{ label: 'Roadmap', slug: 'roadmap' },

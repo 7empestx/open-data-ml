@@ -3,14 +3,18 @@ title: Roadmap
 description: What's planned next for open-data-ml and windml.
 ---
 
-## windml
+## Done
 
-1. **More years of data.** Add Kelmarsh 2016 to 2024 and Penmanshiel 2016 to 2021 from Zenodo, under the same CC BY 4.0 license.
-2. **Normal-behavior models.** Predict component temperatures (gear oil, bearings, converter) from operating conditions on healthy data, and use the gap between predicted and actual as an anomaly score.
-3. **Test against the labels.** Check whether that score rises in the 7, 14, and 30 days before labeled faults, with and without the July 2022 heatwave stops.
-4. **Cross-farm test.** Check how well a model trained on Kelmarsh works on Penmanshiel.
-5. **More open benchmarks.** Add other openly licensed wind datasets with fault logs.
-6. **Publish.** Post the methods, results, and limits, including what doesn't work.
+- Cleaned and labeled every published year of Kelmarsh (2016 to 2024) and Penmanshiel (2016 to 2024).
+- Tested normal-behavior models (30-day warning) and short-term trip models (24 to 72 hours) under a strict walk-forward test. Neither beat chance. See [Results](/windml/results/).
+- Built a [sample condition report](/windml/condition-report/) from the same data.
+
+## windml next
+
+1. **Better data.** Look for openly licensed wind data with 1-second to 1-minute resolution, maintenance or work-order records, or vibration data.
+2. **Repeatable health check.** Turn the condition report into a pipeline that runs on any farm's SCADA and status logs.
+3. **Cross-farm checks.** Test whether findings from one farm hold at the other.
+4. **Publish the code** after the license and readiness review.
 
 ## open-data-ml
 
