@@ -16,5 +16,6 @@ raw/
 *.tar.gz
 *.csv.gz
 
-# windml all-years outputs: single files exceed 90 MB (rebuild with projects/windml/scripts/run_all_years.py)
-projects/windml/data/processed/all_years/
+# windml all-years outputs: parquets over 90 MB are not committed (rebuild with projects/windml/scripts/run_all_years.py)
+projects/windml/data/processed/all_years/*_scada_10min.parquet
+projects/windml/data/processed/all_years/*_scada_labeled.parquet

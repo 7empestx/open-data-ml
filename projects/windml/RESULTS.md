@@ -96,3 +96,21 @@ The full write-up is in [reports/nbm_baseline.md](reports/nbm_baseline.md). Code
 * **Fleet-relative scoring** (subtract the farm-median z) cuts Kelmarsh false alarms to 0.19 per turbine-month (0.13 at threshold 4). At threshold 4 it flags 4/8 vs 0.55 expected. But inspecting the alarms shows the hits come from recurring turbine-specific deviations (KEL02 gen bearing rear; KEL06 rotor bearing after its April yaw fault), not precursors.
 * **CUSUM** is uninformative: it fires in nearly every window.
 * **Conclusion.** The NBM is accurate, but with one year of data it shows **no robust early warning** of these faults. Most of them are pitch, converter, or hydraulic faults, not drivetrain faults, and the seasonal extrapolation dominates the residuals. More years are needed: a full prior year of training, many more episodes, and ideally real gearbox and bearing failures. Fleet-relative scoring should be kept.
+
+## 7. All years (Kelmarsh 2016 to 2024, Penmanshiel 2016 to 2024)
+
+Same cleaning and labeling rules, re-run on every year published on Zenodo (`scripts/run_all_years.py`). Detail: [labels_kelmarsh_all_years.md](reports/labels_kelmarsh_all_years.md), [labels_penmanshiel_all_years.md](reports/labels_penmanshiel_all_years.md). Outputs go to `data/processed/all_years/`; the SCADA parquets (360 to 780 MB each) are not committed, the events parquets and `summary.json` are.
+
+| Wind farm | Turbines and years | 10-minute rows | Fault stops | Major faults | Episodes | Major faults by component | Single-period set |
+|---|---|---|---|---|---|---|---|
+| Kelmarsh | KEL01 to KEL06, 2016 to 2024 | 2,840,832 | 1,196 | 97 | 72 | converter 44, pitch 28, gearbox 8, generator 7, hydraulics 6, yaw 4 | 12 in 9 episodes (2022) |
+| Penmanshiel | PEN01, PEN02, PEN04 to PEN10: 2016 to 2023; PEN11 to PEN15: 2016 to 2024 | 6,114,096 | 3,246 | 318 | 232 | pitch 146, converter 87, gearbox 76, generator 6, hydraulics 3 | 2 in 2 episodes (H1 2021) |
+
+Gearbox and bearing faults: still no confirmed mechanical failures. The status logs record stops, not component replacements.
+- Kelmarsh: the 8 gearbox major faults are oil-system and protection stops (low oil pressure 3, oil-cooler fan overload 2, oil-pump overload 1, drivetrain oscillation 1, particle alarm 1). The 7 generator ones are overspeed and speed-sensor stops. No bearing stops.
+- Penmanshiel: the 76 gearbox major faults (52 episodes) are mostly lubrication stops (missing gear oil 45, low oil pressure 14, pump overload 5, cooler fan overload 3), plus gear-speed sensor 7 and particle alarm 2. The only bearing stops are 4 generator-bearing over-temperature stops on PEN04.
+
+Data problems in the extra years:
+- The 2023 and 2024 exports from both farms repeat every timestamp about 40 to 46 times (sparse and all-NaN rows). These were collapsed on extraction (`scripts/extract_dedup.py`) with 0 conflicting values.
+- Penmanshiel data starts mid-2016, after commissioning, so 2016 is 35 to 57% filled. WT01-10 has no January 2023 file and no 2024 data in the record. There are farm-wide SCADA outages from 2020-06-08 to 06-11 and 2020-09-25 to 10-10.
+- Kelmarsh has only 1 major fault in 2017 and 1 in 2019, against 5 to 28 in the other years. The status logs are complete for those years (833 and 673 stops, 118 and 60 fault stops), so this is real year-to-year variation in long major-component stops, not missing data.

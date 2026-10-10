@@ -1,5 +1,27 @@
 # Failure labels: penmanshiel
 
+<!-- all-years:begin -->
+## All years (2016-06-02 to 2024-12-31)
+
+Re-run of the same rules on every downloaded year, 14 turbines (PEN01, PEN02, PEN04, PEN05, PEN06, PEN07, PEN08, PEN09, PEN10, PEN11, PEN12, PEN13, PEN14, PEN15), 6,114,096 labeled 10-minute rows. Full detail: [labels_penmanshiel_all_years.md](labels_penmanshiel_all_years.md); data in data/processed/all_years/ (not committed, files > 90 MB; rebuild with scripts/run_all_years.py).
+
+- Events: 1,053,535; fault stops: 3,246
+- Major faults: **318 events in 232 episodes**; by component {'pitch': 146, 'converter': 87, 'gearbox': 76, 'generator': 6, 'hydraulics': 3}
+
+|   year |   major_faults |   episodes |
+|-------:|---------------:|-----------:|
+|   2016 |             52 |         35 |
+|   2017 |             29 |         24 |
+|   2018 |             20 |         17 |
+|   2019 |             47 |         39 |
+|   2020 |             63 |         48 |
+|   2021 |             30 |         24 |
+|   2022 |             32 |         18 |
+|   2023 |             33 |         20 |
+|   2024 |             12 |          8 |
+
+The section below is the original single-period report.
+<!-- all-years:end -->
 Source: Greenbyte status logs (2020-12-21 to 2021-06-30, UTC). Rules in src/windml/labeling.py.
 Major fault = Stop classified as fault, component in gearbox/generator/bearing/converter/pitch/yaw/hydraulics, duration >= 1 h; major faults on the same turbine within 24 h are merged into one episode. Pre-fault windows count back from each episode start.
 

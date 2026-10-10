@@ -4,8 +4,8 @@ The source, license, and attribution for every dataset below come from the `SOUR
 
 | Dataset | Used here | Source | License | Required attribution |
 |---|---|---|---|---|
-| Kelmarsh wind farm SCADA (6x Senvion MM92, UK), 2022 | Yes, cleaned and labeled | https://zenodo.org/records/16807551 (DOI 10.5281/zenodo.16807551) | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.16807551 |
-| Penmanshiel wind farm SCADA (Senvion MM82, UK), WT11-15, 2021-01-01 to 2021-07-01 | Yes, cleaned and labeled | https://zenodo.org/records/5946808 (DOI 10.5281/zenodo.5946808) | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.5946808 |
+| Kelmarsh wind farm SCADA (6x Senvion MM92, UK), 2016 to 2024 | Yes, cleaned and labeled (2022 single-year set + all-years set) | https://zenodo.org/records/16807551 (DOI 10.5281/zenodo.16807551) | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.16807551 |
+| Penmanshiel wind farm SCADA (14x Senvion MM82, UK), WT01-10 2016 to 2023, WT11-15 2016 to 2024 (H1-2021 WT11-15 single-period set from the earlier version) | Yes, cleaned and labeled (H1-2021 single-period set + all-years set) | https://zenodo.org/records/16807304 (DOI 10.5281/zenodo.16807304); earlier version https://zenodo.org/records/5946808 | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.16807304 (and 10.5281/zenodo.5946808 for the H1-2021 set) |
 | NREL PVDAQ public PV data, system 10 (NREL CIS-1), 2008 | Yes, light cleaning | https://data.openei.org/submissions/4568 (DOI 10.25984/1846021) | CC BY 4.0 (per OEDI / data.gov metadata) | Credit NREL PVDAQ / OEDI and DOI 10.25984/1846021 |
 | CoMoPI: Condition Monitoring for Packaging Industry | Yes, light cleaning | https://zenodo.org/records/7572501 | CC BY 4.0 | Credit the dataset authors and Zenodo record 7572501 |
 | PIADE: Packaging Industry Anomaly DEtection | Yes, light cleaning | https://zenodo.org/records/7071747 | CC BY 4.0 | Credit the dataset authors and Zenodo record 7071747 |

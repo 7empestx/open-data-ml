@@ -3,7 +3,7 @@
 cd /workspace/industrial-data/penmanshiel-wind-scada
 for z in zips/Penmanshiel_SCADA_*.zip; do
   b=$(basename "$z" .zip)
-  grep -q "OK $b.zip" ../_dl/dl.log ../_dl/dl2.log 2>/dev/null || { echo "skip (not verified yet) $b"; continue; }
+  grep -qF "OK $b.zip" ../_dl/dl*.log* 2>/dev/null || { echo "skip (not verified yet) $b"; continue; }
   d=$(echo "$b" | sed -E 's/^Penmanshiel_SCADA_//; s/_[0-9]+$//; s/WT_?01-10/wt01-10/; s/WT_?11-15/wt11-15/; s/ /_/g' | tr 'A-Z' 'a-z')
   [ "$d" = "2021_wt11-15" ] && d="2021_wt11-15_v4461"
   dest="scada_$d"
