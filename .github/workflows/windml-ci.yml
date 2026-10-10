@@ -1,0 +1,39 @@
+name: windml CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["projects/windml/**", ".github/workflows/windml-ci.yml"]
+  pull_request:
+    paths: ["projects/windml/**", ".github/workflows/windml-ci.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windml-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: projects/windml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: projects/windml/requirements*.txt
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Lint (errors only)
+        run: python -m ruff check src scripts tests
+      - name: Import every module
+        run: python -c "import sys; sys.path.insert(0, 'src'); import windml.config, windml.greenbyte, windml.clean_wind, windml.labeling, windml.nbm, windml.nbm_years, windml.trip_features, windml.profile; print('imports ok')"
+      - name: Unit tests (tiny fixtures, no data download)
+        run: python -m pytest -q tests
