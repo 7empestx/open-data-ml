@@ -114,3 +114,23 @@ Data problems in the extra years:
 - The 2023 and 2024 exports from both farms repeat every timestamp about 40 to 46 times (sparse and all-NaN rows). These were collapsed on extraction (`scripts/extract_dedup.py`) with 0 conflicting values.
 - Penmanshiel data starts mid-2016, after commissioning, so 2016 is 35 to 57% filled. WT01-10 has no January 2023 file and no 2024 data in the record. There are farm-wide SCADA outages from 2020-06-08 to 06-11 and 2020-09-25 to 10-10.
 - Kelmarsh has only 1 major fault in 2017 and 1 in 2019, against 5 to 28 in the other years. The status logs are complete for those years (833 and 673 stops, 118 and 60 fault stops), so this is real year-to-year variation in long major-component stops, not missing data.
+
+## 7. All-years NBM (2016–2024): gearbox oil-system and pitch faults
+
+The full write-up is in [reports/nbm_all_years.md](reports/nbm_all_years.md). Code: `src/windml/nbm_years.py`, plus `scripts/extract_extra_signals.py`, `run_nbm_years.py`, `eval_nbm_years.py`, and `report_nbm_years.py`.
+
+* **Setup.**
+  * One LightGBM model per turbine and target, walk-forward by year (train on all prior years, test on the next). Each model's history covers all 12 months.
+  * Training uses healthy rows only: no stops or 6-h cool-down, no faults, not in the 30 days before a major fault.
+  * Gearbox targets: gear-oil temperatures, inlet and pump oil pressure, main-bearing temperatures. Pitch targets: pitch-motor temperatures, hub temperature, and the pitch-vs-wind curve. Two model-free pitch signals were added: blade-angle spread and motor-temperature spread.
+  * Scores use robust z and an EWMA, either raw or fleet-relative.
+* **Oil-pressure units.** The "bar" columns are logged as bar in some periods and ×100 (kPa) in others, switching on the same dates fleet-wide. They are now normalised row by row.
+* **Settings chosen on 2017–2020 only, then scored once on 2021–2024:**
+  * **Gearbox** (raw / oil signals / 24 h / threshold 3): 8 of 27 held-out episodes caught within 30 days, vs 9.57 expected by season-matched chance (p = 0.82). False alarms: 0.72 per turbine-month.
+  * **Pitch** (fleet / all signals / 24 h / threshold 8): 1 of 48, vs 2.22 expected (p = 0.91). False alarms: 0.078 per turbine-month.
+* **No held-out year beats chance.** Over all 168 settings per farm and fault type, fewer reach p < 0.05 on the held-out years than chance alone would produce. Time spent in alarm does not rank turbines by future fault count either.
+* **Fit is good, but there is still no early warning.** Healthy gear-oil temperature MAE is about 0.8–1.4 °C, and inlet pressure about 0.2–0.3 bar. Even so, with 9 years of data these 10-min NBMs give **no early warning** for oil-system or pitch trips.
+* **Next steps:**
+  * Use the 10-min min/max/std columns, or higher-resolution data.
+  * Try supervised short-horizon trip-risk models.
+  * Get maintenance or work-order labels.

@@ -48,3 +48,16 @@ The NBM learns per-turbine healthy drivetrain temperatures from operating condit
 ```
 
 Results and caveats: [reports/nbm_baseline.md](reports/nbm_baseline.md).
+
+## All-years NBM (src/windml/nbm_years.py)
+
+Walk-forward-by-year normal-behaviour models for gearbox oil-system and pitch faults, using 2016–2024 data. Long jobs run under nohup with logs in /workspace/logs/. Results are cached per turbine, so a rerun resumes where it stopped.
+
+```
+.venv/bin/python scripts/extract_extra_signals.py      # pitch-motor temps, hub temp, oil pump pressure from the raw CSVs already on the box
+nohup .venv/bin/python scripts/run_nbm_years.py > /workspace/logs/nbm_years.log 2>&1 &   # ~23 min -> data/nbm_years/ (git-ignored)
+.venv/bin/python scripts/eval_nbm_years.py             # grid, selection on 2017-2020, held-out 2021-2024 -> reports/nbmy_*.csv
+.venv/bin/python scripts/report_nbm_years.py           # figures + reports/nbmy_tables.md
+```
+
+Results: [reports/nbm_all_years.md](reports/nbm_all_years.md).

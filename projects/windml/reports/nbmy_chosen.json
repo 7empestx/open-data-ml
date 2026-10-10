@@ -1,0 +1,18 @@
+{
+ "gearbox": {
+  "variant": "raw",
+  "halflife_h": 24,
+  "subgroup": "oil",
+  "thr": 3.0,
+  "n_candidates": 168,
+  "n_eligible": 28
+ },
+ "pitch": {
+  "variant": "fleet",
+  "halflife_h": 24,
+  "subgroup": "all",
+  "thr": 8.0,
+  "n_candidates": 168,
+  "n_eligible": 42
+ }
+}
