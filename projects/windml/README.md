@@ -44,7 +44,7 @@ nohup make all > logs/all.log 2>&1 &
 | Step | Time |
 |---|---|
 | `make setup` | ~1 min |
-| `make smoke` | ~7 min, most of it the 535 MB download; ~1 min of compute |
+| `make smoke` | 5-10 min, mostly the 535 MB download (Zenodo speed varies); ~1-2 min of compute |
 | `make download` (full) | 1-3 h download + ~1 h extraction (the padded 2023/2024 files are de-duplicated) |
 | `make preprocess` | ~1 h |
 | `make nbm` | ~25 min |
