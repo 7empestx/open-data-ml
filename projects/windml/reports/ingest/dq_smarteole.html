@@ -1,0 +1,691 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Data-quality report</title><style>body{font-family:system-ui,Arial,sans-serif;max-width:1200px;margin:2em auto;color:#1d2733;font-size:14px}
+table{border-collapse:collapse;font-size:12px;margin:8px 0}th{background:#12324d;color:#fff;padding:3px 6px;text-align:left}
+td{border-bottom:1px solid #d5dde5;padding:2px 6px}h1{color:#12324d}h2{color:#12324d;border-bottom:1px solid #b8c4d0}code{background:#eef2f6}</style></head><body><h1>Data-quality report: smarteole</h1>
+<p>SMARTEOLE wind-farm-control open dataset, 7x Senvion MM82 (ENGIE), 1-min SCADA, Feb-May 2020</p>
+<ul>
+<li>Period (UTC): 2020-02-17 16:30 to 2020-05-24 23:50; 7 turbines; 94,318 10-min rows</li>
+<li>Signals mapped: 7 of 34 canonical signals</li>
+<li>Source files: 1</li>
+</ul>
+<h2>Day-1 findings</h2>
+<ol>
+<li><strong>Coverage</strong> SMV1: 93.4% of 10-min slots have data (longest gap 65.2 h)</li>
+<li><strong>Coverage</strong> SMV2: 93.3% of 10-min slots have data (longest gap 65.3 h)</li>
+<li><strong>Coverage</strong> SMV3: 87.1% of 10-min slots have data (longest gap 122.5 h)</li>
+<li><strong>Coverage</strong> SMV4: 94.2% of 10-min slots have data (longest gap 68.5 h)</li>
+<li><strong>Coverage</strong> SMV5: 93.6% of 10-min slots have data (longest gap 65.2 h)</li>
+<li><strong>Coverage</strong> SMV6: 93.3% of 10-min slots have data (longest gap 65.2 h)</li>
+<li><strong>Coverage</strong> SMV7: 93.4% of 10-min slots have data (longest gap 65.3 h)</li>
+<li><strong>Stuck sensors</strong> (constant &gt;= 6 h, or &gt;= 24 h for coarse sensors): SMV6 ambient_temp_c 29.5 h; SMV6 wind_speed_ms 29.3 h</li>
+<li><strong>Sparse high-res bins</strong>: 3,071 of 94,318 10-min bins (SMV1, SMV2, SMV3, SMV4, SMV5, SMV6, SMV7, native 1min) had too few samples and were blanked</li>
+</ol>
+<h2>Coverage per turbine</h2>
+<p>Coverage = 10-min slots with power or wind speed present, over the farm-wide period.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">first</th>
+<th style="text-align: left;">last</th>
+<th style="text-align: right;">expected_rows</th>
+<th style="text-align: right;">rows_with_data</th>
+<th style="text-align: left;">coverage</th>
+<th style="text-align: right;">gaps_ge_1h</th>
+<th style="text-align: right;">longest_gap_h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13082</td>
+<td style="text-align: left;">93.4%</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13080</td>
+<td style="text-align: left;">93.3%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">65.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">12211</td>
+<td style="text-align: left;">87.1%</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">122</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13198</td>
+<td style="text-align: left;">94.2%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">68.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13123</td>
+<td style="text-align: left;">93.6%</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13075</td>
+<td style="text-align: left;">93.3%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: left;">2020-02-17 16:30</td>
+<td style="text-align: left;">2020-05-24 23:50</td>
+<td style="text-align: right;">14013</td>
+<td style="text-align: right;">13088</td>
+<td style="text-align: left;">93.4%</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">65.3</td>
+</tr>
+</tbody>
+</table>
+<h2>Signal completeness (share of rows with a value)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">SMV1</th>
+<th style="text-align: left;">SMV2</th>
+<th style="text-align: left;">SMV3</th>
+<th style="text-align: left;">SMV4</th>
+<th style="text-align: left;">SMV5</th>
+<th style="text-align: left;">SMV6</th>
+<th style="text-align: left;">SMV7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">96.6%</td>
+<td style="text-align: left;">96.7%</td>
+<td style="text-align: left;">90.5%</td>
+<td style="text-align: left;">97.5%</td>
+<td style="text-align: left;">96.8%</td>
+<td style="text-align: left;">95.7%</td>
+<td style="text-align: left;">96.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">97.0%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">generator_speed_rpm</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">97.0%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">97.0%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">97.0%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">97.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">97.1%</td>
+</tr>
+</tbody>
+</table>
+<h2>Gaps of 1 h or more (20 longest)</h2>
+<p>63 gaps in total.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">gap_start</th>
+<th style="text-align: left;">gap_end</th>
+<th style="text-align: right;">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-02-20 07:50</td>
+<td style="text-align: left;">2020-02-25 10:20</td>
+<td style="text-align: right;">122</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 12:10</td>
+<td style="text-align: right;">68.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 09:00</td>
+<td style="text-align: right;">65.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 09:00</td>
+<td style="text-align: right;">65.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 08:50</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 08:50</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 08:50</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: left;">2020-05-16 15:40</td>
+<td style="text-align: left;">2020-05-19 08:50</td>
+<td style="text-align: right;">65.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: left;">2020-05-06 11:10</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: left;">2020-05-06 11:10</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">2020-05-06 11:20</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">24.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: left;">2020-05-06 11:20</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">24.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">2020-05-06 11:20</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">24.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: left;">2020-05-06 11:20</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">24.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-05-06 11:20</td>
+<td style="text-align: left;">2020-05-07 12:10</td>
+<td style="text-align: right;">24.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-02-25 13:00</td>
+<td style="text-align: left;">2020-02-26 13:30</td>
+<td style="text-align: right;">24.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">2020-02-20 13:10</td>
+<td style="text-align: left;">2020-02-21 13:00</td>
+<td style="text-align: right;">23.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-04-02 14:20</td>
+<td style="text-align: left;">2020-04-03 12:00</td>
+<td style="text-align: right;">21.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">2020-05-22 14:20</td>
+<td style="text-align: left;">2020-05-23 11:10</td>
+<td style="text-align: right;">20.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">2020-05-22 14:20</td>
+<td style="text-align: left;">2020-05-23 11:10</td>
+<td style="text-align: right;">20.8</td>
+</tr>
+</tbody>
+</table>
+<h2>Stuck sensors (identical value for 6 h or more, 24 h for coarse sensors where &gt;= 60% of readings sit on a 0.5-unit grid; temperatures, pressures, wind speed)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">signal</th>
+<th style="text-align: right;">coarse_share</th>
+<th style="text-align: right;">min_run_h</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">hours_stuck</th>
+<th style="text-align: right;">longest_h</th>
+<th style="text-align: left;">longest_from</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">29.3</td>
+<td style="text-align: right;">29.3</td>
+<td style="text-align: left;">2020-02-25 09:50</td>
+<td style="text-align: right;">8.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">29.5</td>
+<td style="text-align: right;">29.5</td>
+<td style="text-align: left;">2020-02-25 09:50</td>
+<td style="text-align: right;">8.6</td>
+</tr>
+</tbody>
+</table>
+<h2>Value ranges vs plausible physical range (canonical units)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">plausible</th>
+<th style="text-align: right;">values</th>
+<th style="text-align: right;">out_of_range</th>
+<th style="text-align: left;">share</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">p1</th>
+<th style="text-align: right;">p99</th>
+<th style="text-align: right;">max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">kW</td>
+<td style="text-align: left;">-200 to 10000</td>
+<td style="text-align: right;">90342</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-17.1</td>
+<td style="text-align: right;">-5.75</td>
+<td style="text-align: right;">2.05e+03</td>
+<td style="text-align: right;">2.06e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">0 to 60</td>
+<td style="text-align: right;">90857</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.857</td>
+<td style="text-align: right;">14.7</td>
+<td style="text-align: right;">19.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">generator_speed_rpm</td>
+<td style="text-align: left;">rpm</td>
+<td style="text-align: left;">-50 to 3000</td>
+<td style="text-align: right;">90858</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-3.69</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">1.8e+03</td>
+<td style="text-align: right;">1.81e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-10 to 100</td>
+<td style="text-align: right;">90858</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-88.6</td>
+<td style="text-align: right;">-1.01</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">1.31e+30</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-45 to 55</td>
+<td style="text-align: right;">90858</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-0.176</td>
+<td style="text-align: right;">3.18</td>
+<td style="text-align: right;">28.4</td>
+<td style="text-align: right;">3.13e+17</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">91247</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.0106</td>
+<td style="text-align: right;">7.07</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">91247</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.0338</td>
+<td style="text-align: right;">7.17</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">360</td>
+</tr>
+</tbody>
+</table>
+<h2>Units</h2>
+<table>
+<thead>
+<tr>
+<th>signal</th>
+<th>decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>power_kw</td>
+<td>kW -&gt; kW (mapping)</td>
+</tr>
+<tr>
+<td>wind_speed_ms</td>
+<td>m/s -&gt; m/s (mapping)</td>
+</tr>
+<tr>
+<td>generator_speed_rpm</td>
+<td>rpm -&gt; rpm (mapping)</td>
+</tr>
+<tr>
+<td>pitch_a_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>nacelle_position_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>wind_direction_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>ambient_temp_c</td>
+<td>degC -&gt; degC (mapping)</td>
+</tr>
+</tbody>
+</table>
+<h2>Sampling interval and aggregation</h2>
+<p>Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">interval</th>
+<th style="text-align: right;">regular_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: left;">1min</td>
+<td style="text-align: right;">0.9998</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Aggregated SMV1, SMV2, SMV3, SMV4, SMV5, SMV6, SMV7 from 1min (10 samples per bin): 94,318 bins, mean coverage 96.7%, 3,071 bins below the minimum coverage (values set to NaN), 0 duplicate samples dropped</li>
+</ul>
+<p>Bin coverage per turbine:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">mean</th>
+<th style="text-align: left;">bins_lt_90pct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: left;">97.1%</td>
+<td style="text-align: left;">3.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: left;">97.2%</td>
+<td style="text-align: left;">3.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: left;">90.6%</td>
+<td style="text-align: left;">9.7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: left;">98.0%</td>
+<td style="text-align: left;">2.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: left;">97.3%</td>
+<td style="text-align: left;">3.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">0.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: left;">97.2%</td>
+<td style="text-align: left;">3.5%</td>
+</tr>
+</tbody>
+</table>
+<h2>Timestamps and clocks</h2>
+<ul>
+<li>Duplicate timestamps collapsed (most complete row kept): none</li>
+<li>Duplicate dates (top): none</li>
+<li>Off-grid timestamps: none</li>
+<li>Local-time conversion: timestamps were UTC or carried offsets</li>
+</ul>
+<p>Best lag vs fleet (10-min steps; 0 = clocks agree), from wind-speed changes:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: right;">2020Q1</th>
+<th style="text-align: right;">2020Q2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SMV1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">SMV7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h2>Loader warnings</h2>
+<ul>
+<li>high-res aggregation: 3,071 of 94,318 10-min bins have coverage below 0.5 and were set to NaN (coverage column kept)</li>
+</ul>
+<h2>Columns in the export that are not mapped</h2>
+<p><code>nacelle_position_1_min</code>, <code>nacelle_position_1_max</code>, <code>nacelle_position_1_std</code>, <code>nacelle_position_1_count</code>, <code>nacelle_position_2_min</code>, <code>nacelle_position_2_max</code>, <code>nacelle_position_2_std</code>, <code>nacelle_position_2_count</code>, <code>nacelle_position_3_min</code>, <code>nacelle_position_3_max</code>, <code>nacelle_position_3_std</code>, <code>nacelle_position_3_count</code>, <code>nacelle_position_4_min</code>, <code>nacelle_position_4_max</code>, <code>nacelle_position_4_std</code>, <code>nacelle_position_4_count</code>, <code>nacelle_position_5_min</code>, <code>nacelle_position_5_max</code>, <code>nacelle_position_5_std</code>, <code>nacelle_position_5_count</code>, <code>nacelle_position_6_min</code>, <code>nacelle_position_6_max</code>, <code>nacelle_position_6_std</code>, <code>nacelle_position_6_count</code>, <code>nacelle_position_7_min</code>, <code>nacelle_position_7_max</code>, <code>nacelle_position_7_std</code>, <code>nacelle_position_7_count</code>, <code>wind_vane_1_avg</code>, <code>wind_vane_1_min</code>, <code>wind_vane_1_max</code>, <code>wind_vane_1_std</code>, <code>wind_vane_1_count</code>, <code>wind_vane_2_avg</code>, <code>wind_vane_2_min</code>, <code>wind_vane_2_max</code>, <code>wind_vane_2_std</code>, <code>wind_vane_2_count</code>, <code>wind_vane_3_avg</code>, <code>wind_vane_3_min</code>, <code>wind_vane_3_max</code>, <code>wind_vane_3_std</code>, <code>wind_vane_3_count</code>, <code>wind_vane_4_avg</code>, <code>wind_vane_4_min</code>, <code>wind_vane_4_max</code>, <code>wind_vane_4_std</code>, <code>wind_vane_4_count</code>, <code>wind_vane_5_avg</code>, <code>wind_vane_5_min</code>, <code>wind_vane_5_max</code>, <code>wind_vane_5_std</code>, <code>wind_vane_5_count</code>, <code>wind_vane_6_avg</code>, <code>wind_vane_6_min</code>, <code>wind_vane_6_max</code>, <code>wind_vane_6_std</code>, <code>wind_vane_6_count</code>, <code>wind_vane_7_avg</code>, <code>wind_vane_7_min</code>, <code>wind_vane_7_max</code>, <code>wind_vane_7_std</code>, <code>wind_vane_7_count</code>, <code>wind_direction_1_min</code>, <code>wind_direction_1_max</code>, <code>wind_direction_1_std</code>, <code>wind_direction_1_count</code>, <code>wind_direction_2_min</code>, <code>wind_direction_2_max</code>, <code>wind_direction_2_std</code>, <code>wind_direction_2_count</code>, <code>wind_direction_3_min</code>, <code>wind_direction_3_max</code>, <code>wind_direction_3_std</code>, <code>wind_direction_3_count</code>, <code>wind_direction_4_min</code>, <code>wind_direction_4_max</code>, <code>wind_direction_4_std</code>, <code>wind_direction_4_count</code>, <code>wind_direction_5_min</code>, <code>wind_direction_5_max</code>, <code>wind_direction_5_std</code>, <code>wind_direction_5_count</code>, <code>wind_direction_6_min</code>, <code>wind_direction_6_max</code>, <code>wind_direction_6_std</code>, <code>wind_direction_6_count</code>, <code>wind_direction_7_min</code>, <code>wind_direction_7_max</code>, <code>wind_direction_7_std</code>, <code>wind_direction_7_count</code>, <code>temperature_1_min</code>, <code>temperature_1_max</code>, <code>temperature_1_std</code>, <code>temperature_1_count</code>, <code>temperature_2_min</code>, <code>temperature_2_max</code>, <code>temperature_2_std</code>, <code>temperature_2_count</code>, <code>temperature_3_min</code>, <code>temperature_3_max</code>, <code>temperature_3_std</code>, <code>temperature_3_count</code>, <code>temperature_4_min</code>, <code>temperature_4_max</code>, <code>temperature_4_std</code>, <code>temperature_4_count</code>, <code>temperature_5_min</code>, <code>temperature_5_max</code>, <code>temperature_5_std</code>, <code>temperature_5_count</code>, <code>temperature_6_min</code>, <code>temperature_6_max</code>, <code>temperature_6_std</code>, <code>temperature_6_count</code>, <code>temperature_7_min</code>, <code>temperature_7_max</code>, <code>temperature_7_std</code>, <code>temperature_7_count</code></p>
+<h2>Files read</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">file</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">turbines</th>
+<th style="text-align: left;">missing_columns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">smarteole/SMARTEOLE_WakeSteering_SCADA_1minData.csv</td>
+<td style="text-align: right;">942627</td>
+<td style="text-align: left;">['SMV1', 'SMV2', 'SMV3', 'SMV4', 'SMV5', 'SMV6', 'SMV7']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Generated by <code>windml ingest validate</code> (projects/windml/src/windml/ingest). Thresholds: gaps &gt;= 1 h, stuck &gt;= 6 h, coverage &lt; 95%, out-of-range share &gt; 0.1%.</p></body></html>

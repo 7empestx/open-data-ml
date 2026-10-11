@@ -209,6 +209,20 @@ Coverage = 10-min slots with power or wind speed present, over the farm-wide per
 | pitch_motor_temp_2_c | degC -> degC (column name) |
 | pitch_motor_temp_3_c | degC -> degC (column name) |
 
+## Sampling interval and aggregation
+
+Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).
+
+| turbine_id   | interval   |   regular_share |
+|:-------------|:-----------|----------------:|
+| KEL01        | 10min      |               1 |
+| KEL02        | 10min      |               1 |
+| KEL03        | 10min      |               1 |
+| KEL04        | 10min      |               1 |
+| KEL05        | 10min      |               1 |
+| KEL06        | 10min      |               1 |
+
+
 ## Timestamps and clocks
 
 - Duplicate timestamps collapsed (most complete row kept): none

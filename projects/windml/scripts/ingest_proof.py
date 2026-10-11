@@ -166,6 +166,88 @@ def prove_messy(name, raw, out_dir, ref, ref_ev, L, desc):
     return ok
 
 
+def prove_highres(name, raw, out_dir, L, desc):
+    """High-res fixture: aggregated bins vs (a) an independent groupby of the written samples and (b) the original
+    Kelmarsh 10-min record the samples were generated from."""
+    hr = raw / "ingest-fixtures" / "highres"
+    tag = name.split("_")[1]
+    m, df, log, ev, secs = load(name, raw, ROOT / "mappings" / "examples" / f"{name}.yaml")
+    s = dq(name, m, df, log, ev, out_dir)
+    tr = pd.read_parquet(hr / f"truth_{tag}.parquet")
+    ref = pd.read_parquet(hr / "ref_10min_2022-03.parquet")
+    mc = float((m["scada"].get("aggregate") or {}).get("min_coverage", 0.5))
+    j = tr.merge(df, on=["turbine_id", "timestamp"], how="outer", suffixes=("_t", ""), indicator=True)
+    both = j[j["_merge"] == "both"]
+    full = both[both["coverage_t"] >= mc]
+    lin = ["power_kw", "wind_speed_ms", "rotor_speed_rpm", "pitch_a_deg", "gear_oil_temp_c", "gear_oil_inlet_pressure_bar", "ambient_temp_c"]
+    worst = max(float(((full[c] - full[c + "_t"]).abs() / full[c + "_t"].abs().clip(lower=1)).max()) for c in lin + ["power_kw_std", "power_kw_min", "power_kw_max"])
+    n_ok = bool((both["n_samples"] == both["n_samples_t"]).all())
+    blank = both[both["coverage_t"] < mc]
+    blank_ok = bool(blank["power_kw"].isna().all())
+    r = ref.merge(df, on=["turbine_id", "timestamp"], suffixes=("_ref", ""))
+    rf = r[r["coverage"] >= 1.0]
+    mean_err = float(((rf["power_kw"] - rf["power_kw_ref"]).abs() / rf["power_kw_ref"].abs().clip(lower=1)).max())
+    std_err = float((rf["power_kw_std"] - rf["power_kw__std"].fillna(0)).abs().max())
+    dn = (rf["nacelle_position_deg"] - rf["nacelle_position_deg_ref"] + 180) % 360 - 180
+    ok = (j["_merge"] == "both").all() and worst < 1e-6 and n_ok and blank_ok and mean_err < 1e-6 and std_err < 1e-4
+    iv = ", ".join(sorted({v["interval"] for v in log.native_interval.values()}))
+    L += [f"### {name} ({'PASS' if ok else 'CHECK'})", "", f"- Shape: {desc}",
+          f"- Mapping `mappings/examples/{name}.yaml`; native interval detected: {iv}; {len(df):,} 10-min bins from "
+          f"{sum(f['rows'] for f in log.files):,} samples in {secs:.1f} s",
+          f"- vs an independent groupby of the samples actually written: {int((j['_merge'] == 'both').sum()):,} bins matched, "
+          f"{int((j['_merge'] != 'both').sum())} unmatched; sample counts identical: {'yes' if n_ok else 'no'}; worst relative difference "
+          f"(means, power min/max/std) {worst:.1e}; {len(blank)} bins under {mc:.0%} coverage blanked: {'yes' if blank_ok else 'no'}",
+          f"- vs the original Kelmarsh 10-min record ({len(rf):,} complete bins): power mean max rel. error {mean_err:.1e}, "
+          f"power std vs Greenbyte std max abs. error {std_err:.1e} kW; nacelle circular mean vs the 10-min value: median "
+          f"{float(dn.abs().median()):.2f}°, 99th percentile {float(dn.abs().quantile(0.99)):.2f}° (bins with large in-bin yaw "
+          "movement differ because the generator spreads samples linearly; the loader uses the circular mean)",
+          f"- Day-1 report: [dq_{name}.md](dq_{name}.md) ({len(s['findings'])} findings)", ""]
+    return ok
+
+
+def prove_smarteole(raw, out_dir, L):
+    """Real open 1-min data (SMARTEOLE, ENGIE): the loader's 10-min bins vs an independent pandas computation from the
+    raw CSV columns (count-weighted mean, min of minima, max of maxima, pooled std of the underlying ~1 Hz samples)."""
+    m, df, log, ev, secs = load("smarteole", raw, ROOT / "mappings" / "smarteole.yaml")
+    s = dq("smarteole", m, df, log, ev, out_dir)
+    mc = float(m["scada"]["aggregate"]["min_coverage"])
+    raw_csv = raw / "smarteole" / "SMARTEOLE_WakeSteering_SCADA_1minData.csv"
+    worst, nb, nblank_ok = 0.0, 0, True
+    for n in (1, 3, 6):
+        c = {k: f"active_power_{n}_{k}" for k in ("avg", "min", "max", "std", "count")}
+        r = pd.read_csv(raw_csv, usecols=["time", *c.values()])
+        r = r.dropna(subset=[c["avg"]]).drop_duplicates("time")
+        r["bin"] = pd.to_datetime(r["time"]).dt.floor("10min")   # canonical stamps = interval start (as Greenbyte)
+        w = r[c["count"]].fillna(0)
+        r[c["std"]] = r[c["std"]].mask(r[c["std"]].isna() & (w <= 1), 0.0)   # one underlying sample: std 0
+        g = r.assign(w=w, mw=w * r[c["avg"]], m2=w * (r[c["std"]] ** 2 + r[c["avg"]] ** 2)).groupby("bin")
+        ref = pd.DataFrame({"n": g.size(), "mean": g["mw"].sum() / g["w"].sum(), "mn": g[c["min"]].min(), "mx": g[c["max"]].max()})
+        ref["std"] = np.sqrt((g["m2"].sum() / g["w"].sum() - ref["mean"] ** 2).clip(lower=0))
+        ref = ref[ref["n"] >= mc * 10]
+        d = df[df["turbine_id"] == f"SMV{n}"].set_index("timestamp")
+        d.index = d.index.tz_localize(None) if d.index.tz is not None else d.index
+        j = ref.join(d[["power_kw", "power_kw_min", "power_kw_max", "power_kw_std"]], how="left")
+        nblank_ok &= bool(j["power_kw"].notna().all())
+        for a, b in (("mean", "power_kw"), ("mn", "power_kw_min"), ("mx", "power_kw_max"), ("std", "power_kw_std")):
+            worst = max(worst, float(((j[a] - j[b]).abs() / j[a].abs().clip(lower=1)).max()))
+        nb += len(j)
+    within = df["power_kw_std"] ** 2
+    iv = ", ".join(sorted({v["interval"] for v in log.native_interval.values()}))
+    ok = worst < 1e-6 and nblank_ok
+    L += [f"### smarteole ({'PASS' if ok else 'CHECK'})", "",
+          "- Real open high-res data: SMARTEOLE wind-farm-control dataset (ENGIE / SMARTEOLE consortium, Zenodo 7342466, "
+          "Licence Ouverte 2.0), 7x Senvion MM82, Feb-May 2020. One CSV, turbine number inside each column name, 1-min "
+          "avg/min/max/std/count of ~1 Hz samples. Time zone/stamp convention not documented: UTC + interval-start assumed.",
+          f"- Mapping `mappings/smarteole.yaml`; native interval detected: {iv}; {len(df):,} 10-min bins, 7 turbines, in {secs:.1f} s",
+          f"- vs an independent pandas computation from the raw columns (SMV1, SMV3, SMV6 power; {nb:,} bins with >= {mc:.0%} "
+          f"of minutes): worst relative difference of mean / min / max / pooled std {worst:.1e}; all such bins present: "
+          f"{'yes' if nblank_ok else 'no'}",
+          f"- The pooled 10-min power std (median {float(np.sqrt(within).median()):.0f} kW) describes the underlying 1-Hz signal; "
+          "a std of the ten 1-min means alone would understate it.",
+          f"- Day-1 report: [dq_smarteole.md](dq_smarteole.md) ({len(s['findings'])} findings)", ""]
+    return ok
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--raw-dir", default=str(cfg.RAW_DIR))
@@ -173,9 +255,11 @@ def main():
     a = ap.parse_args()
     raw, out = Path(a.raw_dir), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
+    import subprocess
     if not (raw / "ingest-fixtures" / "acme").exists():
-        import subprocess
         subprocess.run([sys.executable, str(ROOT / "scripts" / "make_messy_fixtures.py"), "--raw-dir", str(raw)], check=True)
+    if not (raw / "ingest-fixtures" / "highres" / "truth_1s.parquet").exists():
+        subprocess.run([sys.executable, str(ROOT / "scripts" / "make_highres_fixtures.py"), "--raw-dir", str(raw)], check=True)
     L = ["# windml.ingest proof", "",
          "Generated by `scripts/ingest_proof.py` (`make ingest-proof`). Each input is loaded only through its mapping YAML and "
          "compared with an independent reference. Day-1 data-quality reports sit next to this file.", "",
@@ -194,6 +278,15 @@ def main():
     }
     for n, d in shapes.items():
         results[n] = prove_messy(n, raw, out, ref, ref_ev, body, d)
+    hr_shapes = {
+        "highres_1min": "1-min CSV, ';' + decimal comma, Europe/London local time across the spring DST change, END-of-minute stamps, "
+                        "state code, 5% random dropouts, a 2-h outage, a sparse hour",
+        "highres_1s": "1-s wide parquet (172,800 samples), UTC, start stamps",
+    }
+    for n, d in hr_shapes.items():
+        results[n] = prove_highres(n, raw, out, body, d)
+    if (raw / "smarteole" / "SMARTEOLE_WakeSteering_SCADA_1minData.csv").exists():   # optional: scripts/download_smarteole.py
+        results["smarteole"] = prove_smarteole(raw, out, body)
     table = {
         "kelmarsh": ("Greenbyte wide CSV, 1 file/turbine, preamble", "data/processed (existing pipeline)"),
         "penmanshiel": ("Greenbyte wide CSV, 1 file/turbine, preamble", "data/processed (existing pipeline)"),
@@ -201,6 +294,9 @@ def main():
         "acme_messy": ("messy vendor CSV, local time, W/°F/kPa", "canonical Kelmarsh load"),
         "longco_long": ("long tag/value parquet", "canonical Kelmarsh load"),
         "xlsx_sheets": ("Excel, sheet per turbine", "canonical Kelmarsh load"),
+        "highres_1min": ("1-min CSV, local time, dropouts -> 10-min", "sample groupby + Kelmarsh 10-min"),
+        "highres_1s": ("1-s parquet -> 10-min", "sample groupby + Kelmarsh 10-min"),
+        "smarteole": ("real 1-min avg/min/max/std/count, turbine in column names", "raw-column pandas computation"),
     }
     for n, ok in results.items():
         L.append(f"| {n} | {table[n][0]} | {table[n][1]} | {'PASS' if ok else 'CHECK'} |")

@@ -89,6 +89,16 @@ _none_
 | nacelle_position_deg | deg -> deg (mapping) |
 | wind_direction_deg | deg -> deg (mapping) |
 
+## Sampling interval and aggregation
+
+Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).
+
+| turbine_id   | interval   |   regular_share |
+|:-------------|:-----------|----------------:|
+| KEL01        | 10min      |               1 |
+| KEL02        | 10min      |               1 |
+
+
 ## Timestamps and clocks
 
 - Duplicate timestamps collapsed (most complete row kept): none

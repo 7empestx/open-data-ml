@@ -74,6 +74,16 @@ _none_
 | gear_oil_inlet_pressure_bar | kPa -> bar (mapping) |
 | pitch_a_deg | deg -> deg (mapping) |
 
+## Sampling interval and aggregation
+
+Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).
+
+| turbine_id   | interval   |   regular_share |
+|:-------------|:-----------|----------------:|
+| KEL01        | 10min      |          0.9998 |
+| KEL02        | 10min      |          0.9999 |
+
+
 ## Timestamps and clocks
 
 - Duplicate timestamps collapsed (most complete row kept): none

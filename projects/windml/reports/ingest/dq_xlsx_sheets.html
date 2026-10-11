@@ -241,6 +241,29 @@ td{border-bottom:1px solid #d5dde5;padding:2px 6px}h1{color:#12324d}h2{color:#12
 </tr>
 </tbody>
 </table>
+<h2>Sampling interval and aggregation</h2>
+<p>Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">interval</th>
+<th style="text-align: right;">regular_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">KEL01</td>
+<td style="text-align: left;">10min</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">KEL02</td>
+<td style="text-align: left;">10min</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 <h2>Timestamps and clocks</h2>
 <ul>
 <li>Duplicate timestamps collapsed (most complete row kept): none</li>

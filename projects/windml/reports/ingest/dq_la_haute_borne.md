@@ -90,6 +90,18 @@ Coverage = 10-min slots with power or wind speed present, over the farm-wide per
 | wind_direction_deg | deg -> deg (mapping) |
 | ambient_temp_c | degC -> degC (mapping) |
 
+## Sampling interval and aggregation
+
+Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to 10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).
+
+| turbine_id   | interval   |   regular_share |
+|:-------------|:-----------|----------------:|
+| LHB01        | 10min      |               1 |
+| LHB02        | 10min      |               1 |
+| LHB03        | 10min      |               1 |
+| LHB04        | 10min      |               1 |
+
+
 ## Timestamps and clocks
 
 - Duplicate timestamps collapsed (most complete row kept): {'LHB01': 12, 'LHB02': 12, 'LHB03': 12, 'LHB04': 12}
