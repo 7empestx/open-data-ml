@@ -22,3 +22,4 @@ Both datasets were released by Cubico Sustainable Investments on Zenodo under CC
 2. **Labeled.** Major faults identified from the status logs. See [Failure labels](/windml/labels/).
 3. **Tested.** Normal-behavior models and short-term trip models, under a strict walk-forward test. Neither beat chance. See [Results](/windml/results/).
 4. **Condition report.** A retrospective health review built from the same data. See the [sample condition report](/windml/condition-report/).
+5. **Public and reproducible.** The code is on [GitHub](https://github.com/7empestx/open-data-ml) under the MIT license. See [Reproduce it](/windml/reproduce/).

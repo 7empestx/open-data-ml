@@ -21,4 +21,4 @@ Every page, model card, or result that uses this data carries the same credit.
 
 ## Other open datasets
 
-The repository also holds lightly cleaned copies of other openly licensed industrial datasets (solar, packaging, metro compressor, and NASA's simulated turbofan data) for possible future projects. They aren't part of windml. Two datasets were left out on purpose: the NASA IMS bearing data (no clear license) and the SKAB water-pump benchmark (copyleft license).
+The repository also holds lightly cleaned copies of other openly licensed industrial datasets (solar, packaging, bottling, metro compressor and hydraulic systems) for possible future projects. They aren't part of windml. NASA's simulated turbofan data (C-MAPSS) isn't committed; a script fetches it from NASA. Two datasets were left out on purpose: the NASA IMS bearing data (no clear license) and the SKAB water-pump benchmark (copyleft license).

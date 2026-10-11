@@ -3,6 +3,8 @@ title: Cleaning notes and data problems
 description: How the windml SCADA data was cleaned and what problems turned up.
 ---
 
+These rules were first built on one year of Kelmarsh (2022) and half a year of Penmanshiel (PEN11 to PEN15, first half of 2021), then run unchanged on every published year. The coverage figures and per-turbine table below are from that first pass. Problems found only in the later years are listed [at the end](#extra-problems-in-the-full-2016-to-2024-data).
+
 ## Cleaning steps
 
 - **Time.** Every source file header says UTC, so timestamps are stored as UTC. A row at time t covers the 10 minutes from t to t + 10 min.
@@ -21,7 +23,7 @@ description: How the windml SCADA data was cleaned and what problems turned up.
 
 ## Data problems found
 
-- **Gear oil inlet pressure unit.** Labeled "bar" but ranges from 0 to about 400, so the unit or scale is wrong. The column is kept, but its absolute values shouldn't be trusted.
+- **Gear oil pressure units.** Labeled "bar" but ranges from 0 to about 400 in places. The full data showed why: the pressure columns are logged in bar in some periods and in units 100 times larger in others, switching on the same dates across each fleet. They are now normalized row by row.
 - **Negative generator speeds.** A few rows per turbine have negative 10-minute average generator speeds, down to -575 rpm. These were removed.
 - **Frozen bearing sensors.** Rotor-bearing and generator-bearing temperatures froze on KEL01, KEL02, KEL04, KEL05, and KEL06, with 36 to 133 rows each set to missing.
 - **No gearbox bearing temperature.** The export has gear oil temperatures only, and no time-based availability flag.
@@ -44,3 +46,10 @@ description: How the windml SCADA data was cleaned and what problems turned up.
 | PEN13 | 26,064 | 19 | 1 | 3.0 |
 | PEN14 | 26,064 | 19 | 1 | 3.0 |
 | PEN15 | 26,064 | 48 | 3 | 3.7 |
+
+## Extra problems in the full 2016 to 2024 data
+
+- **Repeated timestamps.** The 2023 and 2024 exports from both farms repeat every timestamp about 40 to 46 times, as sparse or all-empty rows. These were collapsed on extraction, with no conflicting values.
+- **Partial first year.** Penmanshiel data starts mid-2016, after commissioning, so 2016 is only 35 to 57% filled.
+- **Missing files.** PEN01 to PEN10 have no January 2023 file and no 2024 data in the record.
+- **Farm-wide outages.** Penmanshiel SCADA is missing from 8 to 11 June 2020 and from 25 September to 10 October 2020.

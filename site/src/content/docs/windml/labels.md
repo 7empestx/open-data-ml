@@ -13,7 +13,24 @@ A **major fault** is a stop that:
 
 Major faults on the same turbine within 24 hours of each other are merged into one **episode**.
 
-## Counts
+## All years (used for the results)
+
+The same rules were run on every year published on Zenodo.
+
+| Wind farm | Turbines and years | 10-minute rows | Fault stops | Major faults | Episodes | Major faults by component |
+|---|---|---|---|---|---|---|
+| Kelmarsh | KEL01 to KEL06, 2016 to 2024 | 2,840,832 | 1,196 | 97 | 72 | converter 44, pitch 28, gearbox 8, generator 7, hydraulics 6, yaw 4 |
+| Penmanshiel | PEN01, PEN02, PEN04 to PEN10: 2016 to 2023; PEN11 to PEN15: 2016 to 2024 | 6,114,096 | 3,246 | 318 | 232 | pitch 146, converter 87, gearbox 76, generator 6, hydraulics 3 |
+
+**Still no confirmed mechanical failures.** The status logs record stops, not component replacements.
+
+- Kelmarsh: the 8 gearbox major faults are oil-system and protection stops (low oil pressure 3, oil-cooler fan overload 2, oil-pump overload 1, drivetrain oscillation 1, particle alarm 1). The 7 generator ones are overspeed and speed-sensor stops. There are no bearing stops.
+- Penmanshiel: the 76 gearbox major faults (52 episodes) are mostly lubrication stops (missing gear oil 45, low oil pressure 14, pump overload 5, cooler fan overload 3), plus gear-speed sensor 7 and particle alarm 2. The only bearing stops are 4 generator-bearing over-temperature stops on PEN04.
+- Kelmarsh has only 1 major fault in 2017 and 1 in 2019, against 5 to 28 in other years. The status logs are complete for those years, so this is real year-to-year variation, not missing data.
+
+## First pass: single periods
+
+The first pass used one year of Kelmarsh and half a year of Penmanshiel. Those counts are kept here for reference.
 
 | Wind farm | Status events | Stops | Fault stops | Major faults | Episodes | Major faults by component |
 |---|---|---|---|---|---|---|
@@ -35,6 +52,4 @@ Each row is also flagged if it falls within 7, 14, or 30 days before the start o
 | Kelmarsh | 9,063 | 18,135 | 36,709 | 315,360 |
 | Penmanshiel | 2,014 | 4,030 | 8,638 | 130,320 |
 
-## Why more data is needed
-
-9 episodes at Kelmarsh and 2 at Penmanshiel are too few to train or judge a reliable early-warning model. More years are available on Zenodo under the same license. See the [Roadmap](/roadmap/).
+9 episodes at Kelmarsh and 2 at Penmanshiel were too few to train or judge an early-warning model, which is why every published year was added. See [Results](/windml/results/) for what the full data showed.
