@@ -1,60 +1,58 @@
 ---
-title: open-data-ml
-description: Machine learning on openly licensed public data. First project, windml, tests wind turbine fault prediction on open SCADA data.
+title: Machine learning on open data
+description: open-data-ml trains machine learning models only on openly licensed public data and publishes every result, including the negative ones. First project, windml, works on wind turbine SCADA data.
 template: splash
 hero:
   title: Machine learning on open data, done in the open
-  tagline: open-data-ml trains machine learning models only on public data that is openly licensed. Every dataset, cleaning step, and result is documented so the work can be checked.
+  tagline: We train models only on openly licensed public data and publish every dataset, method and result, including the ones that don't work. What we learn goes into plain, checkable condition reports for wind operators.
   actions:
-    - text: Read about windml
-      link: /windml/
+    - text: See the windml results
+      link: /windml/results/
       icon: right-arrow
-    - text: Data policy
-      link: /about/
+    - text: Sample condition report
+      link: /windml/condition-report/
+      variant: secondary
+    - text: Work with us
+      link: /work-with-us/
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-
-## How it works
-
-<CardGrid>
-	<Card title="Open data">
-		We use public datasets released under open licenses, such as CC BY 4.0. We download them from the original source and follow each license's terms.
-	</Card>
-	<Card title="Models">
-		We clean the data, label known events, and train models we can test against those labels. We document the methods and the limits of each model, and plan to publish the code.
-	</Card>
-	<Card title="Attribution">
-		Each project lists its data sources, licenses, and required credits. The people who released the data get credit everywhere it's used.
-	</Card>
-</CardGrid>
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 ## First project: windml
 
-windml tests whether wind turbine faults can be predicted from public 10-minute SCADA data.
+windml asks a simple question: can wind turbine faults be predicted from public 10-minute SCADA data? It uses every published year from two UK wind farms released by Cubico Sustainable Investments under CC BY 4.0.
 
-It uses two UK wind farms released by Cubico Sustainable Investments under CC BY 4.0:
+<div class="odm-stats">
+	<div class="odm-stat"><b>20</b><span>turbines at Kelmarsh and Penmanshiel</span></div>
+	<div class="odm-stat"><b>9 years</b><span>of data, 2016 to 2024</span></div>
+	<div class="odm-stat"><b>8.95 M</b><span>10-minute SCADA rows</span></div>
+	<div class="odm-stat"><b>415</b><span>major faults labeled from the logs</span></div>
+</div>
 
-- **Kelmarsh:** 6 turbines, 2016 to 2024, 2.84 million rows of 10-minute data, 97 major faults labeled from the farm's own logs.
-- **Penmanshiel:** 14 turbines, 2016 to 2024, 6.11 million rows, 318 major faults labeled.
-
-**The first result is negative.** Under a strict walk-forward test, with settings picked on 2017 to 2020 and scored once on 2021 to 2024, neither normal-behavior models nor short-term trip models beat chance at predicting gearbox oil-system or pitch faults. [Read the results](/windml/results/), including why.
-
-The same data still supports a useful look back. The [sample condition report](/windml/condition-report/) shows where downtime came from, which turbines stand out, and which abnormal states lasted for months.
-
-## What's next
-
-- Look for open wind data with higher time resolution or maintenance records.
-- Turn the condition report into a repeatable health check.
-- Publish the code once the license review is done.
-- Add more open datasets as new projects.
+<CardGrid>
+	<Card title="What we found" icon="magnifier">
+		Under a strict test (settings picked on 2017 to 2020, scored once on 2021 to 2024), neither normal-behavior models nor short-term trip models beat chance at predicting gearbox oil-system or pitch faults. [Read the results](/windml/results/) and why.
+	</Card>
+	<Card title="What the data is still good for" icon="document">
+		A look back at fleet health: where downtime came from, which turbines stand out, oil-pressure build-ups that ended at a service, and sensor or model drift. [See the sample report](/windml/condition-report/).
+	</Card>
+	<Card title="Check our work" icon="github">
+		The code is public under the MIT license, with tests on every push. `make setup && make smoke` reruns the pipeline on a slice of the data in about 10 minutes. [Reproduce it](/windml/reproduce/).
+	</Card>
+	<Card title="How we work with data" icon="open-book">
+		Open licenses only, credit to the people who published the data, and no resale. Operator data stays the operator's. [Read the data policy](/about/).
+	</Card>
+</CardGrid>
 
 ## For wind operators
 
-If you run wind turbines and want a free health check on your own SCADA data, get in touch. You keep ownership of your data.
+If you run wind turbines, we can produce the same kind of condition report from your own SCADA exports and status logs. The pilot is free. You send a year or more of data, and two weeks later you get a written report with a per-turbine scorecard and specific things to check. You keep ownership of your data.
 
-Contact: [hello@beehivewebstudio.com](mailto:hello@beehivewebstudio.com)
+<CardGrid>
+	<LinkCard title="Work with us" description="What the free pilot includes, what data we need, and how your data is handled." href="/work-with-us/" />
+	<LinkCard title="Email hello@beehivewebstudio.com" description="A short note about your fleet is enough to start." href="mailto:hello@beehivewebstudio.com" />
+</CardGrid>
 
 ---
 
