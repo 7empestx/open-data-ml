@@ -1,0 +1,22 @@
+# Synthetic long (tag/value) export (scripts/make_messy_fixtures.py, derived from Kelmarsh KEL01-02 2022).
+# Shape: one parquet per month for all turbines, rows = (epoch-ms UTC, asset, IEC 61400-25 tag, value), unsorted,
+# gearbox oil pressure in kPa.
+name: longco_long
+description: "Synthetic long-format (tag/value) export generated from Kelmarsh KEL01-02, 2022"
+license: "Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files: ["ingest-fixtures/longco/scada_long_*.parquet"]
+  format: parquet
+  layout: long
+  long: {tag_column: tag, value_column: value}
+  turbine_id: {from: column, column: asset, regex: 'WTG-(\d+)', format: "KEL{:02d}"}
+  timestamp: {column: ts, format: epoch_ms, label: start}
+  signals:
+    power_kw: {tag: WTUR.W, unit: kW}
+    wind_speed_ms: {tag: WNAC.WdSpd, unit: m/s}
+    ambient_temp_c: {tag: WNAC.ExTmp, unit: degC}
+    rotor_speed_rpm: {tag: WROT.RotSpd, unit: rpm}
+    gear_oil_temp_c: {tag: WTRM.TrmTmp.GbxOil, unit: degC}
+    gear_oil_inlet_pressure_bar: {tag: WTRM.GbxOilPres, unit: kPa}
+    pitch_a_deg: {tag: WROT.BlPthAngVal1, unit: deg}

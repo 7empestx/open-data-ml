@@ -1,0 +1,22 @@
+# Synthetic Excel export (scripts/make_messy_fixtures.py, derived from Kelmarsh KEL01-02, March 2022).
+# Shape: one workbook, one sheet per turbine ("WEA 1", "WEA 2"), two title rows above the header, German column
+# names, native Excel datetimes in UTC.
+name: xlsx_sheets
+description: "Synthetic Excel workbook (sheet per turbine) generated from Kelmarsh KEL01-02, March 2022"
+license: "Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files: ["ingest-fixtures/xlsx/Betriebsdaten_*.xlsx"]
+  format: excel
+  excel: {sheets: all, header_row: 2}
+  layout: wide
+  turbine_id: {from: sheet, regex: 'WEA (\d+)', format: "KEL{:02d}"}
+  timestamp: {column: "Datum/Uhrzeit (UTC)", timezone: UTC, label: start}
+  signals:
+    power_kw: "Leistung (kW)"
+    wind_speed_ms: "Windgeschwindigkeit (m/s)"
+    ambient_temp_c: "Aussentemperatur (°C)"
+    rotor_speed_rpm: "Rotordrehzahl (U/min)"
+    generator_speed_rpm: "Generatordrehzahl (U/min)"
+    gear_oil_temp_c: "Getriebeoeltemperatur (°C)"
+    nacelle_position_deg: "Gondelposition (°)"

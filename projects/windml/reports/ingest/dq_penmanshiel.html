@@ -1,0 +1,1353 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Data-quality report</title><style>body{font-family:system-ui,Arial,sans-serif;max-width:1200px;margin:2em auto;color:#1d2733;font-size:14px}
+table{border-collapse:collapse;font-size:12px;margin:8px 0}th{background:#12324d;color:#fff;padding:3px 6px;text-align:left}
+td{border-bottom:1px solid #d5dde5;padding:2px 6px}h1{color:#12324d}h2{color:#12324d;border-bottom:1px solid #b8c4d0}code{background:#eef2f6}</style></head><body><h1>Data-quality report: penmanshiel</h1>
+<p>Penmanshiel wind farm (14x Senvion MM82, UK), Cubico, Greenbyte export</p>
+<ul>
+<li>Period (UTC): 2021-01-01 00:00 to 2021-06-30 23:50; 5 turbines; 130,320 10-min rows</li>
+<li>Signals mapped: 34 of 34 canonical signals</li>
+<li>Source files: 5</li>
+</ul>
+<h2>Day-1 findings</h2>
+<ol>
+<li><strong>Out of range</strong> gear_oil_inlet_pressure_bar: 3.19% of values outside 0 to 15 bar (min -2.65, max 20)</li>
+<li><strong>Stuck sensors</strong> (constant &gt;= 6 h, or &gt;= 24 h for coarse sensors): PEN15 hub_temp_c 81.8 h; PEN13 pitch_motor_temp_3_c 33.2 h; PEN13 hub_temp_c 31.8 h; PEN11 hub_temp_c 30.5 h; PEN14 hub_temp_c 30.0 h</li>
+</ol>
+<h2>Coverage per turbine</h2>
+<p>Coverage = 10-min slots with power or wind speed present, over the farm-wide period.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">first</th>
+<th style="text-align: left;">last</th>
+<th style="text-align: right;">expected_rows</th>
+<th style="text-align: right;">rows_with_data</th>
+<th style="text-align: left;">coverage</th>
+<th style="text-align: right;">gaps_ge_1h</th>
+<th style="text-align: right;">longest_gap_h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">2021-01-01 00:00</td>
+<td style="text-align: left;">2021-06-30 23:50</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: right;">25646</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">44.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN12</td>
+<td style="text-align: left;">2021-01-01 00:00</td>
+<td style="text-align: left;">2021-06-30 23:50</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: right;">26045</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">2021-01-01 00:00</td>
+<td style="text-align: left;">2021-06-30 23:50</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: right;">26045</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: left;">2021-01-01 00:00</td>
+<td style="text-align: left;">2021-06-30 23:50</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: right;">26045</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">2021-01-01 00:00</td>
+<td style="text-align: left;">2021-06-30 23:50</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: right;">26016</td>
+<td style="text-align: left;">99.8%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3.7</td>
+</tr>
+</tbody>
+</table>
+<h2>Signal completeness (share of rows with a value)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">PEN11</th>
+<th style="text-align: left;">PEN12</th>
+<th style="text-align: left;">PEN13</th>
+<th style="text-align: left;">PEN14</th>
+<th style="text-align: left;">PEN15</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">97.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_1_ms</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_2_ms</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">rotor_speed_rpm</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">generator_speed_rpm</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_inlet_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_inlet_pressure_bar</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_bearing_front_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_bearing_rear_temp_c</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">rotor_bearing_temp_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gen_bearing_front_temp_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gen_bearing_rear_temp_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">converter_inlet_temp_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_b_deg</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_c_deg</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">yaw_bearing_angle_deg</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">power_setpoint_kw</td>
+<td style="text-align: left;">97.8%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.3%</td>
+<td style="text-align: left;">99.4%</td>
+<td style="text-align: left;">99.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">available_capacity_kw</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">data_availability</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">energy_export_kwh</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">lost_prod_curtail_total_kwh</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+<td style="text-align: left;">100.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">lost_prod_downtime_kwh</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_pump_pressure_bar</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_1_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: left;">98.4%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.9%</td>
+<td style="text-align: left;">99.8%</td>
+</tr>
+</tbody>
+</table>
+<h2>Gaps of 1 h or more (20 longest)</h2>
+<p>9 gaps in total.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">gap_start</th>
+<th style="text-align: left;">gap_end</th>
+<th style="text-align: right;">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">2021-01-16 14:40</td>
+<td style="text-align: left;">2021-01-18 11:30</td>
+<td style="text-align: right;">44.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">2021-01-18 15:30</td>
+<td style="text-align: left;">2021-01-19 13:10</td>
+<td style="text-align: right;">21.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">2021-01-26 06:00</td>
+<td style="text-align: left;">2021-01-26 09:40</td>
+<td style="text-align: right;">3.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN12</td>
+<td style="text-align: left;">2021-02-26 05:50</td>
+<td style="text-align: left;">2021-02-26 08:50</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">2021-02-26 05:50</td>
+<td style="text-align: left;">2021-02-26 08:50</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">2021-02-26 05:50</td>
+<td style="text-align: left;">2021-02-26 08:50</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: left;">2021-02-26 05:50</td>
+<td style="text-align: left;">2021-02-26 08:50</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">2021-02-26 05:50</td>
+<td style="text-align: left;">2021-02-26 08:50</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">2021-01-03 22:30</td>
+<td style="text-align: left;">2021-01-03 23:30</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<h2>Stuck sensors (identical value for 6 h or more, 24 h for coarse sensors where &gt;= 60% of readings sit on a 0.5-unit grid; temperatures, pressures, wind speed)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">signal</th>
+<th style="text-align: right;">coarse_share</th>
+<th style="text-align: right;">min_run_h</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">hours_stuck</th>
+<th style="text-align: right;">longest_h</th>
+<th style="text-align: left;">longest_from</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">30.5</td>
+<td style="text-align: right;">30.5</td>
+<td style="text-align: left;">2021-02-05 13:00</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">6.7</td>
+<td style="text-align: left;">2021-05-26 03:30</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">21.2</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: left;">2021-03-01 01:10</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN12</td>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">10.3</td>
+<td style="text-align: left;">2021-06-26 22:00</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN12</td>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15.8</td>
+<td style="text-align: right;">8.7</td>
+<td style="text-align: left;">2021-03-01 00:50</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">31.8</td>
+<td style="text-align: right;">31.8</td>
+<td style="text-align: left;">2021-02-05 16:40</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">pitch_motor_temp_1_c</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: left;">2021-02-28 21:50</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">22.5</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: left;">2021-01-25 01:30</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">33.2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">2021-01-20 05:30</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: right;">0.76</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">2021-02-02 10:40</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: left;">pitch_motor_temp_1_c</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: left;">2021-01-13 11:40</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: left;">2021-02-28 22:50</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">81.8</td>
+<td style="text-align: right;">30.5</td>
+<td style="text-align: left;">2021-02-07 14:50</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">pitch_motor_temp_1_c</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15.8</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">2021-01-13 11:10</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">7.5</td>
+<td style="text-align: left;">2021-01-13 11:20</td>
+<td style="text-align: right;">18</td>
+</tr>
+</tbody>
+</table>
+<h2>Value ranges vs plausible physical range (canonical units)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">plausible</th>
+<th style="text-align: right;">values</th>
+<th style="text-align: right;">out_of_range</th>
+<th style="text-align: left;">share</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">p1</th>
+<th style="text-align: right;">p99</th>
+<th style="text-align: right;">max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">kW</td>
+<td style="text-align: left;">-200 to 10000</td>
+<td style="text-align: right;">129793</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-17.9</td>
+<td style="text-align: right;">-5.24</td>
+<td style="text-align: right;">2.05e+03</td>
+<td style="text-align: right;">2.07e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">0 to 60</td>
+<td style="text-align: right;">129260</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.11</td>
+<td style="text-align: right;">19.3</td>
+<td style="text-align: right;">26.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_1_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">0 to 60</td>
+<td style="text-align: right;">129152</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.424</td>
+<td style="text-align: right;">17.8</td>
+<td style="text-align: right;">26.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_2_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">0 to 60</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-9.28</td>
+<td style="text-align: right;">1.09</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-45 to 55</td>
+<td style="text-align: right;">129077</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-3.49</td>
+<td style="text-align: right;">-1.33</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">22.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-40 to 80</td>
+<td style="text-align: right;">129077</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">1.2</td>
+<td style="text-align: right;">4.62</td>
+<td style="text-align: right;">28.1</td>
+<td style="text-align: right;">35.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">rotor_speed_rpm</td>
+<td style="text-align: left;">rpm</td>
+<td style="text-align: left;">0 to 40</td>
+<td style="text-align: right;">129793</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17.1</td>
+<td style="text-align: right;">17.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">generator_speed_rpm</td>
+<td style="text-align: left;">rpm</td>
+<td style="text-align: left;">-50 to 3000</td>
+<td style="text-align: right;">129795</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-575</td>
+<td style="text-align: right;">-0.737</td>
+<td style="text-align: right;">1.8e+03</td>
+<td style="text-align: right;">1.82e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 110</td>
+<td style="text-align: right;">129075</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">23.3</td>
+<td style="text-align: right;">59.6</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_inlet_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 110</td>
+<td style="text-align: right;">129077</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">3.05</td>
+<td style="text-align: right;">18.6</td>
+<td style="text-align: right;">56.4</td>
+<td style="text-align: right;">58.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_inlet_pressure_bar</td>
+<td style="text-align: left;">bar</td>
+<td style="text-align: left;">0 to 15</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">4141</td>
+<td style="text-align: left;">3.2%</td>
+<td style="text-align: right;">-2.65</td>
+<td style="text-align: right;">-0.789</td>
+<td style="text-align: right;">3.17</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_bearing_front_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 110</td>
+<td style="text-align: right;">129074</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.6</td>
+<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">74.5</td>
+<td style="text-align: right;">75.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">main_bearing_rear_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 110</td>
+<td style="text-align: right;">129074</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">7.62</td>
+<td style="text-align: right;">22.2</td>
+<td style="text-align: right;">65.7</td>
+<td style="text-align: right;">66.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">rotor_bearing_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 110</td>
+<td style="text-align: right;">129794</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">4.35</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">38.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">gen_bearing_front_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 130</td>
+<td style="text-align: right;">129796</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">16.9</td>
+<td style="text-align: right;">65.6</td>
+<td style="text-align: right;">75.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">gen_bearing_rear_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 130</td>
+<td style="text-align: right;">129796</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">7.01</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">52.7</td>
+<td style="text-align: right;">72.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">converter_inlet_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-30 to 80</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-1.25</td>
+<td style="text-align: right;">0.908</td>
+<td style="text-align: right;">21.9</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-10 to 100</td>
+<td style="text-align: right;">129073</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-19</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">93.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_b_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-10 to 100</td>
+<td style="text-align: right;">129073</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-17.2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_c_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-10 to 100</td>
+<td style="text-align: right;">129073</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-17.3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">101</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.0174</td>
+<td style="text-align: right;">4.1</td>
+<td style="text-align: right;">357</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">yaw_bearing_angle_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-1500 to 1500</td>
+<td style="text-align: right;">129077</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.00682</td>
+<td style="text-align: right;">4.08</td>
+<td style="text-align: right;">358</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.00412</td>
+<td style="text-align: right;">4.1</td>
+<td style="text-align: right;">356</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">power_setpoint_kw</td>
+<td style="text-align: left;">kW</td>
+<td style="text-align: left;">-10 to 10000</td>
+<td style="text-align: right;">129077</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">2.06e+03</td>
+<td style="text-align: right;">2.06e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">available_capacity_kw</td>
+<td style="text-align: left;">kW</td>
+<td style="text-align: left;">-10 to 10000</td>
+<td style="text-align: right;">130196</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.05e+03</td>
+<td style="text-align: right;">2.05e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">data_availability</td>
+<td style="text-align: left;">fraction</td>
+<td style="text-align: left;">0 to 1</td>
+<td style="text-align: right;">130320</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">energy_export_kwh</td>
+<td style="text-align: left;">kWh</td>
+<td style="text-align: left;">-100 to 2000</td>
+<td style="text-align: right;">130175</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00794</td>
+<td style="text-align: right;">409</td>
+<td style="text-align: right;">413</td>
+</tr>
+<tr>
+<td style="text-align: left;">lost_prod_curtail_total_kwh</td>
+<td style="text-align: left;">kWh</td>
+<td style="text-align: left;">0 to 2000</td>
+<td style="text-align: right;">130320</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">lost_prod_downtime_kwh</td>
+<td style="text-align: left;">kWh</td>
+<td style="text-align: left;">0 to 2000</td>
+<td style="text-align: right;">130196</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">343</td>
+</tr>
+<tr>
+<td style="text-align: left;">gear_oil_pump_pressure_bar</td>
+<td style="text-align: left;">bar</td>
+<td style="text-align: left;">0 to 25</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">9.6</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td style="text-align: left;">hub_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-40 to 70</td>
+<td style="text-align: right;">129793</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">5.96</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">24.8</td>
+<td style="text-align: right;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_1_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-40 to 150</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">81.2</td>
+<td style="text-align: right;">85.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_2_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-40 to 150</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">6.59</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">80.7</td>
+<td style="text-align: right;">83.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_motor_temp_3_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-40 to 150</td>
+<td style="text-align: right;">129797</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">5.16</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">83</td>
+</tr>
+</tbody>
+</table>
+<h2>Units</h2>
+<table>
+<thead>
+<tr>
+<th>signal</th>
+<th>decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>power_kw</td>
+<td>kW -&gt; kW (column name)</td>
+</tr>
+<tr>
+<td>wind_speed_ms</td>
+<td>m/s -&gt; m/s (column name)</td>
+</tr>
+<tr>
+<td>wind_speed_1_ms</td>
+<td>m/s -&gt; m/s (column name)</td>
+</tr>
+<tr>
+<td>wind_speed_2_ms</td>
+<td>m/s -&gt; m/s (column name)</td>
+</tr>
+<tr>
+<td>ambient_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>nacelle_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>rotor_speed_rpm</td>
+<td>rpm -&gt; rpm (column name)</td>
+</tr>
+<tr>
+<td>generator_speed_rpm</td>
+<td>rpm -&gt; rpm (column name)</td>
+</tr>
+<tr>
+<td>gear_oil_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>gear_oil_inlet_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>gear_oil_inlet_pressure_bar</td>
+<td>per-row switch:</td>
+</tr>
+<tr>
+<td>main_bearing_front_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>main_bearing_rear_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>rotor_bearing_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>gen_bearing_front_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>gen_bearing_rear_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>converter_inlet_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>pitch_a_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>pitch_b_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>pitch_c_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>nacelle_position_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>yaw_bearing_angle_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>wind_direction_deg</td>
+<td>deg -&gt; deg (column name)</td>
+</tr>
+<tr>
+<td>power_setpoint_kw</td>
+<td>kW -&gt; kW (column name)</td>
+</tr>
+<tr>
+<td>available_capacity_kw</td>
+<td>kW -&gt; kW (column name)</td>
+</tr>
+<tr>
+<td>data_availability</td>
+<td>fraction -&gt; fraction (canonical default)</td>
+</tr>
+<tr>
+<td>energy_export_kwh</td>
+<td>kWh -&gt; kWh (column name)</td>
+</tr>
+<tr>
+<td>lost_prod_curtail_total_kwh</td>
+<td>kWh -&gt; kWh (column name)</td>
+</tr>
+<tr>
+<td>lost_prod_downtime_kwh</td>
+<td>kWh -&gt; kWh (column name)</td>
+</tr>
+<tr>
+<td>gear_oil_pump_pressure_bar</td>
+<td>per-row switch:</td>
+</tr>
+<tr>
+<td>hub_temp_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>pitch_motor_temp_1_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>pitch_motor_temp_2_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+<tr>
+<td>pitch_motor_temp_3_c</td>
+<td>degC -&gt; degC (column name)</td>
+</tr>
+</tbody>
+</table>
+<h2>Timestamps and clocks</h2>
+<ul>
+<li>Duplicate timestamps collapsed (most complete row kept): none</li>
+<li>Duplicate dates (top): none</li>
+<li>Off-grid timestamps: none</li>
+<li>Local-time conversion: timestamps were UTC or carried offsets</li>
+</ul>
+<p>Best lag vs fleet (10-min steps; 0 = clocks agree), from wind-speed changes:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: right;">2021Q1</th>
+<th style="text-align: right;">2021Q2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PEN11</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">PEN15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h2>Status / alarm log</h2>
+<ul>
+<li>Events: 26,658; stops: 453; fault stops: 44; major faults: 2</li>
+<li>Stops by class: {'routine': 228, 'weather': 67, 'maintenance': 64, 'curtailment': 50, 'fault': 44}</li>
+<li>Events outside the SCADA period: 1; end before start: 0</li>
+</ul>
+<p>Top stop codes:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">code</th>
+<th style="text-align: left;">message</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">710</td>
+<td style="text-align: left;">Battery test</td>
+<td style="text-align: right;">130</td>
+</tr>
+<tr>
+<td style="text-align: right;">6200</td>
+<td style="text-align: left;">Cable autounwind</td>
+<td style="text-align: right;">63</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">Max. wind speed</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr>
+<td style="text-align: right;">9210</td>
+<td style="text-align: left;">Externally stopped</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Manual stop - on site</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr>
+<td style="text-align: right;">5760</td>
+<td style="text-align: left;">Hydraulic oil flushing operation</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td style="text-align: right;">6530</td>
+<td style="text-align: left;">Anemometer defect</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Manual stop - remote</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td style="text-align: right;">6540</td>
+<td style="text-align: left;">Icing (anemometer)</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">Manual stop without login</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+<h2>Columns in the export that are not mapped</h2>
+<p><code>Wind speed, Standard deviation (m/s)</code>, <code>Wind speed, Minimum (m/s)</code>, <code>Wind speed, Maximum (m/s)</code>, <code>Long Term Wind (m/s)</code>, <code>Wind speed Sensor 1, Standard deviation (m/s)</code>, <code>Wind speed Sensor 1, Minimum (m/s)</code>, <code>Wind speed Sensor 1, Maximum (m/s)</code>, <code>Wind speed Sensor 2, Standard deviation (m/s)</code>, <code>Wind speed Sensor 2, Minimum (m/s)</code>, <code>Wind speed Sensor 2, Maximum (m/s)</code>, <code>Density adjusted wind speed (m/s)</code>, <code>Wind direction, Standard deviation (°)</code>, <code>Wind direction, Minimum (°)</code>, <code>Wind direction, Maximum (°)</code>, <code>Nacelle position, Standard deviation (°)</code>, <code>Nacelle position, Minimum (°)</code>, <code>Nacelle position, Maximum (°)</code>, <code>Vane position 1+2 (°)</code>, <code>Vane position 1+2, Max (°)</code>, <code>Vane position 1+2, Min (°)</code>, <code>Vane position 1+2, StdDev (°)</code>, <code>Energy Export counter (kWh)</code>, <code>Energy Import (kWh)</code>, <code>Energy Import counter (kWh)</code>, <code>Lost Production (Contractual) (kWh)</code>, <code>Lost Production (Time-based IEC B.2.2) (kWh)</code>, <code>Lost Production (Time-based IEC B.2.3) (kWh)</code>, <code>Lost Production (Time-based IEC B.2.4) (kWh)</code>, <code>Lost Production (Time-based IEC B.3.2) (kWh)</code>, <code>Lost Production (Production-based IEC B.2.2) (kWh)</code>, <code>Lost Production (Production-based IEC B.2.3) (kWh)</code>, <code>Lost Production (Production-based IEC B.3.2) (kWh)</code>, <code>Energy Budget - Default (kWh)</code>, <code>Energy Theoretical (kWh)</code>, <code>Lost Production to Performance (kWh)</code>, <code>Lost Production Total (kWh)</code>, <code>Lost Production to Curtailment (Grid) (kWh)</code>, <code>Lost Production to Curtailment (Noise) (kWh)</code>, <code>Lost Production to Curtailment (Shadow) (kWh)</code>, <code>Lost Production to Curtailment (Bats) (kWh)</code>, <code>Lost Production to Curtailment (Birds) (kWh)</code>, <code>Lost Production to Curtailment (Ice) (kWh)</code>, <code>Lost Production to Curtailment (Sector Management) (kWh)</code>, <code>Lost Production to Curtailment (Technical) (kWh)</code>, <code>Lost Production to Curtailment (Marketing) (kWh)</code>, <code>Lost Production to Curtailment (Boat Action) (kWh)</code>, <code>Compensated Lost Production (kWh)</code>, <code>Virtual Production (kWh)</code>, <code>Lost Production to Curtailment (Grid Constraint) (kWh)</code>, <code>Lost Production to Downtime and Curtailment Total (kWh)</code>, <code>Lost Production (Contractual Global) (kWh)</code>, <code>Lost Production (Contractual Custom) (kWh)</code>, <code>Potential power default PC (kW)</code>, <code>Power, Standard deviation (kW)</code>, <code>Power, Minimum (kW)</code>, <code>Power, Maximum (kW)</code>, <code>Potential power learned PC (kW)</code>, <code>Potential power reference turbines (kW)</code>, <code>Cascading potential power (kW)</code>, <code>Cascading potential power for performance (kW)</code>, <code>Potential power met mast anemometer (kW)</code>, <code>Potential power primary reference turbines (kW)</code>, <code>Potential power secondary reference turbines (kW)</code>, <code>Potential power estimated (kW)</code>, <code>Potential power MPC (kW)</code>, <code>Potential power met mast anemometer MPC (kW)</code>, <code>Turbine Power setpoint, Max (kW)</code>, <code>Turbine Power setpoint, Min (kW)</code>, <code>Turbine Power setpoint, StdDev (kW)</code>, <code>Available Capacity for Production (Planned) (kW)</code>, <code>APE-2 (kW)</code>, <code>Power factor (cosphi)</code>, <code>Power factor (cosphi), Max</code>, <code>Power factor (cosphi), Min</code>, <code>Power factor (cosphi), Standard deviation</code>, <code>Reactive power (kvar)</code>, <code>Reactive power, Max (kvar)</code>, <code>Reactive power, Min (kvar)</code>, <code>Reactive power, Standard deviation (kvar)</code>, <code>Stator temperature 1 (°C)</code>, <code>Transformer temperature (°C)</code>, <code>Temp. top box (°C)</code>, <code>Transformer cell temperature (°C)</code>, <code>Front bearing temperature, Max (°C)</code>, <code>Front bearing temperature, Min (°C)</code>, <code>Front bearing temperature, Standard deviation (°C)</code>, <code>Rear bearing temperature, Max (°C)</code>, <code>Rear bearing temperature, Min (°C)</code>, <code>Rear bearing temperature, Standard deviation (°C)</code>, <code>CPU temperature (°C)</code>, <code>Nacelle temperature, Max (°C)</code>, <code>Nacelle temperature, Min (°C)</code>, <code>Generator bearing front temperature, Max (°C)</code>, <code>Generator bearing front temperature, Min (°C)</code>, <code>Generator bearing rear temperature, Max (°C)</code>, <code>Generator bearing rear temperature, Min (°C)</code>, <code>Generator bearing front temperature, Std (°C)</code>, <code>Generator bearing rear temperature, Std (°C)</code>, <code>Nacelle temperature, Standard deviation (°C)</code>, <code>Gear oil temperature, Max (°C)</code>, <code>Gear oil temperature, Min (°C)</code>, <code>Gear oil temperature, Standard deviation (°C)</code>, <code>Hub temperature, min (°C)</code>, <code>Hub temperature, max (°C)</code>, <code>Hub temperature, standard deviation (°C)</code>, <code>Ambient temperature (converter), Max (°C)</code>, <code>Ambient temperature (converter), Min (°C)</code>, <code>Ambient temperature (converter), StdDev (°C)</code>, <code>Gear oil inlet temperature, Max (°C)</code>, <code>Gear oil inlet temperature, Min (°C)</code>, <code>Gear oil inlet temperature, StdDev (°C)</code>, <code>Nacelle ambient temperature, Max (°C)</code>, <code>Nacelle ambient temperature, Min (°C)</code>, <code>Nacelle ambient temperature, StdDev (°C)</code>, <code>Rotor bearing temp, Max (°C)</code>, <code>Rotor bearing temp, Min (°C)</code>, <code>Rotor bearing temp, StdDev (°C)</code>, <code>CPU temperature, Max (°C)</code>, <code>CPU temperature, Min (°C)</code>, <code>CPU temperature, StdDev (°C)</code>, <code>Transformer cell temperature, Max (°C)</code>, <code>Transformer cell temperature, Min (°C)</code>, <code>Transformer cell temperature, StdDev (°C)</code>, <code>Transformer temperature, Max (°C)</code>, <code>Transformer temperature, Min (°C)</code>, <code>Transformer temperature, StdDev (°C)</code>, <code>Stator temperature 1, Max (°C)</code>, <code>Stator temperature 1, Min (°C)</code>, <code>Stator temperature 1, StdDev (°C)</code>, <code>Temp. top box, Max (°C)</code>, <code>Temp. top box, Min (°C)</code>, <code>Temp. top box, StdDev (°C)</code>, <code>Temperature motor axis 1, Max (°C)</code>, <code>Temperature motor axis 1, Min (°C)</code>, <code>Temperature motor axis 1, StdDev (°C)</code>, <code>Temperature motor axis 2, Max (°C)</code>, <code>Temperature motor axis 2, Min (°C)</code>, <code>Temperature motor axis 2, StdDev (°C)</code>, <code>Temperature motor axis 3, Max (°C)</code>, <code>Temperature motor axis 3, Min (°C)</code>, <code>Temperature motor axis 3, StdDev (°C)</code>, <code>Voltage L1 / U (V)</code>, <code>Voltage L2 / V (V)</code>, <code>Voltage L3 / W (V)</code>, <code>Grid voltage (V)</code>, <code>Grid voltage, Max (V)</code>, <code>Grid voltage, Min (V)</code>, <code>Grid voltage, Standard deviation (V)</code>, <code>Voltage L1 / U, Min (V)</code>, <code>Voltage L1 / U, Max (V)</code> ...</p>
+<h2>Files read</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">file</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">turbines</th>
+<th style="text-align: left;">missing_columns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">penmanshiel-wind-scada/scada_2021_wt11-15/Turbine_Data_Penmanshiel_11_2021-01-01_-_2021-07-01_1051.csv</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: left;">['PEN11']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+<tr>
+<td style="text-align: left;">penmanshiel-wind-scada/scada_2021_wt11-15/Turbine_Data_Penmanshiel_12_2021-01-01_-_2021-07-01_1052.csv</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: left;">['PEN12']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+<tr>
+<td style="text-align: left;">penmanshiel-wind-scada/scada_2021_wt11-15/Turbine_Data_Penmanshiel_13_2021-01-01_-_2021-07-01_1053.csv</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: left;">['PEN13']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+<tr>
+<td style="text-align: left;">penmanshiel-wind-scada/scada_2021_wt11-15/Turbine_Data_Penmanshiel_14_2021-01-01_-_2021-07-01_1054.csv</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: left;">['PEN14']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+<tr>
+<td style="text-align: left;">penmanshiel-wind-scada/scada_2021_wt11-15/Turbine_Data_Penmanshiel_15_2021-01-01_-_2021-07-01_1056.csv</td>
+<td style="text-align: right;">26064</td>
+<td style="text-align: left;">['PEN15']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Generated by <code>windml ingest validate</code> (projects/windml/src/windml/ingest). Thresholds: gaps &gt;= 1 h, stuck &gt;= 6 h, coverage &lt; 95%, out-of-range share &gt; 0.1%.</p></body></html>

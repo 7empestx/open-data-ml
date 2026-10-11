@@ -1,0 +1,521 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Data-quality report</title><style>body{font-family:system-ui,Arial,sans-serif;max-width:1200px;margin:2em auto;color:#1d2733;font-size:14px}
+table{border-collapse:collapse;font-size:12px;margin:8px 0}th{background:#12324d;color:#fff;padding:3px 6px;text-align:left}
+td{border-bottom:1px solid #d5dde5;padding:2px 6px}h1{color:#12324d}h2{color:#12324d;border-bottom:1px solid #b8c4d0}code{background:#eef2f6}</style></head><body><h1>Data-quality report: la_haute_borne</h1>
+<p>La Haute Borne wind farm (4x Senvion MM82 2050 kW, France), ENGIE open data via NREL OpenOA</p>
+<ul>
+<li>Period (UTC): 2014-01-01 00:00 to 2015-12-31 23:50; 4 turbines; 420,432 10-min rows</li>
+<li>Signals mapped: 6 of 34 canonical signals</li>
+<li>Source files: 1</li>
+</ul>
+<h2>Day-1 findings</h2>
+<ol>
+<li><strong>Stuck sensors</strong> (constant &gt;= 6 h, or &gt;= 24 h for coarse sensors): LHB02 ambient_temp_c 18.7 h; LHB03 wind_speed_ms 7.0 h</li>
+<li><strong>Duplicate timestamps</strong>: 48 collapsed (LHB01 12, LHB02 12, LHB03 12, LHB04 12)</li>
+<li><strong>DST</strong> duplicate timestamps on the spring DST date(s) (LHB01 12, LHB02 12, LHB03 12, LHB04 12): the exporter probably stamped the skipped local hour with the summer-time offset (02:xx written as 03:xx), so one copy of each pair is an hour early. The most complete row was kept; confirm with the operator</li>
+</ol>
+<h2>Coverage per turbine</h2>
+<p>Coverage = 10-min slots with power or wind speed present, over the farm-wide period.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">first</th>
+<th style="text-align: left;">last</th>
+<th style="text-align: right;">expected_rows</th>
+<th style="text-align: right;">rows_with_data</th>
+<th style="text-align: left;">coverage</th>
+<th style="text-align: right;">gaps_ge_1h</th>
+<th style="text-align: right;">longest_gap_h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2014-01-01 00:00</td>
+<td style="text-align: left;">2015-12-31 23:50</td>
+<td style="text-align: right;">105120</td>
+<td style="text-align: right;">104633</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">34.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2014-01-01 00:00</td>
+<td style="text-align: left;">2015-12-31 23:50</td>
+<td style="text-align: right;">105120</td>
+<td style="text-align: right;">103899</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">133</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2014-01-01 00:00</td>
+<td style="text-align: left;">2015-12-31 23:50</td>
+<td style="text-align: right;">105120</td>
+<td style="text-align: right;">104673</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">34.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2014-01-01 00:00</td>
+<td style="text-align: left;">2015-12-31 23:50</td>
+<td style="text-align: right;">105120</td>
+<td style="text-align: right;">104658</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">34.3</td>
+</tr>
+</tbody>
+</table>
+<h2>Signal completeness (share of rows with a value)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">LHB01</th>
+<th style="text-align: left;">LHB02</th>
+<th style="text-align: left;">LHB03</th>
+<th style="text-align: left;">LHB04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">99.5%</td>
+<td style="text-align: left;">98.8%</td>
+<td style="text-align: left;">99.6%</td>
+<td style="text-align: left;">99.6%</td>
+</tr>
+</tbody>
+</table>
+<h2>Gaps of 1 h or more (20 longest)</h2>
+<p>49 gaps in total.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">gap_start</th>
+<th style="text-align: left;">gap_end</th>
+<th style="text-align: right;">hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2015-02-27 01:40</td>
+<td style="text-align: left;">2015-03-04 14:30</td>
+<td style="text-align: right;">133</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2015-06-16 00:40</td>
+<td style="text-align: left;">2015-06-17 11:00</td>
+<td style="text-align: right;">34.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2015-06-16 00:40</td>
+<td style="text-align: left;">2015-06-17 11:00</td>
+<td style="text-align: right;">34.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2015-06-16 00:40</td>
+<td style="text-align: left;">2015-06-17 11:00</td>
+<td style="text-align: right;">34.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2015-06-16 00:40</td>
+<td style="text-align: left;">2015-06-17 10:50</td>
+<td style="text-align: right;">34.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2015-02-27 04:10</td>
+<td style="text-align: left;">2015-02-27 15:40</td>
+<td style="text-align: right;">11.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2015-02-27 04:10</td>
+<td style="text-align: left;">2015-02-27 14:50</td>
+<td style="text-align: right;">10.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2015-02-27 04:10</td>
+<td style="text-align: left;">2015-02-27 14:50</td>
+<td style="text-align: right;">10.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2014-10-29 07:10</td>
+<td style="text-align: left;">2014-10-29 17:20</td>
+<td style="text-align: right;">10.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2014-10-29 07:30</td>
+<td style="text-align: left;">2014-10-29 17:20</td>
+<td style="text-align: right;">9.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2014-10-29 07:20</td>
+<td style="text-align: left;">2014-10-29 17:00</td>
+<td style="text-align: right;">9.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2014-10-29 07:20</td>
+<td style="text-align: left;">2014-10-29 17:00</td>
+<td style="text-align: right;">9.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2014-06-18 05:00</td>
+<td style="text-align: left;">2014-06-18 10:40</td>
+<td style="text-align: right;">5.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2014-06-18 05:20</td>
+<td style="text-align: left;">2014-06-18 10:40</td>
+<td style="text-align: right;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2014-06-18 05:20</td>
+<td style="text-align: left;">2014-06-18 10:40</td>
+<td style="text-align: right;">5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: left;">2015-04-17 05:30</td>
+<td style="text-align: left;">2015-04-17 10:30</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2015-04-17 05:30</td>
+<td style="text-align: left;">2015-04-17 10:10</td>
+<td style="text-align: right;">4.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">2015-04-17 05:40</td>
+<td style="text-align: left;">2015-04-17 10:20</td>
+<td style="text-align: right;">4.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: left;">2015-04-17 05:40</td>
+<td style="text-align: left;">2015-04-17 10:10</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">2014-06-18 05:10</td>
+<td style="text-align: left;">2014-06-18 09:10</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+<h2>Stuck sensors (identical value for 6 h or more, 24 h for coarse sensors where &gt;= 60% of readings sit on a 0.5-unit grid; temperatures, pressures, wind speed)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: left;">signal</th>
+<th style="text-align: right;">coarse_share</th>
+<th style="text-align: right;">min_run_h</th>
+<th style="text-align: right;">runs</th>
+<th style="text-align: right;">hours_stuck</th>
+<th style="text-align: right;">longest_h</th>
+<th style="text-align: left;">longest_from</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: left;">2014-06-09 12:00</td>
+<td style="text-align: right;">34.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">2014-10-27 01:30</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h2>Value ranges vs plausible physical range (canonical units)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">signal</th>
+<th style="text-align: left;">unit</th>
+<th style="text-align: left;">plausible</th>
+<th style="text-align: right;">values</th>
+<th style="text-align: right;">out_of_range</th>
+<th style="text-align: left;">share</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">p1</th>
+<th style="text-align: right;">p99</th>
+<th style="text-align: right;">max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">power_kw</td>
+<td style="text-align: left;">kW</td>
+<td style="text-align: left;">-200 to 10000</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-17.9</td>
+<td style="text-align: right;">-4.59</td>
+<td style="text-align: right;">1.87e+03</td>
+<td style="text-align: right;">2.05e+03</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_speed_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">0 to 60</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12.4</td>
+<td style="text-align: right;">19.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">pitch_a_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">-10 to 100</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-121</td>
+<td style="text-align: right;">-1.01</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">263</td>
+</tr>
+<tr>
+<td style="text-align: left;">nacelle_position_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.84</td>
+<td style="text-align: right;">354</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">wind_direction_deg</td>
+<td style="text-align: left;">deg</td>
+<td style="text-align: left;">0 to 360</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.18</td>
+<td style="text-align: right;">354</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr>
+<td style="text-align: left;">ambient_temp_c</td>
+<td style="text-align: left;">degC</td>
+<td style="text-align: left;">-45 to 55</td>
+<td style="text-align: right;">417863</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">0.0%</td>
+<td style="text-align: right;">-273</td>
+<td style="text-align: right;">-0.74</td>
+<td style="text-align: right;">31.2</td>
+<td style="text-align: right;">39.9</td>
+</tr>
+</tbody>
+</table>
+<h2>Units</h2>
+<table>
+<thead>
+<tr>
+<th>signal</th>
+<th>decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>power_kw</td>
+<td>kW -&gt; kW (mapping)</td>
+</tr>
+<tr>
+<td>wind_speed_ms</td>
+<td>m/s -&gt; m/s (mapping)</td>
+</tr>
+<tr>
+<td>pitch_a_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>nacelle_position_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>wind_direction_deg</td>
+<td>deg -&gt; deg (mapping)</td>
+</tr>
+<tr>
+<td>ambient_temp_c</td>
+<td>degC -&gt; degC (mapping)</td>
+</tr>
+</tbody>
+</table>
+<h2>Timestamps and clocks</h2>
+<ul>
+<li>Duplicate timestamps collapsed (most complete row kept): {'LHB01': 12, 'LHB02': 12, 'LHB03': 12, 'LHB04': 12}</li>
+<li>Duplicate dates (top): {'LHB01': {'2014-03-30': 6, '2015-03-29': 6}, 'LHB02': {'2014-03-30': 6, '2015-03-29': 6}, 'LHB03': {'2014-03-30': 6, '2015-03-29': 6}, 'LHB04': {'2014-03-30': 6, '2015-03-29': 6}}</li>
+<li>Off-grid timestamps: none</li>
+<li>Local-time conversion: timestamps were UTC or carried offsets</li>
+</ul>
+<p>Best lag vs fleet (10-min steps; 0 = clocks agree), from wind-speed changes:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">turbine_id</th>
+<th style="text-align: right;">2014Q1</th>
+<th style="text-align: right;">2014Q2</th>
+<th style="text-align: right;">2014Q3</th>
+<th style="text-align: right;">2014Q4</th>
+<th style="text-align: right;">2015Q1</th>
+<th style="text-align: right;">2015Q2</th>
+<th style="text-align: right;">2015Q3</th>
+<th style="text-align: right;">2015Q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">LHB01</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB02</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB03</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">LHB04</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<h2>Columns in the export that are not mapped</h2>
+<p><code>Va_avg</code></p>
+<h2>Files read</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">file</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">turbines</th>
+<th style="text-align: left;">missing_columns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">la-haute-borne/la-haute-borne-data-2014-2015.csv</td>
+<td style="text-align: right;">420480</td>
+<td style="text-align: left;">['LHB01', 'LHB02', 'LHB03', 'LHB04']</td>
+<td style="text-align: left;">[]</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Generated by <code>windml ingest validate</code> (projects/windml/src/windml/ingest). Thresholds: gaps &gt;= 1 h, stuck &gt;= 6 h, coverage &lt; 95%, out-of-range share &gt; 0.1%.</p></body></html>

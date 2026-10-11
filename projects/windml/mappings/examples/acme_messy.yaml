@@ -1,0 +1,49 @@
+# Synthetic "messy operator" export (scripts/make_messy_fixtures.py, derived from Kelmarsh KEL01-02 2022).
+# Drafted with `windml ingest suggest`, then reviewed: turbine id format, rated power, status log added.
+# Shape: one CSV per turbine per month, ';' + decimal comma, latin-1, 2-line preamble, vendor tags, W / °F / kPa,
+# Europe/London local time with DST, dd.mm.yyyy, timestamps at the END of each interval.
+name: acme_messy
+description: "Synthetic ACME-style vendor export generated from Kelmarsh KEL01-02, 2022"
+license: "Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files:
+    - "ingest-fixtures/acme/WTG*_*.csv"
+  format: csv
+  csv: {delimiter: ";", decimal: ",", encoding: latin-1, header_match: '^Zeitstempel'}
+  layout: wide
+  turbine_id: {from: filename, regex: 'WTG(\d+)_', format: "KEL{:02d}"}
+  timestamp:
+    column: Zeitstempel
+    format: "%d.%m.%Y %H:%M"
+    timezone: Europe/London
+    ambiguous: infer          # files are in time order, so the repeated October hour can be inferred
+    nonexistent: drop
+    label: end
+  signals:
+    power_kw: {column: "WTG_ActPwr_Mean [W]", unit: W}
+    wind_speed_ms: {column: "WindSpd_Avg [m/s]", unit: m/s}
+    ambient_temp_c: {column: "AmbTmp_Avg [°F]", unit: degF}
+    nacelle_temp_c: {column: "NacTmp_Avg [°F]", unit: degF}
+    rotor_speed_rpm: {column: "RotorSpd_Avg [rpm]", unit: rpm}
+    generator_speed_rpm: {column: "GenSpd_Avg [rpm]", unit: rpm}
+    gear_oil_temp_c: {column: "GbxOilSumpTmp_Avg [°F]", unit: degF}
+    gear_oil_inlet_pressure_bar: {column: "GbxOilInletPrs_Avg [kPa]", unit: kPa}
+    main_bearing_front_temp_c: {column: "MainBrgTmp1_Avg [°F]", unit: degF}
+    pitch_a_deg: {column: "Blade1PitchAng_Avg [deg]", unit: deg}
+    nacelle_position_deg: {column: "NacDir_Avg [deg]", unit: deg}
+    wind_direction_deg: {column: "WindDirAbs_Avg [deg]", unit: deg}
+status:
+  files:
+    - "ingest-fixtures/acme/Alarme_WTG*_2022.csv"
+  format: csv
+  csv: {delimiter: ";", encoding: latin-1}
+  turbine_id: {from: filename, regex: 'WTG(\d+)_', format: "KEL{:02d}"}
+  start: {column: Beginn, format: "%d.%m.%Y %H:%M:%S", timezone: Europe/London, ambiguous: earliest, nonexistent: shift_forward}
+  end: {column: Ende, format: "%d.%m.%Y %H:%M:%S", timezone: Europe/London, ambiguous: earliest, nonexistent: shift_forward}
+  end_missing: [""]
+  status: {column: Typ, map: {Halt: Stop, Warnung: Warning, Info: Informational}}
+  code: Fehlercode
+  message: Meldung
+  service_category: Kategorie
+  iec_category: IEC
