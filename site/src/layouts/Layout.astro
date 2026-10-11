@@ -1,0 +1,43 @@
+---
+import '~/assets/styles/tailwind.css';
+
+import { Font } from 'astro:assets';
+
+import { I18N } from 'astrowind:config';
+
+import CommonMeta from '~/components/common/CommonMeta.astro';
+import Favicons from '~/components/Favicons.astro';
+import CustomStyles from '~/components/CustomStyles.astro';
+import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
+import Metadata from '~/components/common/Metadata.astro';
+
+import type { MetaData as MetaDataType } from '~/types';
+
+export interface Props {
+  metadata?: MetaDataType;
+}
+
+const { metadata = {} } = Astro.props;
+const { language, textDirection } = I18N;
+---
+
+<!doctype html>
+<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+  <head>
+    <CommonMeta />
+    <Favicons />
+    <Font cssVariable="--font-inter" preload />
+    <CustomStyles />
+    <ApplyColorMode />
+    <Metadata {...metadata} />
+    <slot name="head" />
+  </head>
+
+  <body class="antialiased text-default bg-page tracking-tight min-h-screen flex flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 btn-primary"
+      >Skip to content</a
+    >
+    <slot />
+
+  </body>
+</html>

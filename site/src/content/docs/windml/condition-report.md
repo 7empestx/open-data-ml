@@ -11,9 +11,7 @@ This sample shows what a wind farm health assessment looks like. The full report
 
 Want one for your own fleet? See [Work with us](/work-with-us/).
 
-:::caution[Not a failure prediction]
-This is a retrospective review of public data, not engineering advice. Any finding should be checked by a qualified engineer, with site records and inspections, before anyone acts on it.
-:::
+<div class="callout callout-caution" role="note"><p class="callout-title">Not a failure prediction</p><p>This is a retrospective review of public data, not engineering advice. Any finding should be checked by a qualified engineer, with site records and inspections, before anyone acts on it.</p></div>
 
 ## Sites and data
 

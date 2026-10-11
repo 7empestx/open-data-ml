@@ -2,140 +2,141 @@
 // Accessible, theme-aware horizontal bar chart rendered as plain HTML and CSS.
 // No JavaScript. Every value is printed as text, so screen readers get the data.
 interface Bar {
-	name: string;
-	value: number;
-	display?: string;
-	kind?: 'model' | 'baseline' | 'chance';
+  name: string;
+  value: number;
+  display?: string;
+  kind?: 'model' | 'baseline' | 'chance';
 }
 interface Group {
-	label: string;
-	note?: string;
-	bars: Bar[];
+  label: string;
+  note?: string;
+  bars: Bar[];
 }
 interface Props {
-	title: string;
-	caption?: string;
-	groups: Group[];
-	max?: number;
-	unit?: string;
+  title: string;
+  caption?: string;
+  groups: Group[];
+  max?: number;
+  unit?: string;
 }
 const { title, caption, groups, max, unit = '' } = Astro.props;
 const top = max ?? Math.max(...groups.flatMap((g) => g.bars.map((b) => b.value))) * 1.1;
 const id = 'chart-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
-<figure class="odm-chart not-content" aria-labelledby={`${id}-title`}>
-	<figcaption id={`${id}-title`} class="odm-chart-title">{title}</figcaption>
-	{
-		groups.map((g) => (
-			<div class="odm-chart-group">
-				<div class="odm-chart-group-label">
-					{g.label}
-					{g.note && <span class="odm-chart-note">{g.note}</span>}
-				</div>
-				<ul>
-					{g.bars.map((b) => (
-						<li class={`odm-bar odm-bar--${b.kind ?? 'model'}`}>
-							<span class="odm-bar-name">{b.name}</span>
-							<span class="odm-bar-track" aria-hidden="true">
-								<span class="odm-bar-fill" style={`width:${Math.max(0.5, (b.value / top) * 100).toFixed(1)}%`} />
-							</span>
-							<span class="odm-bar-value">
-								{b.display ?? b.value}
-								{unit}
-							</span>
-						</li>
-					))}
-				</ul>
-			</div>
-		))
-	}
-	{caption && <p class="odm-chart-caption">{caption}</p>}
+<figure class="odm-chart not-prose" aria-labelledby={`${id}-title`}>
+  <figcaption id={`${id}-title`} class="odm-chart-title">{title}</figcaption>
+  {
+    groups.map((g) => (
+      <div class="odm-chart-group">
+        <div class="odm-chart-group-label">
+          {g.label}
+          {g.note && <span class="odm-chart-note">{g.note}</span>}
+        </div>
+        <ul>
+          {g.bars.map((b) => (
+            <li class={`odm-bar odm-bar--${b.kind ?? 'model'}`}>
+              <span class="odm-bar-name">{b.name}</span>
+              <span class="odm-bar-track" aria-hidden="true">
+                <span class="odm-bar-fill" style={`width:${Math.max(0.5, (b.value / top) * 100).toFixed(1)}%`} />
+              </span>
+              <span class="odm-bar-value">
+                {b.display ?? b.value}
+                {unit}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+  {caption && <p class="odm-chart-caption">{caption}</p>}
 </figure>
 
 <style>
-	.odm-chart {
-		margin: 1.5rem 0;
-		padding: 1rem 1.25rem 1.1rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.6rem;
-		background: var(--sl-color-gray-7, var(--sl-color-gray-6));
-	}
-	.odm-chart-title {
-		font-weight: 600;
-		color: var(--sl-color-white);
-		margin-bottom: 0.75rem;
-	}
-	.odm-chart-group + .odm-chart-group {
-		margin-top: 0.9rem;
-	}
-	.odm-chart-group-label {
-		font-size: var(--sl-text-sm);
-		font-weight: 600;
-		color: var(--sl-color-gray-2);
-		margin-bottom: 0.35rem;
-	}
-	.odm-chart-note {
-		font-weight: 400;
-		color: var(--sl-color-gray-3);
-		margin-left: 0.5rem;
-	}
-	ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: grid;
-		gap: 0.3rem;
-	}
-	.odm-bar {
-		display: grid;
-		grid-template-columns: minmax(7.5rem, 11rem) 1fr 4.5rem;
-		align-items: center;
-		gap: 0.6rem;
-		font-size: var(--sl-text-sm);
-	}
-	.odm-bar-name {
-		color: var(--sl-color-gray-2);
-	}
-	.odm-bar-track {
-		height: 0.9rem;
-		background: var(--sl-color-gray-6);
-		border-radius: 0.2rem;
-		overflow: hidden;
-	}
-	.odm-bar-fill {
-		display: block;
-		height: 100%;
-		border-radius: 0.2rem;
-		background: var(--sl-color-accent);
-	}
-	.odm-bar--baseline .odm-bar-fill {
-		background: var(--sl-color-gray-3);
-	}
-	.odm-bar--chance .odm-bar-fill {
-		background: repeating-linear-gradient(
-			135deg,
-			var(--sl-color-gray-3) 0 3px,
-			transparent 3px 6px
-		);
-		box-shadow: inset 0 0 0 1px var(--sl-color-gray-3);
-	}
-	.odm-bar-value {
-		font-variant-numeric: tabular-nums;
-		color: var(--sl-color-white);
-		text-align: right;
-	}
-	.odm-chart-caption {
-		margin: 0.9rem 0 0;
-		font-size: var(--sl-text-xs);
-		color: var(--sl-color-gray-3);
-	}
-	@media (max-width: 30rem) {
-		.odm-bar {
-			grid-template-columns: 1fr 3.8rem;
-		}
-		.odm-bar-name {
-			grid-column: 1 / -1;
-		}
-	}
+  .odm-chart {
+    margin: 1.75rem 0;
+    padding: 1rem 1.25rem 1.1rem;
+    border: 1px solid var(--aw-color-border);
+    border-radius: 0.6rem;
+    background: var(--aw-color-bg-subtle);
+    font-size: 1rem;
+  }
+  .odm-chart-title {
+    font-weight: 700;
+    color: var(--aw-color-text-heading);
+    margin-bottom: 0.75rem;
+  }
+  .odm-chart-group + .odm-chart-group {
+    margin-top: 0.9rem;
+  }
+  .odm-chart-group-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--aw-color-text-default);
+    margin-bottom: 0.35rem;
+  }
+  .odm-chart-note {
+    font-weight: 400;
+    color: var(--aw-color-text-muted);
+    margin-left: 0.5rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+  .odm-bar {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 11rem) 1fr 4.5rem;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+  }
+  .odm-bar-name {
+    color: var(--aw-color-text-muted);
+  }
+  .odm-bar-track {
+    height: 0.9rem;
+    background: color-mix(in srgb, var(--aw-color-text-default) 8%, transparent);
+    border-radius: 0.2rem;
+    overflow: hidden;
+  }
+  .odm-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 0.2rem;
+    background: var(--aw-color-accent);
+  }
+  :global(:root:not(.dark)) .odm-bar--model .odm-bar-fill {
+    background: var(--aw-color-primary);
+  }
+  .odm-bar--baseline .odm-bar-fill {
+    background: color-mix(in srgb, var(--aw-color-text-default) 45%, transparent);
+  }
+  .odm-bar--chance .odm-bar-fill {
+    --c: color-mix(in srgb, var(--aw-color-text-default) 45%, transparent);
+    background: repeating-linear-gradient(135deg, var(--c) 0 3px, transparent 3px 6px);
+    box-shadow: inset 0 0 0 1px var(--c);
+  }
+  .odm-bar-value {
+    font-variant-numeric: tabular-nums;
+    color: var(--aw-color-text-heading);
+    text-align: right;
+  }
+  .odm-chart-caption {
+    margin: 0.9rem 0 0;
+    font-size: 0.75rem;
+    color: var(--aw-color-text-muted);
+  }
+  @media (max-width: 30rem) {
+    .odm-bar {
+      grid-template-columns: 1fr 3.8rem;
+    }
+    .odm-bar-name {
+      grid-column: 1 / -1;
+    }
+  }
 </style>
