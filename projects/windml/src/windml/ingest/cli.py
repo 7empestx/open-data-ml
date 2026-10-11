@@ -34,7 +34,10 @@ def _load(a):
     from . import mapping, loader
     m = mapping.load_mapping(a.mapping)
     t0 = time.time()
-    df, log = loader.load_scada(m, _raw(a), limit_files=a.limit_files)
+    keep = None
+    if getattr(a, "keep_raw", False):
+        keep = Path(a.out) / f"{a.farm or m['name']}_raw_highres.parquet"
+    df, log = loader.load_scada(m, _raw(a), limit_files=a.limit_files, keep_raw=keep)
     ev = None
     if m.get("status") and not a.no_status:
         ev = loader.classify(loader.load_status(m, _raw(a), log), m)
@@ -124,6 +127,8 @@ def build_parser() -> argparse.ArgumentParser:
             v.add_argument("--out", required=True, help="output directory")
             v.add_argument("--farm", help="farm name for output files (default: mapping name)")
             v.add_argument("--export", action="store_true", help="also clean + label and write the all-years pipeline layout")
+            v.add_argument("--keep-raw", action="store_true",
+                           help="for high-res input (< 10 min): also write the un-aggregated canonical samples (<farm>_raw_highres.parquet)")
 
     sc = sub.add_parser("schema", help="print the canonical schema (markdown)")
     sc.set_defaults(fn=cmd_schema)

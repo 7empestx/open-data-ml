@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from . import readers, units
+from . import readers, resample, units
 from .schema import SIGNALS, FREQ
 
 _OFFSET_RX = re.compile(r"(?:Z|[+-]\d{2}:?\d{2})$")
@@ -23,6 +23,8 @@ class LoadLog:
     unparsed_timestamps: int = 0
     unmapped_columns: list[str] = field(default_factory=list)
     duplicate_dates: dict = field(default_factory=dict)  # turbine -> {date: n} (helps spot DST / clock issues)
+    native_interval: dict = field(default_factory=dict)  # turbine -> {"interval": "1min", "regular_share": 0.99}
+    aggregation: dict = field(default_factory=dict)      # high-res -> 10-min summary (resample.aggregate info)
 
     def warn(self, msg: str):
         if msg not in self.warnings:
@@ -83,7 +85,9 @@ def _localize(t: pd.Series, groups: pd.Series, spec: dict, log: LoadLog, what: s
     return out.dt.tz_convert("UTC")
 
 
-def parse_time(df: pd.DataFrame, spec: dict, groups: pd.Series, log: LoadLog, what: str = "scada") -> pd.Series:
+def parse_time(df: pd.DataFrame, spec: dict, groups: pd.Series, log: LoadLog, what: str = "scada",
+               step: pd.Timedelta | None = None) -> pd.Series:
+    """Parse to UTC. `label: end` moves stamps back by `step` (the native interval; default 10 min)."""
     if "columns" in spec:
         s = df[spec["columns"][0]].astype(str).str.strip() + " " + df[spec["columns"][1]].astype(str).str.strip()
     else:
@@ -117,7 +121,7 @@ def parse_time(df: pd.DataFrame, spec: dict, groups: pd.Series, log: LoadLog, wh
         t = t.dt.tz_convert("UTC")
     shift = pd.Timedelta(spec.get("shift") or "0min")
     if spec["label"] == "end":
-        shift -= pd.Timedelta(FREQ)
+        shift -= pd.Timedelta(step or FREQ)
     return t + shift if shift else t
 
 
@@ -131,6 +135,7 @@ def _needed_columns(sc: dict) -> set[str]:
         need |= {sc["long"]["tag_column"], sc["long"]["value_column"]}
     else:
         need |= {s["column"] for s in sc["signals"].values()}
+        need |= set((sc.get("states") or {}).values())
     return need
 
 
@@ -154,8 +159,11 @@ def _numeric(s: pd.Series, decimal: str) -> pd.Series:
 
 
 # ----------------------------------------------------------------------------- SCADA
-def read_raw(sc: dict, raw_dir: Path, log: LoadLog, limit_files: int | None = None) -> pd.DataFrame:
+def read_raw(sc: dict, raw_dir: Path, log: LoadLog, limit_files: int | None = None, only: list[Path] | None = None) -> pd.DataFrame:
     hits = readers.expand(sc["files"], raw_dir)
+    if only is not None:
+        keep = {Path(p).resolve() for p in only}
+        hits = [h for h in hits if h[0].resolve() in keep]
     if not hits:
         raise FileNotFoundError(f"no files match {[f['glob'] for f in sc['files']]} under {raw_dir}")
     if limit_files:
@@ -181,26 +189,77 @@ def read_raw(sc: dict, raw_dir: Path, log: LoadLog, limit_files: int | None = No
     return df
 
 
-def load_scada(m: dict, raw_dir: Path, limit_files: int | None = None) -> tuple[pd.DataFrame, LoadLog]:
+def load_scada(m: dict, raw_dir: Path, limit_files: int | None = None, keep_raw: Path | None = None,
+               files: list[Path] | None = None) -> tuple[pd.DataFrame, LoadLog]:
+    """Load the SCADA part of a mapping into the canonical 10-min frame.
+    High-res data (native interval < 10 min) is aggregated by resample.aggregate; `keep_raw` writes the
+    un-aggregated canonical samples (UTC, sample-start stamps) to that parquet file first. `files` restricts the
+    read to these paths (used to process one turbine at a time)."""
     sc = m["scada"]
     log = LoadLog()
-    df = read_raw(sc, raw_dir, log, limit_files)
+    df = read_raw(sc, raw_dir, log, limit_files, only=files)
     groups = df["turbine_id"].astype(str) + "|" + df["_file"].astype(str) + "|" + df.get("_sheet", pd.Series("", index=df.index)).astype(str)
+    tspec = {**sc["timestamp"], "label": "start"}       # the end-label shift is applied after the native interval is known
+    states = sc.get("states") or {}
     if sc["layout"] == "long":
-        df = _long_to_wide(df, sc, groups, log)
+        df = _long_to_wide(df, {**sc, "timestamp": tspec}, groups, log)
     else:
-        df["timestamp"] = parse_time(df, sc["timestamp"], groups, log)
+        df["timestamp"] = parse_time(df, tspec, groups, log)
         out = pd.DataFrame({"timestamp": df["timestamp"], "turbine_id": df["turbine_id"].astype(str)})
         for name, spec in sc["signals"].items():
             col = spec["column"]
             out[name] = _numeric(df[col], sc["csv"]["decimal"]) if col in df.columns else np.nan
             if col not in df.columns:
                 log.warn(f"{name}: column {col!r} not found in any file")
+        for name, col in states.items():
+            out[name] = df[col] if col in df.columns else np.nan
         df = out
     df = df.dropna(subset=["timestamp"])
+    native = _native_intervals(df, sc, log)
+    if sc["timestamp"]["label"] == "end":
+        step = df["turbine_id"].map({t: v or pd.Timedelta(FREQ) for t, v in native.items()})
+        df["timestamp"] = df["timestamp"] - pd.to_timedelta(step)
     _apply_units(df, sc, log)
-    df = _to_grid(df, log)
-    return df, log
+    hi = [t for t, v in native.items() if v is not None and v < pd.Timedelta(FREQ)]
+    if keep_raw is not None and hi:
+        Path(keep_raw).parent.mkdir(parents=True, exist_ok=True)
+        df[df["turbine_id"].isin(hi)].sort_values(["turbine_id", "timestamp"]).to_parquet(keep_raw, index=False)
+        log.aggregation["raw_file"] = Path(keep_raw).name
+    parts = []
+    if hi:
+        agg = sc.get("aggregate") or {}
+        h = df[df["turbine_id"].isin(hi)]
+        for iv, tids in pd.Series(hi).groupby(pd.Series([native[t] for t in hi])):
+            a, info = resample.aggregate(h[h["turbine_id"].isin(tids)], iv, list(sc["signals"]), agg.get("stats"),
+                                         list(states), float(agg.get("min_coverage", 0.5)))
+            parts.append(a)
+            log.aggregation.setdefault("groups", []).append({"turbines": sorted(tids), **info})
+            if info["bins_below_min_coverage"]:
+                log.warn(f"high-res aggregation: {info['bins_below_min_coverage']:,} of {info['bins']:,} 10-min bins have coverage "
+                         f"below {agg.get('min_coverage', 0.5)} and were set to NaN (coverage column kept)")
+    lo = df[~df["turbine_id"].isin(hi)]
+    if len(lo):
+        parts.append(_to_grid(lo, log))
+    df = pd.concat(parts, ignore_index=True) if len(parts) > 1 else parts[0]
+    return df.sort_values(["turbine_id", "timestamp"]).reset_index(drop=True), log
+
+
+def _native_intervals(df: pd.DataFrame, sc: dict, log: LoadLog) -> dict:
+    conf = str(sc.get("interval") or "auto")
+    out = {}
+    for tid, g in df.groupby("turbine_id", sort=True):
+        iv, share = resample.detect_interval(g["timestamp"])
+        if conf != "auto":
+            if iv is not None and iv != pd.Timedelta(conf):
+                log.warn(f"{tid}: mapping says interval {conf} but the timestamps step by {iv} ({share:.0%} of steps); using {conf}")
+            iv = pd.Timedelta(conf)
+        out[tid] = iv
+        log.native_interval[tid] = {"interval": resample.fmt_interval(iv), "regular_share": round(share, 4)}
+        if iv is not None and iv > pd.Timedelta(FREQ):
+            log.warn(f"{tid}: native interval {iv} is coarser than 10 min; rows are placed on the 10-min grid, nothing is interpolated")
+        elif iv is not None and share < 0.5:
+            log.warn(f"{tid}: irregular sampling (only {share:.0%} of steps equal the most common step {iv})")
+    return out
 
 
 def _long_to_wide(df, sc, groups, log):
@@ -208,6 +267,8 @@ def _long_to_wide(df, sc, groups, log):
     tag2sig = {}
     for name, spec in sc["signals"].items():
         tag2sig[str(spec["tag"])] = name
+    for name, tag in (sc.get("states") or {}).items():
+        tag2sig[str(tag)] = name
     tags = df[tagc].astype(str)
     log.unmapped_columns = sorted(set(tags.unique()) - set(tag2sig))[:200]
     keep = tags.isin(tag2sig)
@@ -224,7 +285,10 @@ def _long_to_wide(df, sc, groups, log):
         if name not in w:
             w[name] = np.nan
             log.warn(f"{name}: tag {sc['signals'][name]['tag']!r} not found")
-    return w[["timestamp", "turbine_id"] + list(sc["signals"])]
+    for name in sc.get("states") or {}:
+        if name not in w:
+            w[name] = np.nan
+    return w[["timestamp", "turbine_id"] + list(sc["signals"]) + list(sc.get("states") or {})]
 
 
 def _apply_units(df: pd.DataFrame, sc: dict, log: LoadLog):

@@ -10,6 +10,17 @@ EXTRA = ["pitch_motor_temp_1_c", "pitch_motor_temp_2_c", "pitch_motor_temp_3_c",
          "pitch_motor_current_3_a", "hub_temp_c", "gear_oil_pump_pressure_bar", "pitch_a_std_deg", "pitch_b_std_deg", "pitch_c_std_deg"]
 
 
+# {farm}_stats_<TID>.parquet columns (scripts/extract_stat_signals.py) <- aggregated high-res columns
+STATS_MAP = {"inlet_p_mean": "gear_oil_inlet_pressure_bar", "inlet_p_min": "gear_oil_inlet_pressure_bar_min",
+             "inlet_p_max": "gear_oil_inlet_pressure_bar_max", "inlet_p_std": "gear_oil_inlet_pressure_bar_std",
+             "pump_p_mean": "gear_oil_pump_pressure_bar", "pump_p_min": "gear_oil_pump_pressure_bar_min",
+             "pump_p_max": "gear_oil_pump_pressure_bar_max", "pump_p_std": "gear_oil_pump_pressure_bar_std",
+             "rotor_rpm_std": "rotor_speed_rpm_std",
+             "pitchA_max": "pitch_a_deg_max", "pitchA_min": "pitch_a_deg_min", "pitchA_std": "pitch_a_deg_std",
+             "pitchB_max": "pitch_b_deg_max", "pitchB_min": "pitch_b_deg_min", "pitchB_std": "pitch_b_deg_std",
+             "pitchC_max": "pitch_c_deg_max", "pitchC_min": "pitch_c_deg_min", "pitchC_std": "pitch_c_deg_std"}
+
+
 def clean(df: pd.DataFrame, rated_kw: float | dict = 2050.0, interval: tuple | None = None) -> tuple[pd.DataFrame, list[dict]]:
     """Run clean_wind.clean_turbine on each turbine of a canonical frame. Pressures are already in bar here."""
     inv = {k: v for k, v in cw.KEY_COLUMNS.items()}
@@ -54,7 +65,16 @@ def export(df: pd.DataFrame, ev: pd.DataFrame, farm: str, out_dir: Path, rated_k
         for c in EXTRA:
             e[c] = g[c].astype("float32") if c in g else np.float32(np.nan)
         e.to_parquet(out_dir / f"{farm}_extra_{tid}.parquet", index=False)
-    return {"rows": len(lab), "turbines": sorted(df["turbine_id"].unique()), "events": len(ev), "clean_stats": stats}
+    n_stats = 0
+    if any(c in df for c in STATS_MAP.values() if c.endswith(("_min", "_max", "_std"))):  # high-res input aggregated with min/max/std -> trip-model stats layout
+        for tid, g in df.groupby("turbine_id"):
+            st = g[["timestamp"]].copy()
+            for k, c in STATS_MAP.items():
+                st[k] = g[c].astype("float32") if c in g else np.float32(np.nan)
+            st.to_parquet(out_dir / f"{farm}_stats_{tid}.parquet", index=False)
+            n_stats += 1
+    return {"rows": len(lab), "turbines": sorted(df["turbine_id"].unique()), "events": len(ev), "clean_stats": stats,
+            "stats_files": n_stats}
 
 
 def _empty_labels(scada, windows):

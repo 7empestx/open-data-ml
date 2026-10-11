@@ -1,6 +1,7 @@
 """File readers: CSV (any delimiter, decimal comma, comment/preamble lines), Excel (one or many sheets), parquet."""
 from __future__ import annotations
 import csv
+import fnmatch
 import glob as _glob
 import re
 from pathlib import Path
@@ -13,7 +14,10 @@ def expand(files: list[dict], raw_dir: Path) -> list[tuple[Path, dict]]:
         pat = f["glob"]
         p = pat if Path(pat).is_absolute() else str(raw_dir / pat)
         hits = sorted(Path(x) for x in _glob.glob(p, recursive=True))
-        out += [(h, f) for h in hits if h.is_file()]
+        # exclude: glob patterns matched against the path relative to raw_dir (e.g. "*/scada_2021_wt11-15/*")
+        ex = f.get("exclude") or []
+        rel = lambda h: str(h.relative_to(raw_dir)) if h.is_relative_to(raw_dir) else str(h)
+        out += [(h, f) for h in hits if h.is_file() and not any(fnmatch.fnmatch(rel(h), e) for e in ex)]
     return out
 
 

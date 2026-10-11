@@ -198,6 +198,10 @@ def build(df: pd.DataFrame, log=None, ev: pd.DataFrame | None = None, mapping: d
         if len(off):
             g = off.groupby("turbine_id")["best_lag_steps"].agg(lambda s: sorted(set(s)))
             findings.append("**Clock offset/drift**: " + "; ".join(f"{t} lags the fleet by {v} x 10 min in {int((off['turbine_id'] == t).sum())} quarter(s)" for t, v in g.items()))
+    for gr in ((log.aggregation or {}).get("groups", []) if log else []):
+        if gr["bins_below_min_coverage"]:
+            findings.append(f"**Sparse high-res bins**: {gr['bins_below_min_coverage']:,} of {gr['bins']:,} 10-min bins "
+                            f"({', '.join(gr['turbines'])}, native {gr['native']}) had too few samples and were blanked")
     if log and log.unparsed_timestamps:
         findings.append(f"**Timestamps**: {log.unparsed_timestamps:,} could not be parsed")
     if ss and ss.get("turbines_without_events"):
@@ -219,6 +223,20 @@ def build(df: pd.DataFrame, log=None, ev: pd.DataFrame | None = None, mapping: d
           "## Value ranges vs plausible physical range (canonical units)", "", _fmt(oor, pct=("share",)), "",
           "## Units", "", "| signal | decision |", "|---|---|"]
     L += [f"| {k} | {v} |" for k, v in (log.units.items() if log else [])]
+    if log and log.native_interval:
+        L += ["", "## Sampling interval and aggregation", "",
+              "Native interval = most common step between a turbine's timestamps. Data finer than 10 minutes is aggregated to "
+              "10-minute bins (mean; min/max/std for key signals; coverage = samples present / samples expected).", "",
+              pd.DataFrame([{"turbine_id": k, **v} for k, v in log.native_interval.items()]).to_markdown(index=False), ""]
+        for gr in (log.aggregation or {}).get("groups", []):
+            L.append(f"- Aggregated {', '.join(gr['turbines'])} from {gr['native']} ({gr['expected_per_bin']:g} samples per bin): "
+                     f"{gr['bins']:,} bins, mean coverage {gr['mean_coverage']:.1%}, {gr['bins_below_min_coverage']:,} bins below the "
+                     f"minimum coverage (values set to NaN), {gr['duplicates_dropped']:,} duplicate samples dropped")
+        if "coverage" in df:
+            cv = df.groupby("turbine_id")["coverage"].agg(mean="mean", bins_lt_90pct=lambda x: float((x < 0.9).mean()))
+            L += ["", "Bin coverage per turbine:", "", _fmt(cv.reset_index(), pct=("mean", "bins_lt_90pct")), ""]
+        if (log.aggregation or {}).get("raw_file"):
+            L.append(f"- Raw high-res samples kept in `{log.aggregation['raw_file']}`")
     L += ["", "## Timestamps and clocks", "",
           f"- Duplicate timestamps collapsed (most complete row kept): {log.duplicates or 'none'}" if log else "",
           f"- Duplicate dates (top): {log.duplicate_dates or 'none'}" if log else "",
