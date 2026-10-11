@@ -1,0 +1,279 @@
+{
+ "selected_on": "2017-2020",
+ "checked_on": "2021-2024",
+ "horizon_days": 90,
+ "params": {
+  "oil_abn": {
+   "a": 0.1,
+   "r": 2,
+   "k": 1
+  },
+  "pitch_abn": {
+   "a": 0.2,
+   "r": 3.0,
+   "k": 2
+  },
+  "bearing_abn": {
+   "a": 0.2,
+   "r": 3.0,
+   "k": 2
+  },
+  "perf_abn": {
+   "a": 0.2,
+   "r": 3.0,
+   "k": 2
+  },
+  "pump": {
+   "a": 1.0,
+   "r": 5
+  },
+  "oil_trips": {
+   "n": 3
+  },
+  "pitch_trips": {
+   "n": 6
+  },
+  "avail": {
+   "a": 0.95,
+   "r": 5
+  }
+ },
+ "active": [
+  "oil_trips",
+  "pitch_trips",
+  "pump"
+ ],
+ "red": {
+  "persist": 2,
+  "rel": 5.0,
+  "pump": 2.0,
+  "trip_mult": 3.0
+ },
+ "validation": {
+  "families_test": {
+   "oil_abn": {
+    "rows": 792,
+    "flagged": 76,
+    "flag_rate": 0.096,
+    "hits": 30,
+    "hit_rate": 0.3947,
+    "ci_lo": 0.2925,
+    "ci_hi": 0.5071,
+    "base": 0.2247,
+    "expected": 0.2688,
+    "lift": 1.7564,
+    "lift_vs_month": 1.4685,
+    "recall": 0.1685,
+    "turbines": 14
+   },
+   "pitch_abn": {
+    "rows": 792,
+    "flagged": 26,
+    "flag_rate": 0.0328,
+    "hits": 1,
+    "hit_rate": 0.0385,
+    "ci_lo": 0.0068,
+    "ci_hi": 0.1889,
+    "base": 0.2172,
+    "expected": 0.1804,
+    "lift": 0.1771,
+    "lift_vs_month": 0.2132,
+    "recall": 0.0058,
+    "turbines": 6
+   },
+   "bearing_abn": {
+    "rows": 792,
+    "flagged": 2,
+    "flag_rate": 0.0025,
+    "hits": 1,
+    "hit_rate": 0.5,
+    "ci_lo": 0.0945,
+    "ci_hi": 0.9055,
+    "base": 0.274,
+    "expected": 0.4,
+    "lift": 1.8249,
+    "lift_vs_month": 1.25,
+    "recall": 0.0046,
+    "turbines": 1
+   },
+   "perf_abn": {
+    "rows": 792,
+    "flagged": 5,
+    "flag_rate": 0.0063,
+    "hits": 3,
+    "hit_rate": 0.6,
+    "ci_lo": 0.2307,
+    "ci_hi": 0.8824,
+    "base": 0.274,
+    "expected": 0.2571,
+    "lift": 2.1899,
+    "lift_vs_month": 2.3333,
+    "recall": 0.0138,
+    "turbines": 1
+   },
+   "pump": {
+    "rows": 792,
+    "flagged": 12,
+    "flag_rate": 0.0152,
+    "hits": 7,
+    "hit_rate": 0.5833,
+    "ci_lo": 0.3195,
+    "ci_hi": 0.8067,
+    "base": 0.298,
+    "expected": 0.5476,
+    "lift": 1.9576,
+    "lift_vs_month": 1.0652,
+    "recall": 0.0297,
+    "turbines": 3
+   },
+   "oil_trips": {
+    "rows": 792,
+    "flagged": 75,
+    "flag_rate": 0.0947,
+    "hits": 47,
+    "hit_rate": 0.6267,
+    "ci_lo": 0.5135,
+    "ci_hi": 0.7274,
+    "base": 0.2247,
+    "expected": 0.3194,
+    "lift": 2.7883,
+    "lift_vs_month": 1.9618,
+    "recall": 0.264,
+    "turbines": 8
+   },
+   "pitch_trips": {
+    "rows": 792,
+    "flagged": 6,
+    "flag_rate": 0.0076,
+    "hits": 4,
+    "hit_rate": 0.6667,
+    "ci_lo": 0.3,
+    "ci_hi": 0.9032,
+    "base": 0.2172,
+    "expected": 0.3611,
+    "lift": 3.0698,
+    "lift_vs_month": 1.8462,
+    "recall": 0.0233,
+    "turbines": 1
+   },
+   "avail": {
+    "rows": 792,
+    "flagged": 72,
+    "flag_rate": 0.0909,
+    "hits": 17,
+    "hit_rate": 0.2361,
+    "ci_lo": 0.153,
+    "ci_hi": 0.346,
+    "base": 0.274,
+    "expected": 0.2722,
+    "lift": 0.8618,
+    "lift_vs_month": 0.8673,
+    "recall": 0.0783,
+    "turbines": 9
+   }
+  },
+  "overall_test": {
+   "pooled": {
+    "amber_or_red": {
+     "rows": 792,
+     "flagged": 87,
+     "flag_rate": 0.1098,
+     "hits": 66,
+     "hit_rate": 0.7586,
+     "ci_lo": 0.659,
+     "ci_hi": 0.8364,
+     "base": 0.4457,
+     "expected": 0.503,
+     "lift": 1.7021,
+     "lift_vs_month": 1.5082,
+     "recall": 0.187,
+     "turbines": 10
+    },
+    "red": {
+     "rows": 792,
+     "flagged": 22,
+     "flag_rate": 0.0278,
+     "hits": 13,
+     "hit_rate": 0.5909,
+     "ci_lo": 0.3873,
+     "ci_hi": 0.7674,
+     "base": 0.4457,
+     "expected": 0.5052,
+     "lift": 1.3258,
+     "lift_vs_month": 1.1697,
+     "recall": 0.0368,
+     "turbines": 4
+    }
+   },
+   "kelmarsh": {
+    "amber_or_red": {
+     "rows": 270,
+     "flagged": 6,
+     "flag_rate": 0.0222,
+     "hits": 4,
+     "hit_rate": 0.6667,
+     "ci_lo": 0.3,
+     "ci_hi": 0.9032,
+     "base": 0.3222,
+     "expected": 0.3889,
+     "lift": 2.069,
+     "lift_vs_month": 1.7143,
+     "recall": 0.046,
+     "turbines": 1
+    },
+    "red": {
+     "rows": 270,
+     "flagged": 0,
+     "flag_rate": 0.0,
+     "hits": 0,
+     "hit_rate": null,
+     "ci_lo": null,
+     "ci_hi": null,
+     "base": 0.3222,
+     "expected": null,
+     "lift": null,
+     "lift_vs_month": null,
+     "recall": 0.0,
+     "turbines": 0
+    }
+   },
+   "penmanshiel": {
+    "amber_or_red": {
+     "rows": 522,
+     "flagged": 81,
+     "flag_rate": 0.1552,
+     "hits": 62,
+     "hit_rate": 0.7654,
+     "ci_lo": 0.6625,
+     "ci_hi": 0.8444,
+     "base": 0.5096,
+     "expected": 0.5115,
+     "lift": 1.5021,
+     "lift_vs_month": 1.4966,
+     "recall": 0.2331,
+     "turbines": 9
+    },
+    "red": {
+     "rows": 522,
+     "flagged": 22,
+     "flag_rate": 0.0421,
+     "hits": 13,
+     "hit_rate": 0.5909,
+     "ci_lo": 0.3873,
+     "ci_hi": 0.7674,
+     "base": 0.5096,
+     "expected": 0.5052,
+     "lift": 1.1596,
+     "lift_vs_month": 1.1697,
+     "recall": 0.0489,
+     "turbines": 4
+    }
+   }
+  },
+  "test_share": {
+   "GREEN": 0.8902,
+   "AMBER": 0.0821,
+   "RED": 0.0278
+  }
+ }
+}
