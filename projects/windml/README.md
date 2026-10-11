@@ -145,8 +145,8 @@ One command turns any fleet with a mapping into a condition report (markdown, ht
 It prepares each turbine through the mapping (clean + label, one turbine at a time), trains per-turbine
 normal-behaviour models, computes data quality, availability, downtime by cause, trips, NBM residual health per
 component, chronic abnormal months, full-load oil pressure and temperature trends, sensor drift vs the fleet and
-stuck sensors, then flags each turbine RED/AMBER/GREEN with plain-language reasons and a confidence level. Page 1 is
-an executive summary for an O&M manager. Everything is cached under `data/fleet/<farm>/`, so a rerun only redoes
+stuck sensors, then rates each turbine RED/AMBER/GREEN with a one-line plain-English reason, a suggested check and a
+confidence level. Page 1 is an executive summary for an O&M manager. Everything is cached under `data/fleet/<farm>/`, so a rerun only redoes
 what changed (`--force` redoes everything).
 
 - **Short histories.** 24+ months: each calendar year is scored by models trained on earlier years only. 12-23
@@ -155,11 +155,19 @@ what changed (`--force` redoes everything).
 - **Missing inputs.** No alarm log (e.g. La Haute Borne): stops are inferred from SCADA (no power while the wind is
   4.5-25 m/s), availability/trip/fault sections are replaced by a note, and flags rely on models, trends and sensors.
   Missing signals simply drop their models and sections; a power-curve model gives every fleet a performance view.
+- **Ratings.** Calibrated, fleet-relative rules (`src/windml/fleet/rules.py`, thresholds in `calibration.json`),
+  applied to the turbine's latest month-end: AMBER for a full-load gear-oil pump pressure rise of >= 1 bar that is a
+  clear outlier vs the sister turbines, >= 3 oil-system or >= 6 pitch trip episodes in 6 months, or a drifting or
+  frozen sensor; RED for a >= 2 bar pump build-up, a persistent and still active trip run (3x the amber count), or two
+  systems amber at once. Thresholds were chosen on 2017-2020 and checked on 2021-2024 (Kelmarsh + Penmanshiel):
+  `scripts/calibrate_flags.py` -> [reports/fleet_proof/calibration.md](reports/fleet_proof/calibration.md).
+  Availability and model-based abnormal-day rates had no reliable lead on events, so they appear as notes only.
 - **Options.** `--window-months 24`, `--score-years N` (walk-forward: last N years only, faster), `--turbines`,
   `--workers 2` (~1.5 GB per worker for a 9-year turbine), `--no-pdf`, `--fast`.
 
 Runs, timings and the comparison with the hand-built report: [reports/fleet_proof/README.md](reports/fleet_proof/README.md).
-Tests: `tests/test_fleet_report.py` (a synthetic 4-turbine fleet with a pump-pressure rise and a drifting sensor).
+Tests: `tests/test_fleet_report.py` (a synthetic 4-turbine fleet with a pump-pressure rise and a drifting sensor) and
+`tests/test_fleet_rules.py` (the rating rules).
 
 ## Failure labeling (src/windml/labeling.py)
 
