@@ -184,6 +184,9 @@ def markdown_report(M: dict, S: dict, prep: dict, opts: dict, figs: dict) -> str
             s = S[t]
             items = s["red"] + s["amber"]
             why = items[0][2] + (f" Also: {'; '.join(x[2].rstrip('.') for x in items[1:])}." if len(items) > 1 else "")
+            ao = s.get("as_of")
+            if ao is not None and ao < end - pd.Timedelta(days=60):
+                why += f" (This turbine's published data ends {ao:%d %b %Y}.)"
             rows.append([t, f"**{s['flag']}**", why, items[0][3], s["confidence"]])
         L += [_table(rows, ["Turbine", "Rating", "Why", "Suggested check", "Confidence"]), ""]
     if green:
@@ -201,7 +204,10 @@ def markdown_report(M: dict, S: dict, prep: dict, opts: dict, figs: dict) -> str
     lim = []
     if not has_log:
         lim.append("There is **no alarm log**, so we cannot see faults, trips or availability. Stops are inferred from SCADA "
-                   "(no power while the wind blows), and flags rely on the models, trends and sensor checks only.")
+                   "(no power while the wind blows), and the trip rules cannot run.")
+    if not has_log and not any(T[t].get("pump_base") is not None for t in tids):
+        lim.append("With neither an alarm log nor gear-oil pump pressure, only the sensor checks can change a rating for this "
+                   "fleet: green here mostly means 'no sensor problem found'. Model alerts are still shown as notes.")
     if "none" in schemes:
         n = sum(H.get(t, {}).get("scheme", "none") == "none" for t in tids)
         lim.append(f"{n} turbine(s) have less than 12 months of data: no normal-behaviour model was trained for them.")

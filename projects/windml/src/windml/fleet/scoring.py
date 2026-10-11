@@ -88,6 +88,7 @@ def assess(P: pd.DataFrame, R: pd.DataFrame, metrics_turbines: dict, health: dic
         rows = P.index[P["turbine_id"] == tid]
         red, amb, notes = [], [], []          # (category, technical text, plain reason, suggested check)
         rating = "GREEN"
+        asof = None
         if len(rows):
             i = P.loc[rows, "as_of"].idxmax()
             x, f = P.loc[i], R.loc[i]
@@ -106,7 +107,7 @@ def assess(P: pd.DataFrame, R: pd.DataFrame, metrics_turbines: dict, health: dic
                 prec = _pump_precedent(P, ev, tid, asof - pd.Timedelta(days=31 * run))
                 is_red = bool(f["pump_red"])
                 plain = (f"Gear-oil pump pressure at full load is {rise:.1f} bar above its own 12-month baseline (now {now:.1f} bar)"
-                         + (f", while the other turbines are at {pm + 0.0:+.1f} bar" if pm is not None else "")
+                         + (f", while the other turbines are at {round(pm, 1) + 0.0:+.1f} bar" if pm is not None else "")
                          + (f"; flagged {_months(run)} running" if run > 1 else "") + ".")
                 chk = ("Inspect the gearbox oil filter and pump: read the filter differential pressure, check the bypass "
                        "and pressure-relief valve, take an oil sample for particles")
@@ -202,7 +203,7 @@ def assess(P: pd.DataFrame, R: pd.DataFrame, metrics_turbines: dict, health: dic
         else:
             why.append(f"only {n_turbines} turbines (no peer comparison)")
         conf = "High" if pts >= 5 else "Medium" if pts >= 3 else "Low"
-        out[tid] = {"flag": rating, "red": red, "amber": amb, "notes": notes, "confidence": conf, "confidence_points": pts,
+        out[tid] = {"flag": rating, "as_of": asof, "red": red, "amber": amb, "notes": notes, "confidence": conf, "confidence_points": pts,
                     "confidence_notes": why, "reasons": "; ".join(t[1] for t in red + amb) or "no trigger",
                     "notes_text": "; ".join(t[1] for t in notes)}
     return out
