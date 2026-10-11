@@ -30,7 +30,8 @@ SMOKE_ENV = WINDML_RAW_DIR=$(SMOKE_RAW_DIR) WINDML_DATA_DIR=$(SMOKE_DIR)/data WI
             WINDML_LOG_DIR=$(SMOKE_DIR)/logs WINDML_YEARS=$(SMOKE_YEARS) WINDML_TURBINES=$(SMOKE_TURBINES) \
             WINDML_TRIP_MIN_POS=1 WINDML_WORKERS=2
 
-.PHONY: help setup setup-dev config download download-cmapss preprocess nbm nbm-eval trip trip-eval report all smoke smoke-clean test lint
+.PHONY: help setup setup-dev config download download-cmapss download-lhb preprocess nbm nbm-eval trip trip-eval report all smoke smoke-clean test lint \
+        ingest-suggest ingest-validate ingest-load ingest-fixtures ingest-proof
 
 help:
 	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/^## //'
@@ -58,6 +59,10 @@ download: setup
 ## download-cmapss  NASA C-MAPSS (not used by windml; side dataset, not redistributed)
 download-cmapss:
 	bash scripts/download_cmapss.sh
+
+## download-lhb     La Haute Borne (ENGIE, Licence Ouverte 2.0) 2014-2015 extract via NREL OpenOA (~37 MB, SHA-256 pinned)
+download-lhb: setup
+	$(PY) scripts/download_la_haute_borne.py
 
 ## preprocess       clean + label all years, extract extra and 10-min statistic signals
 preprocess: setup
@@ -106,6 +111,29 @@ smoke: setup
 ## smoke-clean      delete derived smoke outputs (keeps the downloaded raw subset)
 smoke-clean:
 	rm -rf $(SMOKE_DIR)/data $(SMOKE_DIR)/reports $(SMOKE_DIR)/logs
+
+## ingest-suggest   draft a mapping from a sample export: make ingest-suggest SAMPLE=path/to/export.csv [OUT=mappings/acme.yaml]
+ingest-suggest: setup
+	@test -n "$(SAMPLE)" || { echo "usage: make ingest-suggest SAMPLE=<file> [OUT=mappings/<name>.yaml]"; exit 2; }
+	bin/windml ingest suggest "$(SAMPLE)" $(if $(OUT),--out "$(OUT)")
+
+## ingest-validate  check a mapping + write the day-1 data-quality report: make ingest-validate MAPPING=mappings/x.yaml
+ingest-validate: setup
+	@test -n "$(MAPPING)" || { echo "usage: make ingest-validate MAPPING=<yaml> [REPORT=reports/ingest/dq_x.md]"; exit 2; }
+	bin/windml ingest validate --mapping "$(MAPPING)" $(if $(REPORT),--report "$(REPORT)")
+
+## ingest-load      load to canonical parquet + pipeline layout: make ingest-load MAPPING=mappings/x.yaml OUT=data/ingest/x
+ingest-load: setup
+	@test -n "$(MAPPING)" -a -n "$(OUT)" || { echo "usage: make ingest-load MAPPING=<yaml> OUT=<dir>"; exit 2; }
+	bin/windml ingest load --mapping "$(MAPPING)" --out "$(OUT)" --export
+
+## ingest-fixtures  synthetic messy operator exports from Kelmarsh 2022 (needs make download YEARS=2022)
+ingest-fixtures: setup
+	$(PY) scripts/make_messy_fixtures.py
+
+## ingest-proof     load 6 differently shaped inputs, compare with references -> reports/ingest/proof.md + dq_*.md
+ingest-proof: setup
+	$(RUN) scripts/ingest_proof.py $(call LOG,ingest_proof)
 
 ## test             unit tests on tiny fixtures (no data needed)
 test: setup-dev

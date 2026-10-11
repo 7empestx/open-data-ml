@@ -34,6 +34,6 @@ jobs:
       - name: Lint (errors only)
         run: python -m ruff check src scripts tests
       - name: Import every module
-        run: python -c "import sys; sys.path.insert(0, 'src'); import windml.config, windml.greenbyte, windml.clean_wind, windml.labeling, windml.nbm, windml.nbm_years, windml.trip_features, windml.profile; print('imports ok')"
+        run: python -c "import sys; sys.path.insert(0, 'src'); import windml.config, windml.greenbyte, windml.clean_wind, windml.labeling, windml.nbm, windml.nbm_years, windml.trip_features, windml.profile, windml.ingest.cli, windml.ingest.loader, windml.ingest.quality, windml.ingest.suggest, windml.ingest.pipeline; print('imports ok')"
       - name: Unit tests (tiny fixtures, no data download)
         run: python -m pytest -q tests

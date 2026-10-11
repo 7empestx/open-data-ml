@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# windml command-line entry point: bin/windml ingest suggest|validate|load|schema ...
+# Uses projects/windml/.venv if present (make setup), else python3 from PATH.
+set -euo pipefail
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+py="$here/.venv/bin/python"
+[[ -x "$py" ]] || py="$(command -v python3)"
+PYTHONPATH="$here/src${PYTHONPATH:+:$PYTHONPATH}" exec "$py" -m windml "$@"
