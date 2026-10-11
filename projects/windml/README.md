@@ -127,7 +127,39 @@ Proof (`make ingest-proof`, results in [reports/ingest/proof.md](reports/ingest/
   - a long tag/value parquet;
   - an Excel workbook with one sheet per turbine.
 
-Unit tests on tiny synthetic files: `tests/test_ingest.py`.
+- High-res input (1 s to 10 min) is detected per turbine and aggregated to 10-min bins: mean (circular for
+  directions), min/max/std for key signals, last/mode for status columns, a coverage fraction per bin, correct
+  interval-start vs interval-end handling, gaps kept as gaps and sparse bins blanked. `--keep-raw` keeps the raw
+  samples. Proved on 1-min and 1-s data generated from Kelmarsh (exact 10-min mean and std) and on the real 1-min
+  SMARTEOLE open dataset (ENGIE, Licence Ouverte 2.0, `make download-smarteole`; count-weighted mean and pooled std of
+  the underlying 1-Hz samples match an independent computation exactly).
+
+Unit tests on tiny synthetic files: `tests/test_ingest.py`, `tests/test_ingest_highres.py`.
+
+## Fleet condition report (`windml report`)
+
+One command turns any fleet with a mapping into a condition report (markdown, html, pdf, figures and csv tables):
+
+    bin/windml report --mapping mappings/kelmarsh_all_years.yaml --out reports/kelmarsh/
+
+It prepares each turbine through the mapping (clean + label, one turbine at a time), trains per-turbine
+normal-behaviour models, computes data quality, availability, downtime by cause, trips, NBM residual health per
+component, chronic abnormal months, full-load oil pressure and temperature trends, sensor drift vs the fleet and
+stuck sensors, then flags each turbine RED/AMBER/GREEN with plain-language reasons and a confidence level. Page 1 is
+an executive summary for an O&M manager. Everything is cached under `data/fleet/<farm>/`, so a rerun only redoes
+what changed (`--force` redoes everything).
+
+- **Short histories.** 24+ months: each calendar year is scored by models trained on earlier years only. 12-23
+  months: cross-fitting within the record (6 blocks), which cannot see a slow change that predates the data. Under
+  12 months: no models; the report keeps data quality, trends, drift and stops, and says so.
+- **Missing inputs.** No alarm log (e.g. La Haute Borne): stops are inferred from SCADA (no power while the wind is
+  4.5-25 m/s), availability/trip/fault sections are replaced by a note, and flags rely on models, trends and sensors.
+  Missing signals simply drop their models and sections; a power-curve model gives every fleet a performance view.
+- **Options.** `--window-months 24`, `--score-years N` (walk-forward: last N years only, faster), `--turbines`,
+  `--workers 2` (~1.5 GB per worker for a 9-year turbine), `--no-pdf`, `--fast`.
+
+Runs, timings and the comparison with the hand-built report: [reports/fleet_proof/README.md](reports/fleet_proof/README.md).
+Tests: `tests/test_fleet_report.py` (a synthetic 4-turbine fleet with a pump-pressure rise and a drifting sensor).
 
 ## Failure labeling (src/windml/labeling.py)
 
