@@ -31,7 +31,7 @@ SMOKE_ENV = WINDML_RAW_DIR=$(SMOKE_RAW_DIR) WINDML_DATA_DIR=$(SMOKE_DIR)/data WI
             WINDML_TRIP_MIN_POS=1 WINDML_WORKERS=2
 
 .PHONY: help setup setup-dev config download download-cmapss download-lhb download-smarteole preprocess nbm nbm-eval trip trip-eval report all smoke smoke-clean test lint \
-        ingest-suggest ingest-validate ingest-load ingest-fixtures ingest-proof
+        ingest-suggest ingest-validate ingest-load ingest-fixtures ingest-proof fleet-report nbm-on-export
 
 help:
 	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/^## //'
@@ -101,6 +101,15 @@ report: setup
 	$(RUN) scripts/condition_tables.py $(call LOG,condition_tables)
 	$(RUN) scripts/condition_figures.py $(call LOG,condition_figures)
 	$(RUN) scripts/build_condition_report.py $(call LOG,build_condition_report)
+
+## fleet-report     repeatable condition report for any mapped fleet: make fleet-report MAPPING=mappings/x.yaml OUT=reports/x/
+fleet-report: setup
+	@test -n "$(MAPPING)" -a -n "$(OUT)" || { echo "usage: make fleet-report MAPPING=<yaml> OUT=reports/<farm>/ [ARGS=...]"; exit 2; }
+	bin/windml report --mapping "$(MAPPING)" --out "$(OUT)" $(ARGS)
+
+## nbm-on-export    ingest export of KEL01 2016-2018 -> unchanged run_nbm_years.py -> compare with data/nbm_years
+nbm-on-export: setup
+	$(PY) scripts/nbm_on_export.py
 
 ## all              full reproduction (hours; run under nohup, see README)
 all: download preprocess nbm nbm-eval trip trip-eval report
