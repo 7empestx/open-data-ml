@@ -35,3 +35,70 @@
 .sl-markdown-content h2 { letter-spacing: -0.01em; font-weight: 600; }
 .sl-markdown-content table { font-size: 0.9rem; }
 .site-title { font-weight: 600; letter-spacing: -0.01em; }
+
+/* Charts exported from the report have white backgrounds: frame them so they read well in both themes. */
+.sl-markdown-content figure.odm-figure {
+	margin: 1.5rem 0;
+}
+.sl-markdown-content figure.odm-figure img,
+.sl-markdown-content p > img {
+	display: block;
+	width: 100%;
+	height: auto;
+	background: #ffffff;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.6rem;
+	padding: 0.5rem;
+}
+.sl-markdown-content figure.odm-figure figcaption {
+	margin-top: 0.5rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+.sl-markdown-content figure.odm-figure a {
+	display: block;
+}
+
+/* Key numbers row on the homepage. */
+.odm-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+	gap: 0.75rem;
+	margin: 1.25rem 0;
+}
+.odm-stat {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.6rem;
+	padding: 0.85rem 1rem;
+}
+.odm-stat b {
+	display: block;
+	font-size: 1.5rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	color: var(--sl-color-white);
+	line-height: 1.2;
+}
+.odm-stat span {
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+.sl-markdown-content .odm-stats {
+	margin-top: 1.25rem;
+}
+
+/* Hero: no image, so use the full width and keep the headline to two lines on desktop. */
+@media (min-width: 50rem) {
+	.hero { grid-template-columns: 1fr !important; padding-bottom: 1.5rem !important; }
+	.hero h1 { max-width: 25ch !important; }
+	.hero .tagline { max-width: 62ch !important; }
+}
+@media (max-width: 50rem) {
+	.hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+}
+
+/* One accent colour for card icons instead of Starlight's rotating palette. */
+.card {
+	--sl-card-border: var(--sl-color-accent) !important;
+	--sl-card-bg: var(--sl-color-accent-low) !important;
+}
