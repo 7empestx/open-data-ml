@@ -91,6 +91,44 @@ Environment: `.venv` from `make setup` (pinned in requirements.txt: pandas 3, py
 
 Licenses: Kelmarsh, Penmanshiel, PVDAQ, CoMoPI, PIADE, bottling, MetroPT-3 and UCI hydraulic are CC BY 4.0; C-MAPSS has no stated license, so it is not committed (fetch it with `scripts/download_cmapss.sh`). Credit the sources in any published demo (see DATA_SOURCES.md).
 
+## Onboarding a new operator's data
+
+`src/windml/ingest/` maps an unfamiliar SCADA export onto windml's canonical format (UTC, 10-min grid, one column per
+signal in a fixed unit; schema and units in [mappings/README.md](mappings/README.md)). Everything operator-specific
+goes in one YAML mapping; the loaded data feeds cleaning, labeling, the NBM and the trip models unchanged.
+
+Target: about a day from receiving an export to running the pipeline.
+
+1. **Draft a mapping** from one sample file (CSV, Excel or parquet; any delimiter, decimal comma, preamble, wide or long):
+
+       bin/windml ingest suggest /path/to/sample.csv --out mappings/acme.yaml     # or: make ingest-suggest SAMPLE=... OUT=...
+
+   The draft has the reader options, timestamp column and format, turbine id source and a guess for every
+   signal. Guesses come from fuzzy name matching (vendor abbreviations, IEC 61400-25 tags, some German and French) plus
+   value-range checks that also pick the unit (W vs kW, °F vs °C, kPa vs bar). Each one carries a confidence score.
+   Lines marked `CHECK` need a human: the timezone (it detects DST fingerprints and zones named in the header), whether
+   timestamps mark the interval start or end, the canonical turbine ids and the rated power. Unmapped columns are
+   listed at the bottom.
+2. **Review and validate.** `bin/windml ingest validate --mapping mappings/acme.yaml` (or `make ingest-validate MAPPING=...`)
+   rejects unknown keys and bad values, loads everything and writes the **day-1 data-quality report**
+   (`reports/ingest/dq_acme.md` + `.html`) to send back to the operator. It covers coverage per turbine, gaps,
+   completeness per signal, stuck sensors, out-of-range values, unit suspicions (for example an oil-pressure logger
+   switching between bar and kPa, °F ambient, MW power), duplicate and off-grid timestamps, DST fingerprints, clock
+   offset or drift against the rest of the fleet, and a status-log summary.
+3. **Load.** `bin/windml ingest load --mapping mappings/acme.yaml --out data/ingest/acme --export` writes
+   `acme_canonical.parquet` (+ events). With `--export` it also cleans, labels and writes the all-years layout
+   (`acme_scada_10min`, `_events`, `_scada_labeled`, `_extra_<TID>.parquet`) that `scripts/run_nbm_years.py` reads.
+
+Proof (`make ingest-proof`, results in [reports/ingest/proof.md](reports/ingest/proof.md)):
+- Kelmarsh and Penmanshiel loaded through their mappings reproduce `data/processed/` exactly, events and labels included.
+- La Haute Borne (ENGIE, Licence Ouverte 2.0, `make download-lhb`) has a different layout: one file, tag names and UTC offsets.
+- Three synthetic messy exports generated from Kelmarsh reproduce the canonical load:
+  - vendor tags, W/°F/kPa, local time with DST, interval-end stamps, decimal commas, monthly files and a German alarm log;
+  - a long tag/value parquet;
+  - an Excel workbook with one sheet per turbine.
+
+Unit tests on tiny synthetic files: `tests/test_ingest.py`.
+
 ## Failure labeling (src/windml/labeling.py)
 
     import sys; sys.path.insert(0, "projects/windml/src")
