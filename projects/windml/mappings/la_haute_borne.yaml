@@ -1,0 +1,33 @@
+# La Haute Borne wind farm (4x Senvion MM82, Meuse, France), ENGIE open data, 2014-2015 extract shipped with NREL OpenOA.
+# Layout differs from the Greenbyte farms: ONE file for all turbines (turbine id in a column), short tag names
+# (P_avg, Ws_avg, ...), ISO-8601 timestamps with a local UTC offset (+01:00 / +02:00), no status/alarm log.
+# Download: python scripts/download_la_haute_borne.py  (or make download-lhb)
+name: la_haute_borne
+description: "La Haute Borne wind farm (4x Senvion MM82 2050 kW, France), ENGIE open data via NREL OpenOA"
+license: "Licence Ouverte / Open Licence 2.0 (Etalab; compatible with CC BY 4.0), ENGIE Group"
+source: "https://github.com/NREL/OpenOA/raw/9bfc7a3dc542b17bbfc06b692dbfb8b23c754975/examples/data/la_haute_borne.zip"
+rated_power_kw: 2050
+scada:
+  files:
+    - "la-haute-borne/la-haute-borne-data-*.csv"
+  format: csv
+  csv: {delimiter: ",", decimal: "."}
+  layout: wide
+  turbine_id:
+    from: column
+    column: Wind_turbine_name
+    map: {R80711: LHB01, R80721: LHB02, R80736: LHB03, R80790: LHB04}
+  timestamp:
+    column: Date_time
+    format: iso            # offsets in the data make the UTC conversion exact (no DST guessing)
+    label: start
+  signals:
+    power_kw: {column: P_avg, unit: kW}
+    wind_speed_ms: {column: Ws_avg, unit: m/s}
+    pitch_a_deg: {column: Ba_avg, unit: deg, comment: "blade pitch (one value per turbine)"}
+    nacelle_position_deg: {column: Ya_avg, unit: deg}
+    wind_direction_deg: {column: Wa_avg, unit: deg}
+    ambient_temp_c: {column: Ot_avg, unit: degC}
+notes:
+  - "Va_avg (vane position = wind direction relative to the nacelle) has no canonical signal and is left unmapped."
+  - "No status/alarm log in this extract, so no stop/fault labels: the loaded data supports cleaning and power-curve work, not the trip models."

@@ -6,6 +6,7 @@ The source, license, and attribution for every dataset below come from the `SOUR
 |---|---|---|---|---|
 | Kelmarsh wind farm SCADA (6x Senvion MM92, UK), 2016 to 2024 | Yes, cleaned and labeled (2022 single-year set + all-years set) | https://zenodo.org/records/16807551 (DOI 10.5281/zenodo.16807551) | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.16807551 |
 | Penmanshiel wind farm SCADA (14x Senvion MM82, UK), WT01-10 2016 to 2023, WT11-15 2016 to 2024 (H1-2021 WT11-15 single-period set from the earlier version) | Yes, cleaned and labeled (H1-2021 single-period set + all-years set) | https://zenodo.org/records/16807304 (DOI 10.5281/zenodo.16807304); earlier version https://zenodo.org/records/5946808 | CC BY 4.0 | Credit Cubico Sustainable Investments and the Zenodo DOI 10.5281/zenodo.16807304 (and 10.5281/zenodo.5946808 for the H1-2021 set) |
+| La Haute Borne wind farm SCADA (4x Senvion MM82, France), 2014-2015 extract | Ingest proof only (third input layout for `windml.ingest`); nothing committed except small reports | ENGIE open data, redistributed with NREL OpenOA: https://github.com/NREL/OpenOA/raw/9bfc7a3dc542b17bbfc06b692dbfb8b23c754975/examples/data/la_haute_borne.zip (SHA-256 pinned in `scripts/download_la_haute_borne.py`) | Licence Ouverte / Open Licence 2.0 (Etalab), designed to be compatible with CC BY 4.0 (checked 2026-10-10; ENGIE's own portal opendata-renewables.engie.com is offline, the license is stated in the OpenOA examples and the CRAN `openwindfarm` package) | Credit the ENGIE Group (La Haute Borne open data) and link the license https://www.etalab.gouv.fr/licence-ouverte-open-licence/ |
 | NREL PVDAQ public PV data, system 10 (NREL CIS-1), 2008 | Yes, light cleaning | https://data.openei.org/submissions/4568 (DOI 10.25984/1846021) | CC BY 4.0 (verified on the OEDI page, 2026-10-10) | Credit NREL PVDAQ / OEDI and DOI 10.25984/1846021 |
 | CoMoPI: Condition Monitoring for Packaging Industry | Yes, light cleaning | https://zenodo.org/records/7572501 | CC BY 4.0 | Credit the dataset authors and Zenodo record 7572501 |
 | PIADE: Packaging Industry Anomaly DEtection | Yes, light cleaning | https://zenodo.org/records/7071747 | CC BY 4.0 | Credit the dataset authors and Zenodo record 7071747 |
@@ -24,6 +25,12 @@ Zenodo licenses (Kelmarsh, Penmanshiel, CoMoPI, PIADE, bottling line) were reche
 SCADA zips through the Zenodo records API, checks each file's published MD5, and extracts them into `$WINDML_RAW_DIR`
 (default `data/raw/`, git-ignored). It also writes a `SOURCE.txt` with the record, license and retrieval date. Use
 `--farms` and `--years` to download a subset. See README.md, section "Reproduce".
+
+## Downloading La Haute Borne
+
+`make download-lhb` (or `python scripts/download_la_haute_borne.py`) downloads the OpenOA zip at a pinned commit, checks
+its SHA-256 and extracts only the four ENGIE files into `$WINDML_RAW_DIR/la-haute-borne/` with a `SOURCE.txt`. The zip
+also contains ERA5 and MERRA-2 reanalysis extracts, which carry their own licenses; the script skips them.
 
 ## NASA C-MAPSS: download it yourself
 
