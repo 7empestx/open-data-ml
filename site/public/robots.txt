@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ml.beehivewebstudio.com/sitemap-index.xml
