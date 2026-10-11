@@ -1,0 +1,69 @@
+# Kelmarsh wind farm (6x Senvion MM92, UK), Cubico, Greenbyte export
+# Wide Greenbyte CSV: one file per turbine per period, '#' preamble, header line "# Date and time,...", UTC timestamps
+# marking the START of each 10-min interval. Change the globs to scada_*/ for all years (exclude superseded folders).
+name: kelmarsh
+description: "Kelmarsh wind farm (6x Senvion MM92, UK), Cubico, Greenbyte export"
+license: "CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files:
+    - "kelmarsh-wind-scada/scada_2022/Turbine_Data_Kelmarsh_*.csv"
+  format: csv
+  csv: {delimiter: ",", decimal: ".", header_match: "^# Date and time"}
+  layout: wide
+  turbine_id: {from: filename, regex: '_Kelmarsh_(\d+)_', format: "KEL{:02d}"}
+  timestamp: {column: "# Date and time", format: "%Y-%m-%d %H:%M:%S", timezone: UTC, label: start}
+  signals:
+    power_kw: "Power (kW)"
+    wind_speed_ms: "Wind speed (m/s)"
+    wind_speed_1_ms: "Wind speed Sensor 1 (m/s)"
+    wind_speed_2_ms: "Wind speed Sensor 2 (m/s)"
+    ambient_temp_c: "Nacelle ambient temperature (°C)"
+    nacelle_temp_c: "Nacelle temperature (°C)"
+    rotor_speed_rpm: "Rotor speed (RPM)"
+    generator_speed_rpm: "Generator RPM (RPM)"
+    gear_oil_temp_c: "Gear oil temperature (°C)"
+    gear_oil_inlet_temp_c: "Gear oil inlet temperature (°C)"
+    gear_oil_inlet_pressure_bar:
+      column: "Gear oil inlet pressure (bar)"
+      unit_switch: {low: bar, high: kPa, threshold: 20}   # header says bar, but most of the record is logged in kPa (x100)
+    main_bearing_front_temp_c: "Front bearing temperature (°C)"
+    main_bearing_rear_temp_c: "Rear bearing temperature (°C)"
+    rotor_bearing_temp_c: "Rotor bearing temp (°C)"
+    gen_bearing_front_temp_c: "Generator bearing front temperature (°C)"
+    gen_bearing_rear_temp_c: "Generator bearing rear temperature (°C)"
+    converter_inlet_temp_c: "Ambient temperature (converter) (°C)"
+    pitch_a_deg: "Blade angle (pitch position) A (°)"
+    pitch_b_deg: "Blade angle (pitch position) B (°)"
+    pitch_c_deg: "Blade angle (pitch position) C (°)"
+    nacelle_position_deg: "Nacelle position (°)"
+    yaw_bearing_angle_deg: "Yaw bearing angle (°)"
+    wind_direction_deg: "Wind direction (°)"
+    power_setpoint_kw: "Turbine Power setpoint (kW)"
+    available_capacity_kw: "Available Capacity for Production (kW)"
+    data_availability: "Data Availability"
+    energy_export_kwh: "Energy Export (kWh)"
+    lost_prod_curtail_total_kwh: "Lost Production to Curtailment (Total) (kWh)"
+    lost_prod_downtime_kwh: "Lost Production to Downtime (kWh)"
+    gear_oil_pump_pressure_bar:
+      column: "Gear oil pump pressure (bar)"
+      unit_switch: {low: bar, high: kPa, threshold: 20}   # header says bar, but most of the record is logged in kPa (x100)
+    hub_temp_c: "Hub temperature (°C)"
+    pitch_motor_temp_1_c: "Temperature motor axis 1 (°C)"
+    pitch_motor_temp_2_c: "Temperature motor axis 2 (°C)"
+    pitch_motor_temp_3_c: "Temperature motor axis 3 (°C)"
+status:
+  files:
+    - "kelmarsh-wind-scada/scada_2022/Status_Kelmarsh_*.csv"
+  format: csv
+  csv: {delimiter: ",", header_match: "^Timestamp start"}
+  turbine_id: {from: filename, regex: '_Kelmarsh_(\d+)_', format: "KEL{:02d}"}
+  start: {column: "Timestamp start", format: "%Y-%m-%d %H:%M:%S", timezone: UTC}
+  end: {column: "Timestamp end", format: "%Y-%m-%d %H:%M:%S", timezone: UTC}
+  end_missing: ["-"]
+  duration: Duration
+  status: Status
+  code: Code
+  message: Message
+  service_category: "Service contract category"
+  iec_category: "IEC category"
