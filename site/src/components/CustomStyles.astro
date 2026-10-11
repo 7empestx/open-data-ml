@@ -1,0 +1,48 @@
+---
+// Brand colours for open-data-ml. Font: self-hosted Inter via the Fonts API (astro.config.ts).
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-inter);
+
+    --aw-color-primary: rgb(47 107 46);
+    --aw-color-secondary: rgb(28 64 27);
+    --aw-color-accent: rgb(47 107 46);
+    --aw-color-link: rgb(38 92 37);
+
+    --aw-color-text-heading: rgb(17 17 17);
+    --aw-color-text-default: rgb(31 31 31);
+    --aw-color-text-muted: rgb(31 31 31 / 70%);
+    --aw-color-bg-page: rgb(255 255 255);
+    --aw-color-bg-subtle: rgb(246 248 246);
+    --aw-color-border: rgb(222 226 222);
+
+    --aw-color-bg-page-dark: rgb(15 15 15);
+
+    ::selection {
+      background-color: rgb(216 238 215);
+    }
+  }
+
+  .dark {
+    --aw-color-primary: rgb(58 125 57);
+    --aw-color-secondary: rgb(47 107 46);
+    --aw-color-accent: rgb(139 196 138);
+    --aw-color-link: rgb(139 196 138);
+
+    --aw-color-text-heading: rgb(245 245 245);
+    --aw-color-text-default: rgb(229 231 229);
+    --aw-color-text-muted: rgb(229 231 229 / 70%);
+    --aw-color-bg-page: rgb(15 15 15);
+    --aw-color-bg-subtle: rgb(26 28 26);
+    --aw-color-border: rgb(48 52 48);
+
+    ::selection {
+      background-color: rgb(31 42 31);
+      color: snow;
+    }
+  }
+</style>

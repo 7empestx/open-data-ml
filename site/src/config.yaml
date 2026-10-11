@@ -1,0 +1,35 @@
+site:
+  name: open-data-ml
+  site: 'https://ml.beehivewebstudio.com'
+  base: '/'
+  trailingSlash: true
+
+# Default SEO metadata
+metadata:
+  title:
+    default: open-data-ml
+    template: '%s | open-data-ml'
+  description: 'open-data-ml trains machine learning models only on openly licensed public data and publishes every result, including the negative ones. First project: windml, on wind turbine SCADA data. By Beehive AI Labs LLC.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: open-data-ml
+    images:
+      - url: '/og-image.png'
+        width: 1200
+        height: 630
+    type: website
+  twitter:
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: false
+
+ui:
+  theme: 'system'
