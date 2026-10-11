@@ -1,0 +1,27 @@
+# Synthetic 1-minute export (scripts/make_highres_fixtures.py, upsampled from Kelmarsh KEL01-02, March 2022).
+# Shape: ';' + decimal comma, Europe/London LOCAL time (DST change 27 March), stamps at the END of each minute,
+# an operating-state code, random sample dropouts, an outage and a sparse hour. Aggregated to 10-min on load.
+name: highres_1min
+description: "Synthetic 1-min SCADA upsampled from Kelmarsh KEL01-02, March 2022"
+license: "Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files: ["ingest-fixtures/highres/1min/WTG*_2022-03.csv"]
+  csv: {delimiter: ";", decimal: ","}
+  turbine_id: {from: filename, regex: 'WTG(\d+)_', format: "KEL{:02d}"}
+  timestamp: {column: Zeit, format: "%d.%m.%Y %H:%M", timezone: Europe/London, label: end}
+  interval: auto                       # detected: 1 min
+  aggregate:
+    min_coverage: 0.5                  # bins with fewer than 5 of 10 samples are blanked (coverage column kept)
+    stats: [power_kw, wind_speed_ms, rotor_speed_rpm, pitch_a_deg, nacelle_position_deg, gear_oil_inlet_pressure_bar]
+  signals:
+    power_kw: "P_mean [kW]"
+    wind_speed_ms: "WS_mean [m/s]"
+    rotor_speed_rpm: "RotSpd [rpm]"
+    pitch_a_deg: "Pitch1 [deg]"
+    nacelle_position_deg: "NacPos [deg]"
+    gear_oil_temp_c: "GbxOilT [degC]"
+    gear_oil_inlet_pressure_bar: "GbxOilP [bar]"
+    ambient_temp_c: "AmbT [degC]"
+  states:
+    operating_state: Betriebszustand   # -> operating_state_last, operating_state_mode per 10-min bin

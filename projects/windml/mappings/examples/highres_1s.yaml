@@ -1,0 +1,20 @@
+# Synthetic 1-second export (scripts/make_highres_fixtures.py, upsampled from Kelmarsh KEL01, 10-11 March 2022).
+# Shape: wide parquet, UTC sample-start stamps, 600 samples per 10-min bin.
+name: highres_1s
+description: "Synthetic 1-s SCADA upsampled from Kelmarsh KEL01, 10-11 March 2022"
+license: "Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551"
+rated_power_kw: 2050
+scada:
+  files: ["ingest-fixtures/highres/1s/*.parquet"]
+  format: parquet
+  turbine_id: {from: column, column: turbine_id}
+  timestamp: {column: time_utc, label: start}
+  signals:
+    power_kw: "P_mean [kW]"
+    wind_speed_ms: "WS_mean [m/s]"
+    rotor_speed_rpm: "RotSpd [rpm]"
+    pitch_a_deg: "Pitch1 [deg]"
+    nacelle_position_deg: "NacPos [deg]"
+    gear_oil_temp_c: "GbxOilT [degC]"
+    gear_oil_inlet_pressure_bar: "GbxOilP [bar]"
+    ambient_temp_c: "AmbT [degC]"
