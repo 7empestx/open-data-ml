@@ -3,6 +3,8 @@ title: Results
 description: What windml found when it tried to predict wind turbine faults from public 10-minute SCADA data.
 ---
 
+import BarChart from '../../../components/BarChart.astro';
+
 **Short version:** under a strict test, fault prediction from public 10-minute SCADA data, with labels taken from the turbines' stop logs, did not beat chance on the held-out years 2021 to 2024.
 
 That's a negative result, and we're publishing it as one. The data was still useful for a different job: a retrospective [condition report](/windml/condition-report/).
@@ -25,14 +27,53 @@ These models learn each turbine's normal temperatures and oil pressures from ope
 
 - **Fit is good.** Healthy gear-oil temperature error is about 0.8 to 1.4 °C, and inlet pressure about 0.2 to 0.3 bar.
 - **Gearbox oil-system faults:** 8 of 27 held-out episodes were flagged within 30 days. Chance would give 9.57 (p = 0.82), with 0.72 false alarms per turbine-month.
-- **Pitch faults:** 1 of 48 flagged, against 2.22 expected by chance (p = 0.91).
+- **Pitch faults:** 1 of 48 flagged, against 2.22 expected by chance (p = 0.91), with 0.078 false alarms per turbine-month.
 - Across all 168 settings tried per farm and fault type, fewer reached p < 0.05 on the held-out years than chance alone would produce.
+
+<BarChart
+	title="Held-out episodes flagged within 30 days, 2021 to 2024"
+	max={10.5}
+	groups={[
+		{ label: 'Gearbox oil-system faults', note: '27 episodes', bars: [
+			{ name: 'Normal-behavior model', value: 8 },
+			{ name: 'Expected by chance', value: 9.57, kind: 'chance' },
+		] },
+		{ label: 'Pitch faults', note: '48 episodes', bars: [
+			{ name: 'Normal-behavior model', value: 1 },
+			{ name: 'Expected by chance', value: 2.22, kind: 'chance' },
+		] },
+	]}
+	caption="Chance is matched for season and each turbine's usual fault rate. Both models flagged fewer episodes than chance would. Source: RESULTS.md section 7."
+/>
 
 ## Short-term trip models (24, 48 and 72 hours)
 
 These are supervised models on 1.43 million hourly rows from 20 turbines. They use 10-minute min, max and standard deviation of oil pressures, pitch currents and blade angles, plus trip history and season.
 
 - **Oil-system trips:** PR-AUC 0.011, 0.018 and 0.027 at 24, 48 and 72 hours, against 0.008, 0.013 and 0.020 for a model that only knows the season. The best test had p = 0.006, which doesn't pass the corrected threshold.
+
+<BarChart
+	title="Oil-system trips: held-out PR-AUC, 2021 to 2024"
+	max={0.03}
+	groups={[
+		{ label: '24 hours ahead', bars: [
+			{ name: 'Sensor model', value: 0.0114, display: '0.011' },
+			{ name: 'Season only', value: 0.008, display: '0.008', kind: 'baseline' },
+			{ name: 'Random (prevalence)', value: 0.0035, display: '0.0035', kind: 'chance' },
+		] },
+		{ label: '48 hours ahead', bars: [
+			{ name: 'Sensor model', value: 0.0179, display: '0.018' },
+			{ name: 'Season only', value: 0.0131, display: '0.013', kind: 'baseline' },
+			{ name: 'Random (prevalence)', value: 0.0074, display: '0.0074', kind: 'chance' },
+		] },
+		{ label: '72 hours ahead', bars: [
+			{ name: 'Sensor model', value: 0.0274, display: '0.027' },
+			{ name: 'Season only', value: 0.0196, display: '0.020', kind: 'baseline' },
+			{ name: 'Random (prevalence)', value: 0.0114, display: '0.0114', kind: 'chance' },
+		] },
+	]}
+	caption="PR-AUC is the area under the precision-recall curve; a random guess scores the share of hours that precede a trip. Both farms pooled; sensor models are the ones picked on 2017 to 2020. Every score is far below what would be useful in practice. Source: reports/trip_shortterm.md, section 3."
+/>
 - At 48 hours the sensor model caught 19 to 20 of 105 episodes, about twice the turbine-matched chance of about 10. But a season-only model caught 19, and only about 3% of alarms were followed by a trip.
 - **Pitch trips:** the sensor signals were at chance. Trip history alone reached PR-AUC 0.12 at 24 hours (prevalence 0.005), and adding sensors gave 0.18 (p = 0.046, not significant). Most of that came from repeat trips at Kelmarsh.
 
@@ -51,8 +92,15 @@ These are supervised models on 1.43 million hourly rows from 20 turbines. They u
 - Maintenance and work-order records, so labels mean physical failures rather than stops.
 - Vibration and oil-lab data.
 
-## Full write-ups
+## Full write-ups and code
 
-The detailed reports are in the project repository (`projects/windml/RESULTS.md`, sections 6 to 9, and `reports/`). The repository is private for now.
+The detailed write-ups are in the public repository:
+
+- [RESULTS.md](https://github.com/7empestx/open-data-ml/blob/main/projects/windml/RESULTS.md), sections 6 to 9.
+- [Normal-behavior models, all years](https://github.com/7empestx/open-data-ml/blob/main/projects/windml/reports/nbm_all_years.md).
+- [Short-term trip models](https://github.com/7empestx/open-data-ml/blob/main/projects/windml/reports/trip_shortterm.md).
+- Every table and figure in [reports/](https://github.com/7empestx/open-data-ml/tree/main/projects/windml/reports).
+
+To rerun any of it yourself, see [Reproduce it](/windml/reproduce/).
 
 *This is research on public data. It's not engineering advice.*
