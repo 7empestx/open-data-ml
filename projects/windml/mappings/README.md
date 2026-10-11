@@ -10,9 +10,13 @@ schema. Everything operator-specific lives here; the loader itself has no per-op
 | `examples/acme_messy.yaml` | synthetic: `;` + decimal comma, latin-1, vendor tags, W/°F/kPa, Europe/London local time, interval-end labels, monthly files, German alarm log |
 | `examples/longco_long.yaml` | synthetic: long tag/value parquet, IEC 61400-25 tags, epoch ms |
 | `examples/xlsx_sheets.yaml` | synthetic: Excel workbook, one sheet per turbine, title rows above the header |
+| `examples/highres_1min.yaml` | synthetic high-res: 1-min CSV, decimal comma, Europe/London, end stamps, state code, dropouts and an outage |
+| `examples/highres_1s.yaml` | synthetic high-res: 1-s parquet, UTC |
+| `smarteole.yaml` | real high-res: SMARTEOLE (ENGIE) 1-min avg/min/max/std/count, one CSV, turbine number inside the column names |
 
-The synthetic exports are generated from Kelmarsh by `scripts/make_messy_fixtures.py` (`make ingest-fixtures`).
-`make ingest-proof` loads all six and writes `reports/ingest/proof.md`.
+The synthetic exports are generated from Kelmarsh by `scripts/make_messy_fixtures.py` and
+`scripts/make_highres_fixtures.py` (`make ingest-fixtures`). `make ingest-proof` loads all of them (plus SMARTEOLE when
+`make download-smarteole` has been run) and writes `reports/ingest/proof.md`.
 
 ## Mapping format
 
@@ -26,6 +30,7 @@ scada:
   files:                          # globs relative to WINDML_RAW_DIR (or absolute); any number of files
     - "acme/WTG*_*.csv"
     - {glob: "acme/odd_name.csv", turbine_id: {from: constant, value: KEL07}}   # per-file override
+    - {glob: "acme/*/*.csv", exclude: "acme/old_export/*"}   # exclude: glob(s) relative to WINDML_RAW_DIR
   format: auto                    # auto (by extension) | csv | excel | parquet
   csv:
     delimiter: auto               # auto | "," | ";" | "\t" | "|"
@@ -38,7 +43,9 @@ scada:
   layout: wide                    # wide (one column per signal) | long (tag/value rows)
   long: {tag_column: tag, value_column: value}       # only for layout: long
   turbine_id:
-    from: filename                # column | filename | sheet | constant
+    from: filename                # column | columns | filename | sheet | constant
+    # from: columns, values: [1, 2, 3]   -> turbine number inside the column names; write signal columns as
+    #                                       templates, e.g. "active_power_{turbine}_avg"
     column: asset                 # for from: column
     regex: 'WTG(\d+)_'            # first group = raw id (applied to the file name, column value or sheet name)
     map: {R80711: LHB01}          # optional raw -> canonical id
@@ -52,6 +59,12 @@ scada:
     nonexistent: drop             # skipped spring hour: drop | shift_forward
     label: end                    # start | end: does the stamp mark the start or the end of the interval?
     shift: 0min                   # extra fixed correction, e.g. "-1h" for a known clock offset
+  interval: auto                  # native sampling interval: auto (detected per turbine) or e.g. "1min"; 1 s .. 10 min
+  aggregate:                      # only used when the native interval is shorter than 10 min
+    min_coverage: 0.5             # bins with fewer samples than this share of the expected count are blanked
+    stats: [power_kw, wind_speed_ms]   # signals that also get <signal>_min/_max/_std (default: key signals)
+  states:                         # status-like columns: 10-min <name>_last and <name>_mode, never averaged
+    operating_state: Betriebszustand
   signals:                        # canonical name -> source (see the schema below)
     wind_speed_ms: "WindSpd_Avg [m/s]"           # short form: column (wide) or tag (long)
     power_kw: {column: "ActPwr [W]", unit: W}    # converted to the canonical unit
@@ -61,6 +74,8 @@ scada:
       unit_switch: {low: bar, high: kPa, threshold: 20}   # per-row unit when the logger switched units
     pitch_a_deg: {column: Ba_avg, unit: auto}    # auto = pick the unit that best fits the plausible range (warns)
     nacelle_temp_c: {column: NacTmp, scale: 0.1, offset: 0}   # raw counts -> value, applied after unit conversion
+    power_kw:                     # high-res samples that are themselves statistics (e.g. 1-min of 1-Hz data):
+      {column: P_avg, min: P_min, max: P_max, std: P_std, count: P_n}   # -> count-weighted mean, pooled std
 
 status:                           # optional alarm / status log -> stop and fault labels
   files: ["acme/Alarme_WTG*.csv"]
@@ -79,6 +94,22 @@ status:                           # optional alarm / status log -> stop and faul
   class_rules:                                       # regex rules on a field (default: message)
     - {match: "grid|netz", class: grid}
 ```
+
+### High-res input (1 s to 10 min)
+
+The loader detects the native interval per turbine (the most common step, snapped to 1/2/5/10/15/30 s or 1/2/5/10 min)
+and aggregates anything finer than 10 min to the canonical 10-minute bins:
+
+- Stamps are first moved to the sample start (`label: end` shifts back by the native interval, not by 10 min), so a
+  bin holds exactly the samples that start in `[t, t + 10 min)`.
+- Mean for linear signals, circular mean (and circular std) for `nacelle_position_deg` / `wind_direction_deg`; `_min`,
+  `_max`, `_std` (population) for the `aggregate.stats` signals; `_last` / `_mode` for `states`.
+- `n_samples` and `coverage` (samples / expected, capped at 1) per bin. Bins with no samples do not exist (gaps stay
+  gaps); bins under `min_coverage` keep `n_samples`/`coverage` but their values are blanked. Duplicate samples are
+  dropped (the most complete row wins).
+- `windml ingest load --keep-raw` also writes the un-aggregated canonical samples to `<farm>_raw_highres.parquet` for
+  later high-res features. Exported `_min/_max/_std` columns end up in `<farm>_stats_<tid>.parquet`.
+- Coarser than 10 min: rows are placed on the 10-min grid, nothing is interpolated (warning).
 
 Supported units (`src/windml/ingest/units.py`): °C/°F/K; kW/W/MW; kWh/Wh/MWh; bar/kPa/Pa/hPa/mbar/MPa/psi;
 m/s, km/h, mph, kn; rpm, rad/s; deg, rad; fraction, percent. Unknown keys anywhere in the file are rejected, so typos
