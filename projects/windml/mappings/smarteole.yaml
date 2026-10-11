@@ -1,0 +1,41 @@
+# SMARTEOLE wind-farm-control open dataset (ENGIE, 7x Senvion MM82 2050 kW, Sole du Moulin Vieux, France), 2020-02-17 to
+# 2020-05-24. Real HIGH-RES input: 1-minute statistics (avg/min/max/std/count of ~1 Hz samples), ONE CSV for all
+# turbines with the turbine number inside every column name (active_power_<n>_avg, ...). No alarm log; derate_<n> is a
+# 0/1 derating flag (wake-steering experiment). The ReadMe does not state the time zone or the stamp convention:
+# UTC and interval-start are assumed (CHECK with the data owner before relying on clock-sensitive results).
+# Download: python scripts/download_smarteole.py  (or make download-smarteole)
+name: smarteole
+description: "SMARTEOLE wind-farm-control open dataset, 7x Senvion MM82 (ENGIE), 1-min SCADA, Feb-May 2020"
+license: "Licence Ouverte / Open Licence 2.0 (Etalab), ENGIE Green / SMARTEOLE consortium, doi:10.5281/zenodo.7342466"
+source: "https://zenodo.org/records/7342466"
+rated_power_kw: 2050
+scada:
+  files: ["smarteole/SMARTEOLE_WakeSteering_SCADA_1minData.csv"]
+  format: csv
+  csv: {delimiter: ",", decimal: "."}
+  layout: wide
+  turbine_id: {from: columns, values: [1, 2, 3, 4, 5, 6, 7], format: "SMV{}"}
+  timestamp: {column: time, format: "%Y-%m-%d %H:%M:%S", timezone: UTC, label: start}
+  interval: auto                    # detected: 1 min
+  aggregate:
+    min_coverage: 0.5
+    stats: [power_kw, wind_speed_ms, generator_speed_rpm, pitch_a_deg, nacelle_position_deg]
+  signals:
+    power_kw: {column: "active_power_{turbine}_avg", min: "active_power_{turbine}_min", max: "active_power_{turbine}_max",
+               std: "active_power_{turbine}_std", count: "active_power_{turbine}_count", unit: kW}
+    wind_speed_ms: {column: "wind_speed_{turbine}_avg", min: "wind_speed_{turbine}_min", max: "wind_speed_{turbine}_max",
+                    std: "wind_speed_{turbine}_std", count: "wind_speed_{turbine}_count", unit: m/s}
+    generator_speed_rpm: {column: "generator_speed_{turbine}_avg", min: "generator_speed_{turbine}_min",
+                          max: "generator_speed_{turbine}_max", std: "generator_speed_{turbine}_std",
+                          count: "generator_speed_{turbine}_count", unit: rpm}
+    pitch_a_deg: {column: "blade_1_pitch_angle_{turbine}_avg", min: "blade_1_pitch_angle_{turbine}_min",
+                  max: "blade_1_pitch_angle_{turbine}_max", std: "blade_1_pitch_angle_{turbine}_std",
+                  count: "blade_1_pitch_angle_{turbine}_count", unit: deg}
+    nacelle_position_deg: {column: "nacelle_position_{turbine}_avg", unit: deg}
+    wind_direction_deg: {column: "wind_direction_{turbine}_avg", unit: deg}
+    ambient_temp_c: {column: "temperature_{turbine}_avg", unit: degC, comment: "outdoor nacelle temperature"}
+  states:
+    derate_flag: "derate_{turbine}"
+notes:
+  - "wind_vane_<n> (relative wind direction) has no canonical signal and is left unmapped."
+  - "Only ~3 months of data and no alarm log: good for the high-res path and DQ; too short for the condition report's 12-month models."

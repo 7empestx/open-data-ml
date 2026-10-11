@@ -30,7 +30,7 @@ SMOKE_ENV = WINDML_RAW_DIR=$(SMOKE_RAW_DIR) WINDML_DATA_DIR=$(SMOKE_DIR)/data WI
             WINDML_LOG_DIR=$(SMOKE_DIR)/logs WINDML_YEARS=$(SMOKE_YEARS) WINDML_TURBINES=$(SMOKE_TURBINES) \
             WINDML_TRIP_MIN_POS=1 WINDML_WORKERS=2
 
-.PHONY: help setup setup-dev config download download-cmapss download-lhb preprocess nbm nbm-eval trip trip-eval report all smoke smoke-clean test lint \
+.PHONY: help setup setup-dev config download download-cmapss download-lhb download-smarteole preprocess nbm nbm-eval trip trip-eval report all smoke smoke-clean test lint \
         ingest-suggest ingest-validate ingest-load ingest-fixtures ingest-proof
 
 help:
@@ -63,6 +63,10 @@ download-cmapss:
 ## download-lhb     La Haute Borne (ENGIE, Licence Ouverte 2.0) 2014-2015 extract via NREL OpenOA (~37 MB, SHA-256 pinned)
 download-lhb: setup
 	$(PY) scripts/download_la_haute_borne.py
+
+## download-smarteole SMARTEOLE (ENGIE, Licence Ouverte 2.0) 1-min SCADA, 7 turbines, Feb-May 2020 (~150 MB, MD5 pinned)
+download-smarteole: setup
+	$(PY) scripts/download_smarteole.py
 
 ## preprocess       clean + label all years, extract extra and 10-min statistic signals
 preprocess: setup
@@ -130,8 +134,9 @@ ingest-load: setup
 ## ingest-fixtures  synthetic messy operator exports from Kelmarsh 2022 (needs make download YEARS=2022)
 ingest-fixtures: setup
 	$(PY) scripts/make_messy_fixtures.py
+	$(PY) scripts/make_highres_fixtures.py
 
-## ingest-proof     load 6 differently shaped inputs, compare with references -> reports/ingest/proof.md + dq_*.md
+## ingest-proof     load 8-9 differently shaped inputs (incl. high-res), compare with references -> reports/ingest/proof.md + dq_*.md
 ingest-proof: setup
 	$(RUN) scripts/ingest_proof.py $(call LOG,ingest_proof)
 
