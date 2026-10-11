@@ -7,7 +7,7 @@
 Astro 7 needs **Node.js 22.12 or newer**. The box's system Node is 20, so the site was built with a local Node 22 install.
 
 ```bash
-cd site/web          # later: wherever the site lives inside the open-data-ml repo
+cd site
 npm ci
 npm run build        # outputs fully static files to dist/
 ```
@@ -67,7 +67,7 @@ function handler(event) {
 ## 2. Deploy (each release)
 
 ```bash
-# from site/web after npm run build
+# from site/ after npm run build
 aws s3 sync dist/ s3://<bucket> --delete
 
 # optional: longer cache for hashed assets, short cache for HTML

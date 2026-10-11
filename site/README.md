@@ -1,49 +1,28 @@
-# Starlight Starter Kit: Basics
+# ml.beehivewebstudio.com
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Source for the open-data-ml website, built with [Astro Starlight](https://starlight.astro.build) as a fully static site (no server, no analytics, no third-party scripts).
 
-```
-npm create astro@latest -- --template starlight
-```
+## Develop
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Needs Node.js 22.12 or newer.
 
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+cd site
+npm ci
+npm run dev       # local preview at http://localhost:4321
+npm run build     # static output in dist/
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Layout
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+- `src/content/docs/`: one Markdown or MDX file per page. The file path is the URL.
+- `src/assets/condition-report/`: report figures, converted to WebP at build time.
+- `src/components/BarChart.astro`: small HTML and CSS bar chart used on the results page (no JavaScript).
+- `public/`: files copied as-is (favicon, social image, robots.txt, the sample report PDF).
+- `astro.config.mjs`: site title, sidebar, header links and meta tags.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Numbers on the site come from `projects/windml/RESULTS.md` and `projects/windml/reports/`. Update them together.
 
-## 🧞 Commands
+## Deploy
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+Hosted on S3 behind CloudFront. See [DEPLOY.md](DEPLOY.md). Deploys are run manually by the site owner.
