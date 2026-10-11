@@ -4,7 +4,7 @@
 
 ## 0. Build
 
-Astro 7 needs **Node.js 22.12 or newer**. The box's system Node is 20, so the site was built with a local Node 22 install.
+The site (AstroWind on Astro 7) needs **Node.js 22.22.3 or newer**. The box's system Node is 20, so the site is built with a local Node 22 install.
 
 ```bash
 cd site
@@ -84,7 +84,7 @@ Add `--profile <profile>` to each command if Grant uses a named AWS CLI profile.
 - https://ml.beehivewebstudio.com/ loads over HTTPS.
 - `/windml/labels/` and `/windml/labels` (which should redirect) both work.
 - A made-up path returns the 404 page.
-- Search works. It's Pagefind, fully static, under `/pagefind/`.
+- There is no site search in the AstroWind version (Starlight's Pagefind search was removed). Navigation is the header, footer and docs sidebar.
 
 ## Cost note (est.)
 For a small static site, S3 storage and CloudFront traffic are typically a few dollars a month or less. The ACM public certificate is free. CloudFront Functions are billed per invocation at a very low rate.

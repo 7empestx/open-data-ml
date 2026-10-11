@@ -44,4 +44,6 @@ Datasets with unclear or copyleft licenses (for example NASA IMS bearings and SK
 
 The code in this repository is released under the [MIT License](LICENSE), Copyright (c) 2026 Beehive AI Labs LLC.
 
+The website in `site/` is based on the AstroWind template (MIT, Copyright (c) 2023 onWidget) and self-hosts the Inter font (SIL Open Font License 1.1). See [site/THIRD_PARTY_NOTICES.md](site/THIRD_PARTY_NOTICES.md).
+
 The MIT License covers the code only. **Datasets and their processed derivatives keep their own licenses.** The Kelmarsh and Penmanshiel wind farm data (Cubico Sustainable Investments, via Zenodo) are CC BY 4.0, and so are the other committed datasets. Reuse requires attribution as listed in each project's `DATA_SOURCES.md` (for windml: [projects/windml/DATA_SOURCES.md](projects/windml/DATA_SOURCES.md)). NASA C-MAPSS data is not committed; fetch it from NASA with `projects/windml/scripts/download_cmapss.sh`.
