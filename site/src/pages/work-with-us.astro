@@ -1,0 +1,204 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import { EMAIL } from '~/navigation';
+
+const metadata = {
+  title: 'Work with us',
+  description:
+    'A free two-week pilot for wind operators. Send a year or more of SCADA exports and status logs, and get a written condition report on your fleet.',
+};
+---
+
+<PageLayout metadata={metadata}>
+  <Hero
+    tagline="Work with us"
+    title="A free condition report on your own wind farm"
+    subtitle="open-data-ml is run by Beehive AI Labs LLC. We offer wind O&amp;M teams three things, all built on the same methods published on this site."
+    actions={[
+      { variant: 'primary', text: `Email ${EMAIL}`, href: `mailto:${EMAIL}` },
+      { text: 'See the sample report', href: '/windml/condition-report/' },
+    ]}
+  />
+
+  <Features
+    id="services"
+    tagline="Services"
+    title="What we offer"
+    columns={3}
+    classes={{ container: 'pt-0 md:pt-0 lg:pt-0' }}
+    items={[
+      {
+        title: 'Health assessment',
+        icon: 'tabler:report-analytics',
+        description:
+          'A one-off written review of a wind farm&#39;s SCADA data and status logs, like the <a class="underline" href="/windml/condition-report/">sample condition report</a>.',
+      },
+      {
+        title: 'Condition monitoring',
+        icon: 'tabler:activity-heartbeat',
+        description:
+          'The same checks repeated on new data at an interval that suits you, with changes since the last report called out.',
+      },
+      {
+        title: 'Free pilot',
+        icon: 'tabler:gift',
+        description:
+          'A first health assessment on one site at no cost, so you can judge whether it&#39;s useful before anything else.',
+      },
+    ]}
+  />
+
+  <section id="pilot" class="relative scroll-mt-[72px]">
+    <div class="mx-auto max-w-5xl px-4 md:px-6 py-12 md:py-16 lg:py-20">
+    <Headline
+      tagline="The free pilot"
+      title="What it is"
+      classes={{ container: 'text-left rtl:text-right max-w-3xl mx-0', title: 'text-3xl lg:text-4xl' }}
+    />
+    <div class="prose md:prose-lg dark:prose-invert max-w-3xl">
+      <p>
+        We run your data through the same cleaning, labeling and condition checks used for Kelmarsh and Penmanshiel, then
+        write up what we find. It's a retrospective review, not a failure prediction. Our own tests show that 10-minute
+        SCADA data can't reliably predict faults ahead of time, and we won't claim otherwise. See <a
+          href="/windml/results/">Results</a
+        >.
+      </p>
+      <h3>What you get, about two weeks after we receive your data</h3>
+      <ul>
+        <li>A written report (PDF) with a per-turbine scorecard and a red, amber or green flag for each turbine.</li>
+        <li>Availability and lost production by cause, per turbine and per year.</li>
+        <li>Chronic abnormal states, such as oil pressures or temperatures sitting away from normal for weeks or months.</li>
+        <li>Sensor health: frozen, drifting or mis-scaled channels, and gaps in the data.</li>
+        <li>A short list of specific things for your engineers to check, each with the evidence behind it.</li>
+        <li>A call to walk through the findings and answer questions.</li>
+      </ul>
+      <p><strong>What it costs.</strong> Nothing. There's no obligation to buy anything afterwards.</p>
+    </div>
+    </div>
+  </section>
+
+  <Steps
+    id="how-it-works"
+    tagline="How the pilot works"
+    title="Five steps, about two weeks"
+    items={[
+      {
+        title: 'Email us',
+        description: 'A line or two about your site: how many turbines, which models, and what data you can export.',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Agree data handling in writing',
+        description:
+          'Before you send anything, we agree where your data will be stored, who can see it, and when it will be deleted. Your NDA or data-sharing agreement is fine.',
+        icon: 'tabler:file-certificate',
+      },
+      {
+        title: 'Send your exports',
+        description: 'Whatever your system exports. We map it to our format, so you don&#39;t need to reshape anything.',
+        icon: 'tabler:upload',
+      },
+      {
+        title: 'Get the report',
+        description: 'About two weeks after we receive the data: a written report with a per-turbine scorecard.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Walk through it',
+        description: 'A call to go over the findings and answer questions.',
+        icon: 'tabler:messages',
+      },
+    ]}
+  />
+
+  <WidgetWrapper id="data-needed" containerClass="max-w-5xl">
+    <Headline
+      tagline="What data we need"
+      title="Data checklist"
+      classes={{ container: 'text-left rtl:text-right max-w-3xl mx-0', title: 'text-3xl lg:text-4xl' }}
+    />
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-xl border border-[var(--aw-color-border)] p-6">
+        <h3 class="text-xl font-bold">Required</h3>
+        <ul class="mt-3 space-y-3 text-muted list-disc pl-5">
+          <li>
+            <strong class="text-default">10-minute SCADA data</strong> for at least 12 months, ideally 2 years or more.
+            Averages are enough. Minimum, maximum and standard deviation columns help if your system exports them.
+          </li>
+          <li>
+            <strong class="text-default">Turbine status or alarm logs</strong> for the same period, with the status code, message,
+            and start and end times.
+          </li>
+          <li><strong class="text-default">Basic site details:</strong> turbine make, model and rating, and turbine IDs.</li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-[var(--aw-color-border)] p-6">
+        <h3 class="text-xl font-bold">Helpful if you have them</h3>
+        <ul class="mt-3 space-y-3 text-muted list-disc pl-5">
+          <li>Maintenance or work-order records, such as component replacements, oil changes and inspections.</li>
+          <li>Oil analysis or vibration reports.</li>
+          <li>Any known changes during the period, such as control software updates or sensor replacements.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-6 text-muted max-w-3xl">
+      <strong class="text-default">Format.</strong> Whatever your system exports is fine: CSV, Excel or Parquet, from Greenbyte,
+      Bazefield, your OEM portal or your own historian.
+    </p>
+  </WidgetWrapper>
+
+  <FAQs
+    id="faq"
+    tagline="Questions"
+    title="How your data is handled, and other questions"
+    items={[
+      {
+        title: 'Who owns the data?',
+        description: 'You do. We use it only for your report.',
+      },
+      {
+        title: 'Will our data or results be published?',
+        description: 'No. It&#39;s never published, shared or added to public results without your written permission.',
+      },
+      {
+        title: 'Where does our data live and who sees it?',
+        description:
+          'Before you send anything, we agree in writing where it will be stored, who can see it, and when it will be deleted. We&#39;re happy to work under your NDA or data-sharing agreement.',
+      },
+      {
+        title: 'Can you predict failures before they happen?',
+        description:
+          'No, and we won&#39;t claim to. Our strict tests found that 10-minute SCADA data doesn&#39;t beat chance at predicting faults ahead of time. The pilot is a retrospective condition review. See <a class="underline" href="/windml/results/">Results</a>.',
+      },
+      {
+        title: 'Is the pilot really free?',
+        description: 'Yes. There&#39;s no obligation to buy anything afterwards.',
+      },
+      {
+        title: 'Anything to check before sending data?',
+        description: 'Check your turbine service contract first. Some contracts limit sharing SCADA data with third parties.',
+      },
+    ]}
+  />
+
+  <CallToAction
+    id="contact"
+    title="Get in touch"
+    subtitle="Email us with a line or two about your site: how many turbines, which models, and what data you can export. We'll reply with next steps."
+    actions={[{ variant: 'primary', text: `Email ${EMAIL}`, href: `mailto:${EMAIL}` }]}
+  />
+
+  <WidgetWrapper id="disclaimer" containerClass="max-w-4xl pt-0 md:pt-0 lg:pt-0">
+    <p class="text-sm text-muted italic">
+      Reports are based on the data you provide. They're not engineering advice, and any finding should be checked by a
+      qualified engineer, with site records and inspections, before anyone acts on it.
+    </p>
+  </WidgetWrapper>
+</PageLayout>

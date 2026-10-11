@@ -1,0 +1,140 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { GITHUB_URL, EMAIL } from '~/navigation';
+
+const metadata = {
+  title: 'Machine learning on open data',
+  description:
+    'open-data-ml trains machine learning models only on openly licensed public data and publishes every result, including the negative ones. First project, windml, works on wind turbine SCADA data.',
+};
+---
+
+<PageLayout metadata={metadata}>
+  <Hero
+    tagline="open-data-ml by Beehive AI Labs LLC"
+    title="Machine learning on open data, done in the open"
+    subtitle="We train models only on openly licensed public data and publish every dataset, method and result, including the ones that don't work. What we learn goes into plain, checkable condition reports for wind operators."
+    actions={[
+      { variant: 'primary', text: 'See the windml results', href: '/windml/results/', icon: 'tabler:arrow-right' },
+      { text: 'Sample condition report', href: '/windml/condition-report/' },
+    ]}
+  >
+    <Fragment slot="content">
+      <p class="mt-6 text-sm text-muted">
+        Run a wind farm? <a class="text-link underline font-medium" href="/work-with-us/">See the free pilot</a>.
+      </p>
+    </Fragment>
+  </Hero>
+
+  <Stats
+    id="windml-data"
+    tagline="First project: windml"
+    title="Can wind turbine faults be predicted from public 10-minute SCADA data?"
+    subtitle="windml uses every published year from two UK wind farms released by Cubico Sustainable Investments under CC BY 4.0."
+    stats={[
+      { amount: '20', title: 'Turbines at Kelmarsh and Penmanshiel' },
+      { amount: '9 years', title: 'Of data, 2016 to 2024' },
+      { amount: '8.95 M', title: '10-minute SCADA rows' },
+      { amount: '415', title: 'Major faults labeled from the logs' },
+    ]}
+    classes={{ container: 'pt-0 md:pt-0 lg:pt-0' }}
+  />
+
+  <Features
+    id="findings"
+    tagline="What we found"
+    title="An honest negative result, and what the data is still good for"
+    columns={2}
+    items={[
+      {
+        title: 'What we found',
+        icon: 'tabler:search',
+        description:
+          'Under a strict test (settings picked on 2017 to 2020, scored once on 2021 to 2024), neither normal-behavior models nor short-term trip models beat chance at predicting gearbox oil-system or pitch faults.',
+        callToAction: { text: 'Read the results and why', href: '/windml/results/', icon: 'tabler:arrow-right' },
+      },
+      {
+        title: 'What the data is still good for',
+        icon: 'tabler:file-analytics',
+        description:
+          'A look back at fleet health: where downtime came from, which turbines stand out, oil-pressure build-ups that ended at a service, and sensor or model drift.',
+        callToAction: { text: 'See the sample report', href: '/windml/condition-report/', icon: 'tabler:arrow-right' },
+      },
+      {
+        title: 'Check our work',
+        icon: 'tabler:brand-github',
+        description:
+          'The code is public under the MIT license, with tests on every push. <code>make setup &amp;&amp; make smoke</code> reruns the pipeline on a slice of the data in about 10 minutes.',
+        callToAction: { text: 'Reproduce it', href: '/windml/reproduce/', icon: 'tabler:arrow-right' },
+      },
+      {
+        title: 'How we work with data',
+        icon: 'tabler:license',
+        description:
+          'Open licenses only, credit to the people who published the data, and no resale. Operator data stays the operator&#39;s.',
+        callToAction: { text: 'Read the data policy', href: '/about/', icon: 'tabler:arrow-right' },
+      },
+    ]}
+  />
+
+  <Steps
+    id="method"
+    tagline="How it works"
+    title="From open data to a checked result"
+    items={[
+      {
+        title: 'Use openly licensed data',
+        description:
+          'Download public datasets from the original source, check the license and record the required credit. Raw files stay with the publisher.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Clean and label',
+        description:
+          'Align timestamps, flag gaps, remove bad and frozen sensor values, and label major faults from the turbines&#39; own status logs.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'Test strictly',
+        description:
+          'Walk forward by year: pick settings on 2017 to 2020, score once on 2021 to 2024, and compare every hit rate with season-matched chance.',
+        icon: 'tabler:chart-bar',
+      },
+      {
+        title: 'Publish everything',
+        description: 'Methods, numbers, code and data credits, including the results that didn&#39;t work.',
+        icon: 'tabler:world',
+      },
+    ]}
+  />
+
+  <CallToAction
+    id="operators"
+    title="For wind operators"
+    subtitle="We can produce the same kind of condition report from your own SCADA exports and status logs. The pilot is free: send a year or more of data, and two weeks later you get a written report with a per-turbine scorecard and specific things to check. You keep ownership of your data."
+    actions={[
+      { variant: 'primary', text: 'Work with us', href: '/work-with-us/' },
+      { text: `Email ${EMAIL}`, href: `mailto:${EMAIL}` },
+    ]}
+  />
+
+  <WidgetWrapper id="credits" containerClass="max-w-4xl pt-0 md:pt-0 lg:pt-0">
+    <p class="text-xs text-muted leading-relaxed">
+      Data credit: Kelmarsh and Penmanshiel wind farm data, Cubico Sustainable Investments Ltd, published on Zenodo under <a
+        class="underline"
+        href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a
+      >. Kelmarsh: DOI <a class="underline" href="https://doi.org/10.5281/zenodo.16807551">10.5281/zenodo.16807551</a>.
+      Penmanshiel: DOI <a class="underline" href="https://doi.org/10.5281/zenodo.16807304">10.5281/zenodo.16807304</a> and
+      the earlier version <a class="underline" href="https://doi.org/10.5281/zenodo.5946808">10.5281/zenodo.5946808</a>. Code: <a
+        class="underline"
+        href={GITHUB_URL}>github.com/7empestx/open-data-ml</a
+      >. This is research on public data. It's not engineering advice.
+    </p>
+  </WidgetWrapper>
+</PageLayout>

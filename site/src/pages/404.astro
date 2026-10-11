@@ -1,0 +1,23 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import Button from '~/components/ui/Button.astro';
+
+const metadata = { title: 'Page not found', description: "This page doesn't exist.", robots: { index: false } };
+---
+
+<PageLayout metadata={metadata}>
+  <section class="flex items-center px-4 py-20 md:py-28">
+    <div class="mx-auto max-w-xl text-center">
+      <p class="text-primary dark:text-[var(--aw-color-accent)] font-bold text-7xl md:text-8xl">404</p>
+      <h1 class="mt-4 text-3xl md:text-4xl font-bold font-heading text-heading">Page not found</h1>
+      <p class="mt-4 text-lg text-muted">
+        The page you're looking for doesn't exist or has moved. Start from one of these.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+        <Button variant="primary" href="/" text="Home" />
+        <Button href="/windml/results/" text="windml results" />
+        <Button variant="tertiary" href="/work-with-us/" text="Work with us" />
+      </div>
+    </div>
+  </section>
+</PageLayout>
