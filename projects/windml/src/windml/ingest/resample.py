@@ -6,6 +6,9 @@ Per turbine and 10-minute bin [t, t+10min) (bin label = start, UTC):
   <state>_last, <state>_mode   for status / state-code columns (last sample in time; most frequent value)
   coverage            samples present / samples expected (10 min / native interval), capped at 1
   n_samples           samples present
+If a signal also maps per-sample statistics (the export is itself made of short-interval means, e.g. 1-min
+avg/min/max/std/count from 1-Hz data), the bin mean is count-weighted, min/max come from the sample minima/maxima and
+the std is pooled (within- plus between-sample variance), so they describe the underlying 1-Hz signal.
 A sample belongs to the bin that contains the START of its own interval: with `label: end` the loader first moves
 each timestamp back by ONE NATIVE interval (not by 10 minutes). Bins with no samples are absent (a gap); bins with
 coverage below `min_coverage` keep coverage / n_samples but their signal values are set to NaN.
@@ -81,6 +84,12 @@ def aggregate(df: pd.DataFrame, native: pd.Timedelta, signals: list[str], stats:
         work[f"{c}__sin"], work[f"{c}__cos"] = np.sin(r), np.cos(r)
     g = work.groupby(key, sort=True)
     out = g.mean()
+    pooled = [c for c in lin if f"{c}__count" in d or f"{c}__std" in d]
+    for c in pooled:   # samples that are themselves short-interval means: count-weighted mean
+        w = d[f"{c}__count"].astype("float64").fillna(0) if f"{c}__count" in d else pd.Series(1.0, index=d.index)
+        w = w.where(d[c].notna(), 0.0)
+        sw = w.groupby(key, sort=True).sum()
+        out[c] = ((d[c].astype("float64").fillna(0) * w).groupby(key, sort=True).sum() / sw).where(sw > 0)
     for c in circ:
         out[c] = _circ_mean(out.pop(f"{c}__sin"), out.pop(f"{c}__cos"))
         rlen = np.hypot(g[f"{c}__sin"].mean(), g[f"{c}__cos"].mean()).clip(upper=1.0)
@@ -92,6 +101,23 @@ def aggregate(df: pd.DataFrame, native: pd.Timedelta, signals: list[str], stats:
         mn, mx, sd = gs.min(), gs.max(), gs.std(ddof=0)
         for c in lin_stats:
             out[f"{c}_min"], out[f"{c}_max"], out[f"{c}_std"] = mn[c], mx[c], sd[c]
+            # pre-aggregated samples (e.g. 1-min avg/min/max/std/count): use the sample extremes and the pooled std
+            if f"{c}__min" in d:
+                out[f"{c}_min"] = d[f"{c}__min"].astype("float64").groupby(key, sort=True).min()
+            if f"{c}__max" in d:
+                out[f"{c}_max"] = d[f"{c}__max"].astype("float64").groupby(key, sort=True).max()
+            if f"{c}__std" in d:
+                w = d[f"{c}__count"].astype("float64").fillna(0) if f"{c}__count" in d else pd.Series(1.0, index=d.index)
+                sd_raw = d[f"{c}__std"].astype("float64")
+                if f"{c}__count" in d:   # a single underlying sample has no std (NaN in most exports): it is 0
+                    sd_raw = sd_raw.mask(sd_raw.isna() & (d[f"{c}__count"] <= 1), 0.0)
+                ok = d[c].notna() & sd_raw.notna()
+                w = w.where(ok, 0.0)
+                mu, sdv = d[c].astype("float64").fillna(0), sd_raw.fillna(0)
+                sw = w.groupby(key, sort=True).sum()
+                ex2 = ((sdv ** 2 + mu ** 2) * w).groupby(key, sort=True).sum() / sw
+                m1 = (mu * w).groupby(key, sort=True).sum() / sw
+                out[f"{c}_std"] = np.sqrt((ex2 - m1 ** 2).clip(lower=0)).where(sw > 0)
     n = (d["_n"] > 0).groupby(key, sort=True).sum()
     out["n_samples"] = n.astype("int32")
     out["coverage"] = (n / expected).clip(upper=1.0).astype("float32")

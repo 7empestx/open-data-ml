@@ -95,7 +95,7 @@ def read_any(path: Path, src: dict, usecols: set[str] | None = None) -> pd.DataF
             names = pq.ParquetFile(path).schema.names
             cols = [c for c in names if c in usecols]
         df = pd.read_parquet(path, columns=cols)
-    return df.assign(_file=str(path.name))
+    return df.copy().assign(_file=str(path.name))  # copy() de-fragments very wide frames
 
 
 def sample_text(path: Path, encoding: str = "utf-8", n: int = 200) -> str:

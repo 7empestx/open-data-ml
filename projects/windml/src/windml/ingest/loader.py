@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from . import readers, resample, units
 from .schema import SIGNALS, FREQ
+from .mapping import SUB_STATS
 
 _OFFSET_RX = re.compile(r"(?:Z|[+-]\d{2}:?\d{2})$")
 
@@ -134,9 +135,33 @@ def _needed_columns(sc: dict) -> set[str]:
     if sc["layout"] == "long":
         need |= {sc["long"]["tag_column"], sc["long"]["value_column"]}
     else:
-        need |= {s["column"] for s in sc["signals"].values()}
-        need |= set((sc.get("states") or {}).values())
+        cols = {s["column"] for s in sc["signals"].values()}
+        cols |= {s[k] for s in sc["signals"].values() for k in SUB_STATS if s.get(k)}
+        cols |= set((sc.get("states") or {}).values())
+        tid = sc.get("turbine_id") or {}
+        if tid.get("from") == "columns":   # one column per turbine: expand the {turbine} placeholder
+            cols = {c.replace("{turbine}", str(v)) for c in cols for v in tid["values"]}
+        need |= cols
     return need
+
+
+def _split_turbine_columns(df: pd.DataFrame, sc: dict) -> pd.DataFrame:
+    """Wide export with the turbine in the column names (power_1, power_2, ...) -> one block per turbine, columns renamed
+    back to the mapping's {turbine} templates."""
+    tid = sc["turbine_id"]
+    templ = {s["column"] for s in sc["signals"].values()} | {s[k] for s in sc["signals"].values() for k in SUB_STATS if s.get(k)}
+    templ |= set((sc.get("states") or {}).values())
+    keep = [c for c in df.columns if c.startswith("_")] + list(set(sum([sc["timestamp"].get("columns") or [sc["timestamp"]["column"]]], [])))
+    parts = []
+    for v in tid["values"]:
+        ren = {t.replace("{turbine}", str(v)): t for t in templ}
+        cols = [c for c in ren if c in df.columns]
+        if not cols:
+            continue
+        b = df[keep + cols].rename(columns=ren)
+        b["turbine_id"] = turbine_ids(b.assign(_tid=str(v)), {**tid, "from": "column", "column": "_tid"}, Path("x"))
+        parts.append(b.drop(columns="_tid", errors="ignore"))
+    return pd.concat(parts, ignore_index=True)
 
 
 def _header(path: Path, sc: dict) -> list[str]:
@@ -179,8 +204,11 @@ def read_raw(sc: dict, raw_dir: Path, log: LoadLog, limit_files: int | None = No
     for path, fspec in hits:
         df = readers.read_any(path, sc, usecols=need if readers.file_format(path, sc["format"]) != "excel" else None)
         tspec = fspec.get("turbine_id") or sc["turbine_id"]
-        df["turbine_id"] = turbine_ids(df, tspec, path)
         missing = [c for c in need if c not in df.columns and c != "turbine_id"]
+        if tspec["from"] == "columns":
+            df = _split_turbine_columns(df, {**sc, "turbine_id": tspec})
+        else:
+            df["turbine_id"] = turbine_ids(df, tspec, path)
         log.files.append({"file": str(path.relative_to(raw_dir)) if path.is_relative_to(raw_dir) else str(path), "rows": len(df),
                           "turbines": sorted(df["turbine_id"].unique().tolist())[:20], "missing_columns": missing})
         frames.append(df)
@@ -211,6 +239,9 @@ def load_scada(m: dict, raw_dir: Path, limit_files: int | None = None, keep_raw:
             out[name] = _numeric(df[col], sc["csv"]["decimal"]) if col in df.columns else np.nan
             if col not in df.columns:
                 log.warn(f"{name}: column {col!r} not found in any file")
+            for k in SUB_STATS:
+                if spec.get(k):
+                    out[f"{name}__{k}"] = _numeric(df[spec[k]], sc["csv"]["decimal"]) if spec[k] in df.columns else np.nan
         for name, col in states.items():
             out[name] = df[col] if col in df.columns else np.nan
         df = out
@@ -238,7 +269,9 @@ def load_scada(m: dict, raw_dir: Path, limit_files: int | None = None, keep_raw:
                 log.warn(f"high-res aggregation: {info['bins_below_min_coverage']:,} of {info['bins']:,} 10-min bins have coverage "
                          f"below {agg.get('min_coverage', 0.5)} and were set to NaN (coverage column kept)")
     lo = df[~df["turbine_id"].isin(hi)]
-    if len(lo):
+    if len(lo):   # 10-min data that maps per-interval stats: keep them as <signal>_min/_max/_std
+        lo = lo.rename(columns={c: c.replace("__", "_") for c in lo.columns if "__" in c and c.rsplit("__", 1)[1] in ("min", "max", "std")})
+        lo = lo.drop(columns=[c for c in lo.columns if c.endswith("__count")])
         parts.append(_to_grid(lo, log))
     df = pd.concat(parts, ignore_index=True) if len(parts) > 1 else parts[0]
     return df.sort_values(["turbine_id", "timestamp"]).reset_index(drop=True), log
@@ -295,6 +328,7 @@ def _apply_units(df: pd.DataFrame, sc: dict, log: LoadLog):
     for name, spec in sc["signals"].items():
         sig = SIGNALS[name]
         x = df[name]
+        u, hi = None, None
         if "unit_switch" in spec:
             us = spec["unit_switch"]
             conv, hi = units.split_switch(x, us["low"], us["high"], sig.unit, float(us.get("threshold", 20)))
@@ -314,12 +348,38 @@ def _apply_units(df: pd.DataFrame, sc: dict, log: LoadLog):
                     log.warn(f"{name}: unit auto-detected as {u} and converted to {sig.unit}; confirm and pin it in the mapping")
             df[name] = units.convert(x, u, sig.unit)
             log.units[name] = f"{units.normalize_unit(u)} -> {sig.unit} ({src})"
+        _sub_units(df, name, spec, sig, u if "unit_switch" not in spec else None, hi if "unit_switch" in spec else None)
         if spec.get("scale") is not None:
             df[name] = df[name] * float(spec["scale"])
         if spec.get("offset") is not None:
             df[name] = df[name] + float(spec["offset"])
         for w in units.unit_suspicions(name, df[name], sig.quantity, sig.unit, sig.plausible, df["timestamp"]):
             log.warn("unit suspicion: " + w)
+
+
+def _sub_units(df, name, spec, sig, u, hi):
+    """Convert per-sample min/max (like the mean) and std (scale only, no offset) of a high-res signal."""
+    sc_, off = float(spec.get("scale") or 1.0), float(spec.get("offset") or 0.0)
+
+    def lin(x, unit):  # value conversion and its pure scale factor
+        f = float(units.convert(pd.Series([1.0]), unit, sig.unit).iloc[0] - units.convert(pd.Series([0.0]), unit, sig.unit).iloc[0])
+        return units.convert(x, unit, sig.unit), f
+    for k in ("min", "max", "std"):
+        c = f"{name}__{k}"
+        if c not in df:
+            continue
+        x = df[c]
+        if hi is not None:   # per-row unit switch decided on the mean
+            us = spec["unit_switch"]
+            if k == "std":
+                f_lo, f_hi = lin(pd.Series([0.0]), us["low"])[1], lin(pd.Series([0.0]), us["high"])[1]
+                v = x * np.where(hi.to_numpy(), f_hi, f_lo)
+            else:
+                v = lin(x.where(~hi), us["low"])[0].fillna(lin(x.where(hi), us["high"])[0])
+        else:
+            conv, f = lin(x, u)
+            v = x * f if k == "std" else conv
+        df[c] = v * sc_ + (0.0 if k == "std" else off)
 
 
 def _to_grid(df: pd.DataFrame, log: LoadLog) -> pd.DataFrame:

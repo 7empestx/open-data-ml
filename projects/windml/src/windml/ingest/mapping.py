@@ -11,9 +11,10 @@ SOURCE_KEYS = {"files", "format", "csv", "excel", "layout", "long", "turbine_id"
 SCADA_KEYS = SOURCE_KEYS | {"signals", "interval", "aggregate", "states"}
 STATUS_KEYS = SOURCE_KEYS | {"start", "end", "duration", "status", "code", "message", "service_category", "iec_category",
                              "class_by_code", "class_rules", "end_missing"}
-SIGNAL_KEYS = {"column", "tag", "unit", "unit_switch", "scale", "offset", "comment"}
+SUB_STATS = ("min", "max", "std", "count")   # optional per-sample statistics columns of a high-res signal
+SIGNAL_KEYS = {"column", "tag", "unit", "unit_switch", "scale", "offset", "comment", *SUB_STATS}
 TIME_KEYS = {"column", "columns", "format", "dayfirst", "timezone", "ambiguous", "nonexistent", "label", "shift"}
-TID_KEYS = {"from", "column", "regex", "value", "map", "format"}
+TID_KEYS = {"from", "column", "regex", "value", "values", "map", "format"}
 
 
 class MappingError(ValueError):
@@ -62,8 +63,11 @@ def _source(d, allowed, where):
         raise MappingError(f"{where}.turbine_id is required (from: column | filename | sheet | constant)")
     if tid is not None:
         _check(tid, TID_KEYS, f"{where}.turbine_id")
-        if tid.get("from") not in ("column", "filename", "sheet", "constant"):
-            raise MappingError(f"{where}.turbine_id.from must be column, filename, sheet or constant")
+        if tid.get("from") == "columns":
+            if not tid.get("values"):
+                raise MappingError(f"{where}.turbine_id: from: columns needs `values` (the turbine numbers/names used in column names)")
+        elif tid.get("from") not in ("column", "filename", "sheet", "constant"):
+            raise MappingError(f"{where}.turbine_id.from must be column, columns, filename, sheet or constant")
     layout = d.get("layout", "wide")
     if layout not in ("wide", "long"):
         raise MappingError(f"{where}.layout must be wide or long")

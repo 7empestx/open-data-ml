@@ -107,3 +107,44 @@ def test_interval_validation():
     bad["scada"]["aggregate"] = {"stats": ["wind_speed_ms"]}
     with pytest.raises(mapping.MappingError, match="not a mapped signal"):
         mapping.validate(bad)
+
+
+def test_turbine_in_columns_and_pre_aggregated_stats(tmp_path):
+    """SMARTEOLE-style export: one file, turbine number inside the column names, 1-min avg/min/max/std/count of 1-Hz
+    samples. Bins must equal the statistics of the underlying 1-Hz samples (count-weighted mean, pooled std)."""
+    rng = np.random.default_rng(1)
+    t0 = pd.Timestamp("2020-03-01 00:00")
+    hz = {n: rng.normal(1000 * n, 50, 20 * 60) for n in (1, 2)}          # 20 min of 1-Hz power per turbine
+    rows = []
+    for i in range(20):
+        r = {"time": (t0 + pd.Timedelta(minutes=i)).strftime("%Y-%m-%d %H:%M:%S")}
+        for n, x in hz.items():
+            k = 60 if not (n == 2 and i == 3) else 1                      # one minute with a single sample (std NaN)
+            s = x[i * 60:i * 60 + k]
+            r |= {f"P_{n}_avg": s.mean(), f"P_{n}_min": s.min(), f"P_{n}_max": s.max(),
+                  f"P_{n}_std": s.std() if k > 1 else np.nan, f"P_{n}_count": k, f"flag_{n}": int(i >= 13)}
+        rows.append(r)
+    pd.DataFrame(rows).to_csv(tmp_path / "farm.csv", index=False)
+    m = _m(tmp_path, {"name": "cols", "scada": {
+        "files": ["farm.csv"], "turbine_id": {"from": "columns", "values": [1, 2], "format": "S{}"},
+        "timestamp": {"column": "time", "timezone": "UTC"},
+        "signals": {"power_kw": {"column": "P_{turbine}_avg", "min": "P_{turbine}_min", "max": "P_{turbine}_max",
+                                 "std": "P_{turbine}_std", "count": "P_{turbine}_count", "unit": "kW"}},
+        "states": {"derate_flag": "flag_{turbine}"}, "aggregate": {"stats": ["power_kw"]}}})
+    df, log = loader.load_scada(m, tmp_path)
+    assert sorted(df["turbine_id"].unique()) == ["S1", "S2"] and log.native_interval["S1"]["interval"] == "1min"
+    b = df.set_index(["turbine_id", "timestamp"])
+    for n in (1, 2):
+        for j in range(2):
+            x = hz[n][j * 600:(j + 1) * 600]
+            if n == 2 and j == 0:
+                x = np.concatenate([x[:180], x[180:181], x[240:]])         # minute 3 kept only its first sample
+            row = b.loc[(f"S{n}", pd.Timestamp(t0, tz="UTC") + pd.Timedelta(minutes=10 * j))]
+            assert row["power_kw"] == pytest.approx(x.mean())
+            assert row["power_kw_min"] == pytest.approx(x.min()) and row["power_kw_max"] == pytest.approx(x.max())
+            assert row["power_kw_std"] == pytest.approx(x.std(), rel=1e-6)
+    assert b.loc[("S1", pd.Timestamp("2020-03-01 00:10", tz="UTC")), "derate_flag_mode"] == 1
+    assert not any("__" in c for c in df.columns)
+    with pytest.raises(mapping.MappingError):
+        _m(tmp_path, {"name": "x", "scada": {"files": ["farm.csv"], "turbine_id": {"from": "columns"},
+                                             "timestamp": {"column": "time"}, "signals": {"power_kw": "P_{turbine}_avg"}}})
