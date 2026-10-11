@@ -58,6 +58,7 @@ def test_report_short_history_no_alarm_log(tmp_path):
     md = (out / "condition_report.md").read_text()
     assert md.index("## Executive summary") < md.index("1. Data quality")
     assert "no alarm log" in md and "cross-fitted" in md
+    assert "Suggested check" in md and "bar above its own 12-month baseline" in md and "How the ratings work" in md
     assert (out / "condition_report.html").exists() and json.loads((out / "run.json").read_text())["turbines"] == 4
     # second run reuses the cache
     info2, _ = _run(tmp_path, tmp_path / "synth.yaml")

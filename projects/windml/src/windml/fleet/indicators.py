@@ -116,6 +116,7 @@ def turbine_panel(work: Path, tid: str, rated_kw: float, ev: pd.DataFrame | None
             for k in ("oil", "pitch"):
                 s = eps[k]
                 r[f"{k}_ep_6m"] = int(((s > t1 - pd.Timedelta(days=180)) & (s <= t1)).sum()) if len(s) else 0
+                r[f"{k}_ep_1m"] = int(((s > t1 - pd.Timedelta(days=30)) & (s <= t1)).sum()) if len(s) else 0
         rows.append(r)
     return pd.DataFrame(rows)
 

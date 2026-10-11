@@ -68,22 +68,22 @@ Active families (set the flag): oil_trips, pitch_trips, pump. RED: amber held 2 
 | | turbine-months | flagged | hit rate (95% CI) | chance (same farm-months) | base rate | lift vs base | lift vs chance | recall |
 |---|---|---|---|---|---|---|---|---|
 | pooled: AMBER or RED | 792 | 87 (11.0%) | 76% (66%–84%) | 50% | 45% | 1.70 | 1.51 | 19% |
-| pooled: RED | 792 | 22 (2.8%) | 59% (39%–77%) | 51% | 45% | 1.33 | 1.17 | 4% |
+| pooled: RED | 792 | 17 (2.1%) | 65% (41%–83%) | 58% | 45% | 1.45 | 1.12 | 3% |
 | kelmarsh: AMBER or RED | 270 | 6 (2.2%) | 67% (30%–90%) | 39% | 32% | 2.07 | 1.71 | 5% |
 | kelmarsh: RED | 270 | 0 | – | – | 32% | – | – | – |
 | penmanshiel: AMBER or RED | 522 | 81 (15.5%) | 77% (66%–84%) | 51% | 51% | 1.50 | 1.50 | 23% |
-| penmanshiel: RED | 522 | 22 (4.2%) | 59% (39%–77%) | 51% | 51% | 1.16 | 1.17 | 5% |
+| penmanshiel: RED | 522 | 17 (3.3%) | 65% (41%–83%) | 58% | 51% | 1.27 | 1.12 | 4% |
 
 ## Overall rating vs any event (selection period 2017-2020)
 
 | | turbine-months | flagged | hit rate (95% CI) | chance (same farm-months) | base rate | lift vs base | lift vs chance | recall |
 |---|---|---|---|---|---|---|---|---|
 | pooled: AMBER or RED | 960 | 78 (8.1%) | 64% (53%–74%) | 56% | 48% | 1.35 | 1.14 | 11% |
-| pooled: RED | 960 | 15 (1.6%) | 60% (36%–80%) | 53% | 48% | 1.26 | 1.12 | 2% |
+| pooled: RED | 960 | 11 (1.1%) | 55% (28%–79%) | 51% | 48% | 1.15 | 1.06 | 1% |
 | kelmarsh: AMBER or RED | 288 | 1 (0.3%) | 0% (0%–79%) | 0% | 28% | 0.00 | nan | 0% |
 | kelmarsh: RED | 288 | 0 | – | – | 28% | – | – | – |
 | penmanshiel: AMBER or RED | 672 | 77 (11.5%) | 65% (54%–75%) | 57% | 56% | 1.16 | 1.14 | 13% |
-| penmanshiel: RED | 672 | 15 (2.2%) | 60% (36%–80%) | 53% | 56% | 1.07 | 1.12 | 2% |
+| penmanshiel: RED | 672 | 11 (1.6%) | 55% (28%–79%) | 51% | 56% | 0.97 | 1.06 | 2% |
 
 ## RED vs the event its rule targets
 
@@ -91,20 +91,22 @@ RED rows scored against the target of the family that turned them red (oil, pitc
 
 | period | farm | turbine-months | RED | hit rate (95% CI) |
 |---|---|---|---|---|
-| train | pooled | 960 | 15 | 40% (20%–64%) |
+| train | pooled | 960 | 11 | 55% (28%–79%) |
 | train | kelmarsh | 288 | 0 | – |
-| train | penmanshiel | 672 | 15 | 40% (20%–64%) |
-| test | pooled | 792 | 22 | 59% (39%–77%) |
+| train | penmanshiel | 672 | 11 | 55% (28%–79%) |
+| test | pooled | 792 | 17 | 65% (41%–83%) |
 | test | kelmarsh | 270 | 0 | – |
-| test | penmanshiel | 522 | 22 | 59% (39%–77%) |
+| test | penmanshiel | 522 | 17 | 65% (41%–83%) |
 
 ## Decisions taken after looking at the held-out years (disclosed)
 
 - Availability: the 2017-2020 selection activated an availability-outlier amber rule on only 8 flagged turbine-months; on 2021-2024 it had no lift (0.86). Low availability is now shown as a note, never a flag. This was the planned treatment (past downtime describes the past) but it was confirmed on held-out data.
 - RED budget: the first pass allowed RED on up to 2.5% of 2017-2020 turbine-months, which gave 8% of held-out turbine-months red, mostly repeat oil trips at Penmanshiel. The budget was tightened to 1.5% and repeat-trip reds now need 3x the amber trip count; this was a choice about how rare red should be (flag rate), not about hit rates, but it was made after seeing held-out numbers.
+- Recency: a repeat-trip red also needs a trip in the last 30 days, so a turbine whose trips stopped (likely repaired) is amber with 'confirm the repair' instead. Added after reading the sample reports (PEN04's trips stopped and its pump pressure fell back in December 2023), not tuned on hit rates.
+- Pump rule with fewer than 4 turbines (no peer comparison possible): fires on twice the absolute rise (2 bar). Untested on events: neither labelled farm is that small.
 
 
-Share of held-out turbine-months by rating: GREEN 89%, AMBER 8%, RED 3%.
+Share of held-out turbine-months by rating: GREEN 89%, AMBER 9%, RED 2%.
 
 ## Caveats
 

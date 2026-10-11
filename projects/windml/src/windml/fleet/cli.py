@@ -28,7 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
 def run(a) -> dict:
     from .. import config as cfg
     from ..ingest import mapping
-    from . import health, metrics, prepare, render, scoring
+    from . import health, indicators, metrics, prepare, render, rules, scoring
     m = mapping.load_mapping(a.mapping)
     farm = m["name"]
     raw = Path(a.raw_dir) if a.raw_dir else cfg.RAW_DIR
@@ -51,7 +51,11 @@ def run(a) -> dict:
     print(f"health models in {times['health_s']} s", flush=True)
     t = time.time()
     M = metrics.compute(work, prep, a.window_months)
-    S = {tid: scoring.score(r, M["health"].get(tid), prep["has_status_log"]) for tid, r in M["turbines"].items()}
+    P = indicators.panel(work, prep)
+    P = P[P["turbine_id"].isin(list(M["turbines"]))].copy()
+    R = rules.apply(P)
+    ev = pd.read_parquet(work / "events.parquet") if prep["has_status_log"] and (work / "events.parquet").exists() else None
+    S = scoring.assess(P, R, M["turbines"], M["health"], prep["has_status_log"], ev, len(M["turbines"]))
     times["metrics_s"] = round(time.time() - t, 1)
     t = time.time()
     figs = render.figures(M, S, out, rated)
@@ -65,9 +69,11 @@ def run(a) -> dict:
     for tid, r in M["turbines"].items():
         flat = {k: (v if not isinstance(v, (list, dict)) else json.dumps(v, default=str)) for k, v in r.items()}
         rows.append({**flat, "flag": S[tid]["flag"], "confidence": S[tid]["confidence"], "reasons": S[tid]["reasons"],
+                     "notes": S[tid]["notes_text"],
                      "scheme": M["health"].get(tid, {}).get("scheme", "none")})
     sc = pd.DataFrame(rows)
     sc.to_csv(td / "scorecard.csv", index=False)
+    P.assign(rating=R["rating"]).to_csv(td / "rating_panel.csv", index=False)
     for k in ("monthly", "drift", "downtime", "fault_codes"):
         if len(M[k]):
             M[k].to_csv(td / f"{k}.csv", index=False)

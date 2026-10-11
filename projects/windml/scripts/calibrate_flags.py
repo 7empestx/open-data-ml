@@ -247,7 +247,12 @@ def main(argv=None):
           "- RED budget: the first pass allowed RED on up to 2.5% of 2017-2020 turbine-months, which gave 8% of held-out "
           "turbine-months red, mostly repeat oil trips at Penmanshiel. The budget was tightened to 1.5% and repeat-trip "
           "reds now need 3x the amber trip count; this was a choice about how rare red should be (flag rate), not about "
-          "hit rates, but it was made after seeing held-out numbers.", ""]
+          "hit rates, but it was made after seeing held-out numbers.",
+          "- Recency: a repeat-trip red also needs a trip in the last 30 days, so a turbine whose trips stopped (likely "
+          "repaired) is amber with 'confirm the repair' instead. Added after reading the sample reports (PEN04's trips "
+          "stopped and its pump pressure fell back in December 2023), not tuned on hit rates.",
+          "- Pump rule with fewer than 4 turbines (no peer comparison possible): fires on twice the absolute rise "
+          "(2 bar). Untested on events: neither labelled farm is that small.", ""]
     share = R.loc[p["period"] == "test", "rating"].value_counts(normalize=True)
     L += ["", "Share of held-out turbine-months by rating: " + ", ".join(f"{k} {share.get(k, 0):.0%}" for k in ("GREEN", "AMBER", "RED")) + ".", "",
           "## Caveats", "",

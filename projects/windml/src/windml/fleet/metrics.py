@@ -18,7 +18,7 @@ Definitions (generalised from the hand-built reports/condition_report, scripts/c
   first 6 months when the record is too short).
 - Sensor drift: hourly turbine value minus the median of the other turbines (ambient temperature) or
   ratio (wind speed, 4-12 m/s); drift = |median of the last 3 months - median before the window|.
-- Stuck sensors: rows flagged frozen (qc bit 4) by cleaning, window.
+- Stuck sensors: rows flagged frozen (qc bit 4) by cleaning, window (>= 1%) and last 90 days (>= 2%, "recent").
 """
 from __future__ import annotations
 import json
@@ -109,6 +109,9 @@ def turbine(work: Path, tid: str, rated_kw: float, ev: pd.DataFrame | None, wind
     fro = {c[3:]: int(((w[c] & 4) > 0).sum()) for c in qc_cols if c[3:] in present}
     r["frozen_rows_window"] = fro
     r["stuck_sensors"] = sorted(k for k, v in fro.items() if v >= 0.01 * len(w))
+    w90 = w[w["timestamp"] >= end - pd.Timedelta(days=90)]
+    r["stuck_sensors_recent"] = sorted(c[3:] for c in qc_cols if c[3:] in present and len(w90)
+                                       and ((w90[c] & 4) > 0).sum() >= 0.02 * len(w90))
     tables = {}
     # availability and stops
     has_log = ev is not None
@@ -237,7 +240,16 @@ def drift(hourly: dict[str, dict[str, pd.Series]], T: dict[str, dict]) -> pd.Dat
             continue
         df = pd.DataFrame(series)
         for tid in df.columns:
-            others = df.drop(columns=tid).median(axis=1)
+            # same peer set throughout: only turbines that also report in this turbine's last 3 months (otherwise a
+            # fleet whose turbines end at different dates shows a spurious drift when the peer set changes)
+            v = df[tid].dropna()
+            if not len(v):
+                continue
+            recent = df.loc[df.index > v.index[-1] - pd.Timedelta(days=92)]
+            peers = [c for c in df.columns if c != tid and recent[c].notna().mean() >= 0.5]
+            if len(peers) < 3:
+                continue
+            others = df[peers].median(axis=1).where(df[peers].notna().sum(axis=1) >= 3)
             if how == "diff":
                 off = df[tid] - others
             else:

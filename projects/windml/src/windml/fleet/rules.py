@@ -7,7 +7,8 @@ before real events in the 2017-2020 selection period are kept as information onl
 RED is deliberately rare. A family turns RED only when its amber condition has held at three consecutive
 month-ends (persistent, not a one-off) AND the turbine is a strong peer outlier, or when two independent
 families agree, or when the gear-oil pump pressure build-up is large (the signature that preceded the
-Penmanshiel gearbox service events).
+Penmanshiel gearbox oil-pressure trip runs). Repeat-trip reds also need a trip in the last 30 days, so a
+problem that was fixed (trips stopped) is shown amber with "confirm the repair".
 
 The thresholds in PARAMS are the ones selected by scripts/calibrate_flags.py on as-of dates 2017-2020
 (Kelmarsh + Penmanshiel) and checked on 2021-2024; reports/fleet_proof/calibration.md has the hit rates.
@@ -67,8 +68,9 @@ def family_fires(p: pd.DataFrame, fam: str, prm: dict) -> pd.Series:
         c = _ABN[fam]
         return ((_col(p, f"abn_{c}_3m") >= prm["a"]) & (_col(p, f"abn_{c}_3m_rel") >= prm["r"])
                 & (_col(p, f"abn_{c}_months") >= prm["k"]))
-    if fam == "pump":
-        return (_col(p, "pump_rise") >= prm["a"]) & (_col(p, "pump_rise_rel") >= prm["r"])
+    if fam == "pump":   # with fewer than 4 turbines there is no peer comparison: then twice the absolute rise is needed
+        rel = _col(p, "pump_rise_rel")
+        return (_col(p, "pump_rise") >= prm["a"]) & ((rel >= prm["r"]) | (rel.isna() & (_col(p, "pump_rise") >= 2 * prm["a"])))
     if fam in ("oil_trips", "pitch_trips"):
         return _col(p, f"{fam.split('_')[0]}_ep_6m") >= prm["n"]
     if fam == "avail":
@@ -97,8 +99,9 @@ def apply(p: pd.DataFrame, params: dict | None = None, active: set | None = None
         out[fam] = f
         out[f"{fam}_run"] = _run_length(f, p)
         persistent = f & (out[f"{fam}_run"] >= RED_PERSIST)
-        if fam in ("oil_trips", "pitch_trips"):
-            red = persistent & (_col(p, f"{fam.split('_')[0]}_ep_6m") >= RED_TRIP_MULT * prm["n"])
+        if fam in ("oil_trips", "pitch_trips"):     # many trips, for months, and still tripping in the last 30 days
+            k = fam.split("_")[0]
+            red = persistent & (_col(p, f"{k}_ep_6m") >= RED_TRIP_MULT * prm["n"]) & (_col(p, f"{k}_ep_1m") >= 1)
         else:
             red = persistent & (_col(p, REL_COL[fam]).abs() >= RED_REL)
         if fam == "pump":
