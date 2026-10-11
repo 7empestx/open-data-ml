@@ -4,11 +4,13 @@ Synthetic ACME-style vendor export generated from Kelmarsh KEL01-02, 2022. 2 tur
 
 ## Executive summary
 
-**No turbine shows a warning sign** in the last 24 months of data.
+**All 2 turbines are green**: no validated warning sign in the data up to 31 Dec 2022. Green is not a guarantee; see the notes and limits below.
 
-**No action needed now:** KEL01, KEL02.
+**Green:** KEL01, KEL02.
 
-**How sure are we.** Confidence is *High* when the turbine has 3+ years of history, near-complete data, models trained on earlier years and an alarm log; it drops when any of these is missing. A red flag is a reason to look, not a diagnosis.
+**How the ratings work.** A turbine is amber only for a specific, unusual pattern: gear-oil pump pressure building up far beyond its sister turbines, repeated oil-system or pitch trips, or a faulty sensor. It is red when the pattern is strong (e.g. a pump pressure rise of 2 bar or more) or persistent and still active. Thresholds were chosen on 2017-2020 data from two UK wind farms and checked on 2021-2024: amber or red turbine-months were followed by a logged fault, trip or long service stop within 90 days 76% of the time, against 50% for random turbines in the same months; but only 19% of the turbine-months before such an event carried a flag. Ratings help decide where to look first; most faults still arrive without a warning sign in SCADA data. With only 2 turbines there is no peer comparison, so only very large changes can be flagged.
+
+**How sure are we.** Confidence is *High* when the turbine has 3+ years of history, near-complete data, models trained on earlier years, an alarm log and at least 3 sister turbines to compare with; it drops when any of these is missing. A red rating is a reason to look, not a diagnosis.
 
 **What this report could not check:**
 
@@ -30,13 +32,13 @@ Signals present in at least one turbine: `ambient_temp_c`, `gear_oil_inlet_press
 
 | Turbine | Flag | Confidence | Tech. avail. | Energy avail. | Fault h/yr | Largest fault cause | Oil ep. | Pitch ep. | Abnormal oil days, final yr | Under-perf. days, final yr | Pump pressure: base to last (bar) | Oil-temp model error |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| KEL01 | **GREEN** | Medium | 98.5% | - | 17 | hydraulics (8 h) | 0 | 1 | 2% | 0% | - | - |
-| KEL02 | **GREEN** | Medium | 97.3% | - | 12 | converter (6 h) | 1 | 0 | 2% | 0% | - | - |
+| KEL01 | **GREEN** | Low | 98.5% | - | 17 | hydraulics (8 h) | 0 | 1 | 2% | 0% | - | - |
+| KEL02 | **GREEN** | Low | 97.3% | - | 12 | converter (6 h) | 1 | 0 | 2% | 0% | - | - |
 
-### Flags and reasons
+### Ratings, reasons and notes
 
-- **KEL01** **GREEN** (confidence Medium: 12 months of history, short-history models (cross-fit)). No trigger.
-- **KEL02** **GREEN** (confidence Medium: 12 months of history, short-history models (cross-fit)). No trigger.
+- **KEL01** **GREEN** (confidence Low: 12 months of history, short-history models (cross-fit), only 2 turbines (no peer comparison)). No rating trigger.
+- **KEL02** **GREEN** (confidence Low: 12 months of history, short-history models (cross-fit), only 2 turbines (no peer comparison)). No rating trigger.
 
 <h2 class="newpage">3. Model-based health (normal-behaviour residuals)</h2>
 
@@ -95,7 +97,8 @@ Most frequent fault stops in the window (all turbines):
 - **Pipeline.** `windml report` reads the raw export only through the mapping (`windml.ingest`), cleans and labels each turbine (QC flags, short-gap interpolation, alarm-log stop labels), trains the models, computes the metrics and writes this report. Every number here is reproducible from the mapping and the raw files.
 - **Window.** The last 24 months of each turbine; *final year* = its last 12 months.
 - **Models.** LightGBM per turbine and signal on healthy operating rows (no stop within 6 h, no fault, not in the 30 days before a major fault, QC clean). With 2+ calendar years, each year is scored by a model trained only on earlier years (3-day embargo, training must cover all 12 months). With 12-23 months, the record is cut into 6 blocks scored by models trained on the other blocks (cross-fit). Under 12 months, no model.
-- **RAG rules** (fixed in advance, heuristics, not a calibrated risk): RED for availability < 95%, >= 8 oil or pitch trip episodes, pump pressure >= 2 bar above baseline, or abnormal oil state on >= 30% of final-year days; AMBER for availability < 97%, >= 4 episodes, pump rise >= 1 bar, abnormal oil days >= 10%, oil-temperature model error >= 1.5x its pre-window level, or > 2% missing data; AMBER only for under-performance on >= 20% of final-year days, abnormal main-bearing or pitch residuals on >= 30%, sensor drift (1.5 °C, 5% wind) or a stuck monitored sensor.
-- **Confidence.** Points for history (3+ years: 2, 2-3 years: 1), coverage >= 95%, models trained on earlier years, an alarm log, and (for flags) agreement of independent indicators. High >= 4, Medium 2-3, Low <= 1.
-- **Limits.** The alarm-log classes come from the mapping's rules; trip detection uses Senvion-style oil/pitch codes and messages (other vendors need `class_rules`). Full-load oil medians assume one oil circuit design across the fleet. Models learn whatever was normal in their training data, including a fault that was already present. Sensor drift is relative to the other turbines, so a fleet-wide drift is invisible.
+- **Ratings.** Computed at each month-end from data up to that date (latest month-end shown here). AMBER when: the full-load gear-oil pump pressure (median of the last 15 days) is >= 1 bar above the turbine's own baseline (days 60-365 before) AND >= 5 robust standard deviations above the other turbines' rise that month; >= 3 oil-system trip episodes in 6 months; >= 6 pitch trip episodes in 6 months; an ambient-temperature or wind-speed sensor drifting vs the fleet over the last 3 months (1.5 °C, 5%); or a monitored sensor frozen on more than 2% of the last 90 days. RED when the pump rise is >= 2 bar; or a trip rule has held 2 month-ends in a row with >= 3x the amber count and a trip in the last 30 days; or two independent systems are amber at once. Shown as notes but never colour-setting, because they had no reliable lead on events in the validation: low availability (it describes the past), model-based abnormal-day rates (oil, pitch, main bearing, power curve) and missing data. A trip episode merges trips less than 24 h apart.
+- **Validation.** Retrospective check on Kelmarsh and Penmanshiel (21 turbines). Thresholds selected on 2017-2020, checked on 2021-2024 (792 turbine-months): pump build-up → oil trip or service stop: 58% of 12 flagged turbine-months vs 55% by chance; repeat oil trips → further oil trips: 63% of 75 flagged turbine-months vs 32% by chance; repeat pitch trips → further pitch trips: 67% of 6 flagged turbine-months vs 36% by chance. Any amber or red: 76% followed by a logged event within 90 days vs 50% by chance (recall 19%); red alone 65% vs 58% on only 17 turbine-months, so red marks strength and persistence more than a higher probability. Held-out ratings: 89% green, 9% amber, 2% red. Consecutive months overlap, so the effective sample is much smaller than the row counts; details in `reports/fleet_proof/calibration.md`.
+- **Confidence.** Points for history (3+ years: 2, 2-3 years: 1), coverage >= 95%, models trained on earlier years, an alarm log, and a fleet of 4+ turbines (peer comparison). High >= 5, Medium 3-4, Low <= 2.
+- **Limits.** The alarm-log classes come from the mapping's rules; trip detection uses Senvion-style oil/pitch codes and messages (other vendors need `class_rules`). Full-load oil medians assume one oil circuit design across the fleet. Models learn whatever was normal in their training data, including a fault that was already present. Sensor drift is relative to the other turbines, so a fleet-wide drift is invisible. The rating thresholds were calibrated on two UK farms of one turbine family (Senvion MM92/MM82); on other fleets the peer-relative logic still applies but the hit rates are unknown. Ratings look back up to 6 months and only at what SCADA and the alarm log show: inspections, oil analyses, vibration (CMS) data and work orders are not used, so a recent repair or a fault the sensors cannot see changes nothing here.
 - **Data.** Derived from Kelmarsh SCADA, CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.16807551.

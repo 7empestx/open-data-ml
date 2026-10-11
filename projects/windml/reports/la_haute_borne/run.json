@@ -8,9 +8,9 @@
  "times": {
   "prepare_s": 0.0,
   "health_s": 0.0,
-  "metrics_s": 1.9,
+  "metrics_s": 2.1,
   "render_s": 1.5,
-  "total_s": 3.3
+  "total_s": 3.6
  },
  "files": {
   "md": "condition_report.md",
@@ -23,5 +23,5 @@
   "LHB03": "GREEN",
   "LHB04": "GREEN"
  },
- "generated": "2026-10-11 02:54 UTC"
+ "generated": "2026-10-11 03:36 UTC"
 }

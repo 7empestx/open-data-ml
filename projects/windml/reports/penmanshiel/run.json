@@ -8,9 +8,9 @@
  "times": {
   "prepare_s": 0.1,
   "health_s": 0.0,
-  "metrics_s": 27.9,
+  "metrics_s": 38.4,
   "render_s": 2.7,
-  "total_s": 30.8
+  "total_s": 41.2
  },
  "files": {
   "md": "condition_report.md",
@@ -18,20 +18,20 @@
   "pdf": "condition_report.pdf"
  },
  "flags": {
-  "PEN01": "RED",
-  "PEN02": "RED",
-  "PEN04": "RED",
-  "PEN05": "AMBER",
-  "PEN06": "RED",
-  "PEN07": "AMBER",
-  "PEN08": "AMBER",
+  "PEN01": "GREEN",
+  "PEN02": "AMBER",
+  "PEN04": "AMBER",
+  "PEN05": "GREEN",
+  "PEN06": "GREEN",
+  "PEN07": "GREEN",
+  "PEN08": "GREEN",
   "PEN09": "AMBER",
-  "PEN10": "RED",
-  "PEN11": "RED",
+  "PEN10": "GREEN",
+  "PEN11": "GREEN",
   "PEN12": "GREEN",
   "PEN13": "GREEN",
   "PEN14": "RED",
-  "PEN15": "RED"
+  "PEN15": "GREEN"
  },
- "generated": "2026-10-11 02:54 UTC"
+ "generated": "2026-10-11 03:36 UTC"
 }

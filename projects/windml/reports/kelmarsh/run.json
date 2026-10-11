@@ -8,9 +8,9 @@
  "times": {
   "prepare_s": 0.1,
   "health_s": 0.0,
-  "metrics_s": 13.0,
+  "metrics_s": 18.4,
   "render_s": 2.2,
-  "total_s": 15.3
+  "total_s": 20.7
  },
  "files": {
   "md": "condition_report.md",
@@ -18,12 +18,12 @@
   "pdf": "condition_report.pdf"
  },
  "flags": {
-  "KEL01": "AMBER",
+  "KEL01": "GREEN",
   "KEL02": "GREEN",
   "KEL03": "GREEN",
-  "KEL04": "RED",
-  "KEL05": "RED",
-  "KEL06": "AMBER"
+  "KEL04": "GREEN",
+  "KEL05": "GREEN",
+  "KEL06": "GREEN"
  },
- "generated": "2026-10-11 02:53 UTC"
+ "generated": "2026-10-11 03:35 UTC"
 }

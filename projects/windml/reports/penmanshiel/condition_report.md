@@ -4,26 +4,30 @@ Penmanshiel wind farm (14x Senvion MM82, UK), Cubico, Greenbyte export. 14 turbi
 
 ## Executive summary
 
-**12 of 14 turbines need attention** (8 red, 4 amber). The rest show no warning sign in the data we have.
+**10 of 14 turbines are green, 3 amber, 1 red.** Red means act now: a strong, specific warning sign. Amber means check at the next visit: a specific, unusual pattern. Green means no validated warning sign in the data, not a guarantee.
 
-| Turbine | Flag | Why | Confidence | Suggested next step |
+| Turbine | Rating | Why | Suggested check | Confidence |
 |---|---|---|---|---|
-| PEN15 | **RED** | It tripped on oil-system faults in 16 separate episodes in two years; it was down for faults or maintenance 3.0% of the time; it tripped on pitch faults in 5 separate episodes in two years; and more (see scorecard). | High | Inspect the oil circuit (filter, pump, cooler, level); review the fault history below and the open work orders. |
-| PEN04 | **RED** | It was down for faults or maintenance 5.8% of the time; it tripped on oil-system faults in 11 separate episodes in two years; it behaved abnormally in the gearbox oil system on 56% of days last year; and more (see scorecard). | High | Review the fault history below and the open work orders; inspect the oil circuit (filter, pump, cooler, level). |
-| PEN06 | **RED** | It was down for faults or maintenance 5.5% of the time; it tripped on oil-system faults in 4 separate episodes in two years; it tripped on pitch faults in 5 separate episodes in two years; and more (see scorecard). | High | Review the fault history below and the open work orders; inspect the oil circuit (filter, pump, cooler, level). |
-| PEN02 | **RED** | It tripped on oil-system faults in 13 separate episodes in two years; it behaved abnormally in the gearbox oil system on 57% of days last year; it has 4.4% of its SCADA data missing. | High | Inspect the oil circuit (filter, pump, cooler, level); trend oil temperature and pressure against the sister turbines; take an oil sample. |
-| PEN01 | **RED** | It behaved abnormally in the gearbox oil system on 38% of days last year; it has 4.4% of its SCADA data missing. | High | Trend oil temperature and pressure against the sister turbines; take an oil sample; ask the scada provider about the gaps (communication or logger problems hide faults). |
-| PEN10 | **RED** | It was down for faults or maintenance 8.9% of the time; it has 4.9% of its SCADA data missing. | High | Review the fault history below and the open work orders; ask the scada provider about the gaps (communication or logger problems hide faults). |
-| PEN11 | **RED** | It behaved abnormally in the gearbox oil system on 42% of days last year; it has a wind speed sensor that drifted -5% away from the other turbines. | High | Trend oil temperature and pressure against the sister turbines; take an oil sample; recalibrate or replace the sensor (models and power-curve checks rely on it). |
-| PEN14 | **RED** | It needs 2.1 bar more gear-oil pump pressure at full load than earlier in its life. | High | Check the oil filter differential pressure and cooler; take an oil sample. |
-| PEN07 | **AMBER** | It tripped on oil-system faults in 5 separate episodes in two years; it tripped on pitch faults in 4 separate episodes in two years; it behaved abnormally in the gearbox oil system on 14% of days last year; and more (see scorecard). | High | Inspect the oil circuit (filter, pump, cooler, level); inspect pitch drives, batteries and slip ring. |
-| PEN05 | **AMBER** | It was down for faults or maintenance 3.4% of the time; it behaved abnormally in the gearbox oil system on 12% of days last year; it has 4.6% of its SCADA data missing. | High | Review the fault history below and the open work orders; trend oil temperature and pressure against the sister turbines; take an oil sample. |
-| PEN08 | **AMBER** | It tripped on oil-system faults in 6 separate episodes in two years; it has 4.5% of its SCADA data missing. | High | Inspect the oil circuit (filter, pump, cooler, level); ask the scada provider about the gaps (communication or logger problems hide faults). |
-| PEN09 | **AMBER** | It tripped on oil-system faults in 7 separate episodes in two years; it has 4.4% of its SCADA data missing. | High | Inspect the oil circuit (filter, pump, cooler, level); ask the scada provider about the gaps (communication or logger problems hide faults). |
+| PEN14 | **RED** | Gear-oil pump pressure at full load is 2.3 bar above its own 12-month baseline (now 10.0 bar), while the other turbines are at +0.0 bar; flagged 3 months running. | Inspect the gearbox oil filter and pump: read the filter differential pressure, check the bypass and pressure-relief valve, take an oil sample for particles. The same build-up was seen before in PEN01 (+3.0 bar, Aug 2023); PEN02 (+2.7 bar, Jun 2023 followed by 3 oil-pressure trip episodes); PEN04 (+3.2 bar, Jul 2023 followed by 8 oil-pressure trip episodes). | High |
+| PEN02 | **AMBER** | Tripped on oil-system faults in 5 separate episodes in the last 6 months (other turbines: median 0); most often 'Missing gear oil (high rpm)' (5 trips); last on 23 Nov 2023. (This turbine's published data ends 31 Dec 2023.) | No trip in the last 30 days and pump pressure dropped 2.6 bar, which looks like a repair or oil/filter change: confirm it in the work orders. If not repaired: inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. | High |
+| PEN04 | **AMBER** | Tripped on oil-system faults in 9 separate episodes in the last 6 months (other turbines: median 0); most often 'Low gearbox oil pressure' (10 trips); last on 28 Nov 2023. (This turbine's published data ends 31 Dec 2023.) | No trip in the last 30 days and pump pressure dropped 2.6 bar, which looks like a repair or oil/filter change: confirm it in the work orders. If not repaired: inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. | High |
+| PEN09 | **AMBER** | Tripped on oil-system faults in 4 separate episodes in the last 6 months (other turbines: median 0); most often 'Missing gear oil (high rpm)' (22 trips); last on 05 Nov 2023. (This turbine's published data ends 31 Dec 2023.) | No trip in the last 30 days: confirm in the work orders that the cause was repaired. Inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. | High |
 
-**No action needed now:** PEN12, PEN13.
+**Green:** PEN01, PEN05, PEN06, PEN07, PEN08, PEN10, PEN11, PEN12, PEN13, PEN15.
 
-**How sure are we.** Confidence is *High* when the turbine has 3+ years of history, near-complete data, models trained on earlier years and an alarm log; it drops when any of these is missing. A red flag is a reason to look, not a diagnosis.
+**Worth knowing.** Shown for context only: these signals (model alerts, past availability) did not reliably precede events in the validation, so they do not change the rating.
+
+- **PEN01**: Its gearbox oil system behaved unlike its own normal-behaviour model on 62% of days in the last 3 months.
+- **PEN02**: Its gearbox oil system behaved unlike its own normal-behaviour model on 62% of days in the last 3 months, probably because pump pressure dropped 2.6 bar (oil or filter change?).
+- **PEN04**: Its gearbox oil system behaved unlike its own normal-behaviour model on 64% of days in the last 3 months, probably because pump pressure dropped 2.6 bar (oil or filter change?).
+- **PEN07**: Availability was 94.4% over the last 6 months vs 99.0% for the other turbines; largest fault cause: hydraulics (164 h). This is past downtime, not a forecast.
+- **PEN07**: Its pitch system behaved unlike its own normal-behaviour model on 45% of days in the last 3 months.
+- **PEN14**: Its gearbox oil system behaved unlike its own normal-behaviour model on 34% of days in the last 3 months, in line with the pump-pressure build-up.
+- **PEN15**: Its main bearing behaved unlike its own normal-behaviour model on 56% of days in the last 3 months.
+
+**How the ratings work.** A turbine is amber only for a specific, unusual pattern: gear-oil pump pressure building up far beyond its sister turbines, repeated oil-system or pitch trips, or a faulty sensor. It is red when the pattern is strong (e.g. a pump pressure rise of 2 bar or more) or persistent and still active. Thresholds were chosen on 2017-2020 data from two UK wind farms and checked on 2021-2024: amber or red turbine-months were followed by a logged fault, trip or long service stop within 90 days 76% of the time, against 50% for random turbines in the same months; but only 19% of the turbine-months before such an event carried a flag. Ratings help decide where to look first; most faults still arrive without a warning sign in SCADA data.
+
+**How sure are we.** Confidence is *High* when the turbine has 3+ years of history, near-complete data, models trained on earlier years, an alarm log and at least 3 sister turbines to compare with; it drops when any of these is missing. A red rating is a reason to look, not a diagnosis.
 
 <h2 class="newpage">1. Data quality</h2>
 
@@ -52,37 +56,37 @@ Signals present in at least one turbine: `ambient_temp_c`, `available_capacity_k
 
 | Turbine | Flag | Confidence | Tech. avail. | Energy avail. | Fault h/yr | Largest fault cause | Oil ep. | Pitch ep. | Abnormal oil days, final yr | Under-perf. days, final yr | Pump pressure: base to last (bar) | Oil-temp model error |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| PEN01 | **RED** | High | 99.1% | 97.6% | 39 | pitch (76 h) | 2 | 3 | 38% | 0% | 7.2 to 7.5 | 1.1x |
-| PEN02 | **RED** | High | 98.5% | 97.5% | 92 | gearbox (108 h) | 13 | 0 | 57% | 0% | 7.7 to 8.1 | 1.1x |
-| PEN04 | **RED** | High | 94.2% | 94.6% | 262 | unspecified (375 h) | 11 | 1 | 56% | 0% | 7.7 to 8.0 | 0.9x |
-| PEN05 | **AMBER** | High | 96.6% | 94.6% | 166 | pitch (251 h) | 1 | 1 | 12% | 0% | 7.8 to 8.0 | 0.9x |
-| PEN06 | **RED** | High | 94.5% | 91.9% | 143 | pitch (257 h) | 4 | 5 | 3% | 0% | 7.5 to 7.7 | 1.0x |
-| PEN07 | **AMBER** | High | 97.4% | 95.4% | 183 | hydraulics (164 h) | 5 | 4 | 14% | 0% | 7.0 to 7.8 | 1.2x |
-| PEN08 | **AMBER** | High | 98.0% | 96.5% | 114 | converter (154 h) | 6 | 2 | 0% | 0% | 6.8 to 6.9 | 0.9x |
+| PEN01 | **GREEN** | High | 99.1% | 97.6% | 39 | pitch (76 h) | 2 | 3 | 38% | 0% | 7.2 to 7.5 | 1.1x |
+| PEN02 | **AMBER** | High | 98.5% | 97.5% | 92 | gearbox (108 h) | 13 | 0 | 57% | 0% | 7.7 to 8.1 | 1.1x |
+| PEN04 | **AMBER** | High | 94.2% | 94.6% | 262 | unspecified (375 h) | 11 | 1 | 56% | 0% | 7.7 to 8.0 | 0.9x |
+| PEN05 | **GREEN** | High | 96.6% | 94.6% | 166 | pitch (251 h) | 1 | 1 | 12% | 0% | 7.8 to 8.0 | 0.9x |
+| PEN06 | **GREEN** | High | 94.5% | 91.9% | 143 | pitch (257 h) | 4 | 5 | 3% | 0% | 7.5 to 7.7 | 1.0x |
+| PEN07 | **GREEN** | High | 97.4% | 95.4% | 183 | hydraulics (164 h) | 5 | 4 | 14% | 0% | 7.0 to 7.8 | 1.2x |
+| PEN08 | **GREEN** | High | 98.0% | 96.5% | 114 | converter (154 h) | 6 | 2 | 0% | 0% | 6.8 to 6.9 | 0.9x |
 | PEN09 | **AMBER** | High | 98.6% | 97.3% | 87 | gearbox (119 h) | 7 | 0 | 1% | 0% | 6.8 to 6.9 | 0.9x |
-| PEN10 | **RED** | High | 91.1% | 92.4% | 739 | unspecified (1471 h) | 0 | 3 | 0% | 0% | 6.7 to 7.0 | 0.9x |
-| PEN11 | **RED** | High | 98.5% | 95.7% | 66 | unspecified (37 h) | 1 | 1 | 42% | 0% | 6.8 to 6.6 | 1.1x |
+| PEN10 | **GREEN** | High | 91.1% | 92.4% | 739 | unspecified (1471 h) | 0 | 3 | 0% | 0% | 6.7 to 7.0 | 0.9x |
+| PEN11 | **GREEN** | High | 98.5% | 95.7% | 66 | unspecified (37 h) | 1 | 1 | 42% | 0% | 6.8 to 6.6 | 1.1x |
 | PEN12 | **GREEN** | High | 98.0% | 95.4% | 116 | pitch (77 h) | 3 | 3 | 1% | 0% | 7.1 to 7.6 | 1.1x |
 | PEN13 | **GREEN** | High | 99.5% | 97.5% | 6 | tower (11 h) | 0 | 0 | 1% | 0% | 7.3 to 7.6 | 1.2x |
 | PEN14 | **RED** | High | 98.9% | 97.3% | 38 | electrical (70 h) | 0 | 0 | 8% | 0% | 7.8 to 9.9 | 1.4x |
-| PEN15 | **RED** | High | 97.0% | 95.4% | 89 | pitch (71 h) | 16 | 5 | 22% | 1% | 7.4 to 6.9 | 3.1x |
+| PEN15 | **GREEN** | High | 97.0% | 95.4% | 89 | pitch (71 h) | 16 | 5 | 22% | 1% | 7.4 to 6.9 | 3.1x |
 
-### Flags and reasons
+### Ratings, reasons and notes
 
-- **PEN01** **RED** (confidence High: 91 months of history, models trained on earlier years, several independent indicators agree). RED: abnormal oil state 38% of final-year days; data missing 4.4%
-- **PEN02** **RED** (confidence High: 91 months of history, models trained on earlier years, several independent indicators agree). RED: 13 oil-system trip episodes; RED: abnormal oil state 57% of final-year days; data missing 4.4%
-- **PEN04** **RED** (confidence High: 91 months of history, models trained on earlier years, several independent indicators agree). RED: technical availability 94.2%; RED: 11 oil-system trip episodes; RED: abnormal oil state 56% of final-year days; data missing 4.9%
-- **PEN05** **AMBER** (confidence High: 90 months of history, models trained on earlier years, several independent indicators agree). technical availability 96.6%; abnormal oil state 12% of final-year days; data missing 4.6%
-- **PEN06** **RED** (confidence High: 91 months of history, models trained on earlier years, several independent indicators agree). RED: technical availability 94.5%; 4 oil-system trip episodes; 5 pitch trip episodes; data missing 4.5%
-- **PEN07** **AMBER** (confidence High: 91 months of history, only 95% data coverage, models trained on earlier years, several independent indicators agree). 5 oil-system trip episodes; 4 pitch trip episodes; abnormal oil state 14% of final-year days; data missing 5.4%
-- **PEN08** **AMBER** (confidence High: 89 months of history, models trained on earlier years, several independent indicators agree). 6 oil-system trip episodes; data missing 4.5%
-- **PEN09** **AMBER** (confidence High: 90 months of history, models trained on earlier years, several independent indicators agree). 7 oil-system trip episodes; data missing 4.4%
-- **PEN10** **RED** (confidence High: 90 months of history, models trained on earlier years, several independent indicators agree). RED: technical availability 91.1%; data missing 4.9%
-- **PEN11** **RED** (confidence High: 101 months of history, models trained on earlier years, several independent indicators agree). RED: abnormal oil state 42% of final-year days; wind speed sensor drift -5% vs fleet
-- **PEN12** **GREEN** (confidence High: 102 months of history, models trained on earlier years). No trigger.
-- **PEN13** **GREEN** (confidence High: 102 months of history, models trained on earlier years). No trigger.
-- **PEN14** **RED** (confidence High: 102 months of history, models trained on earlier years). RED: pump pressure +2.1 bar vs baseline
-- **PEN15** **RED** (confidence High: 102 months of history, models trained on earlier years, several independent indicators agree). RED: 16 oil-system trip episodes; technical availability 97.0%; 5 pitch trip episodes; abnormal oil state 22% of final-year days; oil-temp model error 3.1x baseline; wind speed sensor drift -5% vs fleet
+- **PEN01** **GREEN** (confidence High: 91 months of history, models trained on earlier years). No rating trigger. Notes: Its gearbox oil system behaved unlike its own normal-behaviour model on 62% of days in the last 3 months. 4.4% of its SCADA data is missing in the window.
+- **PEN02** **AMBER** (confidence High: 91 months of history, models trained on earlier years). AMBER: Tripped on oil-system faults in 5 separate episodes in the last 6 months (other turbines: median 0); most often 'Missing gear oil (high rpm)' (5 trips); last on 23 Nov 2023. *Check:* No trip in the last 30 days and pump pressure dropped 2.6 bar, which looks like a repair or oil/filter change: confirm it in the work orders. If not repaired: inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. Notes: Its gearbox oil system behaved unlike its own normal-behaviour model on 62% of days in the last 3 months, probably because pump pressure dropped 2.6 bar (oil or filter change?). 4.4% of its SCADA data is missing in the window.
+- **PEN04** **AMBER** (confidence High: 91 months of history, models trained on earlier years). AMBER: Tripped on oil-system faults in 9 separate episodes in the last 6 months (other turbines: median 0); most often 'Low gearbox oil pressure' (10 trips); last on 28 Nov 2023. *Check:* No trip in the last 30 days and pump pressure dropped 2.6 bar, which looks like a repair or oil/filter change: confirm it in the work orders. If not repaired: inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. Notes: Its gearbox oil system behaved unlike its own normal-behaviour model on 64% of days in the last 3 months, probably because pump pressure dropped 2.6 bar (oil or filter change?). 4.9% of its SCADA data is missing in the window.
+- **PEN05** **GREEN** (confidence High: 90 months of history, models trained on earlier years). No rating trigger. Notes: 4.6% of its SCADA data is missing in the window.
+- **PEN06** **GREEN** (confidence High: 91 months of history, models trained on earlier years). No rating trigger. Notes: 4.5% of its SCADA data is missing in the window.
+- **PEN07** **GREEN** (confidence High: 91 months of history, only 95% data coverage, models trained on earlier years). No rating trigger. Notes: Availability was 94.4% over the last 6 months vs 99.0% for the other turbines; largest fault cause: hydraulics (164 h). This is past downtime, not a forecast. Its pitch system behaved unlike its own normal-behaviour model on 45% of days in the last 3 months. 5.4% of its SCADA data is missing in the window.
+- **PEN08** **GREEN** (confidence High: 89 months of history, models trained on earlier years). No rating trigger. Notes: 4.5% of its SCADA data is missing in the window.
+- **PEN09** **AMBER** (confidence High: 90 months of history, models trained on earlier years). AMBER: Tripped on oil-system faults in 4 separate episodes in the last 6 months (other turbines: median 0); most often 'Missing gear oil (high rpm)' (22 trips); last on 05 Nov 2023. *Check:* No trip in the last 30 days: confirm in the work orders that the cause was repaired. Inspect the gearbox oil circuit: filter, pump, cooler, oil level and the pressure switch. Notes: 4.4% of its SCADA data is missing in the window.
+- **PEN10** **GREEN** (confidence High: 90 months of history, models trained on earlier years). No rating trigger. Notes: 4.9% of its SCADA data is missing in the window.
+- **PEN11** **GREEN** (confidence High: 101 months of history, models trained on earlier years). No rating trigger.
+- **PEN12** **GREEN** (confidence High: 102 months of history, models trained on earlier years). No rating trigger.
+- **PEN13** **GREEN** (confidence High: 102 months of history, models trained on earlier years). No rating trigger.
+- **PEN14** **RED** (confidence High: 102 months of history, models trained on earlier years). RED: Gear-oil pump pressure at full load is 2.3 bar above its own 12-month baseline (now 10.0 bar), while the other turbines are at +0.0 bar; flagged 3 months running. *Check:* Inspect the gearbox oil filter and pump: read the filter differential pressure, check the bypass and pressure-relief valve, take an oil sample for particles. The same build-up was seen before in PEN01 (+3.0 bar, Aug 2023); PEN02 (+2.7 bar, Jun 2023 followed by 3 oil-pressure trip episodes); PEN04 (+3.2 bar, Jul 2023 followed by 8 oil-pressure trip episodes). Notes: Its gearbox oil system behaved unlike its own normal-behaviour model on 34% of days in the last 3 months, in line with the pump-pressure build-up.
+- **PEN15** **GREEN** (confidence High: 102 months of history, models trained on earlier years). No rating trigger. Notes: Its main bearing behaved unlike its own normal-behaviour model on 56% of days in the last 3 months.
 
 <h2 class="newpage">3. Model-based health (normal-behaviour residuals)</h2>
 
@@ -136,20 +140,20 @@ Drift = change of a turbine's offset to the median of the other turbines, last 3
 
 | Turbine | drift ambient_temp_c | drift wind_speed_ms | Stuck sensors |
 |---|---|---|---|
-| PEN01 | -0.17 °C | 0.1% | - |
-| PEN02 | -0.36 °C | -1.5% | - |
-| PEN04 | +0.03 °C | -0.1% | - |
-| PEN05 | +0.10 °C | 0.9% | - |
-| PEN06 | +0.10 °C | -0.1% | - |
-| PEN07 | +0.19 °C | -1.6% | - |
-| PEN08 | -0.20 °C | 1.7% | - |
-| PEN09 | +0.62 °C | -0.3% | - |
-| PEN10 | +0.08 °C | -1.1% | - |
-| PEN11 | +0.17 °C | -5.0% | - |
-| PEN12 | +0.29 °C | 0.3% | - |
-| PEN13 | -0.10 °C | -2.5% | - |
-| PEN14 | +0.06 °C | -4.9% | - |
-| PEN15 | +0.66 °C | -5.2% | - |
+| PEN01 | -0.03 °C | -0.6% | - |
+| PEN02 | -0.31 °C | -2.1% | - |
+| PEN04 | +0.10 °C | -1.1% | - |
+| PEN05 | +0.17 °C | 0.7% | - |
+| PEN06 | +0.19 °C | -0.4% | - |
+| PEN07 | +0.28 °C | -1.8% | - |
+| PEN08 | -0.09 °C | 1.1% | - |
+| PEN09 | +0.68 °C | -0.2% | - |
+| PEN10 | +0.17 °C | -1.5% | - |
+| PEN11 | +0.02 °C | -0.7% | - |
+| PEN12 | +0.10 °C | 4.0% | - |
+| PEN13 | -0.32 °C | 0.9% | - |
+| PEN14 | -0.04 °C | -1.6% | - |
+| PEN15 | +0.56 °C | -1.9% | - |
 
 ![drift](figures/drift.png)
 
@@ -196,7 +200,8 @@ Most frequent fault stops in the window (all turbines):
 - **Pipeline.** `windml report` reads the raw export only through the mapping (`windml.ingest`), cleans and labels each turbine (QC flags, short-gap interpolation, alarm-log stop labels), trains the models, computes the metrics and writes this report. Every number here is reproducible from the mapping and the raw files.
 - **Window.** The last 24 months of each turbine; *final year* = its last 12 months.
 - **Models.** LightGBM per turbine and signal on healthy operating rows (no stop within 6 h, no fault, not in the 30 days before a major fault, QC clean). With 2+ calendar years, each year is scored by a model trained only on earlier years (3-day embargo, training must cover all 12 months). With 12-23 months, the record is cut into 6 blocks scored by models trained on the other blocks (cross-fit). Under 12 months, no model.
-- **RAG rules** (fixed in advance, heuristics, not a calibrated risk): RED for availability < 95%, >= 8 oil or pitch trip episodes, pump pressure >= 2 bar above baseline, or abnormal oil state on >= 30% of final-year days; AMBER for availability < 97%, >= 4 episodes, pump rise >= 1 bar, abnormal oil days >= 10%, oil-temperature model error >= 1.5x its pre-window level, or > 2% missing data; AMBER only for under-performance on >= 20% of final-year days, abnormal main-bearing or pitch residuals on >= 30%, sensor drift (1.5 °C, 5% wind) or a stuck monitored sensor.
-- **Confidence.** Points for history (3+ years: 2, 2-3 years: 1), coverage >= 95%, models trained on earlier years, an alarm log, and (for flags) agreement of independent indicators. High >= 4, Medium 2-3, Low <= 1.
-- **Limits.** The alarm-log classes come from the mapping's rules; trip detection uses Senvion-style oil/pitch codes and messages (other vendors need `class_rules`). Full-load oil medians assume one oil circuit design across the fleet. Models learn whatever was normal in their training data, including a fault that was already present. Sensor drift is relative to the other turbines, so a fleet-wide drift is invisible.
+- **Ratings.** Computed at each month-end from data up to that date (latest month-end shown here). AMBER when: the full-load gear-oil pump pressure (median of the last 15 days) is >= 1 bar above the turbine's own baseline (days 60-365 before) AND >= 5 robust standard deviations above the other turbines' rise that month; >= 3 oil-system trip episodes in 6 months; >= 6 pitch trip episodes in 6 months; an ambient-temperature or wind-speed sensor drifting vs the fleet over the last 3 months (1.5 °C, 5%); or a monitored sensor frozen on more than 2% of the last 90 days. RED when the pump rise is >= 2 bar; or a trip rule has held 2 month-ends in a row with >= 3x the amber count and a trip in the last 30 days; or two independent systems are amber at once. Shown as notes but never colour-setting, because they had no reliable lead on events in the validation: low availability (it describes the past), model-based abnormal-day rates (oil, pitch, main bearing, power curve) and missing data. A trip episode merges trips less than 24 h apart.
+- **Validation.** Retrospective check on Kelmarsh and Penmanshiel (21 turbines). Thresholds selected on 2017-2020, checked on 2021-2024 (792 turbine-months): pump build-up → oil trip or service stop: 58% of 12 flagged turbine-months vs 55% by chance; repeat oil trips → further oil trips: 63% of 75 flagged turbine-months vs 32% by chance; repeat pitch trips → further pitch trips: 67% of 6 flagged turbine-months vs 36% by chance. Any amber or red: 76% followed by a logged event within 90 days vs 50% by chance (recall 19%); red alone 65% vs 58% on only 17 turbine-months, so red marks strength and persistence more than a higher probability. Held-out ratings: 89% green, 9% amber, 2% red. Consecutive months overlap, so the effective sample is much smaller than the row counts; details in `reports/fleet_proof/calibration.md`.
+- **Confidence.** Points for history (3+ years: 2, 2-3 years: 1), coverage >= 95%, models trained on earlier years, an alarm log, and a fleet of 4+ turbines (peer comparison). High >= 5, Medium 3-4, Low <= 2.
+- **Limits.** The alarm-log classes come from the mapping's rules; trip detection uses Senvion-style oil/pitch codes and messages (other vendors need `class_rules`). Full-load oil medians assume one oil circuit design across the fleet. Models learn whatever was normal in their training data, including a fault that was already present. Sensor drift is relative to the other turbines, so a fleet-wide drift is invisible. The rating thresholds were calibrated on two UK farms of one turbine family (Senvion MM92/MM82); on other fleets the peer-relative logic still applies but the hit rates are unknown. Ratings look back up to 6 months and only at what SCADA and the alarm log show: inspections, oil analyses, vibration (CMS) data and work orders are not used, so a recent repair or a fault the sensors cannot see changes nothing here.
 - **Data.** CC BY 4.0, Cubico Sustainable Investments, doi:10.5281/zenodo.5946808 (H1-2021) / 10.5281/zenodo.16807304.
