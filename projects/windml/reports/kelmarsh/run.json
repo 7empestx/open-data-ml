@@ -1,0 +1,29 @@
+{
+ "farm": "kelmarsh",
+ "mapping": "kelmarsh_all_years.yaml",
+ "turbines": 6,
+ "window_months": 24,
+ "score_years": null,
+ "workers": 2,
+ "times": {
+  "prepare_s": 0.1,
+  "health_s": 0.0,
+  "metrics_s": 13.0,
+  "render_s": 2.2,
+  "total_s": 15.3
+ },
+ "files": {
+  "md": "condition_report.md",
+  "html": "condition_report.html",
+  "pdf": "condition_report.pdf"
+ },
+ "flags": {
+  "KEL01": "AMBER",
+  "KEL02": "GREEN",
+  "KEL03": "GREEN",
+  "KEL04": "RED",
+  "KEL05": "RED",
+  "KEL06": "AMBER"
+ },
+ "generated": "2026-10-11 02:53 UTC"
+}

@@ -1,0 +1,18 @@
+code,message,component,n,turbine_id
+6530,Anemometer defect,sensor_met,63,KEL01
+4540,Tower oscillation X level 2,tower,4,KEL01
+4510,Tower oscillation Y level 1,tower,2,KEL01
+5510,Low hydraulic pressure,hydraulics,2,KEL01
+6620,Vane defect,sensor_met,2,KEL01
+4520,Tower oscillation X level 1,tower,1,KEL01
+455,Repeating error BP52,pitch,1,KEL01
+4540,Tower oscillation X level 2,tower,8,KEL02
+6530,Anemometer defect,sensor_met,7,KEL02
+1070,Drive train monitor level 2,gearbox,6,KEL02
+3110,Frequency converter error,converter,4,KEL02
+4510,Tower oscillation Y level 1,tower,4,KEL02
+6620,Vane defect,sensor_met,2,KEL02
+1065,Drive train monitor level 1,gearbox,1,KEL02
+815,Rotor overspeed nacelle,rotor,1,KEL02
+1800,Overload gear oil pump,gearbox,1,KEL02
+4520,Tower oscillation X level 1,tower,1,KEL02

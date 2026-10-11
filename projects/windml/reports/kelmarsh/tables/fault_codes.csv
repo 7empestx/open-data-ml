@@ -1,0 +1,52 @@
+code,message,component,n,turbine_id
+455,Repeating error BP52,pitch,6,KEL01
+4520,Tower oscillation X level 1,tower,3,KEL01
+4510,Tower oscillation Y level 1,tower,3,KEL01
+5510,Low hydraulic pressure,hydraulics,3,KEL01
+4540,Tower oscillation X level 2,tower,3,KEL01
+4530,Tower oscillation Y level 2,tower,2,KEL01
+1070,Drive train monitor level 2,gearbox,1,KEL01
+3000,Frequency converter not ready,converter,1,KEL01
+3110,Frequency converter error,converter,1,KEL01
+6120,Uncontrolled yaw movement,yaw,1,KEL01
+4510,Tower oscillation Y level 1,tower,9,KEL02
+4540,Tower oscillation X level 2,tower,8,KEL02
+1070,Drive train monitor level 2,gearbox,5,KEL02
+4520,Tower oscillation X level 1,tower,4,KEL02
+570,Pitch too slow BP180,pitch,3,KEL02
+3110,Frequency converter error,converter,2,KEL02
+4530,Tower oscillation Y level 2,tower,2,KEL02
+1065,Drive train monitor level 1,gearbox,1,KEL02
+4540,Tower oscillation X level 2,tower,3,KEL03
+513,Timeout bridging limit switches,control_comm,2,KEL03
+581,Set point><actual value axis 1,pitch,1,KEL03
+6620,Vane defect,sensor_met,1,KEL03
+6530,Anemometer defect,sensor_met,17,KEL04
+4510,Tower oscillation Y level 1,tower,6,KEL04
+3110,Frequency converter error,converter,5,KEL04
+1510,Low gearbox oil pressure,gearbox,3,KEL04
+455,Repeating error BP52,pitch,2,KEL04
+4540,Tower oscillation X level 2,tower,2,KEL04
+1924,Particle Gear Alarm 24h,gearbox,2,KEL04
+435,No speed development,unspecified,1,KEL04
+582,Set point><actual value axis 2,pitch,1,KEL04
+650,Pitch controller communication error,pitch,1,KEL04
+6530,Anemometer defect,sensor_met,158,KEL05
+455,Repeating error BP52,pitch,44,KEL05
+3110,Frequency converter error,converter,23,KEL05
+4540,Tower oscillation X level 2,tower,5,KEL05
+735,Battery voltage axis 3,pitch,2,KEL05
+3000,Frequency converter not ready,converter,1,KEL05
+1815,Overload fan oil cooler gear,gearbox,1,KEL05
+564,Bladeangle implausible,pitch,1,KEL05
+4510,Tower oscillation Y level 1,tower,1,KEL05
+4520,Tower oscillation X level 1,tower,11,KEL06
+1620,Implausible gear speed,gearbox,5,KEL06
+4540,Tower oscillation X level 2,tower,5,KEL06
+455,Repeating error BP52,pitch,4,KEL06
+2500,Maximum generator speed,generator,4,KEL06
+550,Pitch current asymmetry,pitch,3,KEL06
+55,WEC shut down,unspecified,1,KEL06
+2510,Generator speed implausible,generator,1,KEL06
+4510,Tower oscillation Y level 1,tower,1,KEL06
+6300,Yaw error,yaw,1,KEL06

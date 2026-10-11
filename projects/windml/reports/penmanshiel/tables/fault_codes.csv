@@ -1,0 +1,128 @@
+code,message,component,n,turbine_id
+650,Pitch controller communication error,pitch,6,PEN01
+3000,Frequency converter not ready,converter,6,PEN01
+555,Pitch angle deviation,pitch,3,PEN01
+582,Set point><actual value axis 2,pitch,3,PEN01
+4510,Tower oscillation Y level 1,tower,3,PEN01
+1550,Missing gear oil (high rpm),gearbox,2,PEN01
+4530,Tower oscillation Y level 2,tower,1,PEN01
+4510,Tower oscillation Y level 1,tower,25,PEN02
+6530,Anemometer defect,sensor_met,18,PEN02
+1550,Missing gear oil (high rpm),gearbox,13,PEN02
+4530,Tower oscillation Y level 2,tower,13,PEN02
+3000,Frequency converter not ready,converter,7,PEN02
+4520,Tower oscillation X level 1,tower,5,PEN02
+1620,Implausible gear speed,gearbox,3,PEN02
+1815,Overload fan oil cooler gear,gearbox,2,PEN02
+4540,Tower oscillation X level 2,tower,2,PEN02
+1510,Low gearbox oil pressure,gearbox,1,PEN02
+3555,Current asymmetry,unspecified,31,PEN04
+6530,Anemometer defect,sensor_met,27,PEN04
+1510,Low gearbox oil pressure,gearbox,12,PEN04
+3000,Frequency converter not ready,converter,4,PEN04
+4530,Tower oscillation Y level 2,tower,3,PEN04
+4510,Tower oscillation Y level 1,tower,3,PEN04
+55,WEC shut down,unspecified,2,PEN04
+3110,Frequency converter error,converter,2,PEN04
+100,Safety chain open,electrical,1,PEN04
+820,Rotor rotation direction nacelle,rotor,1,PEN04
+6530,Anemometer defect,sensor_met,51,PEN05
+3000,Frequency converter not ready,converter,6,PEN05
+4530,Tower oscillation Y level 2,tower,6,PEN05
+4510,Tower oscillation Y level 1,tower,5,PEN05
+4540,Tower oscillation X level 2,tower,2,PEN05
+715,Charging circuit pitch,pitch,2,PEN05
+4520,Tower oscillation X level 1,tower,2,PEN05
+1550,Missing gear oil (high rpm),gearbox,1,PEN05
+100,Safety chain open,electrical,1,PEN05
+3110,Frequency converter error,converter,1,PEN05
+6530,Anemometer defect,sensor_met,13,PEN06
+4510,Tower oscillation Y level 1,tower,7,PEN06
+715,Charging circuit pitch,pitch,6,PEN06
+6620,Vane defect,sensor_met,6,PEN06
+3000,Frequency converter not ready,converter,6,PEN06
+4530,Tower oscillation Y level 2,tower,5,PEN06
+1550,Missing gear oil (high rpm),gearbox,4,PEN06
+550,Pitch current asymmetry,pitch,2,PEN06
+1620,Implausible gear speed,gearbox,2,PEN06
+582,Set point><actual value axis 2,pitch,1,PEN06
+550,Pitch current asymmetry,pitch,7,PEN07
+650,Pitch controller communication error,pitch,6,PEN07
+3000,Frequency converter not ready,converter,6,PEN07
+1510,Low gearbox oil pressure,gearbox,5,PEN07
+4510,Tower oscillation Y level 1,tower,4,PEN07
+4530,Tower oscillation Y level 2,tower,4,PEN07
+4520,Tower oscillation X level 1,tower,2,PEN07
+657,Error pitch converter 2,pitch,2,PEN07
+1550,Missing gear oil (high rpm),gearbox,2,PEN07
+435,No speed development,unspecified,1,PEN07
+6530,Anemometer defect,sensor_met,135,PEN08
+3110,Frequency converter error,converter,35,PEN08
+1550,Missing gear oil (high rpm),gearbox,9,PEN08
+4510,Tower oscillation Y level 1,tower,7,PEN08
+4530,Tower oscillation Y level 2,tower,5,PEN08
+3000,Frequency converter not ready,converter,4,PEN08
+4540,Tower oscillation X level 2,tower,3,PEN08
+820,Rotor rotation direction nacelle,rotor,1,PEN08
+550,Pitch current asymmetry,pitch,1,PEN08
+455,Repeating error BP52,pitch,1,PEN08
+1550,Missing gear oil (high rpm),gearbox,25,PEN09
+4510,Tower oscillation Y level 1,tower,8,PEN09
+3000,Frequency converter not ready,converter,7,PEN09
+3110,Frequency converter error,converter,4,PEN09
+100,Safety chain open,electrical,2,PEN09
+4530,Tower oscillation Y level 2,tower,2,PEN09
+820,Rotor rotation direction nacelle,rotor,1,PEN09
+4520,Tower oscillation X level 1,tower,1,PEN09
+6620,Vane defect,sensor_met,1,PEN09
+4510,Tower oscillation Y level 1,tower,9,PEN10
+4530,Tower oscillation Y level 2,tower,4,PEN10
+6530,Anemometer defect,sensor_met,3,PEN10
+650,Pitch controller communication error,pitch,3,PEN10
+455,Repeating error BP52,pitch,1,PEN10
+820,Rotor rotation direction nacelle,rotor,1,PEN10
+3800,Circuit breaker,unspecified,1,PEN10
+3110,Frequency converter error,converter,1,PEN10
+4520,Tower oscillation X level 1,tower,1,PEN10
+4540,Tower oscillation X level 2,tower,1,PEN10
+1070,Drive train monitor level 2,gearbox,10,PEN11
+1550,Missing gear oil (high rpm),gearbox,10,PEN11
+3000,Frequency converter not ready,converter,8,PEN11
+4530,Tower oscillation Y level 2,tower,7,PEN11
+715,Charging circuit pitch,pitch,2,PEN11
+7003,Task runtime failure 10 ms,unspecified,2,PEN11
+3110,Frequency converter error,converter,2,PEN11
+100,Safety chain open,electrical,1,PEN11
+4520,Tower oscillation X level 1,tower,1,PEN11
+4540,Tower oscillation X level 2,tower,1,PEN11
+4530,Tower oscillation Y level 2,tower,53,PEN12
+3000,Frequency converter not ready,converter,13,PEN12
+4510,Tower oscillation Y level 1,tower,12,PEN12
+1550,Missing gear oil (high rpm),gearbox,6,PEN12
+4540,Tower oscillation X level 2,tower,5,PEN12
+4520,Tower oscillation X level 1,tower,3,PEN12
+583,Set point><actual value axis 3,pitch,1,PEN12
+581,Set point><actual value axis 1,pitch,1,PEN12
+100,Safety chain open,electrical,1,PEN12
+715,Charging circuit pitch,pitch,1,PEN12
+4530,Tower oscillation Y level 2,tower,9,PEN13
+3000,Frequency converter not ready,converter,7,PEN13
+4510,Tower oscillation Y level 1,tower,3,PEN13
+4520,Tower oscillation X level 1,tower,1,PEN13
+4540,Tower oscillation X level 2,tower,1,PEN13
+6530,Anemometer defect,sensor_met,22,PEN14
+3000,Frequency converter not ready,converter,5,PEN14
+100,Safety chain open,electrical,2,PEN14
+4530,Tower oscillation Y level 2,tower,2,PEN14
+4510,Tower oscillation Y level 1,tower,1,PEN14
+7335,mconfig.ini check failed,unspecified,1,PEN14
+4530,Tower oscillation Y level 2,tower,40,PEN15
+1550,Missing gear oil (high rpm),gearbox,23,PEN15
+1924,Particle Gear Alarm 24h,gearbox,11,PEN15
+3000,Frequency converter not ready,converter,7,PEN15
+4510,Tower oscillation Y level 1,tower,4,PEN15
+4540,Tower oscillation X level 2,tower,4,PEN15
+100,Safety chain open,electrical,2,PEN15
+455,Repeating error BP52,pitch,2,PEN15
+658,Error pitch converter 3,pitch,2,PEN15
+6620,Vane defect,sensor_met,2,PEN15

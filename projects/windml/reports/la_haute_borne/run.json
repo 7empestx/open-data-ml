@@ -1,0 +1,27 @@
+{
+ "farm": "la_haute_borne",
+ "mapping": "la_haute_borne.yaml",
+ "turbines": 4,
+ "window_months": 24,
+ "score_years": null,
+ "workers": 2,
+ "times": {
+  "prepare_s": 0.0,
+  "health_s": 0.0,
+  "metrics_s": 1.9,
+  "render_s": 1.5,
+  "total_s": 3.3
+ },
+ "files": {
+  "md": "condition_report.md",
+  "html": "condition_report.html",
+  "pdf": "condition_report.pdf"
+ },
+ "flags": {
+  "LHB01": "GREEN",
+  "LHB02": "GREEN",
+  "LHB03": "GREEN",
+  "LHB04": "GREEN"
+ },
+ "generated": "2026-10-11 02:54 UTC"
+}

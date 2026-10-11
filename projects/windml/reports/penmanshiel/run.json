@@ -1,0 +1,37 @@
+{
+ "farm": "penmanshiel",
+ "mapping": "penmanshiel_all_years.yaml",
+ "turbines": 14,
+ "window_months": 24,
+ "score_years": null,
+ "workers": 2,
+ "times": {
+  "prepare_s": 0.1,
+  "health_s": 0.0,
+  "metrics_s": 27.9,
+  "render_s": 2.7,
+  "total_s": 30.8
+ },
+ "files": {
+  "md": "condition_report.md",
+  "html": "condition_report.html",
+  "pdf": "condition_report.pdf"
+ },
+ "flags": {
+  "PEN01": "RED",
+  "PEN02": "RED",
+  "PEN04": "RED",
+  "PEN05": "AMBER",
+  "PEN06": "RED",
+  "PEN07": "AMBER",
+  "PEN08": "AMBER",
+  "PEN09": "AMBER",
+  "PEN10": "RED",
+  "PEN11": "RED",
+  "PEN12": "GREEN",
+  "PEN13": "GREEN",
+  "PEN14": "RED",
+  "PEN15": "RED"
+ },
+ "generated": "2026-10-11 02:54 UTC"
+}
